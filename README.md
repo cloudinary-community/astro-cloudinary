@@ -1,1 +1,1 @@
-# astro-cloudinary
+# Astro Cloudinary

@@ -1,0 +1,54 @@
+// How can i get this directly from unpic? UrlTransformerOptions
+
+import { type ImageOptions, type ConfigOptions } from "@cloudinary-util/url-loader";
+import { getCldImageUrl } from "../helpers/getCldImageUrl";
+
+interface TransformUrlOptions {
+  url: string | URL;
+  width?: number;
+  height?: number;
+}
+
+export function generateLoader(props: ImageOptions, config?: ConfigOptions) {
+  return function loader(loaderOptions: TransformUrlOptions) {
+    const options = {
+      ...props,
+      src: loaderOptions.url,
+      width: loaderOptions.width,
+      height: loaderOptions.height,
+    } as ImageOptions;
+  
+    // Normalize width and height to number to allow flexibility in how the values
+    // are passed through as props
+
+    options.width = typeof options.width === 'string' ? Number.parseInt(options.width) : options.width;
+    options.height = typeof options.height === 'string' ? Number.parseInt(options.height) : options.height;
+
+    // The loader options are used to create dynamic sizing when working with responsive images
+    // so these should override the default options collected from the props alone if
+    // the results are different. While we don't always use the height in the loader logic,
+    // we always pass it here, as the usage is determined later based on cropping.js
+
+    if ( typeof loaderOptions?.width === 'number' && typeof options.width === 'number' && loaderOptions.width !== options.width ) {
+      const multiplier = loaderOptions.width / options.width;
+      
+      options.width = loaderOptions.width;
+
+      // The height may change based off of the value passed through via the loader options
+      // In an example where the user sizes is 800x600, but the loader is passing in 400
+      // due to responsive sizing, we want to ensure we're using a height that will
+      // resolve to the same aspect ratio
+      
+      if ( typeof options.height === 'number' ) {
+        options.height = Math.floor(options.height * multiplier);
+      }
+    } else if ( typeof loaderOptions?.width === 'number' && typeof options?.width !== 'number' ) {
+      // If we don't have an explicitly defined width, we still need to define a width for sizing optimization but also
+      // for responsive sizing to take effect, so we can utilize the loader width for the base width
+      // Note: This is primarily an artifact from Next.js, is this applicable here?
+      options.width = loaderOptions?.width;
+    }
+
+    return getCldImageUrl(options, config)
+  }
+}

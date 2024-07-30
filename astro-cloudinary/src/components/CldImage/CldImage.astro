@@ -1,0 +1,35 @@
+---
+import { Image } from "@unpic/astro";
+import { type UnpicImageProps } from "@unpic/core";
+import type { HTMLAttributes } from "astro/types";
+import type { ConfigOptions, ImageOptions } from '@cloudinary-util/url-loader';
+
+import { generateLoader } from '../../lib/loader';
+
+type Props = Omit<UnpicImageProps<HTMLAttributes<"img">>, "src"> & ImageOptions & {
+  src: string;
+  config?: ConfigOptions;
+}
+
+export type CldImageProps = Props;
+
+const { config, ...props }: CldImageProps = Astro.props;
+
+const transformer = generateLoader(props, config);
+
+const url = transformer({
+  url: props.src,
+  width: props.width,
+  height: props.height
+});
+---
+<Image
+  src={url}
+  layout={props.layout || 'constrained'}
+  width={props.width}
+  height={props.height}
+  cdn="cloudinary"
+  transformer={transformer}
+  alt={props.alt}
+  priority={props.priority}
+/>

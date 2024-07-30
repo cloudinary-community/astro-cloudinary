@@ -1,0 +1,30 @@
+{
+  "name": "astro-cloudinary",
+  "version": "0.0.1",
+  "type": "module",
+  "license": "MIT",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "files": [
+    "src",
+    "index.ts"
+  ],
+  "scripts": {},
+  "dependencies": {
+    "@cloudinary-util/types": "1.1.0-beta.1",
+    "@cloudinary-util/url-loader": "5.4.0-beta.1",
+    "@cloudinary-util/util": "^3.0.0",
+    "@unpic/astro": "^0.0.46",
+    "@unpic/core": "^0.0.49",
+    "unpic": "^3.18.0"
+  },
+  "peerDependencies": {
+    "astro": "^3.2.0 || ^4.0.0"
+  },
+  "devDependencies": {
+    "astro": "^4.10.2"
+  }
+}

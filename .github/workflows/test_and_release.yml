@@ -1,0 +1,61 @@
+name: Test & Release
+on: [push, pull_request]
+env:
+  CI: false
+jobs:
+  tests:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '18', '20' ]
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+        working-directory: ./astro-cloudinary
+
+      - run: pnpm test
+        working-directory: ./astro-cloudinary
+
+      - run: pnpm test:app
+        working-directory: ./astro-cloudinary
+
+  release:
+    name: Release
+    if: ${{ github.event_name == 'push' && (github.ref_name == 'main' || github.ref_name == 'beta') }}
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          # https://github.com/pnpm/pnpm/issues/3141
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: pnpm install --frozen-lockfile
+      
+      - run: pnpm release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        
