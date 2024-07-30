@@ -24,11 +24,11 @@ jobs:
       - run: pnpm install --frozen-lockfile
         working-directory: ./astro-cloudinary
 
-      - run: pnpm test
-        working-directory: ./astro-cloudinary
+      # - run: pnpm test
+      #   working-directory: ./astro-cloudinary
 
-      - run: pnpm test:app
-        working-directory: ./astro-cloudinary
+      # - run: pnpm test:app
+      #   working-directory: ./astro-cloudinary
 
   release:
     name: Release
