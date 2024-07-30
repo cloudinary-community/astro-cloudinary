@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "dev": "pnpm -r dev"
   },
   "devDependencies": {
     "@colbyfayock/semantic-release-pnpm": "^1.2.2",

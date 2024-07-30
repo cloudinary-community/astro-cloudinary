@@ -2,38 +2,6 @@ import type { AnalyticsOptions, ConfigOptions } from "@cloudinary-util/url-loade
 
 import { ASTRO_CLOUDINARY_ANALYTICS_PRODUCT_ID, ASTRO_CLOUDINARY_ANALYTICS_ID, ASTRO_CLOUDINARY_VERSION, ASTRO_VERSION } from '../constants/analytics.js';
 
-// /**
-//  * pollForProcessingImage
-//  */
-
-// export interface PollForProcessingImageOptions {
-//   src: string;
-// }
-
-// export async function pollForProcessingImage(options: PollForProcessingImageOptions): Promise<boolean> {
-//   const { src } = options;
-//   try {
-//     await new Promise((resolve, reject) => {
-//       fetch(src).then(res => {
-//         if ( !res.ok ) {
-//           reject(res);
-//           return;
-//         }
-//         resolve(res);
-//       });
-//     });
-//   } catch(e: any) {
-//     // Timeout for 200ms before trying to fetch again to avoid overwhelming requests
-
-//     if ( e.status === 423 ) {
-//       await new Promise((resolve) => setTimeout(() => resolve(undefined), 200));
-//       return await pollForProcessingImage(options);
-//     }
-//     return false;
-//   }
-//   return true;
-// }
-
 /**
  * getCloudinaryConfig
  */

@@ -1,35 +1,137 @@
 ---
-import { Image } from "@unpic/astro";
-import { type UnpicImageProps } from "@unpic/core";
-import type { HTMLAttributes } from "astro/types";
-import type { ConfigOptions, ImageOptions } from '@cloudinary-util/url-loader';
+import { type HTMLAttributes } from 'astro/types';
+import { type UnpicImageProps } from '@unpic/core';
+import { Image } from '@unpic/astro';
+import { getTransformations } from '@cloudinary-util/util';
+import { transformationPlugins, type ConfigOptions, type ImageOptions } from '@cloudinary-util/url-loader';
 
 import { generateLoader } from '../../lib/loader';
 
-type Props = Omit<UnpicImageProps<HTMLAttributes<"img">>, "src"> & ImageOptions & {
-  src: string;
+
+export type CldImageProps = Omit<UnpicImageProps<HTMLAttributes<"img">>, "src"> & ImageOptions & {
   config?: ConfigOptions;
+  src: string;
+  preserveTransformations?: boolean;
 }
 
-export type CldImageProps = Props;
+interface Props extends CldImageProps {};
 
-const { config, ...props }: CldImageProps = Astro.props;
+const { config, ...props }: Props = Astro.props;
 
-const transformer = generateLoader(props, config);
+// Add props here that are intended to only be used for
+// Cloudinary URL construction to avoid them being forwarded
+// to the DOM. These are props that aren't automatically
+// pulled from the URL Loader plugins
 
-const url = transformer({
+const CLOUDINARY_PROPS = [
+  'config',
+  'preserveTransformations',
+];
+
+// Collect all of the valid CldImage props that should only
+// be applied to the URL construction and not applied to
+// the underlaying Image component
+
+transformationPlugins.forEach(({ props }: { props: Record<string, unknown> }) => {
+  Object.keys(props).forEach(prop => {
+    // If the prop already exists, flag it as a duplicate
+    if ( CLOUDINARY_PROPS.includes(prop) ) {
+      throw new Error(`Option ${prop} already exists!`);
+    }
+    CLOUDINARY_PROPS.push(prop);
+  });
+});
+
+// Collect all of the props that are intended to be passed
+// into the URL construction
+
+const cldOptions: ImageOptions = {
+  src: props.src
+};
+
+CLOUDINARY_PROPS.forEach((key) => {
+  const prop = props[key as keyof ImageOptions];
+  if ( prop ) {
+    // @ts-expect-error
+    cldOptions[key as keyof ImageOptions] = prop;
+  }
+});
+
+// Try to preserve the original transformations from the Cloudinary URL passed in
+// to the component. This only works if the URL has a version number on it and otherwise
+// will fail to load
+
+if (props.preserveTransformations) {
+  try {
+    const transformations = getTransformations(props.src).map(t => t.join(','));
+    cldOptions.rawTransformations = [...transformations.flat(), ...(cldOptions.rawTransformations || [])];
+  } catch(e) {
+    console.warn(`Failed to preserve transformations: ${(e as Error).message}`)
+  }
+}
+
+// Create a new instanct of the loader for the Image component to
+// vend URLs for each responsive breakpoint
+
+const transformer = generateLoader(cldOptions, config);
+
+// Construct the base Image component props by filtering out Cloudinary-specific props
+
+const src = transformer({
   url: props.src,
   width: props.width,
   height: props.height
 });
+
+const imageProps = {
+  cdn: 'cloudinary',
+  onerror: 'onCldImageError(this)',
+  src,
+  transformer,
+} as UnpicImageProps<HTMLAttributes<"img">>;
+
+// Loop through all props and try to find any that are not valid
+// Cloudinary props to assume they are intended to be passed through
+// to the Image component
+
+Object.entries(props)
+  .filter(([key]) => typeof key === 'string' && !CLOUDINARY_PROPS.includes(key))
+  .forEach(([key, value]) => imageProps[key as keyof UnpicImageProps<HTMLAttributes<"img">>] = value);
 ---
-<Image
-  src={url}
-  layout={props.layout || 'constrained'}
-  width={props.width}
-  height={props.height}
-  cdn="cloudinary"
-  transformer={transformer}
-  alt={props.alt}
-  priority={props.priority}
-/>
+<Image class="cldimage" {...imageProps} />
+
+<script is:inline>
+  // Optimize this so that a new script isn't added for each image instance
+  async function onCldImageError(image) {
+    if ( await pollForProcessingImage(image.src) ) {
+      const key = `${Date.now()}${Math.random()}`;
+      if ( image.src.includes('?') ) {
+        image.src = `${image.src}?key=${key}`;
+      } else {
+        image.src = `${image.src}&key=${key}`;
+      }
+    }
+  }
+
+  async function pollForProcessingImage(src) {
+    try {
+      await new Promise((resolve, reject) => {
+        fetch(src).then(res => {
+          if ( !res.ok ) {
+            reject(res);
+            return;
+          }
+          resolve(res);
+        });
+      });
+    } catch(e) {
+      // Timeout for 250ms before trying to fetch again to avoid overwhelming requests
+      if ( e.status === 423 ) {
+        await new Promise((resolve) => setTimeout(() => resolve(undefined), 250));
+        return await pollForProcessingImage(src);
+      }
+      return false;
+    }
+    return true;
+  }
+</script>
