@@ -1,0 +1,135 @@
+---
+import { cn } from '../lib/util';
+
+interface Props {
+  class?: string;
+};
+
+const { class: className }: Props = Astro.props;
+
+const codeBlockClassName = cn('code-block', className);
+---
+
+<div class={codeBlockClassName} data-codeblock-expanded="false">
+  <div class="code-block-code">
+    <slot />
+  </div>
+  <ul class="code-block-actions">
+    <li>
+      <button class="code-block-actions-expand">
+        <!-- <BsArrowsExpand /> -->
+        Expand Snippet
+      </button>
+    </li>
+    <li>
+      <button class="code-block-actions-collapse">
+        <!-- <BsArrowsCollapse /> -->
+        Collapse Snippet
+      </button>
+    </li>
+  </ul>
+</div>
+
+<script>
+  const buttons = document.querySelectorAll('.code-block-actions-expand, .code-block-actions-collapse') as NodeListOf<HTMLButtonElement>;
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const codeBlock = button.closest('.code-block') as HTMLDivElement;
+
+      if ( codeBlock?.dataset.codeblockExpanded === 'true' ) {
+        codeBlock?.setAttribute('data-codeblock-expanded', 'false');
+      } else if ( codeBlock?.dataset.codeblockExpanded === 'false' ) {
+        codeBlock?.setAttribute('data-codeblock-expanded', 'true');
+      }
+    });
+  });
+</script>
+
+<style>
+.code-block {
+  position: relative;
+}
+
+[data-codeblock-expanded="true"] {
+
+  .code-block-code {
+    max-height: none;
+
+    &:after {
+      display: none;
+    }
+  }
+
+}
+
+.code-block-code {
+
+  position: relative;
+  max-height: 12em;
+  overflow-y: scroll;
+
+  &:after {
+    display: block;
+    content: '';
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 2em;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+
+    @media (prefers-color-scheme: dark) {
+      background: linear-gradient(to bottom, rgba(#111111, 0), rgba(#111111, 1));
+    }
+
+    :global(.dark) & {
+      background: linear-gradient(to bottom, rgba(#111111, 0), rgba(#111111, 1));
+    }
+
+  }
+
+  pre {
+    border-radius: .2em;
+    margin-bottom: 0;
+  }
+
+}
+
+.code-block-actions {
+
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  border-radius: .2em;
+
+  li {
+    &:first-child {
+      margin-left: -.5em;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+    color: #2D69DE;
+    font-size: .75em;
+    padding: 1em;
+  }
+
+}
+
+.code-block-actions-expand {
+  [data-codeblock-expanded="true"] & {
+    display: none;
+  }
+}
+
+.code-block-actions-collapse {
+  [data-codeblock-expanded="false"] & {
+    display: none;
+  }
+}
+</style>

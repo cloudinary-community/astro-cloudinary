@@ -1,0 +1,23 @@
+---
+import { CldVideoPlayer } from '../../../astro-cloudinary';
+---
+<CldVideoPlayer
+  id="myplayer"
+  src="videos/mountain-stars"
+	width="1620"
+  height="1080"
+/>
+
+<script>
+  document.querySelector('#myplayer')?.addEventListener('cldvideoplayer:play', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('e', e.detail)
+  }) as EventListener);
+  
+  document.querySelector('#myplayer')?.addEventListener('cldvideoplayer:pause', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('e', e.detail)
+  }) as EventListener);
+
+  document.querySelector('#myplayer')?.addEventListener('cldvideoplayer:pause', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('e', e.detail)
+  }) as EventListener);
+</script>

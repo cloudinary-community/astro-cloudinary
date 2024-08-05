@@ -1,0 +1,20 @@
+---
+title: CldVideoPlayer - Astro Cloudinary
+description: TODO
+---
+import { CldVideoPlayer } from '../../../../../astro-cloudinary';
+import VideoPlayer from '../../../components/VideoPlayer.astro';
+
+<VideoPlayer />
+
+<CldVideoPlayer
+  src="videos/mountain-stars"
+	width="1620"
+  height="1080"
+	colors={{
+    accent: '#ff0000',
+    base: '#00ff00',
+    text: '#0000ff'
+  }}
+  fontFace="Source Serif Pro"
+/>
