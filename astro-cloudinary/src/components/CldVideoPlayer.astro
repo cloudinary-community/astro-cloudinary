@@ -1,0 +1,105 @@
+---
+import { getVideoPlayerOptions, type ConfigOptions } from '@cloudinary-util/url-loader';
+
+import { getCloudinaryConfig } from '../lib/cloudinary';
+import type { CloudinaryVideoPlayerOptions, CloudinaryVideoPlayerOptionsLogo } from '@cloudinary-util/types';
+
+const PLAYER_VERSION = '1.11.1';
+
+export interface CldVideoPlayerProps extends Omit<CloudinaryVideoPlayerOptions, "cloud_name" | "autoplayMode" | "publicId" | "secure" | "showLogo" | "logoImageUrl" | "logoOnclickUrl"> {
+  class?: string;
+  config?: ConfigOptions;
+  id?: string;
+  logo?: boolean | CldVideoPlayerPropsLogo;
+  poster?: string; // | GetCldImageUrlOptions | GetCldVideoUrlOptions;
+  src: string;
+  quality?: string | number;
+}
+
+export interface CldVideoPlayerPropsLogo {
+  imageUrl?: CloudinaryVideoPlayerOptionsLogo['logoImageUrl'];
+  logo?: boolean;
+  onClickUrl?: CloudinaryVideoPlayerOptionsLogo['logoOnclickUrl'];
+}
+
+interface Props extends CldVideoPlayerProps {};
+
+const props: Props = Astro.props;
+const { class: className, config, height, id, width } = props;
+
+const cloudinaryConfig = getCloudinaryConfig(config);
+const playerOptions = getVideoPlayerOptions(props, cloudinaryConfig);
+const { publicId } = playerOptions;
+
+if ( typeof publicId === 'undefined' ) {
+  throw new Error('Video Player requires a Public ID or Cloudinary URL - please specify a src prop');
+}
+
+const playerId = id || `player-${publicId.replace('/', '-')}`;
+let playerClassName = 'astro-cloudinary-videoplayer cld-video-player cld-fluid';
+
+if ( className ) {
+  playerClassName = `${playerClassName} ${className}`;
+}
+---
+<link href={`https://unpkg.com/cloudinary-video-player@${PLAYER_VERSION}/dist/cld-video-player.min.css`} rel="stylesheet" />
+
+<div id={playerId} style={{ width: '100%', aspectRatio: `${width} / ${height}`}}>
+  <video
+    id={`${playerId}-video`}
+    class={playerClassName}
+    width={width}
+    height={height}
+    data-cldvideoplayer-options={JSON.stringify(playerOptions)}
+    data-cldvideoplayer-id={playerId}
+  />
+</div>
+
+<script is:inline src={`https://unpkg.com/cloudinary-video-player@${PLAYER_VERSION}/dist/cld-video-player.min.js`}></script>
+
+<script>
+  import type { CloudinaryVideoPlayer } from '@cloudinary-util/types';
+  
+  interface Cloudinary {
+    videoPlayer: (video: HTMLVideoElement, options: {}) => CloudinaryVideoPlayer;
+  }
+
+  window.addEventListener('load', () => {
+    if ( 'cloudinary' in window ) {
+      const cloudinary = window.cloudinary as Cloudinary;
+      const videos = document.querySelectorAll('.astro-cloudinary-videoplayer') as NodeListOf<HTMLVideoElement>;
+
+      videos.forEach(video => {
+        const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);
+        
+        const player = cloudinary.videoPlayer(video, playerOptions);
+
+        if ( !player ) return;
+
+        // Loop through all avialable player events and create custom event callbacks
+
+        const events = [
+          'error',
+          'loadeddata',
+          'loadedmetadata',
+          'pause',
+          'play',
+          'ended',
+        ];
+
+        events.forEach(event => {
+          player.on(event, (e: { Player: CloudinaryVideoPlayer; type: string; }) => {
+            const customEvent = new CustomEvent(`cldvideoplayer:${event}`, {
+              detail: {
+                Player: e.Player,
+                type: e.type,
+                Video: video
+              },
+            });
+            video.closest(`#${video.dataset.cldvideoplayerId}`)?.dispatchEvent(customEvent);
+          });
+        });
+      })
+    }
+  });
+</script>

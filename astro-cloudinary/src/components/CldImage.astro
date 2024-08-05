@@ -3,10 +3,9 @@ import { type HTMLAttributes } from 'astro/types';
 import { type UnpicImageProps } from '@unpic/core';
 import { Image } from '@unpic/astro';
 import { getTransformations } from '@cloudinary-util/util';
-import { transformationPlugins, type ConfigOptions, type ImageOptions } from '@cloudinary-util/url-loader';
+import { transformationPlugins, type ConfigOptions, type ImageOptions, constructCloudinaryUrl } from '@cloudinary-util/url-loader';
 
-import { generateLoader } from '../../lib/loader';
-
+import { generateImageLoader } from '../lib/loader';
 
 export type CldImageProps = Omit<UnpicImageProps<HTMLAttributes<"img">>, "src"> & ImageOptions & {
   config?: ConfigOptions;
@@ -46,7 +45,9 @@ transformationPlugins.forEach(({ props }: { props: Record<string, unknown> }) =>
 // into the URL construction
 
 const cldOptions: ImageOptions = {
-  src: props.src
+  height: props.height,
+  src: props.src,
+  width: props.width,
 };
 
 CLOUDINARY_PROPS.forEach((key) => {
@@ -70,10 +71,10 @@ if (props.preserveTransformations) {
   }
 }
 
-// Create a new instanct of the loader for the Image component to
+// Create a new instance of the loader for the Image component to
 // vend URLs for each responsive breakpoint
 
-const transformer = generateLoader(cldOptions, config);
+const transformer = generateImageLoader(cldOptions, config);
 
 // Construct the base Image component props by filtering out Cloudinary-specific props
 
@@ -98,9 +99,10 @@ Object.entries(props)
   .filter(([key]) => typeof key === 'string' && !CLOUDINARY_PROPS.includes(key))
   .forEach(([key, value]) => imageProps[key as keyof UnpicImageProps<HTMLAttributes<"img">>] = value);
 ---
-<Image class="cldimage" {...imageProps} />
+<Image class="astro-cloudinary-cldimage" {...imageProps} />
 
 <script is:inline>
+  // document.querySelectorAll('.astro-cloudinary-cldimage').on('error', onCldImageError);
   // Optimize this so that a new script isn't added for each image instance
   async function onCldImageError(image) {
     if ( await pollForProcessingImage(image.src) ) {

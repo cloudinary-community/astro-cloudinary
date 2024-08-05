@@ -9,20 +9,22 @@ interface TransformUrlOptions {
   height?: number;
 }
 
-export function generateLoader(props: ImageOptions, config?: ConfigOptions) {
+export function generateImageLoader(props: ImageOptions, config?: ConfigOptions) {
+  const imageProps = { ...props };
+
+  // Normalize width and height to number to allow flexibility in how the values
+  // are passed through as props
+
+  imageProps.width = typeof imageProps.width === 'string' ? Number.parseInt(imageProps.width) : imageProps.width;
+  imageProps.height = typeof imageProps.height === 'string' ? Number.parseInt(imageProps.height) : imageProps.height;
+
   return function loader(loaderOptions: TransformUrlOptions) {
     const options = {
-      ...props,
+      ...imageProps,
       src: loaderOptions.url,
       width: loaderOptions.width,
       height: loaderOptions.height,
     } as ImageOptions;
-  
-    // Normalize width and height to number to allow flexibility in how the values
-    // are passed through as props
-
-    options.width = typeof options.width === 'string' ? Number.parseInt(options.width) : options.width;
-    options.height = typeof options.height === 'string' ? Number.parseInt(options.height) : options.height;
 
     // The loader options are used to create dynamic sizing when working with responsive images
     // so these should override the default options collected from the props alone if
