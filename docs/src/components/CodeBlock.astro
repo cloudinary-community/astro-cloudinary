@@ -1,4 +1,6 @@
 ---
+import { Icon } from 'astro-icon/components'
+
 import { cn } from '../lib/util';
 
 interface Props {
@@ -7,23 +9,23 @@ interface Props {
 
 const { class: className }: Props = Astro.props;
 
-const codeBlockClassName = cn('code-block', className);
+const codeBlockClassName = cn('code-block group relative [&_.code-block-code_pre]:rounded [&_.code-block-code_pre]:border-slate-200', className);
 ---
 
 <div class={codeBlockClassName} data-codeblock-expanded="false">
   <div class="code-block-code">
     <slot />
   </div>
-  <ul class="code-block-actions">
-    <li>
-      <button class="code-block-actions-expand">
-        <!-- <BsArrowsExpand /> -->
+  <ul class="flex justify-center relative z-1 rounded p-0 m-0 !-mt-2">
+    <li class="flex items-center justify-center gap-1 p-4 m-0 group-data-[codeblock-expanded=true]:hidden">
+      <button class="flex gap-2 items-center bg-transparent text-blue-500 text-xs code-block-actions-expand cursor-pointer !mb-0">
+        <Icon name="mdi:expand-horizontal" />
         Expand Snippet
       </button>
     </li>
-    <li>
-      <button class="code-block-actions-collapse">
-        <!-- <BsArrowsCollapse /> -->
+    <li class="flex items-center justify-center gap-1 p-4 m-0 group-data-[codeblock-expanded=false]:hidden">
+      <button class="flex gap-2 items-center bg-transparent text-blue-500 text-xs code-block-actions-collapse cursor-pointer !mb-0">
+        <Icon name="mdi:collapse-horizontal" />
         Collapse Snippet
       </button>
     </li>
@@ -47,10 +49,6 @@ const codeBlockClassName = cn('code-block', className);
 </script>
 
 <style>
-.code-block {
-  position: relative;
-}
-
 [data-codeblock-expanded="true"] {
 
   .code-block-code {
@@ -67,7 +65,7 @@ const codeBlockClassName = cn('code-block', className);
 
   position: relative;
   max-height: 12em;
-  overflow-y: scroll;
+  overflow: hidden;
 
   &:after {
     display: block;
@@ -88,48 +86,5 @@ const codeBlockClassName = cn('code-block', className);
 
   }
 
-  pre {
-    border-radius: .2em;
-    margin-bottom: 0;
-  }
-
-}
-
-.code-block-actions {
-
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-  border-radius: .2em;
-
-  li {
-    &:first-child {
-      margin-left: -.5em;
-    }
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5em;
-    color: #2D69DE;
-    font-size: .75em;
-    padding: 1em;
-  }
-
-}
-
-.code-block-actions-expand {
-  [data-codeblock-expanded="true"] & {
-    display: none;
-  }
-}
-
-.code-block-actions-collapse {
-  [data-codeblock-expanded="false"] & {
-    display: none;
-  }
 }
 </style>

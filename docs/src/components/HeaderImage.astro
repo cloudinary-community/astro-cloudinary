@@ -5,47 +5,15 @@ interface Props {
 
 const { layout }: Props = Astro.props;
 ---
-
-<div class="header-image bg-slate-100 border border-slate-200 dark:bg-black dark:border-[#1c2428]">
-  <div class="header-image-children" data-layout={layout}>
+<div class="w-full bg-slate-100 border border-slate-200 dark:bg-black dark:border-[#1c2428] p-2 sm:py-8 rounded my-5">
+  <div
+    class="
+      header-image-children flex justify-center max-w-[500px] mx-auto my-0
+      data-[layout=grid]:grid data-[layout=grid]:max-w-full data-[layout=grid]:grid-cols-[1fr_1fr] data-[layout=grid]:gap-2
+      [&_img]:rounded-sm [&_img]:!m-0
+    "
+    data-layout={layout}
+  >
     <slot />
   </div>
 </div>
-
-<style>
-.header-image {
-
-  width: 100vw;
-  padding: 1em;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-
-  @media (min-width: 480px) {
-    width: 100%;
-    padding: 2em;
-    border-radius: .25em;
-    margin: 0;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-}
-
-.header-image-children {
-
-  display: flex;
-  justify-content: center;
-  max-width: 500px;
-  margin: 0 auto;
-
-  &[data-layout="grid"] {
-    display: grid;
-    max-width: 100%;
-    grid-template-columns: 1fr 1fr;
-    gap: 1em;
-  }
-
-}
-</style>

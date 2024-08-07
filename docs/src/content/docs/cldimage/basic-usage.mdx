@@ -1,19 +1,20 @@
 ---
-title: CldImage - Astro Cloudinary
-description: Getting Started with CldImage - Astro Cloudinary
+title: Getting Started with CldImage
+description: Optimize and transform images in Astro with the CldImage component.
+head:
+  - tag: title
+    content: CldImage - Astro Cloudinary
 ---
 import { CldImage } from '../../../../../astro-cloudinary';
 
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
 
-# Getting Started with CldImage
-
-The CldImage component provides an easy way to deliver images from Cloudinary with the same experience you'd expect inside of a Next.js app.
+The CldImage component provides an easy way to deliver images from Cloudinary in an Astro app.
 
 With it comes access to more advanced features like dynamic cropping, background removal, overlays, and other Cloudinary transformations.
 
-As CldImage is a wrapper around the Next.js Image component, you also gain access to all built-in Image component features will work out-of-the-box like [Responsive Sizing](/guides/responsive-images).
+As CldImage is a wrapper around the Unpic Image component, you also gain access to built-in Image component features that will work out-of-the-box like [Responsive Sizing](/guides/responsive-images).
 
 ## Basic Usage
 
@@ -21,7 +22,6 @@ The basic required props include `width`, `height`, `src`, and `alt`:
 
 <HeaderImage>
   <CldImage
-  class="rotate-45"
     width="960"
     height="600"
     src={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/turtle`}
@@ -32,7 +32,7 @@ The basic required props include `width`, `height`, `src`, and `alt`:
 
 <CodeBlock>
   ```jsx copy showLineNumbers
-  import { CldImage } from 'next-cloudinary';
+  import { CldImage } from 'astro-cloudinary';
 
   <CldImage
     width="960"
@@ -71,7 +71,7 @@ You can further take advantage of Cloudinary features like background removal an
 
 <CodeBlock>
   ```jsx copy showLineNumbers
-  import { CldImage } from 'next-cloudinary';
+  import { CldImage } from 'astro-cloudinary';
 
   <CldImage
     width="500"
@@ -99,7 +99,7 @@ to ensure the integretiy when during the parsing process.
 
 <CodeBlock className="mt-6">
   ```jsx copy showLineNumbers
-  import { CldImage } from 'next-cloudinary';
+  import { CldImage } from 'astro-cloudinary';
 
   <CldImage
     width="500"
@@ -125,13 +125,6 @@ To preserve those transformations, you can apply the `preserveTransformations` p
   alt="Description of my image"
 />
 ```
-
-## Watch & Learn
-
-{/* <Video
-  title="Automatic Image Optimization & Dynamic Cropping in Next.js with Next Cloudinary"
-  url="https://www.youtube.com/watch?v=oj2-BcZ8szk"
-/> */}
 
 ## Learn More about CldImage
 * [Configuration](/cldimage/configuration)
