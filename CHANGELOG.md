@@ -1,3 +1,11 @@
+# [1.0.0-beta.3](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2024-08-07)
+
+
+### Features
+
+* fixing included props, updating docs ([a3c361d](https://github.com/colbyfayock/astro-cloudinary/commit/a3c361dd8b325837d469be8e85b2a53e077c2768))
+* fixing included props, updating docs ([a85aab7](https://github.com/colbyfayock/astro-cloudinary/commit/a85aab72e8709d305981b69c8ac006e0c26623e6))
+
 # [1.0.0-beta.2](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2024-08-05)
 
 
