@@ -23,8 +23,11 @@ const { config, ...props }: Props = Astro.props;
 // pulled from the URL Loader plugins
 
 const CLOUDINARY_PROPS = [
+  'assetType',
+  'deliveryType',
   'config',
   'preserveTransformations',
+  'strictTransformations',
 ];
 
 // Collect all of the valid CldImage props that should only
