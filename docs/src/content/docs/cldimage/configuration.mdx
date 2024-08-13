@@ -215,9 +215,11 @@ Rotates the image at the given angle.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 angle={15}
 ```
+</CodeBlock>
 
 [Learn more about angle](https://cloudinary.com/documentation/transformation_reference#b_background) on the Cloudinary docs.
 
@@ -227,9 +229,11 @@ Applies a background to empty or transparent areas.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 background="blue"
 ```
+</CodeBlock>
 
 [Learn more about the background transformation](https://cloudinary.com/documentation/transformation_reference#b_background) on the Cloudinary docs.
 
@@ -315,13 +319,16 @@ size. See examples below.
 
 Cropping an image and filling the containing space:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 crop="fill"
 ```
+</CodeBlock>
 
 Using a crop of `thumb` on the original source image:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 crop={{
   width: 1200,
   height: 1200,
@@ -329,6 +336,7 @@ crop={{
   source: true
 }}
 ```
+</CodeBlock>
 
 [Learn more about the crop transformation](https://cloudinary.com/documentation/transformation_reference#c_crop_resize) on the Cloudinary docs.
 
@@ -345,9 +353,11 @@ The `enhance` prop can be used as a boolean.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 enhance
 ```
+</CodeBlock>
 
 [Learn more about the Generative Enhance transformation](https://cloudinary.com/documentation/transformation_reference#e_enhance) on the Cloudinary docs.
 
@@ -401,19 +411,23 @@ a background, or an object, which can take the following options:
 
 Applying Generative Fill with defaults:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 fillBackground
 ```
+</CodeBlock>
 
 Customizing options:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 fillBackground={{
   crop: 'clpad',
   gravity: 'south',
   prompt: 'cupcakes'
 }}
 ```
+</CodeBlock>
 
 [Learn more about the Generative Fill transformation](https://cloudinary.com/documentation/transformation_reference#b_gen_fill) on the Cloudinary docs.
 
@@ -423,9 +437,11 @@ Determines which part of an asset to focus on, and thus which part of the asset 
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 gravity="face"
 ```
+</CodeBlock>
 
 [Learn more about gravity](https://cloudinary.com/documentation/transformation_reference#g_gravity) on the Cloudinary docs.
 
@@ -435,9 +451,11 @@ Loops an animated image infinitely or for the specified number of times.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 loop
 ```
+</CodeBlock>
 
 [Learn more about loop](https://cloudinary.com/documentation/transformation_reference#e_loop) on the Cloudinary docs.
 
@@ -490,19 +508,23 @@ with the following options:
 
 Recoloring an object with an array:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 recolor={['duck', 'blue']}
 ```
+</CodeBlock>
 
 Or using the object format:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 recolor={{
   prompt: 'duck',
   to: 'blue',
   multiple; true
 }}
 ```
+</CodeBlock>
 
 [Learn more about the Generative Recolor transformation](https://cloudinary.com/documentation/transformation_reference#e_gen_recolor) on the Cloudinary docs.
 
@@ -559,37 +581,46 @@ The `remove` prop can either be a string, an array, or an object with the follow
 
 Removing an object by string:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 remove="apple"
 ```
+</CodeBlock>
 
 Removing multiple objects by array:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 remove={['apple', 'banana', 'orange']}
 ```
+</CodeBlock>
 
 Removing multiple instances of an object and their shadow with object configuration:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 remove={{
   prompt: 'apple',
   multiple: true,
   removeShadow: true
 }}
 ```
+</CodeBlock>
 
 Removing a region:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 remove={{
   region: [300, 200, 1900, 3500]
 }}
 ```
+</CodeBlock>
 
 Removing multiple regions:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 remove={{
   region: [
     [300, 200, 1900, 3500],
@@ -597,6 +628,7 @@ remove={{
   ]
 }}
 ```
+</CodeBlock>
 
 [Learn more about the Generative Remove transformation](https://cloudinary.com/documentation/transformation_reference#e_gen_remove) on the Cloudinary docs.
 
@@ -604,16 +636,18 @@ remove={{
 
 Uses the [Cloudinary AI Background Removal add-on](https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon) to make the background of an image transparent.
 
-:::tip
+:::note
 The Cloudinary AI Background Removal add-on is required to use this feature.
 :::
 
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 removeBackground
 ```
+</CodeBlock>
 
 [Learn more about background removal transformation](https://cloudinary.com/documentation/transformation_reference#e_background_removal) on the Cloudinary docs.
 
@@ -667,19 +701,23 @@ with the following options:
 
 Replacing an object with an array:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 replace={['apple', 'banana']}
 ```
+</CodeBlock>
 
 Or using the object format:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 replace={{
   from: 'apple',
   to: 'banana',
   preserveGeometry; true
 }}
 ```
+</CodeBlock>
 
 [Learn more about the Generative Replace transformation](https://cloudinary.com/documentation/transformation_reference#e_gen_replace) on the Cloudinary docs.
 
@@ -727,24 +765,30 @@ with the following options:
 
 Replacing the background based on the image context:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 replaceBackground
 ```
+</CodeBlock>
 
 Or using a string prompt:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 replaceBackground="fish tank"
 ```
+</CodeBlock>
 
 Or using the object format:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 replaceBackground={{
   prompt: 'fish tank',
   seed: 3
 }}
 ```
+</CodeBlock>
 
 [Learn more about the Generative Replace Background transformation](https://cloudinary.com/documentation/transformation_reference#e_gen_background_replace) on the Cloudinary docs.
 
@@ -760,9 +804,11 @@ The `restore` prop can be used as a boolean.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 restore
 ```
+</CodeBlock>
 
 [Learn more about the Generative Restore transformation](https://cloudinary.com/documentation/transformation_reference#e_gen_restore) on the Cloudinary docs.
 
@@ -773,9 +819,11 @@ Controls how close to crop to the detected coordinates when using face-detection
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 zoom="0.75"
 ```
+</CodeBlock>
 
 [Learn more about the zoom transformation](https://cloudinary.com/documentation/transformation_reference#z_zoom) on the Cloudinary docs.
 
@@ -824,24 +872,30 @@ As an object, you can use advanced configuration with the following options:
 
 With defaults:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 zoompan
 ```
+</CodeBlock>
 
 Add looping:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 zoompan="loop"
 ```
+</CodeBlock>
 
 Customize options:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 zoompan={{
   loop: 'loop:2', // Will loop twice
   options: 'mode_ztr;maxzoom_6.5;du_10'
 }}
 ```
+</CodeBlock>
 
 [Learn more about the zoompan transformation](https://cloudinary.com/documentation/transformation_reference#e_zoompan) on the Cloudinary docs.
 
@@ -1208,21 +1262,27 @@ to easily change the appearance of an image.
 
 Make an image black and white:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 blackwhite
 ```
+</CodeBlock>
 
 Pixelate an image:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 pixelate
 ```
+</CodeBlock>
 
 Sharpen an image:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 sharpen={50}
 ```
+</CodeBlock>
 
 [View the Cloudinary docs](https://cloudinary.com/documentation/transformation_reference#e_effect) to see learn more about using effects.
 
@@ -1332,7 +1392,8 @@ Note: The API for Underlays is similar to Overlays except they do not support te
 
 Adding an overlay:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 overlays={[{
   publicId: 'images/earth',
   position: {
@@ -1347,14 +1408,17 @@ overlays={[{
   ]
 }]}
 ```
+</CodeBlock>
 
 Adding an underlay:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 underlays={[{
   publicId: 'images/earth',
 }]}
 ```
+</CodeBlock>
 
 <div className="-mb-4">
   <strong id="layer-effect-props" className="block text-slate-500 text-lg mt-8 -mb-4">
@@ -1645,9 +1709,11 @@ This defaults to an image for the CldImage component.
 
 Create an image thumbnail from a video asset:
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 assetType="video"
 ```
+</CodeBlock>
 
 [Learn more about Asset Types](https://cloudinary.com/documentation/image_transformations#transformation_url_structure) on the Cloudinary docs.
 
@@ -1658,13 +1724,15 @@ Allows configuration for the Cloudinary environment.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 config={{
   cloud: {
     cloudName: '<Your Cloud Name>',
   }
 }}
 ```
+</CodeBlock>
 
 [Learn more about configuration parameters](https://cloudinary.com/documentation/cloudinary_sdks#configuration_parameters) on the Cloudinary docs.
 
@@ -1674,9 +1742,11 @@ Controls the delivery type of the image.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 deliveryType="fetch"
 ```
+</CodeBlock>
 
 [Learn more about Delivery Types](https://cloudinary.com/documentation/image_transformations#delivery_types) on the Cloudinary docs.
 
@@ -1690,9 +1760,11 @@ Configures the default image to use in case the given public ID is not available
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 defaultImage="myimage.jpg"
 ```
+</CodeBlock>
 
 [Learn more about Default Images](https://cloudinary.com/documentation/transformation_reference#d_default_image) on the Cloudinary docs.
 
@@ -1706,10 +1778,12 @@ The `keep_iptc` flag requires not including a quality of auto. Using `quality="d
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 flags={['keep_iptc']}
 quality="default"
 ```
+</CodeBlock>
 
 [Learn more about Flags](https://cloudinary.com/documentation/transformation_reference#fl_flag) on the Cloudinary docs.
 
@@ -1719,9 +1793,11 @@ Adds a dynamic, descriptive suffix to the Public ID for greater SEO control of i
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 seoSuffix="jellyfish-in-space"
 ```
+</CodeBlock>
 
 [Learn more about Dynamic SEO Suffixes](https://cloudinary.com/documentation/advanced_url_delivery_options#dynamic_seo_suffixes) on the Cloudinary docs.
 
@@ -1731,9 +1807,11 @@ Controls the version defined in the delivery URL.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 version="1234"
 ```
+</CodeBlock>
 
 [Learn more about Asset Versions](https://cloudinary.com/documentation/advanced_url_delivery_options#asset_versions) on the Cloudinary docs.
 
@@ -1814,7 +1892,8 @@ Applies a chain of transformation sets to an image.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 effects={[
   {
     width: 100,
@@ -1826,6 +1905,7 @@ effects={[
   }
 ]}
 ```
+</CodeBlock>
 
 #### `namedTransformations`
 
@@ -1833,9 +1913,11 @@ Applies named transformations to the image.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 namedTransformations={['my-transformation']}
 ```
+</CodeBlock>
 
 [Learn more about Named Transformations](https://cloudinary.com/documentation/image_transformations#named_transformations) on the Cloudinary docs.
 
@@ -1854,9 +1936,11 @@ be applied as [rawTransformations](#rawtransformations).
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 preserveTransformations
 ```
+</CodeBlock>
 
 #### `rawTransformations`
 
@@ -1869,9 +1953,11 @@ configured on the component using the [format](#format) or [quality](#quality) o
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 rawTransformations={['w_100', 'b_blue', 'f_auto']}
 ```
+</CodeBlock>
 
 #### `strictTransformations`
 
@@ -1889,10 +1975,12 @@ but are still included on the image tag rendered to the DOM.
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 strictTransformations
 transformations=["my-transformation"]
 ```
+</CodeBlock>
 
 [Learn more about Strict Transformations](https://cloudinary.com/documentation/control_access_to_media#strict_transformations) on the Cloudinary docs.
 
@@ -1961,9 +2049,11 @@ Sets the device pixel ratio (DPR) for the delivered image or video using a speci
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 dpr="2.0"
 ```
+</CodeBlock>
 
 [Learn more about configuring DPR](https://cloudinary.com/documentation/transformation_reference#dpr_dpr) on the Cloudinary docs.
 
@@ -1974,9 +2064,11 @@ Converts (if necessary) and delivers an asset in the specified format regardless
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 format="png"
 ```
+</CodeBlock>
 
 [Learn more about format](https://cloudinary.com/documentation/transformation_reference#f_format) on the Cloudinary docs.
 
@@ -1987,8 +2079,10 @@ Controls the quality of the delivered asset. Reducing the quality is a trade-off
 
 **Examples**
 
-```jsx copy
+<CodeBlock alwaysExpanded={true}>
+```jsx
 quality={10}
 ```
+</CodeBlock>
 
 [Learn more about quality](https://cloudinary.com/documentation/transformation_reference#q_quality) on the Cloudinary docs.

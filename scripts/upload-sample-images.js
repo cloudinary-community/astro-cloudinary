@@ -2,8 +2,6 @@ require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 
 const assets = require('./assets.json');
-const images = require('./images.json');
-const videos = require('./videos.json');
 
 cloudinary.config({
   cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
@@ -12,22 +10,10 @@ cloudinary.config({
 });
 
 (async function run() {
-  
   await uploadAssets(assets, {
     folder: import.meta.env.CLOUDINARY_ASSETS_DIRECTORY || 'assets',
     resourceType: 'image'
   });
-  
-  await uploadAssets(images, {
-    folder: import.meta.env.CLOUDINARY_IMAGES_DIRECTORY || 'images',
-    resourceType: 'image'
-  });
-
-  await uploadAssets(videos, {
-    folder: import.meta.env.CLOUDINARY_VIDEOS_DIRECTORY || 'videos',
-    resourceType: 'video'
-  });
-
   console.log('Finished.');
 })();
 

@@ -1,7 +1,27 @@
 [
   {
     "publicId": "space-jelly-cosmo-helmet",
-    "url": "https://res.cloudinary.com/colbycloud-astro-cloudinary/image/upload/v1676058142/assets/space-jelly-cosmo-helmet.svg",
+    "url": "https://res.cloudinary.com/astro-cloudinary/image/upload/v1723211850/assets/space-jelly-cosmo-helmet.svg",
     "resourceType": "image"
+  },
+  {
+    "publicId": "cloudinary-white",
+    "url": "https://res.cloudinary.com/astro-cloudinary/image/upload/v1723211902/assets/cloudinary-white.svg"
+  },
+  {
+    "publicId": "cloudinary-logo-white",
+    "url": "https://res.cloudinary.com/colbycloud-astro-cloudinary/image/upload/images/cloudinary-logo-white.svg"
+  },
+  {
+    "publicId": "cloudinary-social-background-v1",
+    "url": "https://res.cloudinary.com/astro-cloudinary/image/upload/v1723211909/assets/cloudinary-social-background-v1.png"
+  },
+  {
+    "publicId": "astro-logo-light",
+    "url": "https://res.cloudinary.com/astro-cloudinary/image/upload/v1723211898/assets/astro-logo-light.svg"
+  },
+  {
+    "publicId": "white",
+    "url": "https://res.cloudinary.com/astro-cloudinary/image/upload/v1723211880/assets/white.png"
   }
 ]

@@ -24,14 +24,14 @@ importers:
   astro-cloudinary:
     dependencies:
       '@cloudinary-util/types':
-        specifier: 1.1.0-beta.1
-        version: 1.1.0-beta.1
+        specifier: 1.2.0
+        version: 1.2.0
       '@cloudinary-util/url-loader':
-        specifier: 5.4.0-beta.1
-        version: 5.4.0-beta.1
+        specifier: 5.6.0
+        version: 5.6.0
       '@cloudinary-util/util':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@unpic/astro':
         specifier: ^0.0.46
         version: 0.0.46(astro@4.12.2(@types/node@20.11.5)(sass@1.71.1)(typescript@5.5.4))
@@ -267,20 +267,17 @@ packages:
     resolution: {integrity: sha512-LcnxQSsd9aXOIgmmSpvZ/1yo46ra2ESYyqLcryaBZOghxy5qqOBjvCWP5JfkI8yl9rlxRgdLTTMCQQRcN2hdCg==}
     engines: {node: '>=6.9.0'}
 
-  '@cloudinary-util/types@1.0.5':
-    resolution: {integrity: sha512-QySi6Q138yg/qrD7f6yscH9T+/8VwUfF9AiwFPMS89uI5wnSG9nhC+93a/8iUpgk9ujTDVqE8+TqYAbxvF0BMA==}
+  '@cloudinary-util/types@1.2.0':
+    resolution: {integrity: sha512-2Mo5juB1HV+GmVLq2+bU0Yg5FB6r+csbHyDN6njc0AqkEkp+AW+Q6kYbbTYkT7zk3x9tBWfKn3lfR7wUCwowJw==}
 
-  '@cloudinary-util/types@1.1.0-beta.1':
-    resolution: {integrity: sha512-xUWhZ9uHIOWqAI7mhQtpumzBkp6h9qi0BNZyd5DUevNWrtv7GrV5BokUHJuD8SVOvCqwQurpv+X3uddJcPcXpA==}
+  '@cloudinary-util/types@1.2.0-beta.1':
+    resolution: {integrity: sha512-zdMPqadGhRWwSZQcgsUoouJhr2Dnpc4p1ytGLtnEmVFNvwDhYMR6ER3xLP5FoSNzPx10SoWfNl6UWQKInkk+iQ==}
 
-  '@cloudinary-util/url-loader@5.4.0-beta.1':
-    resolution: {integrity: sha512-z0i00o+CLqIi1wp5KjUr2Z7Qi2geDswlKG7AqAfg4bHcp0bfcqBY5kuDr6eZGBPQWTJdGGvnxkMnnXqQjwaa1w==}
+  '@cloudinary-util/url-loader@5.6.0':
+    resolution: {integrity: sha512-oWTXaaBralKLfk9tD2fWaTfwflx9Acug6L3GO72sLPxIssg+SyeNDiIrNwIFRx6SkFR74bWWNqjp2yu135gaDQ==}
 
-  '@cloudinary-util/util@3.0.0':
-    resolution: {integrity: sha512-o6cJsN49OIelLcSkqUf4WzgefpePDFsAaeQfJbpcKhVdtvmWv71K0oZwMXuX62IY1OolqIg0etMiHtWZPhvPNA==}
-
-  '@cloudinary-util/util@3.1.0-beta.1':
-    resolution: {integrity: sha512-po32hEsGh6+vrjnNbWUOdmhmgeAFwfHjdo4h5Gl6g/x9Kxz3dNORgbVZveGe5JTyasToceKZDmGgP7kBRmA8EQ==}
+  '@cloudinary-util/util@3.2.0':
+    resolution: {integrity: sha512-VJBqAT3W0HQ9kyMagv+EzXkM/VYR9Ks01ewGxsS8T8b2N0NZFPAhYKeU2H9fOXSl6BVrD6aVYjJZAoT8pfQIyA==}
 
   '@cloudinary/transformation-builder-sdk@1.10.1':
     resolution: {integrity: sha512-UUb1wS/eWCf4YBThGszoBBzH6kP+frdd5JeJkF0/SOwbX3tkcrdzxD+Srn5GXPCqzf6Gw1nrGrv/3U9hiZP55A==}
@@ -4144,20 +4141,18 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@cloudinary-util/types@1.0.5': {}
+  '@cloudinary-util/types@1.2.0': {}
 
-  '@cloudinary-util/types@1.1.0-beta.1': {}
+  '@cloudinary-util/types@1.2.0-beta.1': {}
 
-  '@cloudinary-util/url-loader@5.4.0-beta.1':
+  '@cloudinary-util/url-loader@5.6.0':
     dependencies:
-      '@cloudinary-util/types': 1.0.5
-      '@cloudinary-util/util': 3.1.0-beta.1
+      '@cloudinary-util/types': 1.2.0-beta.1
+      '@cloudinary-util/util': 3.2.0
       '@cloudinary/url-gen': 1.15.0
       zod: 3.23.8
 
-  '@cloudinary-util/util@3.0.0': {}
-
-  '@cloudinary-util/util@3.1.0-beta.1': {}
+  '@cloudinary-util/util@3.2.0': {}
 
   '@cloudinary/transformation-builder-sdk@1.10.1':
     dependencies:

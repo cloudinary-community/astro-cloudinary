@@ -22,24 +22,24 @@ The basic required props include `width`, `height`, `src`, and `alt`:
 
 <HeaderImage>
   <CldImage
-    width="960"
-    height="600"
-    src={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/turtle`}
+    width="1870"
+    height="1250"
+    src="cld-sample-5"
     sizes="100vw"
-    alt="Turtle in the ocean"
+    alt="A variety of colorful and appetizing breakfast dishes, including waffles, oatmeal, and fresh fruits, are arranged on a white surface, accompanied by various condiments and utensils."
   />
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx copy showLineNumbers
+  ```jsx
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    width="960"
-    height="600"
+    width="<Width>"
+    height="<Height>"
     src="<Public ID>"
     sizes="100vw"
-    alt="Description of my image"
+    alt="<Description>"
   />
   ```
 </CodeBlock>
@@ -52,62 +52,91 @@ The `sizes` prop is optional, but recommended for [Responsive Sizing](/guides/re
 
 ## Transformations
 
-You can further take advantage of Cloudinary features like background removal and overlays by adding additional props:
-
+You can further take advantage of Cloudinary features like replacing backgrounds with generative AI and text overlays by adding additional props:
 
 <HeaderImage>
   <CldImage
-    width="500"
-    height="500"
-    src={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/turtle`}
-    crop="fill"
-    removeBackground
-    tint="70:blue:purple"
-    underlay={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/galaxy`}
+    width="800"
+    height="600"
+    src="cld-sample-5"
+    crop={{
+      type: 'fill',
+      source: true
+    }}
+    replaceBackground="cartoon outer space"
+    overlays={[
+      {
+        position: {
+          y: 40,
+          x: -10,
+          gravity: 'south',
+        },
+        text: {
+          color: 'magenta',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+      {
+        position: {
+          y: 50,
+          gravity: 'south',
+        },
+        text: {
+          color: 'white',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+    ]}
     sizes="100vw"
     alt="Turtle in the ocean"
   />
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx copy showLineNumbers
+  ```jsx
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    width="500"
-    height="500"
+    width="<Width>"
+    height="<Height>"
     src="<Public ID>"
     crop="fill"
-    removeBackground
-    tint="70:blue:purple"
-    underlay="<Public ID>"
+    replaceBackground="cartoon outer space"
     sizes="100vw"
-    alt="Description of my image"
+    alt="<Description>"
   />
   ```
 </CodeBlock>
 
+[Check out more examples](/cldimage/examples) of what you can do with transformations!
+
 ## Using Cloudinary URLs
 
 CldImage supports passing a fully qualified Cloudinary URL as the `src`, however, it
-must include a version number (/v1234) in order to be correctly parsed.
+must include a version number (`/v1234/`) in order to be correctly parsed.
 
-:::tip
+:::note
 The version number is required due to the variable nature of Cloudinary URLs. This helps
 to ensure the integretiy when during the parsing process.
 :::
 
 <CodeBlock className="mt-6">
-  ```jsx copy showLineNumbers
-  import { CldImage } from 'astro-cloudinary';
+```jsx
+import { CldImage } from 'astro-cloudinary';
 
-  <CldImage
-    width="500"
-    height="500"
-    src="https://res.cloudinary.com/mycloud/image/upload/v1234/myimage"
-    alt="Description of my image"
-  />
-  ```
+<CldImage
+  width="<Width>"
+  height="<Height>"
+  src="https://res.cloudinary.com/mycloud/image/upload/v1234/myimage"
+  alt="<Description>"
+/>
+```
 </CodeBlock>
 
 ### Preserving URL Transformations
@@ -116,15 +145,51 @@ If using a full Cloudinary URL, you might already have transformations applied t
 
 To preserve those transformations, you can apply the `preserveTransformations` property:
 
-```jsx copy
+<CodeBlock className="mt-6">
+```jsx
 <CldImage
-  width="600"
-  height="600"
-  src="https://res.cloudinary.com/mycloud/image/upload/w_100,h_200,c_fill/v1234/myimage"
+  width="<Width>"
+  height="<Height>"
+  src="https://res.cloudinary.com/<Cloud Name>/image/upload/w_100,h_200,c_fill/v1234/myimage"
   preserveTransformations
-  alt="Description of my image"
+  alt="<Description>"
 />
 ```
+</CodeBlock>
+
+For example:
+
+<HeaderImage>
+  <CldImage
+    width="800"
+    height="600"
+    src="https://res.cloudinary.com/astro-cloudinary/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
+    preserveTransformations
+    alt="test"
+  />
+</HeaderImage>
+
+<CodeBlock>
+  ```jsx
+  import { CldImage } from 'astro-cloudinary';
+
+  <CldImage
+    width="<Width>"
+    height="<Height>"
+    src="https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
+    preserveTransformations
+    alt="test"
+  />
+  ```
+</CodeBlock>
+
+Would generate a URL of:
+
+<CodeBlock>
+  ```
+  https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/c_limit,w_1600/v1/cld-sample-5?_a=BBGAABS00
+  ```
+</CodeBlock>
 
 ## Learn More about CldImage
 * [Configuration](/cldimage/configuration)

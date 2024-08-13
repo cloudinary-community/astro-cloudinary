@@ -26,7 +26,7 @@ application, such as:
   <CldImage
     width="960"
     height="600"
-    src={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/turtle`}
+    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
     sizes="(max-width: 768px) 100vw,
           (max-width: 1200px) 50vw,
           33vw"
@@ -109,7 +109,7 @@ In an example such as:
   <CldImage
     width="960"
     height="960"
-    src={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/turtle`}
+    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
     crop="fill"
     sizes="100vw"
     alt="Turtle"
@@ -174,7 +174,7 @@ than a 640x640 image.
   <CldImage
     width="960"
     height="960"
-    src={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/turtle`}
+    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
     crop="thumb"
     sizes="100vw"
     alt="Turtle"
@@ -221,7 +221,7 @@ responsive sizing to resize the result.
   <CldImage
     width="960"
     height="960"
-    src={`${import.meta.env.PUBLIC_IMAGES_DIRECTORY}/turtle`}
+    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
     crop={{
       type: 'thumb',
       source: true
