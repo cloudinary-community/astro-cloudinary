@@ -26,26 +26,26 @@ application, such as:
   <CldImage
     width="960"
     height="600"
-    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
+    src="samples/coffee"
     sizes="(max-width: 768px) 100vw,
           (max-width: 1200px) 50vw,
           33vw"
-    alt="Turtle"
+    alt="Coffee"
   />
 </HeaderImage>
 
 <CodeBlock>
-```jsx copy showLineNumbers
+```jsx
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    width="960"
-    height="600"
-    src="<Your Public ID>"
+    src="<Public ID>"
+    width="<Width>"
+    height="<Height>"
     sizes="(max-width: 768px) 100vw,
           (max-width: 1200px) 50vw,
           33vw"
-    alt="Description"
+    alt="<Description>"
   />
   ```
 </CodeBlock>
@@ -62,27 +62,25 @@ In the example above, the output would look like:
 
 ```
 <img
-  alt="Turtle"
-  loading="lazy"
-  width="960"
-  height="600"
-  decoding="async"
-  data-nimg="1"
-  style="color:transparent"
+  class="astro-cloudinary-cldimage"
+  onerror="onCldImageError(this)"
   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  alt="Coffee"
+  loading="lazy"
+  decoding="async"
+  style="object-fit:cover;max-width:960px;max-height:600px;aspect-ratio:1.6;width:100%"
   srcset="
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_256/f_auto/q_auto/v1/<Public ID> 256w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_384/f_auto/q_auto/v1/<Public ID> 384w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_640/f_auto/q_auto/v1/<Public ID> 640w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_750/f_auto/q_auto/v1/<Public ID> 750w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_828/f_auto/q_auto/v1/<Public ID> 828w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_1080/f_auto/q_auto/v1/<Public ID> 1080w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_1200/f_auto/q_auto/v1/<Public ID> 1200w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_1920/f_auto/q_auto/v1/<Public ID> 1920w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_2048/f_auto/q_auto/v1/<Public ID> 2048w,
-    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_3840/f_auto/q_auto/v1/<Public ID> 3840w
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_640/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 640w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_750/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 750w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_828/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 828w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_960/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 960w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_960/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 960w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_1080/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 1080w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_1280/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 1280w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_1668/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 1668w,
+    https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_1920/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00 1920w
   "
-  src="https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_3840/f_auto/q_auto/v1/<Public ID>"
+  src="https://res.cloudinary.com/<Cloud Name>/image/upload/c_limit,w_960/f_auto/q_auto/v1/samples/coffee?_a=BBGAABS00"
 >
 ```
 
@@ -109,7 +107,7 @@ In an example such as:
   <CldImage
     width="960"
     height="960"
-    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
+    src="samples/coffee"
     crop="fill"
     sizes="100vw"
     alt="Turtle"
@@ -117,13 +115,13 @@ In an example such as:
 </HeaderImage>
 
 <CodeBlock>
-```jsx copy showLineNumbers
+```jsx
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    width="960"
-    height="960"
-    src="<Your Public ID>"
+    src="Public ID>"
+    width="<Width>"
+    height="<Height>"
     crop="fill"
     sizes="100vw"
     alt="Description"
@@ -174,7 +172,7 @@ than a 640x640 image.
   <CldImage
     width="960"
     height="960"
-    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
+    src="samples/coffee"
     crop="thumb"
     sizes="100vw"
     alt="Turtle"
@@ -182,13 +180,13 @@ than a 640x640 image.
 </HeaderImage>
 
 <CodeBlock>
-```jsx copy showLineNumbers
+```jsx
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    width="960"
-    height="960"
-    src="<Your Public ID>"
+    src="Public ID>"
+    width="<Width>"
+    height="<Height>"
     crop="thumb"
     sizes="100vw"
     alt="Description"
@@ -219,26 +217,26 @@ responsive sizing to resize the result.
 
 <HeaderImage>
   <CldImage
+    src="samples/coffee"
     width="960"
     height="960"
-    src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/turtle`}
     crop={{
       type: 'thumb',
       source: true
     }}
-    sizes="100vw"
     alt="Turtle"
+    sizes="100vw"
   />
 </HeaderImage>
 
 <CodeBlock>
-```jsx copy showLineNumbers
+```jsx
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    width="960"
-    height="960"
-    src="<Your Public ID>"
+    src="Public ID>"
+    width="<Width>"
+    height="<Height>"
     crop={{
       type: 'thumb',
       source: true
@@ -249,7 +247,7 @@ responsive sizing to resize the result.
   ```
 </CodeBlock>
 
-:::tip
+:::note
 By default, using an object for `crop` will derive the width and
 height from the top-level width and height, but you can customize those
 values by explicitly setting them.
