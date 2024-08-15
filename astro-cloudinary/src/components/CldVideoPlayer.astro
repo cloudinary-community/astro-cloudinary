@@ -89,8 +89,7 @@ if ( className ) {
       }
 
       videos.forEach(video => {
-        const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);
-        
+        const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);        
         const player = cloudinary.videoPlayer(video, playerOptions);
 
         if ( !player ) return;
@@ -98,12 +97,37 @@ if ( className ) {
         // Loop through all avialable player events and create custom event callbacks
 
         const events = [
+          'loadstart',
+          'suspend',
+          'abort',
           'error',
-          'loadeddata',
+          'emptied',
+          'stalled',
           'loadedmetadata',
-          'pause',
-          'play',
+          'loadeddata',
+          'canplay',
+          'canplaythrough',
+          'playing',
+          'waiting',
+          'seeking',
+          'seeked',
           'ended',
+          'durationchange',
+          'timeupdate',
+          'progress',
+          'play',
+          'pause',
+          'ratechange',
+          'volumechange',
+          'fullscreenchange',
+          'posterchange',
+          'mute',
+          'unmute',
+          'percentsplayed',
+          'timeplayed',
+          'seek',
+          'sourcechanged',
+          'qualitychanged',
         ];
 
         events.forEach(event => {

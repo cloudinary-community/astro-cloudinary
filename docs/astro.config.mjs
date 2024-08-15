@@ -44,6 +44,10 @@ export default defineConfig({
               label: 'Configuration',
               slug: 'cldvideoplayer/configuration'
             },
+            {
+              label: 'Examples',
+              slug: 'cldvideoplayer/examples'
+            }
           ]
         },
         {
