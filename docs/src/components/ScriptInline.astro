@@ -1,0 +1,8 @@
+---
+interface Props {
+  code: string;
+}
+
+const { code }: Props = Astro.props;
+---
+<script set:html={code} />

@@ -1,0 +1,781 @@
+---
+title: Configuring CldVideoPlayer
+description: Options and configuration for CldVideoPlayer in Astro.
+head:
+  - tag: title
+    content: CldVideoPlayer Configuration - Astro Cloudinary
+---
+import { CldVideoPlayer } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import Table from '../../../components/Table.astro';
+
+
+## Required Props
+
+The basic props required to use CldVideoPlayer include:
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'required',
+      title: 'Required'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'height',
+      type: 'string/number',
+      required: 'Yes',
+      example: 1080,
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'src',
+      type: 'string',
+      required: 'Yes',
+      example: 'videos/my-video',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'width',
+      type: 'string/number',
+      required: 'Yes',
+      example: 1920,
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+## Customization
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'aiHighlightsGraph',
+      type: 'boolean',
+      default: '`false`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'bigPlayButton',
+      type: 'boolean/string',
+      default: '`true`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'colors',
+      type: 'object',
+      default: 'See below',
+      example: 'See Colors Below',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'controlBar',
+      type: 'object',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'controls',
+      type: 'boolean',
+      default: '`true`',
+      example: '`true`',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'floatingWhenNotVisible',
+      type: 'string',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'fluid',
+      type: 'boolean',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'fontFace',
+      type: 'string',
+      default: '-',
+      example: '`"Source Serif Pro"`',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'hideContextMenu',
+      type: 'boolean',
+      default: '`false`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'interactionAreas',
+      type: 'any',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'logo',
+      type: 'boolean/object',
+      default: 'See Below',
+      example: 'See Logo Below',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'playbackRates',
+      type: 'array',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'playlistWidget',
+      type: 'object',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'poster',
+      type: 'string/object',
+      default: '-',
+      example: 'See Poster Below',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'posterOptions',
+      type: 'object',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'showJumpControls',
+      type: 'boolean',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'showLogo',
+      type: 'boolean',
+      default: '`true`',
+      example: '`false`',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'seekThumbnails',
+      type: 'boolean',
+      default: '`true`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+### Logo
+
+The `logo` prop gives the option to customize the player's logo.
+
+`logo` defaults to `true`, showing the Cloudinary logo and linking to https://cloudinary.com when clicked.
+
+When `logo` is set to `false`, no logo will be displayed.
+
+To customize the logo, the following options are available in the form of an object:
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'imageUrl',
+      type: 'string',
+      deafult: '-',
+      description: 'Image URL for player logo.',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+
+      prop: 'onClickUrl',
+      type: 'string',
+      deafult: '-',
+      description: 'URL to browse to on logo click.',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+### Poster
+
+The `poster` prop optionally takes a string or object to customize the generated poster.
+
+When passing a string, you can either pass a Cloudinary Public ID or a remote URL to rendered the desired image.
+
+When passing an object, use same configuration and API as [getCldImageUrl](/getcldimageurl/configuration) to customize the image.
+You can either specify a `src` option with a custom public ID or omit the `src`, which will use the video's
+ID to render an automatically generated preview image.
+
+[View examples](/cldvideoplayer/examples#poster).
+
+### Theme Colors
+
+The `colors` prop takes an object that can control what colors are used in the player:
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'accent',
+      type: 'string',
+      default: '`"#FF620C"`',
+      description: 'Seek bar, volume control and for highlighting interactions.',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+
+      prop: 'base',
+      type: 'string',
+      default: '`"#000000"`',
+      description: 'Player controls bar, information bar, central play button, and right-click context menu.',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+
+      prop: 'text',
+      type: 'string',
+      default: '`"#FFFFFF"`',
+      description: 'All the text and icons that are present within the video player UI.',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+Learn more about the color scheme options and how they're used [on the Cloudinary docs](https://cloudinary.com/documentation/video_player_customization#color_scheme).
+
+## Transformations
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'sourceTransformation',
+      type: 'object',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'transformation',
+      type: 'object | array',
+      default: '-',
+      example: `{ width: 200, height: 200, crop: 'fill' }`,
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+## Advanced
+
+### Ads & Analytics
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'ads',
+      type: 'object',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'analytics',
+      type: 'boolean',
+      default: '`false`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'allowUsageReport',
+      type: 'boolean',
+      default: '`true`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+### Configuration & Delivery
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    }
+  ]}
+  data={[
+    {
+      prop: 'chapters',
+      type: 'object',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'class',
+      type: 'string',
+      required: 'Yes',
+      example: 'my-video-player',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'config',
+      type: 'object',
+      default: '-',
+      example: () => (<code>{`{ url: { cloudName: 'spacejelly' } }`}</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/cloudinary_sdks#configuration_parameters">More Info</a>)
+    },
+    {
+      prop: 'cname',
+      type: 'string',
+      example: () => (<code>{`spacejelly.dev`}</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/cloudinary_sdks#configuration_parameters">More Info</a>)
+    },
+    {
+      prop: 'id',
+      type: 'string',
+      required: 'Yes',
+      example: 'my-video',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'preload',
+      type: 'string',
+      default: '`auto`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'privateCdn',
+      type: 'boolean',
+      example: () => (<code>{`true`}</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/cloudinary_sdks#configuration_parameters">More Info</a>)
+    },
+    {
+      prop: 'secureDistribution',
+      type: 'string',
+      example: () => (<code>{`spacejelly.dev`}</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/cloudinary_sdks#configuration_parameters">More Info</a>)
+    },
+    {
+      prop: 'sourceTypes',
+      type: 'array',
+      default: '-',
+      example: `['hls']`,
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'queryParams',
+      type: 'string/object',
+      example: () => (<code>{`{myParam: 'value'}`}</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/cloudinary_sdks#configuration_parameters">More Info</a>)
+    },
+    {
+      prop: 'videoJS',
+      type: 'object',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+#### `config`
+
+Allows configuration for the Cloudinary environment.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+config={{
+  cloud: {
+    cloudName: '<Your Cloud Name>',
+  }
+}}
+```
+</CodeBlock>
+
+#### `cname`
+
+The custom domain name (CNAME) to use for building URLs, requires secure: false.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+cname="spacejelly.dev"
+```
+</CodeBlock>
+
+#### `privateCdn`
+
+Set this parameter to true if you are an Advanced plan user with a private CDN distribution
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+privateCdn={true}
+```
+</CodeBlock>
+
+#### `secureDistribution`
+
+The custom domain name (CNAME) to use for building URLs, requires secure: true.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+secureDistribution="spacejelly.dev"
+```
+</CodeBlock>
+
+#### `queryParams`
+
+Query parameters to append to video URL.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+queryParams={{
+  myParam: 'value'
+}}
+```
+</CodeBlock>
+
+#### `videoJS`
+
+Enables you to access all underlying capabilities of the VideoJS API.
+
+
+### Events
+
+Event handlers allow you to hook into different player events when they occur.
+
+The events are triggered as global custom events which you can assign an event listener to the player.
+
+<CodeBlock alwaysExpanded>
+```jsx
+<CldVideoPlayer {...props} id="video-player-events" />
+
+<script>
+const videoPlayer = document.querySelector(`#video-player-events`);
+
+if ( videoPlayer ) {
+  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:loadedmetadata', e.detail)
+  }) as EventListener);
+}
+</script>
+```
+</CodeBlock>
+
+### Localization
+
+You can add custom localization options to control the languages of the player provides labels in.
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'language',
+      type: 'string',
+      default: '-',
+      description: 'The language of the player\'s labels.',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'languages',
+      type: 'object',
+      default: '-',
+      description: 'Language configuration and label overrides.',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>
+
+Uses Video.js JSON format for localization customization: https://videojs.com/guides/languages/#json-format
+
+### Player Behavior
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    },
+  ]}
+  data={[
+    {
+      prop: 'autoplay',
+      type: 'string/boolean',
+      default: '`"never"`',
+      example: '`"on-scroll"`/`true`',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'autoShowRecommendations',
+      type: 'boolean',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'loop',
+      type: 'boolean',
+      default: '`false`',
+      example: '`true`',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'maxTries',
+      type: 'number',
+      default: '`3`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'muted',
+      type: 'boolean',
+      default: '`false`',
+      example: '`true`',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'pictureInPictureToggle',
+      type: 'boolean',
+      default: '`false`',
+      example: '`true`',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'playedEventPercents',
+      type: 'array',
+      default: '`[25, 50, 75, 100]`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'playedEventTimes',
+      type: 'array/null',
+      default: '`null`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'playsinline',
+      type: 'boolean',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'videoTimeout',
+      type: 'number',
+      default: '`55000`',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+    {
+      prop: 'withCredentials',
+      type: 'boolean',
+      default: '-',
+      example: ' ',
+      more: () => (<a href="#">More Info</a>)
+    },
+  ]}
+/>

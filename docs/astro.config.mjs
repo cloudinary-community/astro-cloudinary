@@ -39,7 +39,11 @@ export default defineConfig({
             {
               label: 'Basic Usage',
               slug: 'cldvideoplayer/basic-usage'
-            }
+            },
+            {
+              label: 'Configuration',
+              slug: 'cldvideoplayer/configuration'
+            },
           ]
         },
         {
