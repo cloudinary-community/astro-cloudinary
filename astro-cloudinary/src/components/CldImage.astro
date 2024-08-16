@@ -15,7 +15,7 @@ export type CldImageProps = Omit<UnpicImageProps<HTMLAttributes<"img">>, "src"> 
 
 interface Props extends CldImageProps {};
 
-const { config, ...props }: Props = Astro.props;
+const { config, class: className, ...props }: Props = Astro.props;
 
 // Add props here that are intended to only be used for
 // Cloudinary URL construction to avoid them being forwarded
@@ -89,7 +89,6 @@ const src = transformer({
 
 const imageProps = {
   cdn: 'cloudinary',
-  onerror: 'onCldImageError(this)',
   src,
   transformer,
 } as UnpicImageProps<HTMLAttributes<"img">>;
@@ -101,13 +100,26 @@ const imageProps = {
 Object.entries(props)
   .filter(([key]) => typeof key === 'string' && !CLOUDINARY_PROPS.includes(key))
   .forEach(([key, value]) => imageProps[key as keyof UnpicImageProps<HTMLAttributes<"img">>] = value);
----
-<Image class="astro-cloudinary-cldimage" {...imageProps} />
 
-<script is:inline>
-  // document.querySelectorAll('.astro-cloudinary-cldimage').on('error', onCldImageError);
+let imageClassName = 'astro-cloudinary-cldimage';
+
+if (className) {
+  imageClassName = `${imageClassName} ${className}`;
+}
+---
+<Image class={imageClassName} {...imageProps} />
+
+<script>
+  import { pollForProcessingImage } from '../lib/util.js';
+
+  document.addEventListener('error', onCldImageError, true);
+    
   // Optimize this so that a new script isn't added for each image instance
-  async function onCldImageError(image) {
+  async function onCldImageError(event: ErrorEvent) {
+    const image = event.target as HTMLImageElement;
+    
+    if ( !image ) return;
+
     if ( await pollForProcessingImage(image.src) ) {
       const key = `${Date.now()}${Math.random()}`;
       if ( image.src.includes('?') ) {
@@ -116,27 +128,5 @@ Object.entries(props)
         image.src = `${image.src}&key=${key}`;
       }
     }
-  }
-
-  async function pollForProcessingImage(src) {
-    try {
-      await new Promise((resolve, reject) => {
-        fetch(src).then(res => {
-          if ( !res.ok ) {
-            reject(res);
-            return;
-          }
-          resolve(res);
-        });
-      });
-    } catch(e) {
-      // Timeout for 250ms before trying to fetch again to avoid overwhelming requests
-      if ( e.status === 423 ) {
-        await new Promise((resolve) => setTimeout(() => resolve(undefined), 250));
-        return await pollForProcessingImage(src);
-      }
-      return false;
-    }
-    return true;
   }
 </script>
