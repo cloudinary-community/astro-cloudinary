@@ -19,9 +19,25 @@ main {
 }
 
 .header {
+
   @media (min-width: 50rem) {
     grid-template-columns: calc(var(--sl-sidebar-width) - var(--sl-nav-pad-x) - var(--sl-nav-pad-x)) 1fr auto
   }
+
+}
+
+.site-title {
+
+  color: black;
+
+  [data-theme="dark"] & {
+    color: white
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
+
 }
 
 .content-panel h1 {

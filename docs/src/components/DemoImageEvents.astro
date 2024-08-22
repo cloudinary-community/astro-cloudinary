@@ -1,0 +1,18 @@
+---
+import { CldImage, type CldImageProps } from '../../../astro-cloudinary';
+
+interface Props extends CldImageProps {};
+
+const props: Props = Astro.props;
+---
+<CldImage {...props} id="cldimage-event-demo" />
+
+<script>
+const image = document.querySelector('#cldimage-event-demo');
+
+if ( image ) {
+  image.addEventListener('cldimage:error', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldimage:error', e.detail)
+  }) as EventListener);
+};
+</script>

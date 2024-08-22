@@ -9,6 +9,7 @@ import { CldImage } from '../../../../../astro-cloudinary';
 
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoImageEvents from '../../../components/DemoImageEvents.astro';
 
 The CldImage component provides an easy way to deliver images from Cloudinary in an Astro app.
 
@@ -190,6 +191,55 @@ Would generate a URL of:
   https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/c_limit,w_1600/v1/cld-sample-5?_a=BBGAABS00
   ```
 </CodeBlock>
+
+
+
+## Image Events
+
+The CldImage component actively triggers a single Error event as a CustomEvent
+in order to allow callback functionality if there is something wrong in how
+the image loads.
+
+<HeaderImage>
+  <DemoImageEvents
+    src="this-image-does-not-exist"
+    width="960"
+    height="600"
+  />
+</HeaderImage>
+
+:::note
+This image is intended to be broken for demonstration purposes!
+:::
+
+<CodeBlock>
+  ```jsx
+  import { CldImage } from 'astro-cloudinary';
+
+  <CldImage
+    id="image-events"
+    src="this-image-does-not-exist"
+    width="<Width>"
+    height="<Height>"
+  />
+
+  <script>
+  const image = document.querySelector(`#image-events`);
+
+  if ( image ) {
+    image.addEventListener('cldimage:error', ((e: CustomEvent<{ detail: {} }>) => {
+      console.log('cldimage:error', e.detail)
+    }) as EventListener);
+  };
+  </script>
+  ```
+</CodeBlock>
+
+:::tip
+See your browser's web console to preview the information logged in the above callback.
+:::
+
+
 
 ## Learn More about CldImage
 * [Configuration](/cldimage/configuration)

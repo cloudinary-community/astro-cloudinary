@@ -10,7 +10,7 @@ interface Props {
 
 const { class: className, alwaysExpanded = false }: Props = Astro.props;
 
-const codeBlockClassName = cn('code-block group relative [&_.code-block-code_pre]:rounded [&_.code-block-code_pre]:border-slate-200', className);
+const codeBlockClassName = cn('code-block group relative [&_.code-block-code_pre]:rounded [&_.code-block-code_pre]:border-slate-200 dark:[&_.code-block-code_pre]:border-slate-600', className);
 ---
 
 <div class={codeBlockClassName} data-codeblock-expanded={alwaysExpanded ? 'true' : 'false'}>
@@ -78,16 +78,20 @@ const codeBlockClassName = cn('code-block group relative [&_.code-block-code_pre
     width: 100%;
     height: 2em;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
-
-    @media (prefers-color-scheme: dark) {
-      background: linear-gradient(to bottom, rgba(#111111, 0), rgba(#111111, 1));
-    }
-
-    :global(.dark) & {
-      background: linear-gradient(to bottom, rgba(#111111, 0), rgba(#111111, 1));
-    }
-
   }
 
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .code-block-code:after {
+    /* Using main background color as basis from docs site */
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0), rgba(15, 23, 42, 1));
+  }
+}
+
+:root[data-theme="dark"] .code-block-code:after {
+  /* Using main background color as basis from docs site */
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0), rgba(15, 23, 42, 1));
 }
 </style>

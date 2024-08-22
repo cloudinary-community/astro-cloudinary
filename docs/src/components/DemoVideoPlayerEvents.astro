@@ -5,10 +5,10 @@ interface Props extends CldVideoPlayerProps {};
 
 const props: Props = Astro.props;
 ---
-<CldVideoPlayer {...props} id="video-player-events" />
+<CldVideoPlayer {...props} id="cldvideoplayer-event-demo" />
 
 <script>
-const videoPlayer = document.querySelector(`#video-player-events`);
+const videoPlayer = document.querySelector(`#cldvideoplayer-event-demo`);
 
 if ( videoPlayer ) {
   videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {

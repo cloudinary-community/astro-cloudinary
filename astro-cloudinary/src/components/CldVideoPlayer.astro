@@ -7,14 +7,18 @@ import type { CloudinaryVideoPlayerOptions, CloudinaryVideoPlayerOptionsLogo } f
 
 const PLAYER_VERSION = '2.0.5';
 
-export interface CldVideoPlayerProps extends Omit<CloudinaryVideoPlayerOptions, "cloud_name" | "autoplayMode" | "publicId" | "secure" | "showLogo" | "logoImageUrl" | "logoOnclickUrl"> {
+export interface CldVideoPlayerProps extends Omit<CloudinaryVideoPlayerOptions, "autoplayMode" | "cloud_name" | "controlBar" | "height" |  "logoImageUrl" | "logoOnclickUrl" | "posterOptions" | "publicId" | "secure" | "showLogo" | "width"> {
   class?: string;
   config?: ConfigOptions;
+  // Redefine to make it required
+  height: CloudinaryVideoPlayerOptions["height"];
   id?: string;
   logo?: boolean | CldVideoPlayerPropsLogo;
   poster?: string; // | GetCldImageUrlOptions | GetCldVideoUrlOptions;
   src: string;
   quality?: string | number;
+  // Redefine to make it required
+  width: CloudinaryVideoPlayerOptions["width"];
 }
 
 export interface CldVideoPlayerPropsLogo {

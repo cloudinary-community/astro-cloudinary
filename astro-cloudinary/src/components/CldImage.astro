@@ -118,7 +118,16 @@ if (className) {
   async function onCldImageError(event: ErrorEvent) {
     const image = event.target as HTMLImageElement;
     
-    if ( !image ) return;
+    if ( !image || image.tagName !== 'IMG' ) return;
+
+    const customEvent = new CustomEvent('cldimage:error', {
+      detail: {
+        Image: image,
+        type: 'error',
+      },
+    });
+
+    image?.dispatchEvent(customEvent);
 
     if ( await pollForProcessingImage(image.src) ) {
       const key = `${Date.now()}${Math.random()}`;
