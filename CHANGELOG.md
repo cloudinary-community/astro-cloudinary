@@ -1,3 +1,10 @@
+# [1.0.0-beta.5](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2024-08-22)
+
+
+### Features
+
+* adding prepare script to run build ([4127fed](https://github.com/colbyfayock/astro-cloudinary/commit/4127fede242a11749ac825471c51fc7391942060))
+
 # [1.0.0-beta.4](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2024-08-22)
 
 
