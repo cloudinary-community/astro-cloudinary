@@ -1,3 +1,10 @@
+# [1.0.0-beta.4](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2024-08-22)
+
+
+### Features
+
+* docs, helpers seed ([58f8474](https://github.com/colbyfayock/astro-cloudinary/commit/58f847488cdd780714a1e96f70c9e84671ac47dc))
+
 # [1.0.0-beta.3](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2024-08-07)
 
 
