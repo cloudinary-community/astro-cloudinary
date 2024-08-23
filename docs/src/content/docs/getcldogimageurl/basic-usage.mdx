@@ -1,0 +1,89 @@
+---
+title: Getting Started with getCldOgImageUrl
+description: Optimize and transform images in Astro with the getCldOgImageUrl component.
+head:
+  - tag: title
+    content: getCldOgImageUrl - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+import { getCldOgImageUrl } from '../../../../../astro-cloudinary/helpers';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoImageEvents from '../../../components/DemoImageEvents.astro';
+
+The getCldOgImageUrl function helps you easily generate Social Card image URLs (Open Graph Images) using Cloudinary.
+
+This URL can be then used when defining metadata for your page within Astro.
+
+{/* :::tip
+Working inside of the Pages router? Check out the [CldOgImage component](/cldogimage/).
+::: */}
+
+## Basic Usage
+
+getCldOgImageUrl makes it convenient to create Social Card URLs out-of-the-box.
+
+The only needed prop is `src`:
+
+<HeaderImage>
+  <CldImage
+    src={getCldOgImageUrl({
+      src: "cld-sample-4",
+      version: 1
+    })}
+    width="1200"
+    height="627"
+    sizes="(max-width: 480px) 100vw, 50vw"
+    alt=""
+  />
+</HeaderImage>
+
+> Note: The image above is rendered using the [CldImage component](/cldimage/basic-usage) for preview only.
+
+<CodeBlock>
+  ```jsx copy showLineNumbers
+  import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+
+  const url = getCldOgImageUrl({
+    src: '<Public ID>'
+  });
+  ```
+</CodeBlock>
+
+The function simply returns a URL for the image public ID provided including default configurations
+including a standard width and height.
+
+:::tip
+@TODO example
+:::
+
+getCldOgImageUrl is a deritive of getCldImageUrl meaning it generally has the same API, but provides
+a few defaults for Open Graph images like sizes.
+
+## Image Size
+
+By default, the image canvas is based upon 1200x627. 627 is used to satisfy the 1.91:1 ratio requirement and minimum size
+[requirement from linkedin](https://www.linkedin.com/help/linkedin/answer/a521928/make-your-website-shareable-on-linkedin).
+
+You can use the `width` and the `height` to control the canvas size.
+
+## Image Format
+
+While Cloudinary's `f_auto` parameter ([format of auto](https://cloudinary.com/documentation/image_optimization#how_to_optimize_image_format)) is great for websites and mobile apps, having more control over the format helps to reduce initial encoding time, which is more critical for a social network to recognize the image and load it on first share.
+
+The safe default format for most use cases is then jpg, as webp does not have broad support (likely nor does AVIF).
+
+> Read more about webp support: https://www.ctrl.blog/entry/webp-ogp.html
+
+If you have the control in your application to produce multiple image sources, such has having a separate `og:image` and `twitter:image`, you can generate two (or more) URLs to produce as optimized a format as you can for the platform:
+
+:::tip
+@TODO example
+:::
+
+Find out how else you can customize your Cloudinary image over on [getCldOgImageUrl configuration](/getcldogimageurl/configuration).
+
+## Learn More about getCldOgImageUrl
+* [Configuration](/getcldogimageurl/configuration)
+* [Examples](/getcldogimageurl/examples)

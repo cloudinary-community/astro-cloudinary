@@ -17,44 +17,105 @@ export default defineConfig({
           link: 'installation'
         },
         {
-          label: 'CldImage',
+          label: 'Components',
           items: [
             {
-              label: 'Basic Usage',
-              slug: 'cldimage/basic-usage'
+              label: 'CldImage',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'cldimage/basic-usage'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'cldimage/configuration'
+                },
+                {
+                  label: 'Examples',
+                  slug: 'cldimage/examples'
+                }
+              ]
             },
             {
-              label: 'Configuration',
-              slug: 'cldimage/configuration'
+              label: 'CldVideoPlayer',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'cldvideoplayer/basic-usage'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'cldvideoplayer/configuration'
+                },
+                {
+                  label: 'Examples',
+                  slug: 'cldvideoplayer/examples'
+                }
+              ]
             },
-            {
-              label: 'Examples',
-              slug: 'cldimage/examples'
-            }
           ]
         },
         {
-          label: 'CldVideoPlayer',
+          label: 'Helpers',
           items: [
             {
-              label: 'Basic Usage',
-              slug: 'cldvideoplayer/basic-usage'
+              label: 'getCldImageUrl',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'getcldimageurl/basic-usage'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'getcldimageurl/configuration'
+                },
+                {
+                  label: 'Examples',
+                  slug: 'getcldimageurl/examples'
+                }
+              ]
             },
             {
-              label: 'Configuration',
-              slug: 'cldvideoplayer/configuration'
+              label: 'getCldOgImageUrl',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'getcldogimageurl/basic-usage'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'getcldogimageurl/configuration'
+                },
+                {
+                  label: 'Examples',
+                  slug: 'getcldogimageurl/examples'
+                }
+              ]
             },
             {
-              label: 'Examples',
-              slug: 'cldvideoplayer/examples'
-            }
+              label: 'getCldVideoUrl',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'getcldvideourl/basic-usage'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'getcldvideourl/configuration'
+                },
+                {
+                  label: 'Examples',
+                  slug: 'getcldvideourl/examples'
+                }
+              ]
+            },
           ]
         },
         {
           label: 'Guides',
           items: [
             {
-              label: 'Responzive Sizing',
+              label: 'Responsive Sizing',
               slug: 'guides/responsive-sizing'
             }
           ]

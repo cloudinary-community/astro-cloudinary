@@ -1,0 +1,17 @@
+---
+title: Getting Started with getCldVideoUrl
+description: Optimize and transform images in Astro with the getCldVideoUrl component.
+head:
+  - tag: title
+    content: getCldVideoUrl - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+import { getCldVideoUrl } from '../../../../../astro-cloudinary/helpers';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoImageEvents from '../../../components/DemoImageEvents.astro';
+
+You can use the getCldVideoUrl helper function to generate Cloudinary URLs without the component wrapper.
+
+getCldOgImageUrl is a deritive of [getCldImageUrl](/getcldimageurl/basic-usage) meaning it generally has the same API, but provides a few defaults for videos in particular, setting the asset type to video and doesn't make available image-specific transformations.

@@ -1,0 +1,44 @@
+---
+title: Configuring getCldVideoUrl
+description: Options and configuration for getCldVideoUrl in Astro.
+head:
+  - tag: title
+    content: getCldVideoUrl Configuration - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import Table from '../../../components/Table.astro';
+
+Configuration for getCldVideoUrl is the same as [getCldImageUrl](/getcldimageurl/configuration).
+
+The only difference is getCldVideoUrl provides the following default settings:
+
+<Table
+  columns={[
+    {
+      id: 'prop',
+      title: 'Prop'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+  ]}
+  data={[
+    {
+      prop: 'assetType',
+      type: 'string',
+      default: '"video"',
+    },
+  ]}
+/>
+
+Additionally, the transformations do not have access to image-specific transformations.
+
+Find more configuration settings over at [getCldImageUrl configuration](/getcldimageurl/configuration).

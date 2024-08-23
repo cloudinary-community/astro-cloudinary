@@ -23,11 +23,11 @@ The basic required props include `width`, `height`, `src`, and `alt`:
 
 <HeaderImage>
   <CldImage
+    src="cld-sample-5"
     width="1870"
     height="1250"
-    src="cld-sample-5"
-    sizes="100vw"
     alt="A variety of colorful and appetizing breakfast dishes, including waffles, oatmeal, and fresh fruits, are arranged on a white surface, accompanied by various condiments and utensils."
+    sizes="100vw"
   />
 </HeaderImage>
 
@@ -36,11 +36,11 @@ The basic required props include `width`, `height`, `src`, and `alt`:
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
+    src="<Public ID>"
     width="<Width>"
     height="<Height>"
-    src="<Public ID>"
-    sizes="100vw" // Optional
     alt="<Description>"
+    sizes="100vw" // Optional
   />
   ```
 </CodeBlock>
@@ -57,9 +57,9 @@ You can further take advantage of Cloudinary features like replacing backgrounds
 
 <HeaderImage>
   <CldImage
+    src="cld-sample-5"
     width="800"
     height="600"
-    src="cld-sample-5"
     crop={{
       type: 'fill',
       source: true
@@ -94,8 +94,8 @@ You can further take advantage of Cloudinary features like replacing backgrounds
         }
       },
     ]}
-    sizes="100vw"
     alt="Turtle in the ocean"
+    sizes="100vw"
   />
 </HeaderImage>
 
@@ -104,13 +104,45 @@ You can further take advantage of Cloudinary features like replacing backgrounds
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
+    src="<Public ID>"
     width="<Width>"
     height="<Height>"
-    src="<Public ID>"
-    crop="fill"
+    crop={{
+      type: 'fill',
+      source: true
+    }}
     replaceBackground="cartoon outer space"
-    sizes="100vw"
+    overlays={[
+      {
+        position: {
+          y: 40,
+          x: -10,
+          gravity: 'south',
+        },
+        text: {
+          color: 'magenta',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+      {
+        position: {
+          y: 50,
+          gravity: 'south',
+        },
+        text: {
+          color: 'white',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+    ]}
     alt="<Description>"
+    sizes="100vw"
   />
   ```
 </CodeBlock>
@@ -132,9 +164,9 @@ to ensure the integretiy when during the parsing process.
 import { CldImage } from 'astro-cloudinary';
 
 <CldImage
+  src="https://res.cloudinary.com/mycloud/image/upload/v1234/myimage"
   width="<Width>"
   height="<Height>"
-  src="https://res.cloudinary.com/mycloud/image/upload/v1234/myimage"
   alt="<Description>"
 />
 ```
@@ -149,9 +181,9 @@ To preserve those transformations, you can apply the `preserveTransformations` p
 <CodeBlock className="mt-6">
 ```jsx
 <CldImage
+  src="https://res.cloudinary.com/<Cloud Name>/image/upload/w_100,h_200,c_fill/v1234/myimage"
   width="<Width>"
   height="<Height>"
-  src="https://res.cloudinary.com/<Cloud Name>/image/upload/w_100,h_200,c_fill/v1234/myimage"
   preserveTransformations
   alt="<Description>"
 />
@@ -162,9 +194,9 @@ For example:
 
 <HeaderImage>
   <CldImage
+    src="https://res.cloudinary.com/astro-cloudinary/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
     width="800"
     height="600"
-    src="https://res.cloudinary.com/astro-cloudinary/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
     preserveTransformations
     alt="test"
   />
@@ -175,9 +207,9 @@ For example:
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
+    src="https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
     width="<Width>"
     height="<Height>"
-    src="https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
     preserveTransformations
     alt="test"
   />
@@ -238,8 +270,6 @@ This image is intended to be broken for demonstration purposes!
 :::tip
 See your browser's web console to preview the information logged in the above callback.
 :::
-
-
 
 ## Learn More about CldImage
 * [Configuration](/cldimage/configuration)
