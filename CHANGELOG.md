@@ -1,3 +1,10 @@
+# [1.0.0-beta.6](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2024-08-23)
+
+
+### Features
+
+* adding and fixing helpers exports ([6743e18](https://github.com/colbyfayock/astro-cloudinary/commit/6743e183469c45bd091173993ace15de50d1c9bd))
+
 # [1.0.0-beta.5](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2024-08-22)
 
 
