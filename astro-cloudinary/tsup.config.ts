@@ -4,7 +4,8 @@ export default defineConfig(() => {
   return {
     clean: true,
     entry: [
-      './src/helpers.ts',
+      './src/helpers/index.ts',
+      './src/loaders/index.ts',
     ],
     dts: true,
     minify: false,

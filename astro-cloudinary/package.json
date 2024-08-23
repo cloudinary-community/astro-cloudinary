@@ -3,20 +3,25 @@
   "version": "1.0.0-beta.5",
   "type": "module",
   "license": "MIT",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./index.ts",
   "exports": {
     ".": {
       "import": "./index.ts"
     },
     "./helpers": {
-      "types": "./dist/helpers.d.ts",
-      "import": "./dist/helpers.js"
+      "types": "./dist/helpers/index.d.ts",
+      "import": "./dist/helpers/index.js"
+    },
+    "./loaders": {
+      "types": "./dist/loaders/index.d.ts",
+      "import": "./dist/loaders/index.js"
     },
     "./package.json": "./package.json"
   },
   "files": [
     "dist",
+    "helpers",
+    "loaders",
     "src",
     "index.ts"
   ],
