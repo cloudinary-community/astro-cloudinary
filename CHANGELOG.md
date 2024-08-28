@@ -1,3 +1,10 @@
+# [1.0.0-beta.7](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2024-08-28)
+
+
+### Bug Fixes
+
+* fixes props being read to include quality and others not included ([cf8bfe9](https://github.com/colbyfayock/astro-cloudinary/commit/cf8bfe96ba6218eb4a81fe066a32bf5cdb195902))
+
 # [1.0.0-beta.6](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2024-08-23)
 
 
