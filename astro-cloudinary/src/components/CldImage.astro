@@ -2,15 +2,13 @@
 import { type HTMLAttributes } from 'astro/types';
 import { type UnpicImageProps } from '@unpic/core';
 import { Image } from '@unpic/astro';
-import { getTransformations } from '@cloudinary-util/util';
-import { transformationPlugins, type ConfigOptions, type ImageOptions, constructCloudinaryUrl } from '@cloudinary-util/url-loader';
+import { transformationPlugins, type ConfigOptions, type ImageOptions } from '@cloudinary-util/url-loader';
 
 import { generateImageLoader } from '../lib/loader';
 
 export type CldImageProps = Omit<UnpicImageProps<HTMLAttributes<"img">>, "src"> & ImageOptions & {
   config?: ConfigOptions;
   src: string;
-  preserveTransformations?: boolean;
 }
 
 interface Props extends CldImageProps {};
@@ -67,19 +65,6 @@ CLOUDINARY_PROPS.forEach((key) => {
   }
 });
 
-// Try to preserve the original transformations from the Cloudinary URL passed in
-// to the component. This only works if the URL has a version number on it and otherwise
-// will fail to load
-
-if (props.preserveTransformations) {
-  try {
-    const transformations = getTransformations(props.src).map(t => t.join(','));
-    cldOptions.rawTransformations = [...transformations.flat(), ...(cldOptions.rawTransformations || [])];
-  } catch(e) {
-    console.warn(`Failed to preserve transformations: ${(e as Error).message}`)
-  }
-}
-
 // Create a new instance of the loader for the Image component to
 // vend URLs for each responsive breakpoint
 
@@ -116,7 +101,7 @@ if (className) {
 <Image class={imageClassName} {...imageProps} />
 
 <script>
-  import { pollForProcessingImage } from '../lib/util.js';
+  import { pollForProcessingImage } from '@cloudinary-util/util';
 
   document.addEventListener('error', onCldImageError, true);
     
@@ -135,7 +120,7 @@ if (className) {
 
     image?.dispatchEvent(customEvent);
 
-    if ( await pollForProcessingImage(image.src) ) {
+    if ( await pollForProcessingImage({ src: image.src }) ) {
       const key = `${Date.now()}${Math.random()}`;
       if ( image.src.includes('?') ) {
         image.src = `${image.src}?key=${key}`;
