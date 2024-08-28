@@ -25,9 +25,15 @@ const { config, class: className, ...props }: Props = Astro.props;
 const CLOUDINARY_PROPS = [
   'assetType',
   'deliveryType',
-  'config',
-  'preserveTransformations',
+  'dpr',
+  'format',
+  'quality',
   'strictTransformations',
+
+  // Excluded props that are managed by the component
+  // 'height',
+  // 'src',
+  // 'width'
 ];
 
 // Collect all of the valid CldImage props that should only
