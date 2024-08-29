@@ -1,3 +1,11 @@
+# [1.0.0-beta.8](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2024-08-29)
+
+
+### Features
+
+* adding an astro loader for content collections ([ba670a3](https://github.com/colbyfayock/astro-cloudinary/commit/ba670a3c412a2d9813175d6fd634bba37596b833))
+* adding an astro loader for content collections ([75e3fd2](https://github.com/colbyfayock/astro-cloudinary/commit/75e3fd210bea9e5142332cb0ad64ee5e9ab783cb))
+
 # [1.0.0-beta.7](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2024-08-28)
 
 
