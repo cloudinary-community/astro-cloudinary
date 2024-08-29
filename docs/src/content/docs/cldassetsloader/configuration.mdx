@@ -1,0 +1,142 @@
+---
+title: Configuring CldImage
+description: Options and configuration for CldImage in Astro.
+head:
+  - tag: title
+    content: CldImage Configuration - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import Table from '../../../components/Table.astro';
+
+cldAssetLoader provides a wide range of options to customize your Collectoin query.
+
+## Basic Options
+
+<Table
+  columns={[
+    {
+      id: 'option',
+      title: 'Option'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    }
+  ]}
+  data={[
+    {
+      option: 'assetType',
+      type: 'string',
+      example: () => (<code>45</code>),
+      default: 'image',
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'deliveryType',
+      type: 'string',
+      default: 'upload',
+      example: () => (<code>upload</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'folder',
+      type: 'string',
+      default: '-',
+      example: () => (<code>samples/food</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'limit',
+      type: 'number',
+      default: '10',
+      example: () => (<code>45</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'type',
+      type: 'number',
+      default: 'list',
+      example: () => (<code>search</code>),
+    },
+  ]}
+/>
+
+#### `assetType`
+
+The type of the assets you want to query.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+assetType: 'video'
+```
+</CodeBlock>
+
+[Learn more about Asset Types](https://cloudinary.com/documentation/upload_parameters#asset_types) on the Cloudinary docs.
+
+#### `deliveryType`
+
+The delivery type of the assets you want to query.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+deliveryType: 'private'
+```
+</CodeBlock>
+
+[Learn more about Delivery Types](https://cloudinary.com/documentation/upload_parameters#delivery_types) on the Cloudinary docs.
+
+#### `folder`
+
+The folder the assets should be queried from.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+folder: 'samples/landscapes'
+```
+</CodeBlock>
+
+#### `limit`
+
+The maximum amount of results to query.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+limit: 20
+```
+</CodeBlock>
+
+#### `type`
+
+The type of query to make for assets, including list or search.
+
+This primarily differs in how the requests are made, using the Admin API or the Search API.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+type: 'search'
+```
+</CodeBlock>

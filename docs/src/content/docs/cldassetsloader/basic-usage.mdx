@@ -1,0 +1,76 @@
+---
+title: Getting Started with Assets Loader
+description: Query Cloudinary assets in Astro with Collections.
+head:
+  - tag: title
+    content: Assets Loader - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoAssetsLoader from '../../../components/DemoAssetsLoader.astro';
+
+The Cloudinary Assets Loader allows you to query your Cloudinary images, videos,
+and other resources using the Astro Collections.
+
+## Basic Usage
+
+`cldAssetsLoader` allows you to sepecify exactly which assets you'd like to
+query and store in an Astro Collection, including a folder and how many
+assets in total you would like to request.
+
+Start by defining a new Collection with `defineCollection`:
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary';
+
+  export const collections = {
+    assetsSamples: defineCollection({
+      loader: cldAssetsLoader({
+        limit: 4,
+        folder: 'samples/food'
+      })
+    }),
+  }
+  ```
+</CodeBlock>
+
+Then you can use `getCollection` to retrieve your assets:
+
+<HeaderImage>
+  <DemoAssetsLoader />
+</HeaderImage>
+
+<CodeBlock>
+  ```jsx
+  ---
+  import { CldImage } from 'astro-cloudinary';
+  import { getCollection } from 'astro:content';
+  const assets = await getCollection('assetsSamples');
+  ---
+  <ul>
+    {assets.map(asset => {
+      return (
+        <li>
+          <CldImage
+            src={asset.data.public_id}
+            width={asset.data.width}
+            height={asset.data.height}
+            alt=""
+          />
+        </li>
+      )
+    })}
+  </ul>
+  ```
+</CodeBlock>
+
+By default, using `cldAssetsLoader` will query the assets in the root of your
+Cloudinary account, but you can customize the request with options depending
+on the assets you want to find.
+
+
+## Learn More about CldImage
+* [Configuration](/cldassetsloader/configuration)

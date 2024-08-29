@@ -5,6 +5,9 @@ import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 
 export default defineConfig({
+  experimental: {
+    contentLayer: true,
+  },
   integrations: [
     starlight({
       title: 'Astro Cloudinary',
@@ -107,6 +110,24 @@ export default defineConfig({
                   label: 'Examples',
                   slug: 'getcldvideourl/examples'
                 }
+              ]
+            },
+          ]
+        },
+        {
+          label: 'Loaders',
+          items: [
+            {
+              label: 'cldAssetsLoader',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'cldassetsloader/basic-usage'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'cldassetsloader/configuration'
+                },
               ]
             },
           ]

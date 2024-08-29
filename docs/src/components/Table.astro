@@ -27,7 +27,7 @@ const { columns, data } = Astro.props;
   )}
   {Array.isArray(data) && (
     <tbody>
-      {data.map((row, index) => {
+      {data.map((row) => {
         return (
           <tr class="border-b last:border-none border-gray-200  dark:border-gray-800">
             { columns.map(({ id }, index) => {
