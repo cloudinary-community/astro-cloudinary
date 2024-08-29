@@ -80,7 +80,9 @@ const src = transformer({
 
 const imageProps = {
   cdn: 'cloudinary',
+  height: props.height,
   src,
+  width: props.width,
   transformer,
 } as UnpicImageProps<HTMLAttributes<"img">>;
 
