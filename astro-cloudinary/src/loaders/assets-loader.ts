@@ -1,6 +1,11 @@
 import { AstroError } from "astro/errors";
 import type { Loader } from "astro/loaders";
-import { z } from "astro/zod";
+import type { CloudinaryResource } from '@cloudinary-util/types'
+
+import { cloudinaryResourceSchema } from '../types/resources';
+import { getEnvironmentConfig, listResources, type ListResourcesOptions, type ListResourcesResponse } from '../lib/resources';
+
+const CLOUDINARY_DEFAULT_LIMIT = 10;
 
 const REQUIRED_CREDENTIALS = [
   'PUBLIC_CLOUDINARY_CLOUD_NAME',
@@ -8,40 +13,11 @@ const REQUIRED_CREDENTIALS = [
   'CLOUDINARY_API_SECRET',
 ];
 
-const CLOUDINARY_MAX_PER_PAGE = 500;
-
-const cloudinaryResourceSchema = z.object({
-  asset_id: z.string(),
-  public_id: z.string(),
-  format: z.string(),
-  version: z.number(),
-  resource_type: z.string(),
-  type: z.string(),
-  created_at: z.string(),
-  bytes: z.number(),
-  width: z.number(),
-  height: z.number(),
-  folder: z.string(),
-  url: z.string(),
-  secure_url: z.string(),
-});
-
-type CloudinaryResource = z.TypeOf<typeof cloudinaryResourceSchema>;
-
 export interface CloudinaryLoaderOptions {
-  assetType?: RequestOptions["assetType"];
-  deliveryType?: RequestOptions["deliveryType"];
-  folder?: RequestOptions["folder"];
-  limit?: RequestOptions["limit"];
-}
-
-interface RequestOptions {
-  assetType: 'image' | 'video' | 'raw';
-  deliveryType: 'upload' | 'fetch' | 'private' | 'authenticated' | 'sprite' | 'facebook' | 'twitter' | 'youtube' | 'vimeo';
-  folder?: string;
-  folderMode?: string;
-  limit?: number;
-  nextCursor?: string;
+  assetType?: ListResourcesOptions["assetType"];
+  deliveryType?: ListResourcesOptions["deliveryType"];
+  folder?: ListResourcesOptions["folder"];
+  limit?: ListResourcesOptions["limit"];
 }
 
 export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
@@ -60,7 +36,7 @@ export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
 
       // 10 is the Cloudinary default max_results
 
-      const { limit = 10, deliveryType = 'upload', assetType = 'image', folder } = options || {};
+      const { limit = CLOUDINARY_DEFAULT_LIMIT, deliveryType = 'upload', assetType = 'image', folder } = options || {};
       let resources: Array<CloudinaryResource> = [];
       let totalAssetsLoaded = 0;
       let nextCursor: string | undefined = undefined;
@@ -76,7 +52,7 @@ export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
       // @TODO add `query` option and just check for its existance instead of type
       // if ( type === 'list' ) {
       while (totalAssetsLoaded < limit) {
-        let data: { resources: Array<CloudinaryResource>; next_cursor?: string; } | undefined = undefined;
+        let data: ListResourcesResponse | undefined = undefined;
 
         try {
           data = await listResources({
@@ -121,73 +97,4 @@ export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
     },
     schema: cloudinaryResourceSchema
   };
-}
-
-async function cldRequest(path: string) {
-  return fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}${path}`, {
-    headers: {
-      'Authorization': 'Basic ' + btoa(`${import.meta.env.PUBLIC_CLOUDINARY_API_KEY}:${import.meta.env.CLOUDINARY_API_SECRET}`)
-    }
-  });
-}
-
-async function getEnvironmentConfig() {
-  const params = new URLSearchParams();
-
-  params.append('settings', 'true');
-
-  const response = await cldRequest(`/config?${params}`);
-
-  if ( !response.ok ) {
-    throw new Error('Failed to get product environment.');
-  }
-
-  const data = await response.json();
-
-  return data;
-}
-
-async function listResources(options: RequestOptions) {
-  const params = new URLSearchParams();
-
-  if ( options.nextCursor ) {
-    params.append('next_cursor', options.nextCursor);
-  }
-
-  if ( options.limit ) {
-    params.append('max_results', `${options.limit}`);
-  }
-
-  params.append('type', options.deliveryType);
-
-  let response;
-
-  if ( options.folder ) {
-    if ( options.folderMode === 'dynamic' ) {
-      
-      // @TODO Test with dynamic folder mode
-      params.append('asset_folder', options.folder);
-
-      response = await cldRequest(`/by_asset_folder?${params}`);
-
-    } else if ( options.folderMode === 'fixed' ) {
-      
-      params.append('prefix', options.folder);
-
-      response = await cldRequest(`/resources/${options.assetType}?${params}`);
-
-    } else {
-      throw new Error(`Unhandled folder mode: ${options.folderMode}`);
-    }
-  } else {
-    response = await cldRequest(`/resources/${options.assetType}?${params}`);
-  }
-
-  if ( !response.ok ) {
-    throw new Error('Failed to list resources.');
-  }
-
-  const data = await response.json();
-
-  return data;
 }

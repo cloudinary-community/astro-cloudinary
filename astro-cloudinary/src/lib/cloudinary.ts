@@ -1,4 +1,6 @@
-import type { AnalyticsOptions, ConfigOptions } from "@cloudinary-util/url-loader";
+// @TODO this should come from ConfigOptions
+import type { CloudinaryAssetConfiguration } from "@cloudinary-util/types";
+import type { AnalyticsOptions } from "@cloudinary-util/url-loader";
 
 import { ASTRO_CLOUDINARY_ANALYTICS_PRODUCT_ID, ASTRO_CLOUDINARY_ANALYTICS_ID, ASTRO_CLOUDINARY_VERSION, ASTRO_VERSION } from '../constants/analytics.js';
 
@@ -6,7 +8,7 @@ import { ASTRO_CLOUDINARY_ANALYTICS_PRODUCT_ID, ASTRO_CLOUDINARY_ANALYTICS_ID, A
  * getCloudinaryConfig
  */
 
-export function getCloudinaryConfig(config?: ConfigOptions) {
+export function getCloudinaryConfig(config?: CloudinaryAssetConfiguration) {
   const cloudName = config?.cloud?.cloudName ?? import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
 
   if (!cloudName) {
