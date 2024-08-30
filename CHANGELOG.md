@@ -1,3 +1,11 @@
+# [1.0.0-beta.9](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2024-08-30)
+
+
+### Features
+
+* updating types and org ([7abcafc](https://github.com/colbyfayock/astro-cloudinary/commit/7abcafc0305eb5e960d98eca3cc0f1fdf9e91e74))
+* updating types and org ([1837bf7](https://github.com/colbyfayock/astro-cloudinary/commit/1837bf753c8fcee7bffd205dd8c44bd4e5597709))
+
 # [1.0.0-beta.8](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2024-08-29)
 
 
