@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+
+import { CldImage } from '../../../astro-cloudinary';
+
+const allAssets = await getCollection('assetsSamplesDefault');
+const assets = allAssets.slice(0, 8);
+---
+<div class="not-content">
+  <ul class="w-full grid grid-cols-4 list-none p-0 gap-2">
+    {assets.map(asset => {
+      return (
+        <li class="m-0">
+          <CldImage
+            class="block"
+            src={asset.data.public_id}
+            width={900}
+            height={900}
+            crop="fill"
+            alt=""
+            sizes="25vw"
+          />
+        </li>
+      )
+    })}
+  </ul>
+
+  <p class="text-sm text-center mt-2">
+    Not displaying all assets for performance.
+  </p>
+
+  <p class="text-sm text-center">
+    Total Assets in Collection: { allAssets.length }
+  </p>
+</div>

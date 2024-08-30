@@ -128,6 +128,10 @@ export default defineConfig({
                   label: 'Configuration',
                   slug: 'cldassetsloader/configuration'
                 },
+                {
+                  label: 'Examples',
+                  slug: 'cldassetsloader/examples'
+                },
               ]
             },
           ]

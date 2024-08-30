@@ -1,0 +1,57 @@
+---
+title: cldAssetsLoader Examples
+description: Query for collections of Cloudinary resources with cldAssetsLoader.
+head:
+  - tag: title
+    content: cldAssetsLoader Examples - Astro Cloudinary
+---
+import { cldAssetsLoader } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoAssetsLoaderSamplesDefault from '../../../components/DemoAssetsLoaderSamplesDefault.astro';
+import DemoAssetsLoaderSamplesLimit from '../../../components/DemoAssetsLoaderSamplesLimit.astro';
+
+## Basic Collections
+
+Cloudinary supports a wide variety of powerful transformations that allow you to
+not only deliver, but easily edit and build new images on the fly.
+
+### Default
+
+<HeaderImage layout="full">
+  <DemoAssetsLoaderSamplesDefault />
+</HeaderImage>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary';
+
+  export const collections = {
+    assets: defineCollection({
+      loader: cldAssetsLoader()
+    }),
+  }
+  ```
+</CodeBlock>
+
+### Large Collections
+
+<HeaderImage layout="full">
+  <DemoAssetsLoaderSamplesLimit />
+</HeaderImage>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
+
+  export const collections = {
+    assets: defineCollection({
+      loader: cldAssetsLoader({
+        limit: 1200,
+        folder: '<Folder Name>'
+      })
+    }),
+  }
+  ```
+</CodeBlock>
