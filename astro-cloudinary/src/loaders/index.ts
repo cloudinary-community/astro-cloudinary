@@ -1,1 +1,1 @@
-export { cldAssetsLoader } from './assets';
+export { cldAssetsLoader } from './assets-loader';

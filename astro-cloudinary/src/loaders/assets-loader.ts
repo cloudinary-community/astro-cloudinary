@@ -8,6 +8,8 @@ const REQUIRED_CREDENTIALS = [
   'CLOUDINARY_API_SECRET',
 ];
 
+const CLOUDINARY_MAX_PER_PAGE = 500;
+
 const cloudinaryResourceSchema = z.object({
   asset_id: z.string(),
   public_id: z.string(),
@@ -24,12 +26,13 @@ const cloudinaryResourceSchema = z.object({
   secure_url: z.string(),
 });
 
+type CloudinaryResource = z.TypeOf<typeof cloudinaryResourceSchema>;
+
 export interface CloudinaryLoaderOptions {
   assetType?: RequestOptions["assetType"];
   deliveryType?: RequestOptions["deliveryType"];
   folder?: RequestOptions["folder"];
   limit?: RequestOptions["limit"];
-  type?: 'list';
 }
 
 interface RequestOptions {
@@ -38,6 +41,7 @@ interface RequestOptions {
   folder?: string;
   folderMode?: string;
   limit?: number;
+  nextCursor?: string;
 }
 
 export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
@@ -56,8 +60,10 @@ export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
 
       // 10 is the Cloudinary default max_results
 
-      const { type = 'list', limit = 10, deliveryType = 'upload', assetType = 'image', folder } = options || {};
-      let resources;
+      const { limit = 10, deliveryType = 'upload', assetType = 'image', folder } = options || {};
+      let resources: Array<CloudinaryResource> = [];
+      let totalAssetsLoaded = 0;
+      let nextCursor: string | undefined = undefined;
 
       const requestOptions = {
         deliveryType,
@@ -66,15 +72,38 @@ export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
         limit,
         assetType
       }
+      
+      // @TODO add `query` option and just check for its existance instead of type
+      // if ( type === 'list' ) {
+      while (totalAssetsLoaded < limit) {
+        let data: { resources: Array<CloudinaryResource>; next_cursor?: string; } | undefined = undefined;
 
-      if ( type === 'list' ) {
         try {
-          const data = await listResources(requestOptions);
-          resources = data.resources;
+          data = await listResources({
+            ...requestOptions,
+            nextCursor
+          });
+          if ( !data ) {
+            throw new Error('Unkown error.');
+          }
         } catch(error) {
           logger.error(`${error}`);
           // @TODO Should we throw error for generic issues or bail and let the app continue?
           return;
+        }
+
+        // We don't want to exceed the the number of resources specific in the limit
+        // so make sure that we're only grabbing enough to fill the limit if we're
+        // to the point where it would be less than the response
+
+        const newResources = data.resources.slice(0, limit - totalAssetsLoaded);
+
+        resources = [...resources, ...newResources];
+        totalAssetsLoaded += newResources.length;
+        nextCursor = data.next_cursor
+
+        if (!nextCursor) {
+          break;
         }
       }
 
@@ -82,7 +111,7 @@ export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
         store.set({
           id: resource.asset_id,
           data: resource,
-          digest: generateDigest(resources),
+          digest: generateDigest(resource),
           // @TODO could this be used to render an <img or <video? Can this render CldImage?
           // rendered: {
           //   html: ...
@@ -120,6 +149,10 @@ async function getEnvironmentConfig() {
 
 async function listResources(options: RequestOptions) {
   const params = new URLSearchParams();
+
+  if ( options.nextCursor ) {
+    params.append('next_cursor', options.nextCursor);
+  }
 
   if ( options.limit ) {
     params.append('max_results', `${options.limit}`);
