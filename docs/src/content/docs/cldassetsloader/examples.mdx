@@ -5,7 +5,7 @@ head:
   - tag: title
     content: cldAssetsLoader Examples - Astro Cloudinary
 ---
-import { cldAssetsLoader } from '../../../../../astro-cloudinary';
+import { cldAssetsLoader } from '../../../../../astro-cloudinary/loaders';
 
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
@@ -25,7 +25,7 @@ not only deliver, but easily edit and build new images on the fly.
 
 <CodeBlock>
   ```jsx
-  import { cldAssetsLoader } from 'astro-cloudinary';
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
 
   export const collections = {
     assets: defineCollection({
