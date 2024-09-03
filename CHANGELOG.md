@@ -1,3 +1,10 @@
+# [1.0.0-beta.10](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2024-09-03)
+
+
+### Bug Fixes
+
+* Merge pull request [#8](https://github.com/colbyfayock/astro-cloudinary/issues/8) from Andarist/fix/getCloudinaryConfig-signature-emit ([51e7a36](https://github.com/colbyfayock/astro-cloudinary/commit/51e7a364182a574c1c6f8d45def0189e28266330))
+
 # [1.0.0-beta.9](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2024-08-30)
 
 
