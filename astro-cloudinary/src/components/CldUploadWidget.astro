@@ -1,0 +1,92 @@
+---
+import { generateSignatureCallback, generateUploadWidgetResultCallback, getUploadWidgetOptions, UPLOAD_WIDGET_EVENTS } from '@cloudinary-util/url-loader';
+import type {
+  CloudinaryUploadWidgetResults,
+  CloudinaryUploadWidgetInstanceMethods,
+  CloudinaryUploadWidgetError
+} from '@cloudinary-util/types';
+import { triggerOnIdle } from '../../lib/util';
+import { getCloudinaryConfig } from "../../lib/cloudinary";
+
+interface Props {
+  config?: any;
+  onError?: (error: CloudinaryUploadWidgetError, widget: any) => void;
+  onOpen?: (widget: any) => void;
+  onUpload?: (results: CloudinaryUploadWidgetResults, widget: any) => void;
+  options?: any;
+  signatureEndpoint?: string;
+  uploadPreset?: string;
+}
+
+const {
+  config,
+  onError,
+  onOpen,
+  onUpload,
+  options,
+  signatureEndpoint,
+  uploadPreset,
+} = Astro.props;
+
+const cloudinaryConfig = getCloudinaryConfig(config);
+
+const uploadSignature = signatureEndpoint && generateSignatureCallback({
+  signatureEndpoint: String(signatureEndpoint),
+  fetch
+});
+
+const uploadOptions = getUploadWidgetOptions({
+  uploadPreset: uploadPreset || import.meta.env.PUBLIC_CLOUDINARY_UPLOAD_PRESET,
+  uploadSignature,
+  ...options,
+}, cloudinaryConfig);
+
+// ... (other necessary functions and logic)
+
+---
+
+<script>
+  // Client-side script to handle widget creation and interactions
+  import { generateUploadWidgetResultCallback, UPLOAD_WIDGET_EVENTS } from '@cloudinary-util/url-loader';
+
+  let cloudinary;
+  let widget;
+
+  function handleOnLoad() {
+    if (!cloudinary) {
+      cloudinary = window.cloudinary;
+    }
+
+    if (!widget) {
+      widget = createWidget();
+    }
+  }
+
+  function createWidget() {
+    const uploadOptions = JSON.parse(document.getElementById('uploadOptions').textContent);
+    const resultsCallback = generateUploadWidgetResultCallback({
+      onError: (uploadError) => {
+        // Handle error
+      },
+      onResult: (uploadResult) => {
+        // Handle result
+      },
+    });
+
+    return cloudinary.createUploadWidget(uploadOptions, resultsCallback);
+  }
+
+  // Add event listener for script load
+  document.querySelector('#cloudinary-script').addEventListener('load', handleOnLoad);
+</script>
+
+<div id="uploadOptions" style="display: none;">
+  {JSON.stringify(uploadOptions)}
+</div>
+
+<slot />
+
+<script
+  id="cloudinary-script"
+  src="https://upload-widget.cloudinary.com/global/all.js"
+></script>

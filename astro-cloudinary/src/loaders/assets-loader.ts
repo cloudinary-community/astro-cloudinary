@@ -85,7 +85,7 @@ export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
 
       for ( const resource of resources ) {
         store.set({
-          id: resource.asset_id,
+          id: resource.public_id,
           data: resource,
           digest: generateDigest(resource),
           // @TODO could this be used to render an <img or <video? Can this render CldImage?
