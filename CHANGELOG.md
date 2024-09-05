@@ -1,3 +1,10 @@
+# [1.0.0-beta.12](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2024-09-05)
+
+
+### Bug Fixes
+
+* updating types to fix resources in content loader ([46bb682](https://github.com/colbyfayock/astro-cloudinary/commit/46bb68242ab38083077c10943a626701253950b6))
+
 # [1.0.0-beta.11](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2024-09-05)
 
 
