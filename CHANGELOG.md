@@ -1,3 +1,10 @@
+# [1.0.0-beta.11](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2024-09-05)
+
+
+### Bug Fixes
+
+* updating assets loader to use public_id for easier querying, adding getentry example to docs ([e535dea](https://github.com/colbyfayock/astro-cloudinary/commit/e535deacfd75341a13c2750b3da09d0630dc7979))
+
 # [1.0.0-beta.10](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2024-09-03)
 
 
