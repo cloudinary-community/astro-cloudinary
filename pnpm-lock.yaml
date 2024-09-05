@@ -27,11 +27,11 @@ importers:
   astro-cloudinary:
     dependencies:
       '@cloudinary-util/types':
-        specifier: 1.5.1
-        version: 1.5.1
+        specifier: 1.5.5
+        version: 1.5.5
       '@cloudinary-util/url-loader':
-        specifier: 5.9.1
-        version: 5.9.1
+        specifier: 5.10.1
+        version: 5.10.1
       '@cloudinary-util/util':
         specifier: ^3.3.2
         version: 3.3.2
@@ -275,14 +275,14 @@ packages:
     resolution: {integrity: sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw==}
     engines: {node: '>=6.9.0'}
 
-  '@cloudinary-util/types@1.5.0':
-    resolution: {integrity: sha512-7vSNbuzdVUpmyzkJb/yRhTEG5vaJBjCGspP+t6CDB/g88Z9vxqHTvVkKR5fc5d5Tiby1orbZUiHDg9ImGO88SA==}
+  '@cloudinary-util/types@1.5.3':
+    resolution: {integrity: sha512-/EbFhGKw942gAmBYN8iLCB8+7PfQR6DRIkfJWWoDf8OxInIrnVAhWHy+m1g1oltrTHZKbkF57oPJmi9Yv/4IIQ==}
 
-  '@cloudinary-util/types@1.5.1':
-    resolution: {integrity: sha512-zQ7ZdiOqIaE5a1hwsciKFYWJwcodwmh9a+Z75iV6sSxz1OmigR8k0s5BmCRUu3kez1strtByNBiMNm5oUJqzuQ==}
+  '@cloudinary-util/types@1.5.5':
+    resolution: {integrity: sha512-uyGQrpoFzsv9HIzpHgT3TEu4s/VWiSy+tk6T3haGw6TdqREj3aABmqZB0Fz2CcWK6LT3vhDxNe6J3h9ZyV/HAw==}
 
-  '@cloudinary-util/url-loader@5.9.1':
-    resolution: {integrity: sha512-1Aqq25RjQgJBUBdCaVW6aLxgFduIL3ClpoeyrrPhaD9V3qZP3x9pcWRKpOhQGn8pdFBb/ze9cG5HWUpmB6NR1Q==}
+  '@cloudinary-util/url-loader@5.10.1':
+    resolution: {integrity: sha512-Hi0NFkTm8X0Rsz1Vvc6PE955ukDwH+kuxLXx5kBqdwqV8JsEH5j5+4ceKKWgmdytF8Lran7TbVCmpn/ABmp63Q==}
 
   '@cloudinary-util/util@3.3.2':
     resolution: {integrity: sha512-Cc0iFxzfl7fcOXuznpeZFGYC885Of/vDgccRDnhTe/8Rf8YKv2PjLtezyo0VgmdA/CpeZy29NCXAsf6liokbwg==}
@@ -4508,13 +4508,13 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@cloudinary-util/types@1.5.0': {}
+  '@cloudinary-util/types@1.5.3': {}
 
-  '@cloudinary-util/types@1.5.1': {}
+  '@cloudinary-util/types@1.5.5': {}
 
-  '@cloudinary-util/url-loader@5.9.1':
+  '@cloudinary-util/url-loader@5.10.1':
     dependencies:
-      '@cloudinary-util/types': 1.5.0
+      '@cloudinary-util/types': 1.5.3
       '@cloudinary-util/util': 3.3.2
       '@cloudinary/url-gen': 1.15.0
       zod: 3.23.8
