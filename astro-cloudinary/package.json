@@ -1,6 +1,6 @@
 {
   "name": "astro-cloudinary",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-beta.13",
   "type": "module",
   "license": "MIT",
   "module": "./index.ts",
