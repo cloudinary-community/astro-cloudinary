@@ -1,3 +1,10 @@
+# [1.0.0-beta.13](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2024-09-07)
+
+
+### Bug Fixes
+
+* updating types for accurate definitions ([dc9e3b9](https://github.com/colbyfayock/astro-cloudinary/commit/dc9e3b9f545e98d451d483d4cfdd882b33209f5f))
+
 # [1.0.0-beta.12](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2024-09-05)
 
 
