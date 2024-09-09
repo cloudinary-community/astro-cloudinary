@@ -13,14 +13,14 @@ const REQUIRED_CREDENTIALS = [
   'CLOUDINARY_API_SECRET',
 ];
 
-export interface CloudinaryLoaderOptions {
+export interface CloudinaryAssetsLoaderOptions {
   assetType?: ListResourcesOptions["assetType"];
   deliveryType?: ListResourcesOptions["deliveryType"];
   folder?: ListResourcesOptions["folder"];
   limit?: ListResourcesOptions["limit"];
 }
 
-export function cldAssetsLoader(options?: CloudinaryLoaderOptions): Loader {
+export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader {
   return {
     name: "cloudinary-assets-loader",
     load: async ({ store, logger, generateDigest }) => {
