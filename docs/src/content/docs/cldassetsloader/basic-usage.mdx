@@ -25,10 +25,11 @@ Start by defining a new Collection with `defineCollection`:
 
 <CodeBlock>
   ```jsx
+  import { defineCollection } from 'astro:content';
   import { cldAssetsLoader } from 'astro-cloudinary/loaders';
 
   export const collections = {
-    assetsSamples: defineCollection({
+    assets: defineCollection({
       loader: cldAssetsLoader({
         limit: 4,
         folder: 'samples/food'

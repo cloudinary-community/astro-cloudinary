@@ -18,6 +18,14 @@ export interface CloudinaryAssetsLoaderOptions {
   deliveryType?: ListResourcesOptions["deliveryType"];
   folder?: ListResourcesOptions["folder"];
   limit?: ListResourcesOptions["limit"];
+  fields?: ListResourcesOptions["fields"];
+
+  // Resource data options: These are used to include
+  // additional data that isn't added by default
+  context?: ListResourcesOptions["context"];
+  metadata?: ListResourcesOptions["metadata"];
+  moderation?: ListResourcesOptions["moderation"];
+  tags?: ListResourcesOptions["tags"];
 }
 
 export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader {
@@ -36,7 +44,16 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
 
       // 10 is the Cloudinary default max_results
 
-      const { limit = CLOUDINARY_DEFAULT_LIMIT, deliveryType = 'upload', assetType = 'image', folder } = options || {};
+      const {
+        limit = CLOUDINARY_DEFAULT_LIMIT,
+        deliveryType = 'upload',
+        assetType = 'image',
+        folder,
+        context = false, // Cloudinary default
+        metadata = false, // Cloudinary default
+        moderation = false, // Cloudinary default
+        tags = false, // Cloudinary default
+      } = options || {};
       let resources: Array<CloudinaryResource> = [];
       let totalAssetsLoaded = 0;
       let nextCursor: string | undefined = undefined;
@@ -46,9 +63,13 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
         folder,
         folderMode,
         limit,
-        assetType
+        assetType,
+        context,
+        metadata,
+        moderation,
+        tags,
       }
-      
+
       // @TODO add `query` option and just check for its existance instead of type
       // if ( type === 'list' ) {
       while (totalAssetsLoaded < limit) {

@@ -7,7 +7,7 @@ export const collections = {
 	assetsSamplesBasic: defineCollection({
 		loader: cldAssetsLoader({
 			limit: 4,
-			folder: 'samples/food'
+			folder: 'samples/food',
 		})
 	}),
 	assetsSamplesDefault: defineCollection({
@@ -17,6 +17,16 @@ export const collections = {
 		loader: cldAssetsLoader({
 			limit: 1200,
 			folder: 'collection'
+		})
+	}),
+	assetsSamplesEcommerce: defineCollection({
+		loader: cldAssetsLoader({
+			limit: 4,
+			folder: 'ecommerce/sneakers',
+			context: true,
+			tags: true,
+			moderation: true,
+			metadata: true,
 		})
 	}),
 	docs: defineCollection({ schema: docsSchema() }),

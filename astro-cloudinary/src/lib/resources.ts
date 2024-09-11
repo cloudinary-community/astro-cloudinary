@@ -46,6 +46,13 @@ export interface ListResourcesOptions {
   folderMode?: string;
   limit?: number;
   nextCursor?: string;
+  fields?: Array<string>;
+
+  // Additional data
+  context?: boolean;
+  metadata?: boolean;
+  moderation?: boolean;
+  tags?: boolean;
 }
 
 export interface ListResourcesResponse {
@@ -65,6 +72,23 @@ export async function listResources(options: ListResourcesOptions): Promise<List
   }
 
   params.append('type', options.deliveryType);
+
+  // There are a few options that are simple booleans that help
+  // include specific datapoints that aren't included by default
+
+  const contentOptions = ['context', 'metadata', 'moderation', 'tags'];
+
+  for ( let contentOption of contentOptions ) {
+    const value = options[contentOption as keyof ListResourcesOptions];
+    if ( typeof value === 'boolean' ) {
+      params.append(contentOption, `${value}`);
+    }
+  }
+
+  if ( Array.isArray(options.fields) ) {
+    const fields = options.fields.join(',');
+    params.append('fields', fields);
+  }
 
   let response;
 

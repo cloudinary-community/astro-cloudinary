@@ -52,7 +52,7 @@ const playerHash = createHash('shake256', { outputLength: 4 })
 		.update(JSON.stringify(playerOptions))
 		.digest("hex");
 
-let playerClassName = 'astro-cloudinary-videoplayer cld-video-player cld-fluid';
+let playerClassName = 'astro-cloudinary-cldvideoplayer cld-video-player cld-fluid';
 
 if ( className ) {
   playerClassName = `${playerClassName} ${className}`;
@@ -83,7 +83,7 @@ if ( className ) {
   window.addEventListener('load', () => {
     if ( 'cloudinary' in window ) {
       const cloudinary = window.cloudinary as Cloudinary;
-      const videos = document.querySelectorAll('.astro-cloudinary-videoplayer') as NodeListOf<HTMLVideoElement>;
+      const videos = document.querySelectorAll('.astro-cloudinary-cldvideoplayer') as NodeListOf<HTMLVideoElement>;
 
       if ( import.meta.env.MODE === 'development' ) {
         const playerIds = Array.from(videos).map(video => video.dataset.cldvideoplayerId);

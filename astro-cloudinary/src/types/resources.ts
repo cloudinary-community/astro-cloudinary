@@ -1,5 +1,5 @@
 import { z } from "astro/zod";
-import type { CloudinaryResource, CloudinaryResourceResourceType, CloudinaryResourceDeliveryType, CloudinaryResourceAccessMode } from '@cloudinary-util/types'
+import type { CloudinaryResource, CloudinaryResourceResourceType, CloudinaryResourceDeliveryType, CloudinaryResourceAccessMode, CloudinaryResourceContext } from '@cloudinary-util/types'
 
 // CloudinaryResource types are primarily maintained in @cloudinary-util/types
 // The refernces here are used to validate that the Zod schemas match the definitions
@@ -8,6 +8,13 @@ export const cloudinaryResourceAccessModeSchema: z.ZodType<CloudinaryResourceAcc
   z.enum(["public", "authenticated"]),
   z.intersection(z.string(), z.object({}))
 ]);
+
+export const cloudinaryResourceContextSchema: z.ZodType<CloudinaryResourceContext> = z.object({
+  custom: z.object({
+    alt: z.string().optional(),
+    caption: z.string().optional(),
+  }).passthrough().optional()
+}).passthrough()
 
 export const cloudinaryResourceDeliveryTypeSchema: z.ZodType<CloudinaryResourceDeliveryType> = z.union([
   z.enum(["animoto", "asset", "authenticated", "dailymotion", "facebook", "fetch", "gravatar", "hulu", "instagram", "list", "multi", "private", "text", "twitter", "twitter_name", "upload", "vimeo", "worldstarhiphop", "youtube"]),
@@ -25,7 +32,7 @@ export const cloudinaryResourceSchema: z.ZodType<CloudinaryResource>  = z.object
   asset_id: z.string(),
   backup: z.boolean().optional(),
   bytes: z.number(),
-  context: z.object({}).passthrough().optional(),
+  context: cloudinaryResourceContextSchema.optional(),
   colors: z.array(z.tuple([z.string(), z.number()])).optional(),
   coordinates: z.object({}).passthrough().optional(),
   created_at: z.string(),
@@ -55,4 +62,4 @@ export const cloudinaryResourceSchema: z.ZodType<CloudinaryResource>  = z.object
   url: z.string(),
   version: z.number(),
   width: z.number()
-}).catchall(z.unknown());
+}).passthrough();
