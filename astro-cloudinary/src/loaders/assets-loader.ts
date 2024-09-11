@@ -49,6 +49,7 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
         deliveryType = 'upload',
         assetType = 'image',
         folder,
+        fields,
         context = false, // Cloudinary default
         metadata = false, // Cloudinary default
         moderation = false, // Cloudinary default
@@ -64,6 +65,7 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
         folderMode,
         limit,
         assetType,
+        fields,
         context,
         metadata,
         moderation,

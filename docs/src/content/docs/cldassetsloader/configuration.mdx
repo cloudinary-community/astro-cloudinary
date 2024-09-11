@@ -46,11 +46,25 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
       more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
     },
     {
+      option: 'context',
+      type: 'boolean',
+      default: 'false',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/contextual_metadata">More Info</a>)
+    },
+    {
       option: 'deliveryType',
       type: 'string',
       default: 'upload',
       example: () => (<code>upload</code>),
       more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'fields',
+      type: 'Array<string>',
+      default: '-',
+      example: () => (<code>['width', 'height', 'context']</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/admin_api#get_resources">More Info</a>)
     },
     {
       option: 'folder',
@@ -67,6 +81,27 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
       more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
     },
     {
+      option: 'metadata',
+      type: 'boolean',
+      default: 'false',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/structured_metadata">More Info</a>)
+    },
+    {
+      option: 'moderation',
+      type: 'boolean',
+      default: 'false',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/upload_parameters#moderation">More Info</a>)
+    },
+    {
+      option: 'tags',
+      type: 'boolean',
+      default: 'true',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/tags">More Info</a>)
+    },
+    {
       option: 'type',
       type: 'number',
       default: 'list',
@@ -74,6 +109,9 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
     },
   ]}
 />
+
+
+
 
 #### `assetType`
 
@@ -89,6 +127,20 @@ assetType: 'video'
 
 [Learn more about Asset Types](https://cloudinary.com/documentation/upload_parameters#asset_types) on the Cloudinary docs.
 
+### `context`
+
+Whether to include Contextual Metadata (`context`) in the resource object.
+
+**Examples**
+
+<CodeBlock>
+```jsx
+context: true
+```
+</CodeBlock>
+
+[Learn more about Contextual Metadata](https://cloudinary.com/documentation/contextual_metadata) in the Cloudinary docs.
+
 #### `deliveryType`
 
 The delivery type of the assets you want to query.
@@ -102,6 +154,18 @@ deliveryType: 'private'
 </CodeBlock>
 
 [Learn more about Delivery Types](https://cloudinary.com/documentation/upload_parameters#delivery_types) on the Cloudinary docs.
+
+#### `fields`
+
+The asset fields to include in the resource object response.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+fields: ['width', 'height', 'context']
+```
+</CodeBlock>
 
 #### `folder`
 
@@ -126,6 +190,48 @@ The maximum amount of results to query.
 limit: 20
 ```
 </CodeBlock>
+
+### `metadata`
+
+Whether to include Structured Metadata (`metadata`) in the resource object.
+
+**Examples**
+
+<CodeBlock>
+```jsx
+metadata: true
+```
+</CodeBlock>
+
+[Learn more about Structured Metadata](https://cloudinary.com/documentation/structured_metadata) in the Cloudinary docs.
+
+### `moderation`
+
+Whether to include the moderation status (`moderation`) in the resource object.
+
+**Examples**
+
+<CodeBlock>
+```jsx
+moderation: true
+```
+</CodeBlock>
+
+[Learn more about Moderation on Upload](https://cloudinary.com/documentation/upload_parameters#moderation) in the Cloudinary docs.
+
+### `tags`
+
+Whether to include the asset's tags (`tags`) in the resource object.
+
+**Examples**
+
+<CodeBlock>
+```jsx
+tags: true
+```
+</CodeBlock>
+
+[Learn more about Tags](https://cloudinary.com/documentation/tags) in the Cloudinary docs.
 
 #### `type`
 
