@@ -39,13 +39,6 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
   ]}
   data={[
     {
-      option: 'assetType',
-      type: 'string',
-      example: () => (<code>45</code>),
-      default: 'image',
-      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
-    },
-    {
       option: 'context',
       type: 'boolean',
       default: 'false',
@@ -95,6 +88,13 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
       more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/upload_parameters#moderation">More Info</a>)
     },
     {
+      option: 'resourceType',
+      type: 'string',
+      example: () => (<code>45</code>),
+      default: 'image',
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
       option: 'tags',
       type: 'boolean',
       default: 'true',
@@ -110,22 +110,6 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
   ]}
 />
 
-
-
-
-#### `assetType`
-
-The type of the assets you want to query.
-
-**Examples**
-
-<CodeBlock alwaysExpanded>
-```jsx
-assetType: 'video'
-```
-</CodeBlock>
-
-[Learn more about Asset Types](https://cloudinary.com/documentation/upload_parameters#asset_types) on the Cloudinary docs.
 
 ### `context`
 
@@ -218,6 +202,20 @@ moderation: true
 </CodeBlock>
 
 [Learn more about Moderation on Upload](https://cloudinary.com/documentation/upload_parameters#moderation) in the Cloudinary docs.
+
+#### `resourceType`
+
+The type of the assets you want to query.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+resourceType: 'video'
+```
+</CodeBlock>
+
+[Learn more about Asset Types](https://cloudinary.com/documentation/upload_parameters#asset_types) on the Cloudinary docs.
 
 ### `tags`
 
