@@ -1,3 +1,10 @@
+# [1.0.0-beta.14](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2024-09-11)
+
+
+### Features
+
+* adding ability to opt into metdata and custom context for assets loader, adding new example ([7f22e4e](https://github.com/colbyfayock/astro-cloudinary/commit/7f22e4ef22cf06363fe28eebb0c65ea91471c445))
+
 # [1.0.0-beta.13](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2024-09-07)
 
 
