@@ -14,11 +14,11 @@ const REQUIRED_CREDENTIALS = [
 ];
 
 export interface CloudinaryAssetsLoaderOptions {
-  assetType?: ListResourcesOptions["assetType"];
   deliveryType?: ListResourcesOptions["deliveryType"];
+  fields?: ListResourcesOptions["fields"];
   folder?: ListResourcesOptions["folder"];
   limit?: ListResourcesOptions["limit"];
-  fields?: ListResourcesOptions["fields"];
+  resourceType?: ListResourcesOptions["resourceType"];
 
   // Resource data options: These are used to include
   // additional data that isn't added by default
@@ -45,30 +45,30 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
       // 10 is the Cloudinary default max_results
 
       const {
-        limit = CLOUDINARY_DEFAULT_LIMIT,
+        context,
         deliveryType = 'upload',
-        assetType = 'image',
-        folder,
         fields,
-        context = false, // Cloudinary default
-        metadata = false, // Cloudinary default
-        moderation = false, // Cloudinary default
-        tags = false, // Cloudinary default
+        folder,
+        limit = CLOUDINARY_DEFAULT_LIMIT,
+        metadata,
+        moderation,
+        resourceType = 'image',
+        tags,
       } = options || {};
       let resources: Array<CloudinaryResource> = [];
       let totalAssetsLoaded = 0;
       let nextCursor: string | undefined = undefined;
 
       const requestOptions = {
+        context,
         deliveryType,
+        fields,
         folder,
         folderMode,
         limit,
-        assetType,
-        fields,
-        context,
         metadata,
         moderation,
+        resourceType,
         tags,
       }
 

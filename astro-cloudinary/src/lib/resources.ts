@@ -40,13 +40,13 @@ export async function getEnvironmentConfig() {
  */
 
 export interface ListResourcesOptions {
-  assetType: Omit<CloudinaryResourceResourceType, "auto">;
   deliveryType: 'upload' | 'fetch' | 'private' | 'authenticated' | 'sprite' | 'facebook' | 'twitter' | 'youtube' | 'vimeo';
+  fields?: Array<string>;
   folder?: CloudinaryResource["folder"];
   folderMode?: string;
   limit?: number;
   nextCursor?: string;
-  fields?: Array<string>;
+  resourceType: Omit<CloudinaryResourceResourceType, "auto">;
 
   // Additional data
   context?: boolean;
@@ -104,13 +104,13 @@ export async function listResources(options: ListResourcesOptions): Promise<List
       
       params.append('prefix', options.folder);
 
-      response = await cldRequest(`/resources/${options.assetType}?${params}`);
+      response = await cldRequest(`/resources/${options.resourceType}?${params}`);
 
     } else {
       throw new Error(`Unhandled folder mode: ${options.folderMode}`);
     }
   } else {
-    response = await cldRequest(`/resources/${options.assetType}?${params}`);
+    response = await cldRequest(`/resources/${options.resourceType}?${params}`);
   }
 
   if ( !response.ok ) {
