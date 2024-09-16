@@ -11,10 +11,13 @@ export const cloudinaryResourceAccessModeSchema: z.ZodType<CloudinaryResourceAcc
 
 export const cloudinaryResourceContextSchema: z.ZodType<CloudinaryResourceContext> = z.object({
   custom: z.object({
-    alt: z.string().optional(),
-    caption: z.string().optional(),
-  }).passthrough().optional()
-}).passthrough()
+      alt: z.string().optional(),
+      caption: z.string().optional(),
+    })
+    .and(
+      z.record(z.string().optional())
+    ),
+});
 
 export const cloudinaryResourceDeliveryTypeSchema: z.ZodType<CloudinaryResourceDeliveryType> = z.union([
   z.enum(["animoto", "asset", "authenticated", "dailymotion", "facebook", "fetch", "gravatar", "hulu", "instagram", "list", "multi", "private", "text", "twitter", "twitter_name", "upload", "vimeo", "worldstarhiphop", "youtube"]),
