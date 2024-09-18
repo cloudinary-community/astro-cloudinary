@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0...v1.0.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* package.json ([9fdcc53](https://github.com/colbyfayock/astro-cloudinary/commit/9fdcc53896e2c82c8a2206bac34184f8384a5808))
+
 # 1.0.0 (2024-09-18)
 
 
