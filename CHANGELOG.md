@@ -1,3 +1,10 @@
+# [1.0.0-beta.16](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2024-09-18)
+
+
+### Features
+
+* force bump ([3cf26d1](https://github.com/colbyfayock/astro-cloudinary/commit/3cf26d1e4984485e084232e07f21624329f699f2))
+
 # [1.0.0-beta.15](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2024-09-13)
 
 
