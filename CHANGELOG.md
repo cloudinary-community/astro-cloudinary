@@ -1,3 +1,10 @@
+# 1.0.0 (2024-09-18)
+
+
+### Features
+
+* force version ([9445ff4](https://github.com/colbyfayock/astro-cloudinary/commit/9445ff4c7c5c56583adf0ad8ae9687c78cc09d4c))
+
 # [1.0.0-beta.16](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2024-09-18)
 
 
