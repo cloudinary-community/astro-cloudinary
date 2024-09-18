@@ -4,3 +4,4 @@ node_modules
 astro-cloudinary/dist
 .idea
 tsconfig.tsbuildinfo
+.vercel

@@ -4,11 +4,15 @@ import tailwind from "@astrojs/tailwind";
 
 import icon from "astro-icon";
 
+import vercel from '@astrojs/vercel/serverless';
+
 export default defineConfig({
   output: 'hybrid',
+
   experimental: {
     contentLayer: true,
   },
+
   integrations: [
     starlight({
       title: 'Astro Cloudinary',
@@ -178,4 +182,10 @@ export default defineConfig({
     }),
     icon()
   ],
+
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    }
+  }),
 });
