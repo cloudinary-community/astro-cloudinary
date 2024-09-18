@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+
+import { CldImage } from '../../../astro-cloudinary';
+
+const assets = await getCollection('assetsSamplesBasic');
+---
+
+<ul class="not-content w-full grid grid-cols-2 list-none p-0 gap-2">
+  {assets.map(asset => {
+    return (
+      <li class="m-0">
+        <CldImage
+          class="block"
+          src={asset.data.public_id}
+          width={900}
+          height={900}
+          crop="lfill"
+          alt=""
+          sizes="50vw"
+        />
+      </li>
+    )
+  })}
+</ul>

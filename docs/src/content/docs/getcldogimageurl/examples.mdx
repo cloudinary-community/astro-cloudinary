@@ -1,0 +1,93 @@
+---
+title: getCldOgImageUrl Examples
+description: Examples of generating social media cards using getCldOgImageUrl in Astro with Cloudinary.
+head:
+  - tag: title
+    content: getCldOgImageUrl Examples - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+import { getCldImageUrl } from '../../../../../astro-cloudinary/helpers';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import ExamplesCldOgImage from '../../../components/ExamplesCldOgImage.astro';
+
+
+The below examples use the CldImage component to render the images. This is not required, you can use the URL returned by getCldOgImageUrl in any way you like.
+
+## Basic Image
+
+`src`: The public ID of the image to use as a Social Card
+
+<HeaderImage>
+  <ExamplesCldOgImage
+    src="cld-sample-4"
+  />
+</HeaderImage>
+
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+
+const url = getCldOgImageUrl({ src: '<Your Public ID>' });
+```
+</CodeBlock>
+
+## Change Background
+
+`replaceBackground`: Uses generative AI to replace a background
+
+<HeaderImage>
+  <ExamplesCldOgImage
+    src="cld-sample-3"
+    replaceBackground="space"
+  />
+</HeaderImage>
+
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+
+const url = getCldOgImageUrl({
+  src: '<Your Public ID>',
+  replaceBackground: '<Prompt>'
+});
+```
+</CodeBlock>
+
+## Text Overlay
+
+`text`: Adds basic text to the image
+
+<HeaderImage>
+  <ExamplesCldOgImage
+    src="cld-sample-2"
+    overlays={[{
+      text: {
+        fontFamily: 'Source Sans Pro',
+        fontSize: 120,
+        fontWeight: 'bold',
+        text: 'Astro Cloudinary',
+        color: 'white'
+      }
+    }]}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+
+const url = getCldOgImageUrl({
+  src: '<Your Public ID>',
+  overlays: [{
+    text: {
+      fontFamily: 'Source Sans Pro',
+      fontSize: 120,
+      fontWeight: 'bold',
+      text: 'Astro Cloudinary'
+    }
+  }]
+});
+```
+</CodeBlock>

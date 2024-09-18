@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+
+import { CldImage } from '../../../astro-cloudinary';
+
+const assets = await getCollection('assetsSamplesEcommerce');
+---
+<ul class="not-content w-full grid grid-cols-2 list-none p-0 gap-2">
+  {assets.map(asset => {
+    return (
+      <li class="m-0">
+        <CldImage
+          class="block"
+          src={asset.data.public_id}
+          width={900}
+          height={900}
+          crop={{
+            source: true,
+            type: 'auto'
+          }}
+          {...(asset.data.context?.custom?.caption && ({
+            overlays: [
+              {
+                text: {
+                  color: 'black',
+                  fontFamily: 'Source Sans Pro',
+                  fontSize: 150,
+                  fontWeight: 'black',
+                  text: asset.data.context.custom.caption.toUpperCase(),
+                  letterSpacing: -6,
+                },
+                position: {
+                  gravity: 'south_west',
+                  x: 50,
+                  y: 50
+                }
+              },
+            ]
+          }))
+          }
+          alt={asset.data.context?.custom?.productId || ''}
+        />
+      </li>
+    )
+  })}
+</ul>

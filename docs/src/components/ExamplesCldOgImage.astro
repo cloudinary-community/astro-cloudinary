@@ -1,0 +1,22 @@
+---
+import { CldImage, type CldImageProps } from '../../../astro-cloudinary';
+import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../../../astro-cloudinary/src/constants/sizes';
+
+interface Props extends CldImageProps {}
+
+const props: Props = Astro.props;
+---
+<CldImage
+  width={OG_IMAGE_WIDTH}
+  height={OG_IMAGE_HEIGHT}
+  crop={{
+    width: OG_IMAGE_WIDTH,
+    height: OG_IMAGE_HEIGHT,
+    type: 'fill',
+    gravity: 'center',
+    source: true
+  }}
+  sizes="100vw"
+  alt=""
+  {...props}
+/>

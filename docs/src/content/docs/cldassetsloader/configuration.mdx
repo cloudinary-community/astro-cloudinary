@@ -1,0 +1,246 @@
+---
+title: Configuring cldAssetsLoader
+description: Options and configuration for cldAssetsLoader in Astro.
+head:
+  - tag: title
+    content: cldAssetsLoader Configuration - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import Table from '../../../components/Table.astro';
+
+cldAssetLoader provides a wide range of options to customize your Collectoin query.
+
+## Basic Options
+
+<Table
+  columns={[
+    {
+      id: 'option',
+      title: 'Option'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'default',
+      title: 'Default'
+    },
+    {
+      id: 'example',
+      title: 'Example'
+    },
+    {
+      id: 'more'
+    }
+  ]}
+  data={[
+    {
+      option: 'context',
+      type: 'boolean',
+      default: 'false',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/contextual_metadata">More Info</a>)
+    },
+    {
+      option: 'deliveryType',
+      type: 'string',
+      default: 'upload',
+      example: () => (<code>upload</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'fields',
+      type: 'Array<string>',
+      default: '-',
+      example: () => (<code>['width', 'height', 'context']</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/admin_api#get_resources">More Info</a>)
+    },
+    {
+      option: 'folder',
+      type: 'string',
+      default: '-',
+      example: () => (<code>samples/food</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'limit',
+      type: 'number',
+      default: '10',
+      example: () => (<code>45</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'metadata',
+      type: 'boolean',
+      default: 'false',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/structured_metadata">More Info</a>)
+    },
+    {
+      option: 'moderation',
+      type: 'boolean',
+      default: 'false',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/upload_parameters#moderation">More Info</a>)
+    },
+    {
+      option: 'resourceType',
+      type: 'string',
+      example: () => (<code>45</code>),
+      default: 'image',
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
+    },
+    {
+      option: 'tags',
+      type: 'boolean',
+      default: 'true',
+      example: () => (<code>true</code>),
+      more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/tags">More Info</a>)
+    },
+    {
+      option: 'type',
+      type: 'number',
+      default: 'list',
+      example: () => (<code>search</code>),
+    },
+  ]}
+/>
+
+
+### `context`
+
+Whether to include Contextual Metadata (`context`) in the resource object.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+context: true
+```
+</CodeBlock>
+
+[Learn more about Contextual Metadata](https://cloudinary.com/documentation/contextual_metadata) in the Cloudinary docs.
+
+#### `deliveryType`
+
+The delivery type of the assets you want to query.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+deliveryType: 'private'
+```
+</CodeBlock>
+
+[Learn more about Delivery Types](https://cloudinary.com/documentation/upload_parameters#delivery_types) on the Cloudinary docs.
+
+#### `fields`
+
+The asset fields to include in the resource object response.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+fields: ['width', 'height', 'context']
+```
+</CodeBlock>
+
+#### `folder`
+
+The folder the assets should be queried from.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+folder: 'samples/landscapes'
+```
+</CodeBlock>
+
+#### `limit`
+
+The maximum amount of results to query.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+limit: 20
+```
+</CodeBlock>
+
+### `metadata`
+
+Whether to include Structured Metadata (`metadata`) in the resource object.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+metadata: true
+```
+</CodeBlock>
+
+[Learn more about Structured Metadata](https://cloudinary.com/documentation/structured_metadata) in the Cloudinary docs.
+
+### `moderation`
+
+Whether to include the moderation status (`moderation`) in the resource object.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+moderation: true
+```
+</CodeBlock>
+
+[Learn more about Moderation on Upload](https://cloudinary.com/documentation/upload_parameters#moderation) in the Cloudinary docs.
+
+#### `resourceType`
+
+The type of the assets you want to query.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+resourceType: 'video'
+```
+</CodeBlock>
+
+[Learn more about Asset Types](https://cloudinary.com/documentation/upload_parameters#asset_types) on the Cloudinary docs.
+
+### `tags`
+
+Whether to include the asset's tags (`tags`) in the resource object.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+tags: true
+```
+</CodeBlock>
+
+[Learn more about Tags](https://cloudinary.com/documentation/tags) in the Cloudinary docs.
+
+#### `type`
+
+The type of query to make for assets, including list or search.
+
+This primarily differs in how the requests are made, using the Admin API or the Search API.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+type: 'search'
+```
+</CodeBlock>

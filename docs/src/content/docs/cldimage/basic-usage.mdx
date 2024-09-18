@@ -1,0 +1,282 @@
+---
+title: Getting Started with CldImage
+description: Optimize and transform images in Astro with the CldImage component.
+head:
+  - tag: title
+    content: CldImage - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoImageEvents from '../../../components/DemoImageEvents.astro';
+
+The CldImage component provides an easy way to deliver images from Cloudinary in an Astro app.
+
+With it comes access to more advanced features like dynamic cropping, background removal, overlays, and other Cloudinary transformations.
+
+As CldImage is a wrapper around the Unpic Image component, you also gain access to built-in Image component features that will work out-of-the-box like [Responsive Sizing](/guides/responsive-images).
+
+## Basic Usage
+
+The basic required props include `width`, `height`, `src`, and `alt`:
+
+<HeaderImage>
+  <CldImage
+    src="cld-sample-5"
+    width="1870"
+    height="1250"
+    alt="A variety of colorful and appetizing breakfast dishes, including waffles, oatmeal, and fresh fruits, are arranged on a white surface, accompanied by various condiments and utensils."
+    sizes="100vw"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  alt="<Description>"
+  sizes="100vw" // Optional
+/>
+```
+</CodeBlock>
+
+The `src` property takes in a Cloudinary Public ID which includes the folder path along with the ID of the image itself.
+The `width` and the `height` should represent the rendered size and the `alt` value should be a text-based description
+of the image.
+
+The `sizes` prop is optional, but recommended for [Responsive Sizing](/guides/responsive-images).
+
+## Transformations
+
+You can further take advantage of Cloudinary features like replacing backgrounds with generative AI and text overlays by adding additional props:
+
+<HeaderImage>
+  <CldImage
+    src="cld-sample-5"
+    width="800"
+    height="600"
+    crop={{
+      type: 'fill',
+      source: true
+    }}
+    replaceBackground="cartoon outer space"
+    overlays={[
+      {
+        position: {
+          y: 40,
+          x: -10,
+          gravity: 'south',
+        },
+        text: {
+          color: 'magenta',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+      {
+        position: {
+          y: 50,
+          gravity: 'south',
+        },
+        text: {
+          color: 'white',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+    ]}
+    alt="Turtle in the ocean"
+    sizes="100vw"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  crop={{
+    type: 'fill',
+    source: true
+  }}
+  replaceBackground="cartoon outer space"
+  overlays={[
+    {
+      position: {
+        y: 40,
+        x: -10,
+        gravity: 'south',
+      },
+      text: {
+        color: 'magenta',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 160,
+        fontWeight: 'black',
+        text: 'OUT OF THIS WORLD'
+      }
+    },
+    {
+      position: {
+        y: 50,
+        gravity: 'south',
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 160,
+        fontWeight: 'black',
+        text: 'OUT OF THIS WORLD'
+      }
+    },
+  ]}
+  alt="<Description>"
+  sizes="100vw"
+/>
+```
+</CodeBlock>
+
+[Check out more examples](/cldimage/examples) of what you can do with transformations!
+
+## Using Cloudinary URLs
+
+CldImage supports passing a fully qualified Cloudinary URL as the `src`, however, it
+must include a version number (`/v1234/`) in order to be correctly parsed.
+
+:::note
+The version number is required due to the variable nature of Cloudinary URLs. This helps
+to ensure the integretiy when during the parsing process.
+:::
+
+<CodeBlock className="mt-6">
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="https://res.cloudinary.com/mycloud/image/upload/v1234/myimage"
+  width="<Width>"
+  height="<Height>"
+  alt="<Description>"
+/>
+```
+</CodeBlock>
+
+### Preserving URL Transformations
+
+If using a full Cloudinary URL, you might already have transformations applied to your image.
+
+To preserve those transformations, you can apply the `preserveTransformations` property:
+
+<CodeBlock className="mt-6">
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="https://res.cloudinary.com/<Cloud Name>/image/upload/w_100,h_200,c_fill/v1234/myimage"
+  width="<Width>"
+  height="<Height>"
+  preserveTransformations
+  alt="<Description>"
+/>
+```
+</CodeBlock>
+
+For example:
+
+<HeaderImage>
+  <CldImage
+    src="https://res.cloudinary.com/astro-cloudinary/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
+    width="800"
+    height="600"
+    preserveTransformations
+    alt="test"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
+  width="<Width>"
+  height="<Height>"
+  preserveTransformations
+  alt="test"
+/>
+```
+</CodeBlock>
+
+Would generate a URL of:
+
+<CodeBlock alwaysExpanded>
+```
+https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/c_limit,w_1600/v1/cld-sample-5?_a=BBGAABS00
+```
+</CodeBlock>
+
+## Image Events
+
+The CldImage component actively triggers a single Error event as a CustomEvent
+in order to allow callback functionality if there is something wrong in how
+the image loads.
+
+:::caution
+This image is intended to be broken for demonstration purposes!
+:::
+
+<HeaderImage>
+  <DemoImageEvents
+    src="this-image-does-not-exist"
+    width="960"
+    height="600"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  id="image-events"
+  src="this-image-does-not-exist"
+  width="<Width>"
+  height="<Height>"
+/>
+
+<script>
+const image = document.querySelector(`#image-events`);
+
+if ( image ) {
+  image.addEventListener('cldimage:error', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldimage:error', e.detail)
+  }) as EventListener);
+};
+</script>
+```
+</CodeBlock>
+
+:::tip
+See your browser's web console to preview the information logged in the above callback.
+:::
+
+## Learn More about CldImage
+* [Configuration](/cldimage/configuration)
+* [Examples](/cldimage/examples)

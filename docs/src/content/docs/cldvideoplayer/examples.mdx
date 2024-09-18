@@ -1,0 +1,506 @@
+---
+title: CldVideoPlayer Examples
+description: Use Adaptive Bitrate Streaming, on-the-fly cropping and resizing, and other transformations with CldVideoPlayer.
+head:
+  - tag: title
+    content: CldVideoPlayer Examples - Astro Cloudinary
+---
+import { CldVideoPlayer } from '../../../../../astro-cloudinary';
+import { getCldImageUrl } from '../../../../../astro-cloudinary/helpers';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoVideoPlayerEvents from '../../../components/DemoVideoPlayerEvents.astro';
+
+## Basic Usage
+
+Standard Cloudinary Video Player with playback.
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/elephants"
+    width="1920"
+    height="1080"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+/>
+```
+</CodeBlock>
+
+## Playback
+
+### Adaptive Bitrate Streaming (ABR)
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/elephants"
+    width="1920"
+    height="1080"
+    sourceTypes={['hls']}
+    transformation={{
+      streaming_profile: 'hd',
+    }}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  sourceTypes={['hls']}
+  transformation={{
+    streaming_profile: 'hd',
+  }}
+/>
+```
+</CodeBlock>
+
+
+### Picture-in-Picture
+
+Utilizes the browser's Picture-in-Picture API to create a floating video on top of other windows.
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+    pictureInPictureToggle
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  pictureInPictureToggle
+/>
+```
+</CodeBlock>
+
+## Player Customization
+
+### Chapters & Selector
+
+Adding a button to select chapters.
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+    chapters={{
+      0: "Chapter 1",
+      6: "Chapter 2",
+      9: "Chapter 3"
+    }}
+    chaptersButton
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  width="4096"
+  height="2160"
+  src="<Public ID>"
+  chapters={{
+    0: "Chapter 1",
+    6: "Chapter 2",
+    9: "Chapter 3"
+  }}
+  chaptersButton
+/>
+```
+</CodeBlock>
+
+### Colors & Font
+
+Changing the player theme using colors and fonts.
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+    colors={{
+      accent: '#ff0000',
+      base: '#00ff00',
+      text: '#0000ff'
+    }}
+    fontFace="Source Serif Pro"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  width="4096"
+  height="2160"
+  src="<Public ID>"
+  colors={{
+    accent: '#ff0000',
+    base: '#00ff00',
+    text: '#0000ff'
+  }}
+  fontFace="Source Serif Pro"
+/>
+```
+</CodeBlock>
+
+### Logo
+
+Adding a custom logo to the player chrome
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+    logo={{
+      imageUrl: getCldImageUrl({
+        src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/space-jelly-cosmo-helmet`
+      }),
+      onClickUrl: 'https://spacejelly.dev'
+    }}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+---
+<CldVideoPlayer
+  width="4096"
+  height="2160"
+  src="<Public ID>"
+  logo={{
+    imageUrl: getCldImageUrl({
+      src: '<Your Public ID>'
+    }),
+    // imageUrl: '<Your Image URL',
+    onClickUrl: '<Your URL>'
+  }}
+/>
+```
+</CodeBlock>
+
+
+### Poster URL
+
+Allows you to change the poster used for the player.
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+    poster={getCldImageUrl({
+      src: 'samples/sea-turtle',
+      assetType: 'video',
+      grayscale: true
+    })}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+---
+<CldVideoPlayer
+  width="4096"
+  height="2160"
+  src="<Public ID>"
+  poster={getCldImageUrl({ src: '<Your Public ID>', grayscale: true })}
+  // poster={getCldImageUrl({ src: '<Your Public ID>', assetType: 'video' })}
+  // poster="<Your Remote URL>"
+/>
+```
+</CodeBlock>
+
+### Poster Transformations
+
+Adding effects to the video's auto-generated thumb
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+    poster={{
+      tint: 'equalize:80:blue:blueviolet'
+    }}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  width="4096"
+  height="2160"
+  src="<Public ID>"
+  poster={{
+    tint: 'equalize:80:blue:blueviolet'
+  }}
+/>
+```
+</CodeBlock>
+
+
+## Transformations
+
+### Cropping & Resizing
+
+<HeaderImage class="not-content">
+  <div className="w-full max-w-[500px] mx-auto">
+    <CldVideoPlayer
+      width="500"
+      height="500"
+      src="samples/sea-turtle"
+      transformation={{
+        width: 500,
+        height: 500,
+        crop: 'fill',
+        gravity: 'auto'
+      }}
+    />
+  </div>
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  width="500"
+  height="500"
+  src="<Public ID>"
+  transformation={{
+    width: 500,
+    height: 500,
+    crop: 'fill',
+    gravity: 'auto'
+  }}
+/>
+```
+</CodeBlock>
+
+
+### Image Overlays
+
+Place an image over the video (Ex: watermarks).
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/elephants"
+    width="1920"
+    height="1080"
+    transformation={{
+      overlay: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}:space-jelly-cosmo-helmet`,
+      width: 150,
+      gravity: "south_east",
+      x: 50,
+      y: 50,
+      opacity: 80
+    }}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  transformation={{
+    overlay: '<Your Public ID>',
+    width: 150,
+    gravity: "south_east",
+    x: 50,
+    y: 50,
+    opacity: 80
+  }}
+/>
+```
+</CodeBlock>
+
+## Advanced
+
+### Localization
+
+Provides localization options for player labels.
+
+Uses Video.js [JSON format](https://videojs.com/guides/languages/#json-format) to provide labels.
+
+<HeaderImage class="not-content">
+  <CldVideoPlayer
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+    language="es"
+    languages={{
+      es: {
+        Play: "Reproducción",
+        "Play Video": "Reproduce el Video",
+        Pause: "Pausa",
+        "Current Time": "Tiempo reproducido",
+        Duration: "Duración total",
+        "Remaining Time": "Tiempo restante",
+        "Stream Type": "Tipo de secuencia",
+        LIVE: "DIRECTO",
+        Loaded: "Cargado",
+        Progress: "Progreso",
+        Fullscreen: "Pantalla completa",
+        "Non-Fullscreen": "Pantalla no completa",
+        Mute: "Silenciar",
+        Unmute: "No silenciado",
+        "Playback Rate": "Velocidad de reproducción",
+        Subtitles: "Subtítulos",
+        "subtitles off": "Subtítulos desactivados",
+        Captions: "Subtítulos especiales",
+        "captions off": "Subtítulos especiales desactivados",
+        Chapters: "Capítulos",
+        "Close Modal Dialog": "Cerca de diálogo modal",
+        "You aborted the video playback":
+          "Ha interrumpido la reproducción del vídeo.",
+        "A network error caused the video download to fail part-way.":
+          "Un error de red ha interrumpido la descarga del vídeo.",
+        "The video could not be loaded, either because the server or network failed or because the format is not supported.":
+          "No se ha podido cargar el vídeo debido a un fallo de red o del servidor o porque el formato es incompatible.",
+        "The video playback was aborted due to a corruption problem or because the video used features your browser did not support.":
+          "La reproducción de vídeo se ha interrumpido por un problema de corrupción de datos o porque el vídeo precisa funciones que su navegador no ofrece.",
+        "No compatible source was found for this video.":
+          "No se ha encontrado ninguna fuente compatible con este vídeo."
+      }
+    }}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  width="4096"
+  height="2160"
+  src="<Public ID>"
+  language="es"
+  languages={{
+    es: {
+      Play: "Reproducción",
+      "Play Video": "Reproduce el Video",
+      Pause: "Pausa",
+      "Current Time": "Tiempo reproducido",
+      Duration: "Duración total",
+      "Remaining Time": "Tiempo restante",
+      "Stream Type": "Tipo de secuencia",
+      LIVE: "DIRECTO",
+      Loaded: "Cargado",
+      Progress: "Progreso",
+      Fullscreen: "Pantalla completa",
+      "Non-Fullscreen": "Pantalla no completa",
+      Mute: "Silenciar",
+      Unmute: "No silenciado",
+      "Playback Rate": "Velocidad de reproducción",
+      Subtitles: "Subtítulos",
+      "subtitles off": "Subtítulos desactivados",
+      Captions: "Subtítulos especiales",
+      "captions off": "Subtítulos especiales desactivados",
+      Chapters: "Capítulos",
+      "Close Modal Dialog": "Cerca de diálogo modal",
+      "You aborted the video playback": "Ha interrumpido la reproducción del vídeo.",
+      "A network error caused the video download to fail part-way.": "Un error de red ha interrumpido la descarga del vídeo.",
+      "The video could not be loaded, either because the server or network failed or because the format is not supported.": "No se ha podido cargar el vídeo debido a un fallo de red o del servidor o porque el formato es incompatible.",
+      "The video playback was aborted due to a corruption problem or because the video used features your browser did not support.": "La reproducción de vídeo se ha interrumpido por un problema de corrupción de datos o porque el vídeo precisa funciones que su navegador no ofrece.",
+      "No compatible source was found for this video.": "No se ha encontrado ninguna fuente compatible con este vídeo."
+    }
+  }}
+/>
+```
+</CodeBlock>
+
+### Playback Events
+
+Callbacks for player events.
+
+<HeaderImage class="not-content">
+  <DemoVideoPlayerEvents
+    src="samples/sea-turtle"
+    width="1920"
+    height="1080"
+  />
+</HeaderImage>
+
+:::note
+The `player` instance is also passed in the callback function:
+:::
+
+<CodeBlock className="mt-6">
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  id="video-player-events"
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+/>
+
+<script>
+const videoPlayer = document.querySelector(`#video-player-events`);
+
+if ( videoPlayer ) {
+  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:loadedmetadata', e.detail)
+  }) as EventListener);
+
+  videoPlayer.addEventListener('cldvideoplayer:play', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:play', e.detail)
+  }) as EventListener);
+
+  videoPlayer.addEventListener('cldvideoplayer:pause', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:pause', e.detail)
+  }) as EventListener);
+};
+</script>
+```
+</CodeBlock>

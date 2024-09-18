@@ -1,0 +1,152 @@
+---
+import { createHash } from "node:crypto";
+import { getVideoPlayerOptions, type ConfigOptions } from '@cloudinary-util/url-loader';
+
+import { getCloudinaryConfig } from '../lib/cloudinary';
+import type { CloudinaryVideoPlayerOptions, CloudinaryVideoPlayerOptionsLogo } from '@cloudinary-util/types';
+
+const PLAYER_VERSION = '2.0.5';
+
+export interface CldVideoPlayerProps extends Omit<CloudinaryVideoPlayerOptions, "autoplayMode" | "cloud_name" | "controlBar" | "height" |  "logoImageUrl" | "logoOnclickUrl" | "posterOptions" | "publicId" | "secure" | "showLogo" | "width"> {
+  class?: string;
+  config?: ConfigOptions;
+  // Redefine to make it required
+  height: CloudinaryVideoPlayerOptions["height"];
+  id?: string;
+  logo?: boolean | CldVideoPlayerPropsLogo;
+  poster?: string; // | GetCldImageUrlOptions | GetCldVideoUrlOptions;
+  src: string;
+  quality?: string | number;
+  // Redefine to make it required
+  width: CloudinaryVideoPlayerOptions["width"];
+}
+
+export interface CldVideoPlayerPropsLogo {
+  imageUrl?: CloudinaryVideoPlayerOptionsLogo['logoImageUrl'];
+  logo?: boolean;
+  onClickUrl?: CloudinaryVideoPlayerOptionsLogo['logoOnclickUrl'];
+}
+
+interface Props extends CldVideoPlayerProps {};
+
+const props: Props = Astro.props;
+const { class: className, config, height, id, width } = props;
+
+const cloudinaryConfig = getCloudinaryConfig(config);
+const playerOptions = getVideoPlayerOptions(props, cloudinaryConfig);
+const { publicId } = playerOptions;
+
+if ( typeof publicId === 'undefined' ) {
+  throw new Error('[CldVideoPlayer] Public ID or Cloudinary URL required - please specify a src prop.');
+}
+
+// Each player needs a unique ID in order to be properly configured
+// in the event that there are multiple players on a single page.
+// Otherwise, if for instance one player has theme customization
+// and another doesn't, you may have unexpected results such as
+// all players having the same theme
+
+let playerId = id || `player-${publicId.replace('/', '-')}`;
+
+const playerHash = createHash('shake256', { outputLength: 4 })
+		.update(JSON.stringify(playerOptions))
+		.digest("hex");
+
+let playerClassName = 'astro-cloudinary-cldvideoplayer cld-video-player cld-fluid';
+
+if ( className ) {
+  playerClassName = `${playerClassName} ${className}`;
+}
+---
+<link href={`https://unpkg.com/cloudinary-video-player@${PLAYER_VERSION}/dist/cld-video-player.min.css`} rel="stylesheet" />
+
+<div id={playerId} style={{ width: '100%', aspectRatio: `${width} / ${height}`}}>
+  <video
+    id={`${playerId}-${playerHash}`}
+    class={playerClassName}
+    width={width}
+    height={height}
+    data-cldvideoplayer-options={JSON.stringify(playerOptions)}
+    data-cldvideoplayer-id={playerId}
+  />
+</div>
+
+<script is:inline src={`https://unpkg.com/cloudinary-video-player@${PLAYER_VERSION}/dist/cld-video-player.min.js`}></script>
+
+<script>
+  import type { CloudinaryVideoPlayer } from '@cloudinary-util/types';
+  
+  interface Cloudinary {
+    videoPlayer: (video: HTMLVideoElement, options: {}) => CloudinaryVideoPlayer;
+  }
+
+  window.addEventListener('load', () => {
+    if ( 'cloudinary' in window ) {
+      const cloudinary = window.cloudinary as Cloudinary;
+      const videos = document.querySelectorAll('.astro-cloudinary-cldvideoplayer') as NodeListOf<HTMLVideoElement>;
+
+      if ( import.meta.env.MODE === 'development' ) {
+        const playerIds = Array.from(videos).map(video => video.dataset.cldvideoplayerId);
+        if ( new Set(playerIds).size !== playerIds.length ) {
+          console.warn('[CldVideoPlayer] Multiple instances of the same video detected on the page which may cause unexpected results. Try adding a unique id to each player.');
+        }
+      }
+
+      videos.forEach(video => {
+        const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);        
+        const player = cloudinary.videoPlayer(video, playerOptions);
+
+        if ( !player ) return;
+
+        // Loop through all avialable player events and create custom event callbacks
+
+        const events = [
+          'loadstart',
+          'suspend',
+          'abort',
+          'error',
+          'emptied',
+          'stalled',
+          'loadedmetadata',
+          'loadeddata',
+          'canplay',
+          'canplaythrough',
+          'playing',
+          'waiting',
+          'seeking',
+          'seeked',
+          'ended',
+          'durationchange',
+          'timeupdate',
+          'progress',
+          'play',
+          'pause',
+          'ratechange',
+          'volumechange',
+          'fullscreenchange',
+          'posterchange',
+          'mute',
+          'unmute',
+          'percentsplayed',
+          'timeplayed',
+          'seek',
+          'sourcechanged',
+          'qualitychanged',
+        ];
+
+        events.forEach(event => {
+          player.on(event, (e: { Player: CloudinaryVideoPlayer; type: string; }) => {
+            const customEvent = new CustomEvent(`cldvideoplayer:${event}`, {
+              detail: {
+                Player: e.Player,
+                type: e.type,
+                Video: video
+              },
+            });
+            video.closest(`#${video.dataset.cldvideoplayerId}`)?.dispatchEvent(customEvent);
+          });
+        });
+      })
+    }
+  });
+</script>

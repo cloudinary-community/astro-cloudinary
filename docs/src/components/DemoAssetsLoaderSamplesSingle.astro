@@ -1,0 +1,16 @@
+---
+import { getEntry } from 'astro:content';
+
+import { CldImage } from '../../../astro-cloudinary';
+
+const asset = await getEntry('assetsSamplesLimit', 'collection/a7ruc9xysr0lkxip4cgg');
+---
+
+<CldImage
+  class="block"
+  src={asset.data.public_id}
+  width={900}
+  height={900}
+  crop="lfill"
+  alt=""
+/>

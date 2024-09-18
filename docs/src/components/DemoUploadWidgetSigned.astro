@@ -1,0 +1,11 @@
+---
+import { type CldUploadWidgetProps } from '../../../astro-cloudinary';
+import DemoUploadWidgetUnsigned from './DemoUploadWidgetUnsigned.astro';
+
+interface Props extends CldUploadWidgetProps {};
+
+const props: Props = Astro.props;
+---
+<DemoUploadWidgetUnsigned {...props} signatureEndpoint="/api/sign-cloudinary-params" uploadPreset="astro-cloudinary-signed">
+  <slot />
+</DemoUploadWidgetUnsigned>

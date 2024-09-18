@@ -1,0 +1,83 @@
+---
+title: CldUploadWidget Examples
+description: Examples of how to upload images, videos, and other files in Astro with the CldUploadWidget component.
+head:
+  - tag: title
+    content: CldUploadWidget Examples - Astro Cloudinary
+---
+import { CldUploadWidget } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import Button from '../../../components/Button.astro';
+import DemoUploadWidgetUnsigned from '../../../components/DemoUploadWidgetUnsigned.astro';
+import DemoUploadWidgetSigned from '../../../components/DemoUploadWidgetSigned.astro';
+
+## Signed Uploads
+
+<DemoUploadWidgetSigned uploadPreset="astro-cloudinary-signed" signatureEndpoint="/api/sign-cloudinary-params">
+  <Button class="cursor-pointer">Upload</Button>
+</DemoUploadWidgetSigned>
+
+:::note
+All files uploaded to this demo will be deleted.
+:::
+
+<CodeBlock alwaysExpanded>
+```jsx
+---
+import { CldUploadWidget } from 'astro-cloudinary';
+---
+<CldUploadWidget signatureEndpoint="<API Endpoint (ex: /api/sign-cloudinary-params)>">
+  <button>Upload</button>
+</CldUploadWidget>
+```
+</CodeBlock>
+
+## Sources
+
+Controls which sources files can be selected from.
+
+<DemoUploadWidgetSigned
+  uploadPreset="astro-cloudinary-signed"
+  signatureEndpoint="/api/sign-cloudinary-params"
+  options={{ sources: ['local', 'url', 'unsplash'] }}
+>
+  <Button class="cursor-pointer">Upload</Button>
+</DemoUploadWidgetSigned>
+
+:::note
+All files uploaded to this demo will be deleted.
+:::
+
+<CodeBlock alwaysExpanded>
+```jsx
+---
+import { CldUploadWidget } from 'astro-cloudinary';
+---
+<CldUploadWidget options={{ sources: ['local', 'url', 'unsplash'] }} uploadPreset="<Your Upload Preset>">
+  <button>Upload</button>
+</CldUploadWidget>
+```
+</CodeBlock>
+
+## Unsigned Uploads
+
+<DemoUploadWidgetUnsigned uploadPreset="astro-cloudinary-unsigned">
+  <Button class="cursor-pointer">Upload</Button>
+</DemoUploadWidgetUnsigned>
+
+:::note
+All files uploaded to this demo will be deleted.
+:::
+
+<CodeBlock alwaysExpanded>
+```jsx
+---
+import { CldUploadWidget } from 'astro-cloudinary';
+---
+<CldUploadWidget uploadPreset="<Your Unsigned Upload Preset>">
+  <button>Upload</button>
+</CldUploadWidget>
+```
+</CodeBlock>

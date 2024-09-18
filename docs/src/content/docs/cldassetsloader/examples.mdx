@@ -1,0 +1,180 @@
+---
+title: cldAssetsLoader Examples
+description: Query for collections of Cloudinary resources with cldAssetsLoader.
+head:
+  - tag: title
+    content: cldAssetsLoader Examples - Astro Cloudinary
+---
+import { cldAssetsLoader } from '../../../../../astro-cloudinary/loaders';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoAssetsLoaderSamplesDefault from '../../../components/DemoAssetsLoaderSamplesDefault.astro';
+import DemoAssetsLoaderSamplesLimit from '../../../components/DemoAssetsLoaderSamplesLimit.astro';
+import DemoAssetsLoaderEcommerce from '../../../components/DemoAssetsLoaderEcommerce.astro';
+
+## Basic Collections
+
+Cloudinary supports a wide variety of powerful transformations that allow you to
+not only deliver, but easily edit and build new images on the fly.
+
+### Default
+
+<HeaderImage layout="full">
+  <DemoAssetsLoaderSamplesDefault />
+</HeaderImage>
+
+<strong class="block mb-2">Defining the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
+
+  export const collections = {
+    assets: defineCollection({
+      loader: cldAssetsLoader()
+    }),
+  }
+  ```
+</CodeBlock>
+
+
+<strong class="block mb-2">Accessing the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  ---
+  import { getCollection } from 'astro:content';
+  import { CldImage } from 'astro-cloudinary';
+  const assets = await getCollection('assets');
+  ---
+  {assets.map(asset => {
+    return (
+      <CldImage
+        src={asset.data.public_id}
+        width={asset.data.width}
+        height={asset.data.height}
+        alt=""
+      />
+    )
+  })}
+  ```
+</CodeBlock>
+
+### Large Collections
+
+<HeaderImage layout="full">
+  <DemoAssetsLoaderSamplesLimit />
+</HeaderImage>
+
+<strong class="block mb-2">Defining the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
+
+  export const collections = {
+    assets: defineCollection({
+      loader: cldAssetsLoader({
+        limit: 1200,
+        folder: '<Folder Name>'
+      })
+    }),
+  }
+  ```
+</CodeBlock>
+
+<strong class="block mb-2">Accessing the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  ---
+  import { getCollection } from 'astro:content';
+  import { CldImage } from 'astro-cloudinary';
+  const assets = await getCollection('assets');
+  ---
+  {assets.map(asset => {
+    return (
+      <CldImage
+        src={asset.data.public_id}
+        width={asset.data.width}
+        height={asset.data.height}
+        alt=""
+      />
+    )
+  })}
+  ```
+</CodeBlock>
+
+## Advanced
+
+### Tags, Context, & Metadata 
+
+<HeaderImage layout="full">
+  <DemoAssetsLoaderEcommerce />
+</HeaderImage>
+
+<strong class="block mb-2">Defining the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
+
+  export const collections = {
+    assets: defineCollection({
+      loader: cldAssetsLoader({
+        context: true,
+        tags: true,
+        moderation: true,
+        metadata: true,
+      })
+    }),
+  }
+  ```
+</CodeBlock>
+
+<strong class="block mb-2">Accessing the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  ---
+  import { getCollection } from 'astro:content';
+  import { CldImage } from 'astro-cloudinary';
+  const assets = await getCollection('assets');
+  ---
+  {assets.map(asset => {
+    return (
+      <CldImage
+        src={asset.data.public_id}
+        width={asset.data.width}
+        height={asset.data.height}
+        crop={{
+          source: true,
+          type: 'auto'
+        }}
+        {...(asset.data.context?.custom?.caption && ({
+          overlays: [
+            {
+              text: {
+                color: 'black',
+                fontFamily: 'Source Sans Pro',
+                fontSize: 150,
+                fontWeight: 'black',
+                text: asset.data.context.custom.caption.toUpperCase(),
+                letterSpacing: -6,
+              },
+              position: {
+                gravity: 'south_west',
+                x: 50,
+                y: 50
+              }
+            },
+          ]
+        }))
+        }
+        alt={asset.data.context?.custom?.alt || ''}
+      />
+    )
+  })}
+  ```
+</CodeBlock>

@@ -1,0 +1,134 @@
+---
+import { type HTMLAttributes } from 'astro/types';
+import { type UnpicImageProps } from '@unpic/core';
+import { Image } from '@unpic/astro';
+import { transformationPlugins, type ConfigOptions, type ImageOptions } from '@cloudinary-util/url-loader';
+
+import { generateImageLoader } from '../lib/loader';
+
+export type CldImageProps = Omit<UnpicImageProps<HTMLAttributes<"img">>, "src"> & ImageOptions & {
+  config?: ConfigOptions;
+  src: string;
+}
+
+interface Props extends CldImageProps {};
+
+const { config, class: className, ...props }: Props = Astro.props;
+
+// Add props here that are intended to only be used for
+// Cloudinary URL construction to avoid them being forwarded
+// to the DOM. These are props that aren't automatically
+// pulled from the URL Loader plugins
+
+const CLOUDINARY_PROPS = [
+  'assetType',
+  'deliveryType',
+  'dpr',
+  'format',
+  'quality',
+  'strictTransformations',
+
+  // Excluded props that are managed by the component
+  // 'height',
+  // 'src',
+  // 'width'
+];
+
+// Collect all of the valid CldImage props that should only
+// be applied to the URL construction and not applied to
+// the underlaying Image component
+
+transformationPlugins.forEach(({ props }: { props: Record<string, unknown> }) => {
+  Object.keys(props).forEach(prop => {
+    // If the prop already exists, flag it as a duplicate
+    if ( CLOUDINARY_PROPS.includes(prop) ) {
+      throw new Error(`Option ${prop} already exists!`);
+    }
+    CLOUDINARY_PROPS.push(prop);
+  });
+});
+
+// Collect all of the props that are intended to be passed
+// into the URL construction
+
+const cldOptions: ImageOptions = {
+  height: props.height,
+  src: props.src,
+  width: props.width,
+};
+
+CLOUDINARY_PROPS.forEach((key) => {
+  const prop = props[key as keyof ImageOptions];
+  if ( prop ) {
+    // @ts-expect-error
+    cldOptions[key as keyof ImageOptions] = prop;
+  }
+});
+
+// Create a new instance of the loader for the Image component to
+// vend URLs for each responsive breakpoint
+
+const transformer = generateImageLoader(cldOptions, config);
+
+// Construct the base Image component props by filtering out Cloudinary-specific props
+
+const src = transformer({
+  url: props.src,
+  width: props.width,
+  height: props.height
+});
+
+const imageProps = {
+  cdn: 'cloudinary',
+  height: props.height,
+  src,
+  width: props.width,
+  transformer,
+} as UnpicImageProps<HTMLAttributes<"img">>;
+
+// Loop through all props and try to find any that are not valid
+// Cloudinary props to assume they are intended to be passed through
+// to the Image component
+
+Object.entries(props)
+  .filter(([key]) => typeof key === 'string' && !CLOUDINARY_PROPS.includes(key))
+  .forEach(([key, value]) => imageProps[key as keyof UnpicImageProps<HTMLAttributes<"img">>] = value);
+
+let imageClassName = 'astro-cloudinary-cldimage';
+
+if (className) {
+  imageClassName = `${imageClassName} ${className}`;
+}
+---
+<Image class={imageClassName} {...imageProps} />
+
+<script>
+  import { pollForProcessingImage } from '@cloudinary-util/util';
+
+  document.addEventListener('error', onCldImageError, true);
+    
+  // Optimize this so that a new script isn't added for each image instance
+  async function onCldImageError(event: ErrorEvent) {
+    const image = event.target as HTMLImageElement;
+    
+    if ( !image || image.tagName !== 'IMG' ) return;
+
+    const customEvent = new CustomEvent('cldimage:error', {
+      detail: {
+        Image: image,
+        type: 'error',
+      },
+    });
+
+    image?.dispatchEvent(customEvent);
+
+    if ( await pollForProcessingImage({ src: image.src }) ) {
+      const key = `${Date.now()}${Math.random()}`;
+      if ( image.src.includes('?') ) {
+        image.src = `${image.src}?key=${key}`;
+      } else {
+        image.src = `${image.src}&key=${key}`;
+      }
+    }
+  }
+</script>

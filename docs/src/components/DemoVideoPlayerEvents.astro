@@ -1,0 +1,26 @@
+---
+import { CldVideoPlayer, type CldVideoPlayerProps } from '../../../astro-cloudinary';
+
+interface Props extends CldVideoPlayerProps {};
+
+const props: Props = Astro.props;
+---
+<CldVideoPlayer {...props} id="cldvideoplayer-event-demo" />
+
+<script>
+const videoPlayer = document.querySelector(`#cldvideoplayer-event-demo`);
+
+if ( videoPlayer ) {
+  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:loadedmetadata', e.detail)
+  }) as EventListener);
+
+  videoPlayer.addEventListener('cldvideoplayer:play', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:play', e.detail)
+  }) as EventListener);
+
+  videoPlayer.addEventListener('cldvideoplayer:pause', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:pause', e.detail)
+  }) as EventListener);
+};
+</script>
