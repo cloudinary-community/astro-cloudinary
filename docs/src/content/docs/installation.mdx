@@ -1,12 +1,9 @@
 ---
 title: Installing Astro Cloudinary
-description: Configuring responsive images in Astro with the CldImage component.
+description: Getting started with Astro Cloudinary.
 head:
   - tag: title
     content: Installation - Astro Cloudinary
-
-
-# import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from '../../astro-cloudinary/src/constants/sizes';
 ---
 import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
 
@@ -25,19 +22,25 @@ import HeaderImage from '../../components/HeaderImage.astro';
 
     <Tabs>
       <TabItem label="npm">
-        ```ansi copy
+        <CodeBlock alwaysExpanded>
+        ```
         npm install astro-cloudinary@1.0.0-beta.14
         ```
+        </CodeBlock>
       </TabItem>
       <TabItem label="pnpm">
-        ```ansi copy
+        <CodeBlock alwaysExpanded>
+        ```
         pnpm install astro-cloudinary@1.0.0-beta.14
         ```
+        </CodeBlock>
       </TabItem>
       <TabItem label="yarn">
-        ```ansi copy
+        <CodeBlock alwaysExpanded>
+        ```
         yarn add astro-cloudinary@1.0.0-beta.14
         ```
+        </CodeBlock>
       </TabItem>
     </Tabs>
   </li>
@@ -46,52 +49,59 @@ import HeaderImage from '../../components/HeaderImage.astro';
 
     Add the following variable to your `.env` file.
 
-    ```ansi copy
+    <CodeBlock alwaysExpanded>
+    ```
     PUBLIC_CLOUDINARY_CLOUD_NAME="<Your Cloud Name>"
     ```
+    </CodeBlock>
 
-    If using Signed Upload with the CldUploadWidget, additionally add:
+    If creating a Collection with cldAssetsLoader or managing Signed Uploads
+    with the CldUploadWidget, additionally add:
 
-    ```ansi copy
+    <CodeBlock alwaysExpanded>
+    ```
     PUBLIC_CLOUDINARY_API_KEY="<Your API Key>"
     CLOUDINARY_API_SECRET="<Your API Secret>"
     ```
-
-    :::tip
-    Don't have a Cloudinary account? <a href="https://cloudinary.com/users/register_free?utm_campaign=devx_astrocloudinary&utm_medium=referral&utm_source=astrocloudinary">Sign up for free</a> on cloudinary.com!
-    :::
+    </CodeBlock>
   </li>
 </ol>
 </Steps>
-{/* 
-## Global Configuration
-
-Here are all of the available configurable environment variables for Astro Cloudinary:
 
 :::tip
-  Note: These are not all required to use the library.
+Don't have a Cloudinary account? <a href="https://cloudinary.com/users/register_free?utm_campaign=devx_astrocloudinary&utm_medium=referral&utm_source=astrocloudinary">Sign up for free</a> on cloudinary.com!
 :::
 
-```ansi copy
-PUBLIC_CLOUDINARY_CLOUD_NAME="<Your Cloud Name>"
-PUBLIC_CLOUDINARY_API_KEY="<Your API Key>"
-CLOUDINARY_API_SECRET="<Your API Secret>"
+## Global Configuration
 
+Additional global configurations are availble to more easily manage
+Cloudinary environments:
+
+<CodeBlock alwaysExpanded>
+```
 PUBLIC_CLOUDINARY_SECURE_DISTRIBUTION="<Your Secure Distribution / CNAME>"
 PUBLIC_CLOUDINARY_PRIVATE_CDN="<true|false>"
-``` */}
+```
+</CodeBlock>
+
+:::tip
+These are not all required to use the library.
+:::
 
 ## Using Astro Cloudinary
 
 Learn how to add one of the Astro Cloudinary components:
 
 * [CldImage](/cldimage/basic-usage): Optimize Cloudinary images with ready-to-use transformations
+* [CldUploadWidget](/clduploadwidget/basic-usage): Cloudinary Upload Widget with a customizable UI
+* [CldVideoPlayer](/cldvideoplayer/basic-usage): Deliver Cloudinary video assets with a customizable player
+* [cldAssetsLoader](/cldassetsloader/basic-usage): Load Cloudinary images and videos into Astro's Content Layer
+
 {/* * [CldOgImage](/cldogimage/basic-usage): Easy-to-use OG Image and Social Media Cards */}
 {/* * [CldUploadButton](/clduploadbutton/basic-usage): Drop-in button that opens the Cloudinary Upload Widget */}
-{/* * [CldUploadWidget](/clduploadwidget/basic-usage): Cloudinary Upload Widget with a customizable UI */}
-* [CldVideoPlayer](/cldvideoplayer/basic-usage): Deliver Cloudinary video assets with a customizable player
 
-{/* Or use the helper methods to generate URLs: */}
+Or use helper methods to generate URLs:
 
-{/* * [getCldImageUrl](/getcldimageurl/basic-usage): Construct a Cloudinary image URL using the same API as CldImage */}
-{/* * [getCldOgImageUrl](/getcldogimageurl/basic-usage): Create a Cloudinary image URL specifically for OG Images or Social Media Cards */}
+* [getCldImageUrl](/getcldimageurl/basic-usage): Construct a Cloudinary image URL using the same API as CldImage
+* [getCldOgImageUrl](/getcldogimageurl/basic-usage): Create a Cloudinary image URL specifically for Social Media Cards
+* [getCldVideoUrl](/getcldvideourl/basic-usage): Create a Cloudinary video URL using a similar API as CldImage

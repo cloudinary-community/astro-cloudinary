@@ -16,7 +16,10 @@ const assets = allAssets.slice(0, 8);
             src={asset.data.public_id}
             width={900}
             height={900}
-            crop="fill"
+            crop={{
+              type: 'lfill',
+              source: true
+            }}
             alt=""
             sizes="25vw"
           />

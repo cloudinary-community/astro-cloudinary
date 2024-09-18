@@ -8,3 +8,8 @@ export {
   type CldVideoPlayerProps,
   type CldVideoPlayerPropsLogo
 } from './CldVideoPlayer.astro';
+
+export {
+  default as CldUploadWidget,
+  type CldUploadWidgetProps,
+} from './CldUploadWidget.astro';

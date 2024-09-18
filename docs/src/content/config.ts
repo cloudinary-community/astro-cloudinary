@@ -11,7 +11,10 @@ export const collections = {
 		})
 	}),
 	assetsSamplesDefault: defineCollection({
-		loader: cldAssetsLoader()
+		loader: cldAssetsLoader({
+			// Setting an explicit folder to avoid unmaintained root images
+			folder: 'ecommerce/fashion',
+		})
 	}),
 	assetsSamplesLimit: defineCollection({
 		loader: cldAssetsLoader({

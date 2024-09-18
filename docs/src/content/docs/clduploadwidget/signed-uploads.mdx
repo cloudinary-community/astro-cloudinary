@@ -1,0 +1,88 @@
+---
+title: Signing Uploads with CldUploadWidget
+description: How to make signed uploads in Astro with the CldUploadWidget component.
+head:
+  - tag: title
+    content: CldUploadWidget Signed Uploads - Astro Cloudinary
+---
+import { CldUploadWidget } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import Button from '../../../components/Button.astro';
+import DemoUploadWidgetSigned from '../../../components/DemoUploadWidgetSigned.astro';
+
+Signing requests is an easy way to provide enhanced security for your file uploads. This helps
+deter people from making unauthenticated uploads to your cloud.
+
+## Configuring Signed Uploads
+
+Setting up CldUploadWidget to sign uploads is as simple as passing an API endpoint as a prop:
+
+<CodeBlock alwaysExpanded>
+```jsx
+---
+import { CldUploadWidget } from 'astro-cloudinary';
+---
+<CldUploadWidget signatureEndpoint="<API Endpoint (ex: /api/sign-cloudinary-params)>">
+  <button>Upload</button>
+</CldUploadWidget>
+```
+</CodeBlock>
+
+However, that API endpoint needs to return a specific shape in order to properly communicate
+with the CldUploadWidget.
+
+## API Endpoint to Sign Requests
+
+When working in Astro, we gain access to a server environment through both somewhat traditional means
+and serverless functions.
+
+This means, we can use the [Cloudinary Node SDK](https://cloudinary.com/documentation/node_integration)
+in order to easily sign our requests.
+
+To start off, install the Cloudinary Node SDK with:
+
+<CodeBlock alwaysExpanded>
+```
+npm install cloudinary
+```
+</CodeBlock>
+
+In order to sign our requests, we'll need to use our Cloudinary API Key and Secret, so set additional
+environment variables:
+
+<CodeBlock alwaysExpanded>
+```
+PUBLIC_CLOUDINARY_API_KEY="<Your API Key>"
+CLOUDINARY_API_SECRET="<Your API Secret>"
+```
+</CodeBlock>
+
+Then, we want to create a new API endpoint:
+
+Create a new API route file such as `src/pages/api/sign-cloudinary-params.ts` and inside add the following:
+
+<CodeBlock>
+```js
+import type { APIRoute } from "astro";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+export const prerender = false;
+
+export const POST: APIRoute = async ({ request }) => {
+  const body = await request.json();
+  const { paramsToSign } = body;
+  const signature = cloudinary.utils.api_sign_request(paramsToSign, import.meta.env.CLOUDINARY_API_SECRET);
+  return Response.json({ signature });
+}
+```
+</CodeBlock>
+
+Whatever path you use will now be the value of `signatureEndpoint` for the CldUploadWidget.

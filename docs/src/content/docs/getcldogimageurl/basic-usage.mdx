@@ -1,6 +1,6 @@
 ---
 title: Getting Started with getCldOgImageUrl
-description: Optimize and transform images in Astro with the getCldOgImageUrl component.
+description: Generate dynamic Social Media Card URLs in Astro with the getCldOgImageUrl helper.
 head:
   - tag: title
     content: getCldOgImageUrl - Astro Cloudinary
@@ -15,10 +15,6 @@ import DemoImageEvents from '../../../components/DemoImageEvents.astro';
 The getCldOgImageUrl function helps you easily generate Social Card image URLs (Open Graph Images) using Cloudinary.
 
 This URL can be then used when defining metadata for your page within Astro.
-
-{/* :::tip
-Working inside of the Pages router? Check out the [CldOgImage component](/cldogimage/).
-::: */}
 
 ## Basic Usage
 
@@ -41,25 +37,47 @@ The only needed prop is `src`:
 
 > Note: The image above is rendered using the [CldImage component](/cldimage/basic-usage) for preview only.
 
-<CodeBlock>
-  ```jsx copy showLineNumbers
-  import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldOgImageUrl({
-    src: '<Public ID>'
-  });
-  ```
+const url = getCldOgImageUrl({ src: '<Public ID>' });
+```
 </CodeBlock>
 
-The function simply returns a URL for the image public ID provided including default configurations
-including a standard width and height.
+The function simply returns a URL for the given image's public ID including default width and height.
 
 :::tip
-@TODO example
-:::
-
 getCldOgImageUrl is a deritive of getCldImageUrl meaning it generally has the same API, but provides
 a few defaults for Open Graph images like sizes.
+:::
+
+## Adding Open Graph Meta Tags
+
+Adding social cards in Astro is as simple as adding Open Graph and Twitter meta tags in the `<head>` of
+whatever page you'd like to include them on.
+
+The only depending factor is where you manage your tags, which can include a `Layout.astro` file, 
+inside of a managed `Head.astro` component, or other solutions.
+
+To add your tags, generate your URL and apply the tags like the following:
+
+<CodeBlock>
+```jsx
+---
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+
+const ogImageUrl = getCldOgImageUrl({ src: '<Public ID>' });
+---
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:secure_url" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="627" />
+<meta property="twitter:title" content="<Twitter Title>" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content={ogImageUrl} />
+```
+</CodeBlock>
 
 ## Image Size
 
@@ -76,11 +94,35 @@ The safe default format for most use cases is then jpg, as webp does not have br
 
 > Read more about webp support: https://www.ctrl.blog/entry/webp-ogp.html
 
-If you have the control in your application to produce multiple image sources, such has having a separate `og:image` and `twitter:image`, you can generate two (or more) URLs to produce as optimized a format as you can for the platform:
+If you have the control in your application to produce multiple image sources, such has having a
+separate `og:image` and `twitter:image`, you can generate two (or more) URLs to produce as optimized
+a format as you can for the platform:
 
-:::tip
-@TODO example
-:::
+<CodeBlock>
+```js
+---
+import { getCldOgImageUrl } from 'astro-cloudinary';
+
+// getCldOgImageUrl defaults to jpg
+
+const ogImageUrl = getCldOgImageUrl({
+  src: '<Public ID>',
+});
+
+const twitterImageUrl = getCldOgImageUrl({
+  src: '<Public ID>',
+  format: 'webp',
+});
+---
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:secure_url" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="627" />
+<meta property="twitter:title" content="<Twitter Title>" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content={twitterImageUrl} />
+```
+</CodeBlock>
 
 Find out how else you can customize your Cloudinary image over on [getCldOgImageUrl configuration](/getcldogimageurl/configuration).
 

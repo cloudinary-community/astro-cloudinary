@@ -32,17 +32,18 @@ The basic required props include `width`, `height`, `src`, and `alt`:
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    alt="<Description>"
-    sizes="100vw" // Optional
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  alt="<Description>"
+  sizes="100vw" // Optional
+/>
+```
 </CodeBlock>
 
 The `src` property takes in a Cloudinary Public ID which includes the folder path along with the ID of the image itself.
@@ -100,51 +101,52 @@ You can further take advantage of Cloudinary features like replacing backgrounds
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    crop={{
-      type: 'fill',
-      source: true
-    }}
-    replaceBackground="cartoon outer space"
-    overlays={[
-      {
-        position: {
-          y: 40,
-          x: -10,
-          gravity: 'south',
-        },
-        text: {
-          color: 'magenta',
-          fontFamily: 'Source Sans Pro',
-          fontSize: 160,
-          fontWeight: 'black',
-          text: 'OUT OF THIS WORLD'
-        }
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  crop={{
+    type: 'fill',
+    source: true
+  }}
+  replaceBackground="cartoon outer space"
+  overlays={[
+    {
+      position: {
+        y: 40,
+        x: -10,
+        gravity: 'south',
       },
-      {
-        position: {
-          y: 50,
-          gravity: 'south',
-        },
-        text: {
-          color: 'white',
-          fontFamily: 'Source Sans Pro',
-          fontSize: 160,
-          fontWeight: 'black',
-          text: 'OUT OF THIS WORLD'
-        }
+      text: {
+        color: 'magenta',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 160,
+        fontWeight: 'black',
+        text: 'OUT OF THIS WORLD'
+      }
+    },
+    {
+      position: {
+        y: 50,
+        gravity: 'south',
       },
-    ]}
-    alt="<Description>"
-    sizes="100vw"
-  />
-  ```
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 160,
+        fontWeight: 'black',
+        text: 'OUT OF THIS WORLD'
+      }
+    },
+  ]}
+  alt="<Description>"
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 [Check out more examples](/cldimage/examples) of what you can do with transformations!
@@ -161,8 +163,9 @@ to ensure the integretiy when during the parsing process.
 
 <CodeBlock className="mt-6">
 ```jsx
+---
 import { CldImage } from 'astro-cloudinary';
-
+---
 <CldImage
   src="https://res.cloudinary.com/mycloud/image/upload/v1234/myimage"
   width="<Width>"
@@ -180,6 +183,9 @@ To preserve those transformations, you can apply the `preserveTransformations` p
 
 <CodeBlock className="mt-6">
 ```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
 <CldImage
   src="https://res.cloudinary.com/<Cloud Name>/image/upload/w_100,h_200,c_fill/v1234/myimage"
   width="<Width>"
@@ -203,34 +209,37 @@ For example:
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
-    width="<Width>"
-    height="<Height>"
-    preserveTransformations
-    alt="test"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5"
+  width="<Width>"
+  height="<Height>"
+  preserveTransformations
+  alt="test"
+/>
+```
 </CodeBlock>
 
 Would generate a URL of:
 
-<CodeBlock>
-  ```
-  https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/c_limit,w_1600/v1/cld-sample-5?_a=BBGAABS00
-  ```
+<CodeBlock alwaysExpanded>
+```
+https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/c_limit,w_1600/v1/cld-sample-5?_a=BBGAABS00
+```
 </CodeBlock>
-
-
 
 ## Image Events
 
 The CldImage component actively triggers a single Error event as a CustomEvent
 in order to allow callback functionality if there is something wrong in how
 the image loads.
+
+:::caution
+This image is intended to be broken for demonstration purposes!
+:::
 
 <HeaderImage>
   <DemoImageEvents
@@ -240,31 +249,28 @@ the image loads.
   />
 </HeaderImage>
 
-:::note
-This image is intended to be broken for demonstration purposes!
-:::
-
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  id="image-events"
+  src="this-image-does-not-exist"
+  width="<Width>"
+  height="<Height>"
+/>
 
-  <CldImage
-    id="image-events"
-    src="this-image-does-not-exist"
-    width="<Width>"
-    height="<Height>"
-  />
+<script>
+const image = document.querySelector(`#image-events`);
 
-  <script>
-  const image = document.querySelector(`#image-events`);
-
-  if ( image ) {
-    image.addEventListener('cldimage:error', ((e: CustomEvent<{ detail: {} }>) => {
-      console.log('cldimage:error', e.detail)
-    }) as EventListener);
-  };
-  </script>
-  ```
+if ( image ) {
+  image.addEventListener('cldimage:error', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldimage:error', e.detail)
+  }) as EventListener);
+};
+</script>
+```
 </CodeBlock>
 
 :::tip

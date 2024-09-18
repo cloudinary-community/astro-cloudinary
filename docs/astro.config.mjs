@@ -5,6 +5,7 @@ import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 
 export default defineConfig({
+  output: 'hybrid',
   experimental: {
     contentLayer: true,
   },
@@ -36,6 +37,27 @@ export default defineConfig({
                 {
                   label: 'Examples',
                   slug: 'cldimage/examples'
+                }
+              ]
+            },
+            {
+              label: 'CldUploadWidget',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'clduploadwidget/basic-usage'
+                },
+                {
+                  label: 'Signed Uploads',
+                  slug: 'clduploadwidget/signed-uploads'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'clduploadwidget/configuration'
+                },
+                {
+                  label: 'Examples',
+                  slug: 'clduploadwidget/examples'
                 }
               ]
             },

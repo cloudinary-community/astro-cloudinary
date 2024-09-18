@@ -45,15 +45,15 @@ not only deliver, but easily edit and build new images on the fly.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    removeBackground: true
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  removeBackground: true
+});
+```
 </CodeBlock>
 
 :::tip
@@ -88,16 +88,16 @@ The Cloudinary AI Background Removal add-on is required to use this feature.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    removeBackground: true,
-    background: 'blueviolet'
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  removeBackground: true,
+  background: 'blueviolet'
+});
+```
 </CodeBlock>
 
 #### Image Background
@@ -133,16 +133,16 @@ with an image based on a prompt, potentially resulting in better results!
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    removeBackground: true,
-    underlay: 'samples/landscapes/nature-mountains'
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  removeBackground: true,
+  underlay: 'samples/landscapes/nature-mountains'
+});
+```
 </CodeBlock>
 
 
@@ -180,15 +180,15 @@ position the subject in the center of the resulting image.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    crop: 'fill'
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  crop: 'fill'
+});
+```
 </CodeBlock>
 
 Cloudinary additionally supports dynamic crop modes like `thumb` that
@@ -228,19 +228,19 @@ resize it to the initial width and height, you can use:
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    crop: {
-      width: 600,
-      height: 600,
-      type: 'thumb',
-      source: true
-    }
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  crop: {
+    width: 600,
+    height: 600,
+    type: 'thumb',
+    source: true
+  }
+});
+```
 </CodeBlock>
 
 Which will provide a consistent crop for all rendered sizes.
@@ -279,15 +279,15 @@ Learn more about [cropping](/getcldimageurl/configuration#crop) and [responsive 
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    fillBackground: true,
-    crop: 'pad' // Returns the given size with padding
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  fillBackground: true,
+  crop: 'pad' // Returns the given size with padding
+});
+```
 </CodeBlock>
 
 :::tip
@@ -323,15 +323,15 @@ The generative fill transformation is currently in Beta. <a href="https://cloudi
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    recolor: ['<Object>', '<Color>'],
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  recolor: ['<Object>', '<Color>'],
+});
+```
 </CodeBlock>
 
 :::tip
@@ -374,17 +374,17 @@ The generative recolor transformation is currently in Beta. <a href="https://clo
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    remove: {
-      prompt: '<Object>',
-      removeShadow: true
-    }
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  remove: {
+    prompt: '<Object>',
+    removeShadow: true
+  }
+});
+```
 </CodeBlock>
 
 :::tip
@@ -425,15 +425,15 @@ The generative remove transformation is currently in Beta. <a href="https://clou
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    replace: ['<Object>', '<Object>']
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  replace: ['<Object>', '<Object>']
+});
+```
 </CodeBlock>
 
 :::tip
@@ -470,15 +470,15 @@ The generative replace transformation is currently in Beta. <a href="https://clo
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    replaceBackground: '<Prompt>'
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  replaceBackground: '<Prompt>'
+});
+```
 </CodeBlock>
 
 :::tip
@@ -517,15 +517,15 @@ that allow you to recolor, improve, fix, and artistically transform your images.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
-  <CldImage
-    src={getCldImageUrl({
-      src: '<Public ID>',
-      blur: 1200
-    })
-  ```
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  blur: 1200
+});
+```
 </CodeBlock>
 
 ### Grayscale
@@ -555,15 +555,15 @@ that allow you to recolor, improve, fix, and artistically transform your images.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    grayscale: true
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  grayscale: true
+});
+```
 </CodeBlock>
 
 ### Opacity
@@ -594,15 +594,15 @@ that allow you to recolor, improve, fix, and artistically transform your images.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    opacity: 50
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  opacity: 50
+});
+```
 </CodeBlock>
 
 ### Pixelate
@@ -632,15 +632,15 @@ that allow you to recolor, improve, fix, and artistically transform your images.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    pixelate: true
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  pixelate: true
+});
+```
 </CodeBlock>
 
 ### Tint
@@ -670,15 +670,15 @@ that allow you to recolor, improve, fix, and artistically transform your images.
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    tint: 'equalize:80:blue:blueviolet'
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  tint: 'equalize:80:blue:blueviolet'
+});
+```
 </CodeBlock>
 
 ### Chaining Multiple Effects
@@ -719,24 +719,24 @@ that allow you to recolor, improve, fix, and artistically transform your images.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    effects: [
-      {
-        background: 'green'
-      },
-      {
-        gradientFade: true
-      },
-      {
-        gradientFade: 'symetric,x_0.5'
-      }
-    ]
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  effects: [
+    {
+      background: 'green'
+    },
+    {
+      gradientFade: true
+    },
+    {
+      gradientFade: 'symetric,x_0.5'
+    }
+  ]
+});
+```
 </CodeBlock>
 
 ### More Filters & Effects
@@ -791,28 +791,28 @@ Image overlays allow you to place one or multiple images on top of another image
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    overlays: [{
-      publicId: '<Public ID>',
-      position: {
-        x: 50,
-        y: 50,
-        gravity: 'north_east',
-      },
-      effects: [{
-        crop: 'fill',
-        width: 350,
-        height: 350,
-        gravity: 'auto',
-        border: '5px_solid_yellow'
-      }]
-    }
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  overlays: [{
+    publicId: '<Public ID>',
+    position: {
+      x: 50,
+      y: 50,
+      gravity: 'north_east',
+    },
+    effects: [{
+      crop: 'fill',
+      width: 350,
+      height: 350,
+      gravity: 'auto',
+      border: '5px_solid_yellow'
+    }]
+  }
+});
+```
 </CodeBlock>
 
 ### Overlay Image with Blend Mode
@@ -856,24 +856,24 @@ that applies a blend mode, such as "multiply"
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    overlays: [{
-      publicId: '<Public ID>',
-      effects: [{
-        crop: 'fill',
-        gravity: 'auto',
-        width: '1.0',
-        height: '1.0',
-      }],
-      flags: ['relative'],
-      appliedEffects: [{ multiply: true }]
-    }]
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  overlays: [{
+    publicId: '<Public ID>',
+    effects: [{
+      crop: 'fill',
+      gravity: 'auto',
+      width: '1.0',
+      height: '1.0',
+    }],
+    flags: ['relative'],
+    appliedEffects: [{ multiply: true }]
+  }]
+});
+```
 </CodeBlock>
 
 ## Image Underlays
@@ -913,15 +913,15 @@ Image underlays allow you to place one or multiple images behind a base image.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    removeBackground: true,
-    underlay: '<Public ID>'
-  })
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  removeBackground: true,
+  underlay: '<Public ID>'
+});
+```
 </CodeBlock>
 
 ### Replace Background with Multiple Images
@@ -976,36 +976,36 @@ Image underlays allow you to place one or multiple images behind a base image.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    removeBackground: true,
-    underlays: [
-      {
-        publicId: '<Public ID>',
-        width: '0.5',
-        height: '1.0',
-        crop: 'fill',
-        position: {
-          gravity: 'north_west'
-        },
-        flags: ['relative']
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  removeBackground: true,
+  underlays: [
+    {
+      publicId: '<Public ID>',
+      width: '0.5',
+      height: '1.0',
+      crop: 'fill',
+      position: {
+        gravity: 'north_west'
       },
-      {
-        publicId: '<Public ID>',
-        width: '0.5',
-        height: '1.0',
-        crop: 'fill',
-        position: {
-          gravity: 'south_east'
-        },
-        flags: ['relative']
+      flags: ['relative']
+    },
+    {
+      publicId: '<Public ID>',
+      width: '0.5',
+      height: '1.0',
+      crop: 'fill',
+      position: {
+        gravity: 'south_east'
       },
-    ]
-  })
-  ```
+      flags: ['relative']
+    },
+  ]
+});
+```
 </CodeBlock>
 
 
@@ -1016,6 +1016,8 @@ Text overlays allow you to place text on top of an image.
 ### Adding Custom Text
 
 `overlays`: Uses overlay objects to add text on top of an image.
+
+{/*@TODO - Fix example to use getCldImageUrl once double encoding is fixed*/}
 
 <HeaderImage layout="grid">
   <CldImage
@@ -1030,43 +1032,10 @@ Text overlays allow you to place text on top of an image.
     sizes="50vw"
   />
   <CldImage
-    src={getCldImageUrl({
-      src: 'cld-sample-5',
-      overlays: [{
-        position: {
-          x: 60,
-          y: 60,
-          angle: -20,
-          gravity: 'south_east',
-        },
-        text: {
-          color: 'blueviolet',
-          fontFamily: 'Source Sans Pro',
-          fontSize: 160,
-          fontWeight: 'black',
-          textDecoration: 'underline',
-          letterSpacing: -15,
-          text: 'With Style'
-        }
-      }],
-      version: 1
-    })}
+    src="cld-sample-5"
     width="960"
     height="600"
-    preserveTransformations
-    crop="fill"
-    alt=""
-    sizes="50vw"
-  />
-</HeaderImage>
-
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
-
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    overlays: [{
+    overlays={[{
       position: {
         x: 60,
         y: 60,
@@ -1082,14 +1051,45 @@ Text overlays allow you to place text on top of an image.
         letterSpacing: -15,
         text: 'With Style'
       }
-    }]
-  })
-  ```
+    }]}
+    crop="fill"
+    alt=""
+    sizes="50vw"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  overlays: [{
+    position: {
+      x: 60,
+      y: 60,
+      angle: -20,
+      gravity: 'south_east',
+    },
+    text: {
+      color: 'blueviolet',
+      fontFamily: 'Source Sans Pro',
+      fontSize: 160,
+      fontWeight: 'black',
+      textDecoration: 'underline',
+      letterSpacing: -15,
+      text: 'With Style'
+    }
+  }]
+});
+```
 </CodeBlock>
 
 ### Adding Text with Effects
 
 `effects`: Applies effects to the overlaid text.
+
+{/*@TODO - Fix example to use getCldImageUrl once double encoding is fixed*/}
 
 <HeaderImage layout="grid">
   <CldImage
@@ -1103,41 +1103,11 @@ Text overlays allow you to place text on top of an image.
     sizes="50vw"
   />
   <CldImage
-    src={getCldImageUrl({
-      src: 'samples/landscapes/nature-mountains',
-      overlays: [{
-        text: {
-          color: 'white',
-          fontFamily: 'Source Sans Pro',
-          fontSize: 400,
-          fontWeight: 'black',
-          text: 'Touching Grass'
-        },
-        effects: [
-          {
-            shear: '40:0',
-            opacity: 50
-          }
-        ]
-      }],
-      version: 1
-    })}
+    src="samples/landscapes/nature-mountains"
     width="960"
     height="600"
     crop="fill"
-    preserveTransformations
-    alt=""
-    sizes="50vw"
-  />
-</HeaderImage>
-
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
-
-  const url = getCldImageUrl({
-    src: '<Public ID>',
-    overlays: [{
+    overlays={[{
       text: {
         color: 'white',
         fontFamily: 'Source Sans Pro',
@@ -1151,9 +1121,35 @@ Text overlays allow you to place text on top of an image.
           opacity: 50
         }
       ]
-    }]
-  })
-  ```
+    }]}
+    alt=""
+    sizes="50vw"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+const url = getCldImageUrl({
+  src: '<Public ID>',
+  overlays: [{
+    text: {
+      color: 'white',
+      fontFamily: 'Source Sans Pro',
+      fontSize: 400,
+      fontWeight: 'black',
+      text: 'Touching Grass'
+    },
+    effects: [
+      {
+        shear: '40:0',
+        opacity: 50
+      }
+    ]
+  }]
+});
+```
 </CodeBlock>
 
 ## Misc
@@ -1181,15 +1177,15 @@ This is handy when wanting to create an image thumbnail from a video, where the 
 If using getCldImageUrl with CldImage, you currently must specify assetType on CldImage
 :::
 
-<CodeBlock>
-  ```jsx
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldImageUrl({
-    assetType: 'video',
-    src: '<Your Video Public ID>'
-  })
-  ```
+const url = getCldImageUrl({
+  assetType: 'video',
+  src: '<Your Video Public ID>'
+});
+```
 </CodeBlock>
 
 ## More Examples

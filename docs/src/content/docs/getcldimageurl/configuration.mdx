@@ -14,7 +14,7 @@ import Table from '../../../components/Table.astro';
 The getCldImageUrl helper provides a wide range of options for being able to easily optimize and transform images.
 
 :::tip
-Note: Configuration for getCldImageUrl is the same as [CldImage](/cldimage/configuration), which both use the same underlying API.
+Configuration for getCldImageUrl is the same as [CldImage](/cldimage/configuration), which both use the same underlying API.
 :::
 
 ## Required Props
@@ -1314,7 +1314,7 @@ Cloudinary gives you the ability to add layers above or below your primary asset
 ### Customizing Overlays & Underlays
 
 :::tip
-Note: The API for Underlays is similar to Overlays except they do not support text.
+The API for Underlays is similar to Overlays except they do not support text.
 :::
 
 <Table
@@ -1753,15 +1753,15 @@ defaultImage: 'myimage.jpg'
 Alters the regular behavior of another transformation or the overall delivery behavior.
 
 :::tip
-The `keep_iptc` flag requires not including a quality of auto. Using `quality="default"` avoids setting the quality flag in the URL.
+The `keep_iptc` flag requires not including a quality of auto. Using `quality: 'default'` avoids setting the quality flag in the URL.
 :::
 
 **Examples**
 
 <CodeBlock alwaysExpanded>
 ```jsx
-flags: ['keep_iptc']
-quality="default"
+flags: ['keep_iptc'],
+quality: 'default'
 ```
 </CodeBlock>
 
@@ -1908,7 +1908,7 @@ Preserves transformations already applied to an image when passing in a Cloudina
 as the `src`.
 
 :::tip
-Note: The Cloudinary URL requires a version number (ex: `/v1234/`) in order to be parsed.
+The Cloudinary URL requires a version number (ex: `/v1234/`) in order to be parsed.
 :::
 
 When using this option, the transformations will be parsed from a valid URL and then
@@ -1948,7 +1948,7 @@ By enabling Strict Transformations, you restrict the ability to generate transfo
 approval through the Cloudinary dashboard.
 
 :::tip
-Note: This disables [optimization](#optimization) and [responsive sizing](/guides/responsive-images)
+This disables [optimization](#optimization) and [responsive sizing](/guides/responsive-images)
 only allowing [named transformations](#transformations) to be applied. The width and height are not applied to the URL,
 but are still included on the image tag rendered to the DOM.
 :::
@@ -1957,7 +1957,7 @@ but are still included on the image tag rendered to the DOM.
 
 <CodeBlock alwaysExpanded>
 ```jsx
-strictTransformations
+strictTransformations: true,
 transformations: ["my-transformation"]
 ```
 </CodeBlock>

@@ -29,15 +29,16 @@ To add a video player, use the CldVideoPlayer component with the basic required 
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldVideoPlayer } from 'astro-cloudinary';
-
-  <CldVideoPlayer
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-  />
-  ```
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+/>
+```
 </CodeBlock>
 
 ## Customization
@@ -59,21 +60,22 @@ You can further take advantage of features like customizing your player:
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldVideoPlayer } from 'astro-cloudinary';
-
-  <CldVideoPlayer
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    colors={{
-      accent: '#ff0000',
-      base: '#00ff00',
-      text: '#0000ff'
-    }}
-    fontFace="Source Serif Pro"
-  />
-  ```
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  colors={{
+    accent: '#ff0000',
+    base: '#00ff00',
+    text: '#0000ff'
+  }}
+  fontFace="Source Serif Pro"
+/>
+```
 </CodeBlock>
 
 ## Player Events
@@ -89,43 +91,40 @@ For listening to player events for advanced interactions with:
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldVideoPlayer } from 'astro-cloudinary';
+```jsx
+---
+import { CldVideoPlayer } from 'astro-cloudinary';
+---
+<CldVideoPlayer
+  id="video-player-events"
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+/>
 
-  <CldVideoPlayer
-    id="video-player-events"
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-  />
+<script>
+const videoPlayer = document.querySelector(`#video-player-events`);
 
-  <script>
-  const videoPlayer = document.querySelector(`#video-player-events`);
+if ( videoPlayer ) {
+  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:loadedmetadata', e.detail)
+  }) as EventListener);
 
-  if ( videoPlayer ) {
-    videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {
-      console.log('cldvideoplayer:loadedmetadata', e.detail)
-    }) as EventListener);
+  videoPlayer.addEventListener('cldvideoplayer:play', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:play', e.detail)
+  }) as EventListener);
 
-    videoPlayer.addEventListener('cldvideoplayer:play', ((e: CustomEvent<{ detail: {} }>) => {
-      console.log('cldvideoplayer:play', e.detail)
-    }) as EventListener);
-
-    videoPlayer.addEventListener('cldvideoplayer:pause', ((e: CustomEvent<{ detail: {} }>) => {
-      console.log('cldvideoplayer:pause', e.detail)
-    }) as EventListener);
-  };
-  </script>
-  ```
+  videoPlayer.addEventListener('cldvideoplayer:pause', ((e: CustomEvent<{ detail: {} }>) => {
+    console.log('cldvideoplayer:pause', e.detail)
+  }) as EventListener);
+};
+</script>
+```
 </CodeBlock>
 
 :::tip
 See your browser's web console to preview the information logged in the above callbacks.
 :::
-
-## Watch & Learn
-
-
 
 ## Learn More about CldVideoPlayer
 * [Configuration](/cldvideoplayer/configuration)

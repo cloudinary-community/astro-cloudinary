@@ -1,9 +1,12 @@
 ---
 title: Astro Cloudinary
-description: Astro Cloudinary
+description: High-performance image and video delivery and uploading at scale in Astro powered by Cloudinary.
 template: splash
 hero:
   tagline: 'Null'
+head:
+  - tag: title
+    content: Astro Cloudinary - The Image & Video API for Astro
 ---
 import { CldImage } from '../../../../astro-cloudinary';
 
@@ -194,6 +197,7 @@ import Button from '../../components/Button.astro';
 
   <ul class="list-none text-center text-lg p-0 mt-20">
     <li class="mb-3"><a class="underline underline-offset-2" href="/cldvideoplayer/examples#adaptive-streaming">Adaptive Bitrate Streaming</a></li>
+    <li class="mb-3"><a class="underline underline-offset-2" href="/cldassetsloader/basic-usage">Content Loader</a></li>
     <li class="mb-3"><a class="underline underline-offset-2" href="/cldimage/examples#generative-fill">Generative AI</a></li>
     <li class="mb-3"><a class="underline underline-offset-2" href="/guides/text-overlays">Text</a> &amp; <a class="underline underline-offset-2" href="/guides/image-overlays">Image</a> Overlays</li>
     <li>And a lot more...</li>

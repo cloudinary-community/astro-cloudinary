@@ -17,7 +17,7 @@ not only deliver, but easily edit and build new images on the fly.
 
 ### Background Removal
 
-#### Remove Background
+<strong class="block mt-8 mb-2 text-lg text-slate-700 font-medium">Remove Background</strong>
 
 `removeBackground`: Removes the background of the image using AI
 
@@ -40,25 +40,26 @@ not only deliver, but easily edit and build new images on the fly.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    removeBackground
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  removeBackground
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 :::tip
 The Cloudinary AI Background Removal add-on is required to use this feature.
 :::
 
-#### Color Background
+<strong class="block mt-8 mb-2 text-lg text-slate-700 font-medium">Color Background</strong>
 
 `background`: Specifies a color to use as a background.
 
@@ -82,22 +83,23 @@ The Cloudinary AI Background Removal add-on is required to use this feature.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    removeBackground
-    background="blueviolet"
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  removeBackground
+  background="blueviolet"
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
-#### Image Background
+<strong class="block mt-8 mb-2 text-lg text-slate-700 font-medium">Image Background</strong>
 
 `underlay`: Specifies a public ID to use as an underlaying image.
 
@@ -126,25 +128,26 @@ with an image based on a prompt, potentially resulting in better results!
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    removeBackground
-    underlay="<Public ID>"
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  removeBackground
+  underlay="<Public ID>"
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 
 ### Cropping & Resizing
 
-#### Cropping
+<strong class="block mt-8 mb-2 text-lg text-slate-700 font-medium">Cropping</strong>
 
 `crop`: Specifies the mode to use when cropping an image based on the given dimensions.
 
@@ -172,18 +175,19 @@ position the subject in the center of the resulting image.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    crop="fill"
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  crop="fill"
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 Cloudinary additionally supports dynamic crop modes like `thumb` that
@@ -218,23 +222,24 @@ resize it to the initial width and height, you can use:
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    crop={{
-      width: 600,
-      height: 600,
-      type: 'thumb',
-      source: true
-    }}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  crop={{
+    width: 600,
+    height: 600,
+    type: 'thumb',
+    source: true
+  }}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 Which will provide a consistent crop for all rendered sizes.
@@ -266,19 +271,20 @@ Learn more about [cropping](/cldimage/configuration#crop) and [responsive images
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    crop="pad"  // Returns the given size with padding
-    fillBackground
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  crop="pad"  // Returns the given size with padding
+  fillBackground
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 :::tip
@@ -310,19 +316,20 @@ The generative fill transformation is currently in Beta. <a href="https://cloudi
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    crop="fill"
-    recolor={['<Object>', '<Color>']}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  crop="fill"
+  recolor={['<Object>', '<Color>']}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 :::tip
@@ -359,21 +366,22 @@ The generative recolor transformation is currently in Beta. <a href="https://clo
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    remove={{
-      prompt: '<Object>',
-      removeShadow: true
-    }}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  remove={{
+    prompt: '<Object>',
+    removeShadow: true
+  }}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 :::tip
@@ -407,18 +415,19 @@ The generative remove transformation is currently in Beta. <a href="https://clou
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    replace={['<Object>', '<Object>']}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  replace={['<Object>', '<Object>']}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 :::tip
@@ -450,19 +459,20 @@ The generative replace transformation is currently in Beta. <a href="https://clo
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    crop="fill"
-    replaceBackground="space galaxy"
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  crop="fill"
+  replaceBackground="space galaxy"
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 :::tip
@@ -497,17 +507,19 @@ that allow you to recolor, improve, fix, and artistically transform your images.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    blur="1200"
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  blur="1200"
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### Grayscale
@@ -533,18 +545,19 @@ that allow you to recolor, improve, fix, and artistically transform your images.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    grayscale
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  grayscale
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### Opacity
@@ -570,18 +583,19 @@ that allow you to recolor, improve, fix, and artistically transform your images.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    opacity="50"
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  opacity="50"
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### Pixelate
@@ -607,18 +621,19 @@ that allow you to recolor, improve, fix, and artistically transform your images.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    pixelate
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  pixelate
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### Tint
@@ -644,18 +659,19 @@ that allow you to recolor, improve, fix, and artistically transform your images.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    sizes="100vw"
-    tint="equalize:80:blue:blueviolet"
-    alt=""
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  sizes="100vw"
+  tint="equalize:80:blue:blueviolet"
+  alt=""
+/>
+```
 </CodeBlock>
 
 ### Chaining Multiple Effects
@@ -691,28 +707,29 @@ that allow you to recolor, improve, fix, and artistically transform your images.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    effects={[
-      {
-        background: 'green'
-      },
-      {
-        gradientFade: true
-      },
-      {
-        gradientFade: 'symetric,x_0.5'
-      }
-    ]}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  effects={[
+    {
+      background: 'green'
+    },
+    {
+      gradientFade: true
+    },
+    {
+      gradientFade: 'symetric,x_0.5'
+    }
+  ]}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### More Filters & Effects
@@ -762,32 +779,33 @@ Image overlays allow you to place one or multiple images on top of another image
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    overlays={[{
-      publicId: "samples/food/fish-vegetables",
-      position: {
-        x: 50,
-        y: 50,
-        gravity: 'north_east',
-      },
-      effects: [{
-        crop: 'fill',
-        width: 350,
-        height: 350,
-        gravity: 'auto',
-        border: '5px_solid_yellow'
-      }]
-    }]}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  overlays={[{
+    publicId: "samples/food/fish-vegetables",
+    position: {
+      x: 50,
+      y: 50,
+      gravity: 'north_east',
+    },
+    effects: [{
+      crop: 'fill',
+      width: 350,
+      height: 350,
+      gravity: 'auto',
+      border: '5px_solid_yellow'
+    }]
+  }]}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### Overlay Image with Blend Mode
@@ -826,28 +844,29 @@ that applies a blend mode, such as "multiply"
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    overlays={[{
-      publicId: "samples/animals/cat",
-      effects: [{
-        crop: 'fill',
-        gravity: 'auto',
-        width: '1.0',
-        height: '1.0',
-      }],
-      flags: ['relative'],
-      appliedEffects: [{ multiply: true }]
-    }]}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  overlays={[{
+    publicId: "samples/animals/cat",
+    effects: [{
+      crop: 'fill',
+      gravity: 'auto',
+      width: '1.0',
+      height: '1.0',
+    }],
+    flags: ['relative'],
+    appliedEffects: [{ multiply: true }]
+  }]}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ## Image Underlays
@@ -880,19 +899,20 @@ Image underlays allow you to place one or multiple images behind a base image.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    underlay="<Public ID>"
-    removeBackground
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  underlay="<Public ID>"
+  removeBackground
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### Replace Background with Multiple Images
@@ -940,40 +960,41 @@ Image underlays allow you to place one or multiple images behind a base image.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    underlays={[
-      {
-        publicId: '<Public ID>',
-        width: '0.5',
-        height: '1.0',
-        crop: 'fill',
-        position: {
-          gravity: 'north_west'
-        },
-        flags: ['relative']
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  underlays={[
+    {
+      publicId: '<Public ID>',
+      width: '0.5',
+      height: '1.0',
+      crop: 'fill',
+      position: {
+        gravity: 'north_west'
       },
-      {
-        publicId: '<Public ID>',
-        width: '0.5',
-        height: '1.0',
-        crop: 'fill',
-        position: {
-          gravity: 'south_east'
-        },
-        flags: ['relative']
+      flags: ['relative']
+    },
+    {
+      publicId: '<Public ID>',
+      width: '0.5',
+      height: '1.0',
+      crop: 'fill',
+      position: {
+        gravity: 'south_east'
       },
-    ]}
-    removeBackground
-    alt=""
-    sizes="100vw"
-  />
-  ```
+      flags: ['relative']
+    },
+  ]}
+  removeBackground
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 
@@ -1022,34 +1043,35 @@ Text overlays allow you to place text on top of an image.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    overlays={[{
-      position: {
-        x: 140,
-        y: 140,
-        angle: -20,
-        gravity: 'south_east',
-      },
-      text: {
-        color: 'blueviolet',
-        fontFamily: 'Source Sans Pro',
-        fontSize: 280,
-        fontWeight: 'bold',
-        textDecoration: 'underline',
-        letterSpacing: 14,
-        text: 'Cool Beans'
-      }
-    }]}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  overlays={[{
+    position: {
+      x: 140,
+      y: 140,
+      angle: -20,
+      gravity: 'south_east',
+    },
+    text: {
+      color: 'blueviolet',
+      fontFamily: 'Source Sans Pro',
+      fontSize: 280,
+      fontWeight: 'bold',
+      textDecoration: 'underline',
+      letterSpacing: 14,
+      text: 'Cool Beans'
+    }
+  }]}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ### Adding Text with Effects
@@ -1091,32 +1113,33 @@ Text overlays allow you to place text on top of an image.
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Public ID>"
-    width="<Width>"
-    height="<Height>"
-    overlays={[{
-      text: {
-        color: 'white',
-        fontFamily: 'Source Sans Pro',
-        fontSize: 400,
-        fontWeight: 'black',
-        text: 'Touching Grass'
-      },
-      effects: [
-        {
-          shear: '40:0',
-          opacity: 50
-        }
-      ]
-    }]}
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  overlays={[{
+    text: {
+      color: 'white',
+      fontFamily: 'Source Sans Pro',
+      fontSize: 400,
+      fontWeight: 'black',
+      text: 'Touching Grass'
+    },
+    effects: [
+      {
+        shear: '40:0',
+        opacity: 50
+      }
+    ]
+  }]}
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ## Misc
@@ -1139,18 +1162,19 @@ This is handy when wanting to create an image thumbnail from a video, where the 
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-
-  <CldImage
-    src="<Your Video Public ID>"
-    assetType="video"
-    width="<Width>"
-    height="<Height>"
-    alt=""
-    sizes="100vw"
-  />
-  ```
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Your Video Public ID>"
+  assetType="video"
+  width="<Width>"
+  height="<Height>"
+  alt=""
+  sizes="100vw"
+/>
+```
 </CodeBlock>
 
 ## More Examples

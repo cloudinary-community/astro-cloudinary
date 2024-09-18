@@ -1,0 +1,57 @@
+---
+import { CldUploadWidget, type CldUploadWidgetProps } from '../../../astro-cloudinary';
+import HeaderImage from './HeaderImage.astro';
+
+interface Props extends CldUploadWidgetProps {};
+
+const props: Props = Astro.props;
+---
+<HeaderImage>
+  <div class="clduploadwidget-demo grid gap-6 grid-cols-1 data-[has-results=true]:grid-cols-2" data-has-results="false">
+    <CldUploadWidget class="clduploadwidget-demo-widget" uploadPreset="astro-cloudinary-unsigned" {...props}>
+      <p class="flex items-center justify-center h-full">
+        <slot />
+      </p>
+    </CldUploadWidget>
+    <div class="clduploadwidget-demo-upload-result hidden" />
+    <template class="clduploadwidget-demo-template-result">
+      <p class="m-0 bg-slate-300">
+        <img src="" alt="Upload Result" />
+      </p>
+    </template>
+  </div>
+</HeaderImage>
+
+<script>
+const demos = Array.from(document.querySelectorAll('.clduploadwidget-demo'));
+
+demos.forEach(demo => {
+  const widget = demo.querySelector('.clduploadwidget-demo-widget');
+  const uploadResult = demo.querySelector('.clduploadwidget-demo-upload-result');
+  const template = demo.querySelector('.clduploadwidget-demo-template-result') as HTMLTemplateElement;
+
+  if ( !widget ) return;
+
+  widget.addEventListener('clduploadwidget:success', ((e: CustomEvent<{ detail: { info: { secure_url: string } } }>) => {
+    console.log('clduploadwidget:success', e.detail)
+
+    if ( !uploadResult || !template ) return;
+
+    const result = template.content.cloneNode(true) as HTMLTemplateElement;
+    // @ts-expect-error
+    result.querySelector('img')?.setAttribute('src', e.detail.info.secure_url);
+    uploadResult.innerHTML = '';
+    uploadResult.appendChild(result);
+    uploadResult.classList.remove('hidden');
+
+    demo?.setAttribute('data-has-results', 'true');
+  }) as EventListener);
+
+  widget.addEventListener('clduploadwidget:queues-end', ((e: CustomEvent<{ detail: { UploadWidget: any } }>) => {
+    console.log('clduploadwidget:onqueuesend', e.detail)
+    // @ts-expect-error
+    e.detail.UploadWidget?.close();
+  }) as EventListener);
+
+})
+</script>

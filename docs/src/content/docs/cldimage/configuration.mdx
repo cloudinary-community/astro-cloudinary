@@ -14,7 +14,7 @@ import Table from '../../../components/Table.astro';
 The CldImage component provides a wide range of options for being able to easily optimize and transform images.
 
 {/* :::tip
-Note: Configuration for CldImage is the same as [getCldImageUrl](/getcldimageurl/configuration), which both use the same underlying API.
+Configuration for CldImage is the same as [getCldImageUrl](/getcldimageurl/configuration), which both use the same underlying API.
 ::: */}
 
 ## Required Props
@@ -1335,7 +1335,7 @@ Cloudinary gives you the ability to add layers above or below your primary asset
 ### Customizing Overlays & Underlays
 
 :::tip
-Note: The API for Underlays is similar to Overlays except they do not support text.
+The API for Underlays is similar to Overlays except they do not support text.
 :::
 
 <Table
@@ -1929,7 +1929,7 @@ Preserves transformations already applied to an image when passing in a Cloudina
 as the `src`.
 
 :::tip
-Note: The Cloudinary URL requires a version number (ex: `/v1234/`) in order to be parsed.
+The Cloudinary URL requires a version number (ex: `/v1234/`) in order to be parsed.
 :::
 
 When using this option, the transformations will be parsed from a valid URL and then
@@ -1969,7 +1969,7 @@ By enabling Strict Transformations, you restrict the ability to generate transfo
 approval through the Cloudinary dashboard.
 
 :::tip
-Note: This disables [optimization](#optimization) and [responsive sizing](/guides/responsive-images)
+This disables [optimization](#optimization) and [responsive sizing](/guides/responsive-images)
 only allowing [named transformations](#transformations) to be applied. The width and height are not applied to the URL,
 but are still included on the image tag rendered to the DOM.
 :::

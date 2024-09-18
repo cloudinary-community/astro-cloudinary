@@ -1,92 +1,136 @@
 ---
-import { generateSignatureCallback, generateUploadWidgetResultCallback, getUploadWidgetOptions, UPLOAD_WIDGET_EVENTS } from '@cloudinary-util/url-loader';
-import type {
-  CloudinaryUploadWidgetResults,
-  CloudinaryUploadWidgetInstanceMethods,
-  CloudinaryUploadWidgetError
-} from '@cloudinary-util/types';
-import { triggerOnIdle } from '../../lib/util';
-import { getCloudinaryConfig } from "../../lib/cloudinary";
+import { type CloudinaryUploadWidgetOptions } from '@cloudinary-util/types';
+import { getUploadWidgetOptions, type ConfigOptions } from "@cloudinary-util/url-loader";
+import { getCloudinaryConfig } from '../lib/cloudinary';
 
-interface Props {
-  config?: any;
-  onError?: (error: CloudinaryUploadWidgetError, widget: any) => void;
-  onOpen?: (widget: any) => void;
-  onUpload?: (results: CloudinaryUploadWidgetResults, widget: any) => void;
-  options?: any;
-  signatureEndpoint?: string;
+export interface CldUploadWidgetProps {
+  class?: string;
+  config?: ConfigOptions;
+  id?: string;
+  options?: CloudinaryUploadWidgetOptions;
+  signatureEndpoint?: URL | RequestInfo;
   uploadPreset?: string;
 }
 
-const {
-  config,
-  onError,
-  onOpen,
-  onUpload,
-  options,
-  signatureEndpoint,
-  uploadPreset,
-} = Astro.props;
+interface Props extends CldUploadWidgetProps {};
+
+const { class: className, config, id, options, signatureEndpoint, uploadPreset }: Props = Astro.props;
+
+// When creating a signed upload, you need to provide both your Cloudinary API Key
+// as well as a signature generator function that will sign any paramters
+// either on page load or during the upload process. Read more about signed uploads at:
+// https://cloudinary.com/documentation/upload_widget#signed_uploads
 
 const cloudinaryConfig = getCloudinaryConfig(config);
 
-const uploadSignature = signatureEndpoint && generateSignatureCallback({
-  signatureEndpoint: String(signatureEndpoint),
-  fetch
-});
-
 const uploadOptions = getUploadWidgetOptions({
-  uploadPreset: uploadPreset || import.meta.env.PUBLIC_CLOUDINARY_UPLOAD_PRESET,
-  uploadSignature,
+  uploadPreset: uploadPreset || process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
   ...options,
 }, cloudinaryConfig);
 
-// ... (other necessary functions and logic)
+let playerClassName = 'astro-cloudinary-clduploadwidget';
 
+if ( typeof className === 'string' ) {
+  playerClassName = `${playerClassName} ${className}`;
+}
 ---
 
+<span
+  id={id}
+  class={playerClassName}
+  data-clduploadwidgetupload-options={JSON.stringify(uploadOptions)}
+  data-clduploadwidgetupload-signatureendpoint={signatureEndpoint}
+>
+  <slot />
+</span>
+
+<script is:inline src="https://upload-widget.cloudinary.com/global/all.js" />
+
 <script>
-  // Client-side script to handle widget creation and interactions
-  import { generateUploadWidgetResultCallback, UPLOAD_WIDGET_EVENTS } from '@cloudinary-util/url-loader';
+import type { CloudinaryCreateUploadWidget, CloudinaryUploadWidget } from '@cloudinary-util/types';
+import { generateSignatureCallback, generateUploadWidgetResultCallback } from "@cloudinary-util/url-loader";
+import { triggerOnIdle } from '../lib/util';
 
-  let cloudinary;
-  let widget;
+interface Cloudinary {
+  createUploadWidget: CloudinaryCreateUploadWidget;
+}
 
-  function handleOnLoad() {
-    if (!cloudinary) {
-      cloudinary = window.cloudinary;
-    }
+window.addEventListener('load', () => {
+  if ( 'cloudinary' in window ) {
+    const cloudinary = window.cloudinary as Cloudinary;
+    const widgets = document.querySelectorAll('.astro-cloudinary-clduploadwidget') as NodeListOf<HTMLSpanElement>;
 
-    if (!widget) {
-      widget = createWidget();
-    }
-  }
+    widgets.forEach(widget => {
+      let widgetInstance: CloudinaryUploadWidget;
 
-  function createWidget() {
-    const uploadOptions = JSON.parse(document.getElementById('uploadOptions').textContent);
-    const resultsCallback = generateUploadWidgetResultCallback({
-      onError: (uploadError) => {
-        // Handle error
-      },
-      onResult: (uploadResult) => {
-        // Handle result
-      },
+      // Primary user interaction point for the upload widget, create
+      // an instance if it doesnt already exist (someone triggering before idle)
+      // then attempt to open the upload widget
+
+      widget.querySelector('button')?.addEventListener('click', (e) => {
+        if (!widgetInstance) {
+          widgetInstance = createWidget();
+        }
+        widgetInstance.open();
+      });
+
+      // Parse the upload options from the DOM and configure the
+      // remaining options that couldn't be serialized
+
+      const uploadOptions = widget.dataset.clduploadwidgetuploadOptions && JSON.parse(widget.dataset.clduploadwidgetuploadOptions);
+      const signatureEndpoint = widget.dataset.clduploadwidgetuploadSignatureendpoint;
+
+      const uploadSignature = signatureEndpoint && generateSignatureCallback({
+        signatureEndpoint: String(signatureEndpoint),
+        fetch
+      });
+
+      const resultsCallback = generateUploadWidgetResultCallback({
+        onError: (uploadError) => {
+          const customEvent = new CustomEvent(`clduploadwidget:error`, {
+            detail: {
+              event: 'error',
+              error: uploadError,
+              UploadWidget: widget,
+            },
+          });
+
+          widget?.dispatchEvent(customEvent);
+        },
+        onResult: (uploadResult) => {
+          if ( typeof uploadResult?.event !== 'string' ) return;
+
+          const customEvent = new CustomEvent(`clduploadwidget:${uploadResult?.event}`, {
+            detail: {
+              event: uploadResult.event,
+              info: uploadResult.info,
+              UploadWidget: widgetInstance,
+            },
+          });
+
+          widget?.dispatchEvent(customEvent);
+        },
+      });
+
+      // To help improve performance, attempt to create a new widget instance
+      // ONLY when the page is deemed idle. This helps offload the JS and
+      // additional file downloads for initialization until after the page
+      // settles while attempting to perform those functions before
+      // user interaction
+
+      triggerOnIdle(() => {
+        if ( !widgetInstance ) {
+          widgetInstance = createWidget();
+        }
+      });
+
+      function createWidget() {
+        return cloudinary.createUploadWidget({
+          ...uploadOptions,
+          uploadSignature
+        }, resultsCallback);
+      }
     });
-
-    return cloudinary.createUploadWidget(uploadOptions, resultsCallback);
   }
-
-  // Add event listener for script load
-  document.querySelector('#cloudinary-script').addEventListener('load', handleOnLoad);
+})
 </script>
-
-<div id="uploadOptions" style="display: none;">
-  {JSON.stringify(uploadOptions)}
-</div>
-
-<slot />
-
-<script
-  id="cloudinary-script"
-  src="https://upload-widget.cloudinary.com/global/all.js"
-></script>

@@ -35,22 +35,12 @@ The basic required props include `width`, `height`, `src`, and `alt`:
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  <CldImage
-    src={getCldImageUrl({
-      src: '<Public ID>',
-      version: 1
-    })}
-    width="<Width>"
-    height="<Height>"
-    alt="<Description>"
-    sizes="100vw" // Optional
-  />
-  ```
+const url = getCldImageUrl({ src: '<Public ID>' });
+```
 </CodeBlock>
 
 The `src` property takes in a Cloudinary Public ID which includes the folder path along with the ID of the image itself.
@@ -83,27 +73,18 @@ You can further take advantage of Cloudinary features like replacing backgrounds
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  <CldImage
-    src={getCldImageUrl({
-      src: '<Public ID>'
-      crop: {
-        type: 'fill',
-        source: true
-      },
-      replaceBackground: 'space',
-      version: 1
-    })}
-    width="<Width>"
-    height="<Height>"
-    preserveTransformations
-    alt="<Description>"
-    sizes="100vw"
-  />
-  ```
+const url = getCldImageUrl({
+  src: '<Public ID>'
+  crop: {
+    type: 'fill',
+    source: true
+  },
+  replaceBackground: 'space',
+});
+```
 </CodeBlock>
 
 [Check out more examples](/getcldimageurl/examples) of what you can do with transformations!
@@ -118,19 +99,13 @@ The version number is required due to the variable nature of Cloudinary URLs. Th
 to ensure the integretiy when during the parsing process.
 :::
 
-<CodeBlock className="mt-6">
+<CodeBlock className="mt-6" alwaysExpanded>
 ```jsx
-import { CldImage } from 'astro-cloudinary';
 import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-<CldImage
-  src={getCldImageUrl({
-    src: 'https://res.cloudinary.com/mycloud/image/upload/v1234/myimage',
-  })}
-  width="<Width>"
-  height="<Height>"
-  alt="<Description>"
-/>
+const url = getCldImageUrl({
+  src: 'https://res.cloudinary.com/mycloud/image/upload/v1234/myimage',
+});
 ```
 </CodeBlock>
 
@@ -143,17 +118,14 @@ public ID of the URL provided.
 To preserve those transformations, you can apply the `preserveTransformations` property
 to CldImage:
 
-<CodeBlock className="mt-6">
+<CodeBlock className="mt-6" alwaysExpanded>
 ```jsx
-<CldImage
-  src={getCldImageUrl({
-    src: 'https://res.cloudinary.com/<Cloud Name>/image/upload/w_100,h_200,c_fill/v1234/myimage'
-  })}
-  width="<Width>"
-  height="<Height>"
-  preserveTransformations
-  alt="<Description>"
-/>
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+const url = getCldImageUrl({
+  src: 'https://res.cloudinary.com/<Cloud Name>/image/upload/w_100,h_200,c_fill/v1234/myimage',
+  preserveTransformations: true
+});
 ```
 </CodeBlock>
 
@@ -171,29 +143,23 @@ For example:
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { CldImage } from 'astro-cloudinary';
-  import { getCldImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
-  <CldImage
-    src={getCldImageUrl({
-      src: 'https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5'
-    })}
-    width="<Width>"
-    height="<Height>"
-    preserveTransformations
-    alt="test"
-  />
-  ```
+const url = getCldImageUrl({
+  src: 'https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/v1/cld-sample-5',
+  preserveTransformations: true
+})
+```
 </CodeBlock>
 
 Would generate a URL of:
 
-<CodeBlock>
-  ```
-  https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/c_limit,w_1600/v1/cld-sample-5?_a=BBGAABS00
-  ```
+<CodeBlock alwaysExpanded>
+```
+https://res.cloudinary.com/<Cloud Name>/image/upload/e_background_removal/b_blueviolet/f_auto/q_auto/c_limit,w_1600/v1/cld-sample-5?_a=BBGAABS00
+```
 </CodeBlock>
 
 ## Learn More about getCldImageUrl

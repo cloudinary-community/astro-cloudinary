@@ -1,6 +1,6 @@
 ---
 title: getCldOgImageUrl Examples
-description: Examples of generating social media cards in Astro with Cloudinary.
+description: Examples of generating social media cards using getCldOgImageUrl in Astro with Cloudinary.
 head:
   - tag: title
     content: getCldOgImageUrl Examples - Astro Cloudinary
@@ -12,11 +12,8 @@ import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
 import ExamplesCldOgImage from '../../../components/ExamplesCldOgImage.astro';
 
-# getCldOgImageUrl Examples
 
-:::note
 The below examples use the CldImage component to render the images. This is not required, you can use the URL returned by getCldOgImageUrl in any way you like.
-:::
 
 ## Basic Image
 
@@ -28,26 +25,12 @@ The below examples use the CldImage component to render the images. This is not 
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldOgImageUrl({
-    src: '<Your Public ID>',
-  })
-
-  export const metadata: Metadata = {
-    openGraph: {
-      images: [
-        {
-          width: 1200,
-          height: 627,
-          url
-        }
-      ]
-    }
-  }
-  ```
+const url = getCldOgImageUrl({ src: '<Your Public ID>' });
+```
 </CodeBlock>
 
 ## Change Background
@@ -61,15 +44,15 @@ The below examples use the CldImage component to render the images. This is not 
   />
 </HeaderImage>
 
-<CodeBlock>
-  ```jsx
-  import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+<CodeBlock alwaysExpanded>
+```jsx
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldOgImageUrl({
-    src: '<Your Public ID>',
-    replaceBackground: '<Prompt>'
-  })
-  ```
+const url = getCldOgImageUrl({
+  src: '<Your Public ID>',
+  replaceBackground: '<Prompt>'
+});
+```
 </CodeBlock>
 
 ## Text Overlay
@@ -92,19 +75,19 @@ The below examples use the CldImage component to render the images. This is not 
 </HeaderImage>
 
 <CodeBlock>
-  ```jsx
-  import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+```jsx
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
 
-  const url = getCldOgImageUrl({
-    src: '<Your Public ID>',
-    overlays: [{
-      text: {
-        fontFamily: 'Source Sans Pro',
-        fontSize: 120,
-        fontWeight: 'bold',
-        text: 'Astro Cloudinary'
-      }
-    }]
-  })
-  ```
+const url = getCldOgImageUrl({
+  src: '<Your Public ID>',
+  overlays: [{
+    text: {
+      fontFamily: 'Source Sans Pro',
+      fontSize: 120,
+      fontWeight: 'bold',
+      text: 'Astro Cloudinary'
+    }
+  }]
+});
+```
 </CodeBlock>
