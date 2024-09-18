@@ -30,8 +30,8 @@ importers:
         specifier: 1.5.7
         version: 1.5.7
       '@cloudinary-util/url-loader':
-        specifier: 5.10.2
-        version: 5.10.2
+        specifier: 5.10.3
+        version: 5.10.3
       '@cloudinary-util/util':
         specifier: ^3.3.2
         version: 3.3.2
@@ -286,14 +286,14 @@ packages:
     resolution: {integrity: sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw==}
     engines: {node: '>=6.9.0'}
 
-  '@cloudinary-util/types@1.5.6':
-    resolution: {integrity: sha512-Xz6j0c7mbqxlHOTHyCsnxp319nI5yX2jbuXIXsAH58r1t9cNcBQVdiW4dcabuO3txFHAOozqLABRsMeHcjfP0w==}
-
   '@cloudinary-util/types@1.5.7':
     resolution: {integrity: sha512-utxS2K+E3f0m4OD5YmrIEHO41x/YKgq6t13JIi94wT47gnQ7kWVW67AVhtgfWq1C6ege6XEreIDcef3dWG4eLA==}
 
-  '@cloudinary-util/url-loader@5.10.2':
-    resolution: {integrity: sha512-pgSidiWjFdxLwgDw44g0EPmiKJpQTDkUIx/2Ai6YmqS8aQxBJL6TlpcNCZ6mop/TIHjK+GgQNbitHkD++Ytdmw==}
+  '@cloudinary-util/types@1.5.8':
+    resolution: {integrity: sha512-gD6n1mPLvqQ/0GXx0DwXk6dud1X2ij/XGzX7uz+X3AObvCAEngdBXgStuz9O8PmnlAiQvhulvwwWZVXHvgpjJg==}
+
+  '@cloudinary-util/url-loader@5.10.3':
+    resolution: {integrity: sha512-bKALWnD2HHL/OZlIQECdjFrGvZYu9VG+RG9pne1y9OVhdClSNS3CZKKSf4F+htcYSp8JXpjdKUzTp2t21b6kiA==}
 
   '@cloudinary-util/util@3.3.2':
     resolution: {integrity: sha512-Cc0iFxzfl7fcOXuznpeZFGYC885Of/vDgccRDnhTe/8Rf8YKv2PjLtezyo0VgmdA/CpeZy29NCXAsf6liokbwg==}
@@ -4717,13 +4717,13 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@cloudinary-util/types@1.5.6': {}
-
   '@cloudinary-util/types@1.5.7': {}
 
-  '@cloudinary-util/url-loader@5.10.2':
+  '@cloudinary-util/types@1.5.8': {}
+
+  '@cloudinary-util/url-loader@5.10.3':
     dependencies:
-      '@cloudinary-util/types': 1.5.6
+      '@cloudinary-util/types': 1.5.8
       '@cloudinary-util/util': 3.3.2
       '@cloudinary/url-gen': 1.15.0
       zod: 3.23.8
