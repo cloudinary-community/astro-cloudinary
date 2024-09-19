@@ -132,7 +132,6 @@ associated ID.
 
 For instance, to listen for the successful upload of an asset, you can add:
 
-
 <DemoUploadWidgetSigned>
   <Button class="cursor-pointer">Upload</Button>
 </DemoUploadWidgetSigned>
@@ -172,6 +171,19 @@ To see a complete list of events and the corresponding shape of results,
 visit the [Cloudinary Upload Widget API Reference](https://cloudinary.com/documentation/upload_widget_reference#events).
 
 The events are triggered with a pattern of `clduploadwidget:<event>`.
+
+All events include a reference to the Upload Widget instance, which exposes instance
+methods such as `open` and `close`.
+
+<CodeBlock alwaysExpanded>
+```jsx
+widget.addEventListener('clduploadwidget:queues-end', ((e: CustomEvent<{ detail: { UploadWidget: object } }>) => {
+  e.detail.UploadWidget.close();
+});
+```
+</CodeBlock>
+
+To see a full list of instance methods, visit the [Cloudinary Upload Widget API Reference](https://cloudinary.com/documentation/upload_widget_reference#instance_methods).
 
 ## Learn More about CldUploadWidget
 * [Configuration](/clduploadwidget/configuration)

@@ -67,6 +67,86 @@ uploadPreset="my-upload-preset"
 
 [Learn more about upload presets](https://cloudinary.com/documentation/upload_presets) on the Cloudinary docs.
 
+## Events
+
+Upload Widget events allow you to tap into different points of the upload lifecycle including
+when an upload has completed, but also when it starts the queue and more.
+
+CldUploadWidget supports all native events emitted from the Upload Widget the component wraps.
+The full list of events can be found on the [Cloudinary Upload Widget API reference](https://cloudinary.com/documentation/upload_widget_reference).
+
+In order to trigger a function based on an event, an event listener can be attached to the widget.
+
+<CodeBlock>
+```jsx
+---
+import { CldUploadWidget } from 'astro-cloudinary';
+---
+<CldUploadWidget
+  id="upload-events"
+  uploadPreset="<Your UploadPreset>"
+/>
+
+<script>
+const widget = document.querySelector('#upload-events');
+
+if ( widget ) {
+  widget.addEventListener('clduploadwidget:success', ((e: CustomEvent<{ detail: object }>) => {
+    console.log('clduploadwidget:success', e.detail);
+  }) as EventListener);
+}
+</script>
+```
+</CodeBlock>
+
+All events follow the same pattern:
+
+<CodeBlock alwaysExpanded>
+```
+clduploadwidget:<event>
+```
+</CodeBlock>
+
+Where `<event>` is based on the name of the event found in the Cloudinary documentation.
+
+The Custom Event will include a details property which allows for access of the event information
+including results, such as the uploaded resource when listening to the success event.
+
+
+<Table
+  columns={[
+    {
+      id: 'name',
+      title: 'Name'
+    },
+    {
+      id: 'type',
+      title: 'Type'
+    },
+    {
+      id: 'description',
+      title: 'Description'
+    },
+  ]}
+  data={[
+    {
+      name: 'event',
+      type: 'string',
+      description: 'Event name.',
+    },
+    {
+      name: 'info',
+      type: 'string | object | undefined',
+      description: 'Result or details of the event.',
+    },
+    {
+      name: 'UploadWidget',
+      type: 'CloudinaryUploadWidget',
+      description: 'Upload Widget instance.',
+    },
+  ]}
+/>
+
 
 ## Advanced
 

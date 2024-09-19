@@ -1,7 +1,470 @@
 ---
-title: Social Media Cards
-description: Temp
+title: Social Card Templates
+description: Generate Social Media Cards in Astro with Cloudinary.
 head:
   - tag: title
-    content: Social Media Cards
+    content: Social Card Templates - Astro Cloudinary
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+import { CldImage } from '../../../../../astro-cloudinary';
+import { getCldOgImageUrl } from '../../../../../astro-cloudinary/helpers';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+
+
+To use a Social Card template, update the Cloudinary public ID and any variable
+information such as the headline, body, and alt with your own values and code
+where you manage your meta tags.
+
+## Article
+
+<HeaderImage>
+  <CldImage
+    src="samples/balloons"
+    width={1200}
+    height={630}
+    crop={{
+      width: 1200,
+      height: 630,
+      type: 'fill',
+      gravity: 'center',
+      source: true
+    }}
+    effects={[
+      {
+        background: 'rgb:010A44'
+      },
+      {
+        color: 'rgb:2A005F',
+        colorize: '100'
+      },
+      {
+        gradientFade: 'symmetric'
+      }
+    ]}
+    overlays={[
+      {
+        publicId: 'samples/balloons',
+        width: 1200,
+        height: 630,
+        crop: 'fill',
+        effects: [
+          { opacity: 20 }
+        ]
+      },
+      {
+        width: 1000,
+        crop: 'fit',
+        text: {
+          color: 'white',
+          fontFamily: 'Merriweather',
+          fontSize: 58,
+          fontWeight: 'bold',
+          lineSpacing: 10,
+          lineSpacing: 10,
+          text: 'High-Performance Image & Video Delivery at Scale in Astro'
+        },
+        position: {
+          x: 100,
+          y: 100,
+          gravity: 'north_west'
+        },
+      },
+      {
+        publicId: 'samples/balloons',
+        width: 1000,
+        height: 2,
+        effects: [{
+          colorize: '100,co_white',
+          opacity: 70
+        }],
+        position: {
+          x: 100,
+          y: 175,
+          gravity: 'south_west'
+        },
+      },
+      {
+        width: 240,
+        crop: 'fit',
+        publicId: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/cloudinary-white`,
+        position: {
+          x: 100,
+          y: 102,
+          gravity: 'south_west'
+        },
+      },
+      {
+        width: 160,
+        crop: 'fit',
+        publicId: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-logo-light-gradient`,
+        position: {
+          x: 380,
+          y: 99,
+          gravity: 'south_west'
+        },
+      },
+    ]}
+    alt="Astro Cloudinary High-Performance Image & Video Delivery at Scale in Astro over picture of a mountain"
+  />
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="getCldOgImageUrl">
+    <CodeBlock className="mt-6">
+```jsx copy showLineNumbers
+import { getCldOgImageUrl } from 'astro-cloudinary';
+
+const publicId = 'images/galaxy';
+const headline = 'High-Performance Image & Video Delivery at Scale in Astro';
+const tagline = 'Astro Cloudinary';
+const logoPublicId = 'images/cloudinary-logo-white';
+
+const url = getCldOgImageUrl({
+  src: publicId,
+  effects: [
+    {
+      background: 'rgb:010A44'
+    },
+    {
+      color: 'rgb:2A005F',
+      colorize: '100'
+    },
+    {
+      gradientFade: 'symmetric'
+    }
+  ],
+  overlays: [
+    {
+      publicId,
+      width: 1200,
+      height: 630,
+      crop: 'fill',
+      effects: [
+        { opacity: 20 }
+      ]
+    },
+    {
+      width: 1000,
+      crop: 'fit',
+      text: {
+        color: 'white',
+        fontFamily: 'Merriweather',
+        fontSize: 58,
+        fontWeight: 'bold',
+        lineSpacing: 10,
+        lineSpacing: 10,
+        text: headline
+      },
+      position: {
+        x: 100,
+        y: 100,
+        gravity: 'north_west'
+      },
+    },
+    {
+      publicId,
+      width: 1000,
+      height: 2,
+      effects: [{
+        colorize: '100,co_white',
+        opacity: 70
+      }],
+      position: {
+        x: 100,
+        y: 175,
+        gravity: 'south_west'
+      },
+    },
+    {
+      width: 60,
+      crop: 'fit',
+      publicId: logoPublicId,
+      position: {
+        x: 100,
+        y: 102,
+        gravity: 'south_west'
+      },
+    },
+    {
+      text: {
+        color: 'white',
+        fontFamily: 'Lato',
+        fontSize: 37,
+        fontWeight: 'bold',
+        text: tagline
+      },
+      position: {
+        x: 180,
+        y: 100,
+        gravity: 'south_west'
+      },
+    },
+  ]
+})
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Full
+
+<HeaderImage>
+  <CldImage
+    src="cld-sample-2"
+    width={1200}
+    height={630}
+    crop={{
+      width: 1200,
+      height: 630,
+      type: 'fill',
+      gravity: 'center',
+      source: true
+    }}
+    colorize="100,co_black"
+    overlays={[
+      {
+        publicId: 'cld-sample-2',
+        width: 1200,
+        height: 630,
+        crop: 'fill',
+        effects: [{ opacity: 60 }]
+      },
+      {
+        width: 700,
+        crop: 'fit',
+        text: {
+          alignment: 'center',
+          color: 'white',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 80,
+          fontWeight: 'bold',
+          text: 'Astro Cloudinary'
+        },
+        position: {
+          y: -50,
+        },
+      },
+      {
+        width: 700,
+        crop: 'fit',
+        text: {
+          alignment: 'center',
+          color: 'white',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 37,
+          text: 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!'
+        },
+        position: {
+          y: 50,
+        },
+      },
+    ]}
+    alt="Astro Cloudinary with picture of a mountain"
+  />
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="getCldOgImageUrl">
+    Update the Cloudinary public ID, headline, body, and alt with your own values and add
+    the following code when defining metadata for a page.
+
+    <CodeBlock className="mt-6">
+```jsx copy showLineNumbers
+import { getCldOgImageUrl } from 'astro-cloudinary';
+
+const publicId = 'cld-sample-2';
+const headline = 'Astro Cloudinary';
+const body = 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!';
+
+const url = getCldOgImageUrl({
+  src: publicId,
+  effects: [{ colorize: '100,co_black' }],
+  overlays: [
+    {
+      publicId,
+      width: 1200,
+      height: 630,
+      crop: 'fill',
+      effects: [{
+        opacity: 60
+      }]
+    },
+    {
+      width: 700,
+      crop: 'fit',
+      text: {
+        alignment: 'center',
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 80,
+        fontWeight: 'bold',
+        text: headline
+      },
+      position: {
+        y: -50,
+      },
+    },
+    {
+      width: 700,
+      crop: 'fit',
+      text: {
+        alignment: 'center',
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 37,
+        text: body
+      },
+      position: {
+        y: 50,
+      },
+    },
+  ]
+})
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## One Third
+
+<HeaderImage>
+  <CldImage
+    src="cld-sample-2"
+    width={1200}
+    height={630}
+    crop={{
+      width: 1200,
+      height: 630,
+      type: 'fill',
+      gravity: 'center',
+      source: true
+    }}
+    colorize="100,co_white"
+    overlays={[
+      {
+        publicId: 'cld-sample-2',
+        position: {
+          gravity: 'north_east',
+        },
+        effects: [
+          {
+            crop: 'fill',
+            gravity: 'auto',
+            width: '0.33',
+            height: '1.0'
+          }
+        ],
+        flags: ['relative']
+      },
+      {
+        width: 625,
+        crop: 'fit',
+        text: {
+          color: 'black',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 80,
+          fontWeight: 'bold',
+          text: 'Astro Cloudinary'
+        },
+        position: {
+          x: 125,
+          y: -50,
+          gravity: 'west',
+        },
+      },
+      {
+        width: 625,
+        crop: 'fit',
+        text: {
+          color: 'black',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 37,
+          text: 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!'
+        },
+        position: {
+          x: 125,
+          y: 50,
+          gravity: 'west',
+        },
+      },
+    ]}
+    alt="Astro Cloudinary with picture of a mountain"
+  />
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="getCldOgImageUrl">
+    Update the Cloudinary public ID, headline, body, and alt with your own values and add
+    the following code when defining metadata for a page.
+
+    <CodeBlock className="mt-6">
+```jsx copy showLineNumbers
+import { getCldOgImageUrl } from 'astro-cloudinary';
+
+const publicId = 'cld-sample-2';
+const headline = 'Astro Cloudinary';
+const body = 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!';
+
+const url = getCldOgImageUrl({
+  src: publicId,
+  effects: [{ colorize: '100,co_white' }],
+  overlays: [
+    {
+      publicId,
+      position: {
+        gravity: 'north_east',
+      },
+      effects: [
+        {
+          crop: 'fill',
+          gravity: 'auto',
+          width: '0.33',
+          height: '1.0'
+        }
+      ],
+      flags: ['relative']
+    },
+    {
+      width: 625,
+      crop: 'fit',
+      text: {
+        color: 'black',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 80,
+        fontWeight: 'bold',
+        text: headline
+      },
+      position: {
+        x: 125,
+        y: -50,
+        gravity: 'west',
+      },
+    },
+    {
+      width: 625,
+      crop: 'fit',
+      text: {
+        color: 'black',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 37,
+        text: body
+      },
+      position: {
+        x: 125,
+        y: 50,
+        gravity: 'west',
+      },
+    },
+  ]
+}),
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Learn More
+* [getCldOgImageUrl Configuration](/getcldogimageurl/configuration)
+* [CldOgImage Configuration](/cldogimage/configuration)

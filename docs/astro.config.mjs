@@ -52,12 +52,12 @@ export default defineConfig({
                   slug: 'clduploadwidget/basic-usage'
                 },
                 {
-                  label: 'Signed Uploads',
-                  slug: 'clduploadwidget/signed-uploads'
-                },
-                {
                   label: 'Configuration',
                   slug: 'clduploadwidget/configuration'
+                },
+                {
+                  label: 'Signed Uploads',
+                  slug: 'clduploadwidget/signed-uploads'
                 },
                 {
                   label: 'Examples',
@@ -168,6 +168,15 @@ export default defineConfig({
             {
               label: 'Responsive Sizing',
               slug: 'guides/responsive-sizing'
+            }
+          ]
+        },
+        {
+          label: 'Templates',
+          items: [
+            {
+              label: 'Social Media Cards',
+              slug: 'templates/social-media-cards'
             }
           ]
         }
