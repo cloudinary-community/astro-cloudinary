@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.1...v1.0.2) (2024-09-19)
+
+
+### Bug Fixes
+
+* updating social card height to 630 per other framework and recommended size ([2023e07](https://github.com/colbyfayock/astro-cloudinary/commit/2023e07f359946dbc7c17f6563cb0c5d5aa0ebac))
+
 ## [1.0.1](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.0...v1.0.1) (2024-09-18)
 
 
