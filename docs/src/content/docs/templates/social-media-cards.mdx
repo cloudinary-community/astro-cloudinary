@@ -87,9 +87,9 @@ where you manage your meta tags.
         },
       },
       {
-        width: 240,
+        width: 60,
         crop: 'fit',
-        publicId: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/cloudinary-white`,
+        publicId: 'samples/logo',
         position: {
           x: 100,
           y: 102,
@@ -97,12 +97,16 @@ where you manage your meta tags.
         },
       },
       {
-        width: 160,
-        crop: 'fit',
-        publicId: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-logo-light-gradient`,
+        text: {
+          color: 'white',
+          fontFamily: 'Lato',
+          fontSize: 37,
+          fontWeight: 'bold',
+          text: 'Astro Cloudinary'
+        },
         position: {
-          x: 380,
-          y: 99,
+          x: 180,
+          y: 100,
           gravity: 'south_west'
         },
       },
@@ -117,10 +121,10 @@ where you manage your meta tags.
 ```jsx copy showLineNumbers
 import { getCldOgImageUrl } from 'astro-cloudinary';
 
-const publicId = 'images/galaxy';
+const publicId = 'samples/balloons';
 const headline = 'High-Performance Image & Video Delivery at Scale in Astro';
 const tagline = 'Astro Cloudinary';
-const logoPublicId = 'images/cloudinary-logo-white';
+const logoPublicId = 'samples/logo';
 
 const url = getCldOgImageUrl({
   src: publicId,
