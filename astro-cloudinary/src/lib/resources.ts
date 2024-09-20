@@ -1,4 +1,5 @@
 import type { CloudinaryResource, CloudinaryResourceResourceType } from '@cloudinary-util/types';
+import { ASTRO_CLOUDINARY_VERSION } from '../constants/analytics';
 
 /**
  * cldRequest
@@ -8,7 +9,8 @@ import type { CloudinaryResource, CloudinaryResourceResourceType } from '@cloudi
 export async function cldRequest(path: string) {
   return fetch(`https://api.cloudinary.com/v1_1/${import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME}${path}`, {
     headers: {
-      'Authorization': 'Basic ' + btoa(`${import.meta.env.PUBLIC_CLOUDINARY_API_KEY}:${import.meta.env.CLOUDINARY_API_SECRET}`)
+      'Authorization': 'Basic ' + btoa(`${import.meta.env.PUBLIC_CLOUDINARY_API_KEY}:${import.meta.env.CLOUDINARY_API_SECRET}`),
+      'User-Agent'   : `CloudinaryAstro/${ASTRO_CLOUDINARY_VERSION}`
     }
   });
 }
