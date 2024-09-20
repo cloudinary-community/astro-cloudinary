@@ -13,27 +13,47 @@ let ogImageUrl;
 
 if ( slug === '' ) {
   ogImageUrl = getCldOgImageUrl({ 
-    src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-1.0`
+    src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-1.1`
   });
 } else {
   ogImageUrl = getCldOgImageUrl({ 
-    src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-template-1.0`,
-    overlays: [{
-      width: 1000,
-      crop: 'fit',
-      position: {
-        y: -80
+    src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-template-1.1`,
+    overlays: [
+      {
+        width: 1000,
+        crop: 'fit',
+        position: {
+          x: -2,
+          y: -78
+        },
+        text: {
+          color: '#3C2375',
+          fontFamily: 'assets:Inter-Bold.ttf',
+          fontSize: 100,
+          text: ogImageTitle || title,
+          alignment: 'center',
+          lineSpacing: -25
+        },
+        effects: [{
+          blur: 50
+        }]
       },
-      text: {
-        color: 'white',
-        fontFamily: 'Source Sans Pro',
-        fontSize: 100,
-        fontWeight: 'black',
-        text: ogImageTitle || title,
-        alignment: 'center',
-        lineSpacing: -25
-      }
-    }]
+      {
+        width: 1000,
+        crop: 'fit',
+        position: {
+          y: -80
+        },
+        text: {
+          color: 'white',
+          fontFamily: 'assets:Inter-Bold.ttf',
+          fontSize: 100,
+          text: ogImageTitle || title,
+          alignment: 'center',
+          lineSpacing: -25
+        }
+      },
+    ]
   });
 }
 ---
