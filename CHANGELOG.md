@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.2...v1.0.3) (2024-09-20)
+
+
+### Bug Fixes
+
+* adding user agent to asset loader request ([ae71ab0](https://github.com/colbyfayock/astro-cloudinary/commit/ae71ab07442f00e42189d73ab0b3e3e5b8c44cac))
+
 ## [1.0.2](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.1...v1.0.2) (2024-09-19)
 
 
