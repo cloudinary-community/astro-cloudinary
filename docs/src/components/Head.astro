@@ -7,11 +7,35 @@ import { getCldOgImageUrl } from '../../../astro-cloudinary/helpers';
 // ID and replace the file extension with `.png`.
 
 const { slug, entry } = Astro.props;
-const { title } = entry.data;
+const { title, ogImageTitle } = entry.data;
 
-const ogImageUrl = getCldOgImageUrl({ 
-  src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-1.0`
-});
+let ogImageUrl;
+
+if ( slug === '' ) {
+  ogImageUrl = getCldOgImageUrl({ 
+    src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-1.0`
+  });
+} else {
+  ogImageUrl = getCldOgImageUrl({ 
+    src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-template-1.0`,
+    overlays: [{
+      width: 1000,
+      crop: 'fit',
+      position: {
+        y: -80
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 100,
+        fontWeight: 'black',
+        text: ogImageTitle || title,
+        alignment: 'center',
+        lineSpacing: -25
+      }
+    }]
+  });
+}
 ---
 <Default {...Astro.props}><slot /></Default>
 
