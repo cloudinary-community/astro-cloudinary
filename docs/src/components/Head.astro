@@ -1,0 +1,24 @@
+---
+import type { Props } from '@astrojs/starlight/props'
+import Default from '@astrojs/starlight/components/Head.astro'
+import { getCldOgImageUrl } from '../../../astro-cloudinary/helpers';
+
+// Get the URL of the generated image for the current page using its
+// ID and replace the file extension with `.png`.
+
+const { slug, entry } = Astro.props;
+const { title } = entry.data;
+
+const ogImageUrl = getCldOgImageUrl({ 
+  src: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-card-1.0`
+});
+---
+<Default {...Astro.props}><slot /></Default>
+
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:secure_url" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content={ogImageUrl} />

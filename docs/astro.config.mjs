@@ -184,6 +184,7 @@ export default defineConfig({
       customCss: ['./src/styles/tailwind.css'],
       components: {
         Hero: './src/components/Null.astro',
+        Head: './src/components/Head.astro',
       },
     }),
     tailwind({
