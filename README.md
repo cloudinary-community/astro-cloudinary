@@ -123,6 +123,13 @@ The project will now be available at <https://localhost:3000> or the configured 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://colbyfayock.com/newsletter"><img src="https://avatars.githubusercontent.com/u/1045274?v=4?s=100" width="100px;" alt="Colby Fayock"/><br /><sub><b>Colby Fayock</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=colbyfayock" title="Code">💻</a> <a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=colbyfayock" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
