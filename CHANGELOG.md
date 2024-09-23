@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.4...v1.0.5) (2024-09-23)
+
+
+### Bug Fixes
+
+* explicitly defining width and height for og image generation, fixing template imports ([b7e738d](https://github.com/colbyfayock/astro-cloudinary/commit/b7e738d2ab8015a349d4666c0ce2d6388223cd62))
+
 ## [1.0.4](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.3...v1.0.4) (2024-09-23)
 
 
