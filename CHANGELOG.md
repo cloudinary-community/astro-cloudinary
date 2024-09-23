@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.5...v1.0.6) (2024-09-23)
+
+
+### Bug Fixes
+
+* Fixes loader when querying folders in dynamic folder mode ([#27](https://github.com/colbyfayock/astro-cloudinary/issues/27)) ([251bd29](https://github.com/colbyfayock/astro-cloudinary/commit/251bd299e24113fd61dac8585c71e049535ffbe6))
+
 ## [1.0.5](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.4...v1.0.5) (2024-09-23)
 
 
