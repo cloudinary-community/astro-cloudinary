@@ -128,6 +128,7 @@ The project will now be available at <https://localhost:3000> or the configured 
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://colbyfayock.com/newsletter"><img src="https://avatars.githubusercontent.com/u/1045274?v=4?s=100" width="100px;" alt="Colby Fayock"/><br /><sub><b>Colby Fayock</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=colbyfayock" title="Code">💻</a> <a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=colbyfayock" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Andarist"><img src="https://avatars.githubusercontent.com/u/9800850?v=4?s=100" width="100px;" alt="Mateusz Burzyński"/><br /><sub><b>Mateusz Burzyński</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=Andarist" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://hunterbertoson.tech"><img src="https://avatars.githubusercontent.com/u/44106297?v=4?s=100" width="100px;" alt="Hunter Bertoson"/><br /><sub><b>Hunter Bertoson</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=hkbertoson" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
