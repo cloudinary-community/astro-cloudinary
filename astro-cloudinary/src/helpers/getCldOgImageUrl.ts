@@ -18,6 +18,8 @@ export function getCldOgImageUrl(options: GetCldOgImageUrlOptions, config?: GetC
     width: options.width || OG_IMAGE_WIDTH,
     height: options.height || OG_IMAGE_HEIGHT,
     crop: options.crop || {
+      width: options.width || OG_IMAGE_WIDTH,
+      height: options.height || OG_IMAGE_HEIGHT,
       type: 'fill',
       gravity: 'center',
       source: true
