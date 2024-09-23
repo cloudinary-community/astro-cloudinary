@@ -96,14 +96,13 @@ export async function listResources(options: ListResourcesOptions): Promise<List
 
   if ( options.folder ) {
     if ( options.folderMode === 'dynamic' ) {
-      
-      // @TODO Test with dynamic folder mode
+
       params.append('asset_folder', options.folder);
 
-      response = await cldRequest(`/by_asset_folder?${params}`);
+      response = await cldRequest(`/resources/by_asset_folder?${params}`);
 
     } else if ( options.folderMode === 'fixed' ) {
-      
+
       params.append('prefix', options.folder);
 
       response = await cldRequest(`/resources/${options.resourceType}?${params}`);
@@ -116,7 +115,7 @@ export async function listResources(options: ListResourcesOptions): Promise<List
   }
 
   if ( !response.ok ) {
-    throw new Error('Failed to list resources.');
+    throw new Error(`Failed to list resources - ${response.statusText}`);
   }
 
   const data = await response.json();
