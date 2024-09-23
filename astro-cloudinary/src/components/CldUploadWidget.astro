@@ -24,7 +24,7 @@ const { class: className, config, id, options, signatureEndpoint, uploadPreset }
 const cloudinaryConfig = getCloudinaryConfig(config);
 
 const uploadOptions = getUploadWidgetOptions({
-  uploadPreset: uploadPreset || process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
+  uploadPreset: uploadPreset || import.meta.env.PUBLIC_CLOUDINARY_UPLOAD_PRESET,
   ...options,
 }, cloudinaryConfig);
 
