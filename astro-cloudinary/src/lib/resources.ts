@@ -100,7 +100,7 @@ export async function listResources(options: ListResourcesOptions): Promise<List
       // @TODO Test with dynamic folder mode
       params.append('asset_folder', options.folder);
 
-      response = await cldRequest(`/by_asset_folder?${params}`);
+      response = await cldRequest(`/resources/by_asset_folder?${params}`);
 
     } else if ( options.folderMode === 'fixed' ) {
       
