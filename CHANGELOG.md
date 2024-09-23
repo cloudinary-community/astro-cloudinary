@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.3...v1.0.4) (2024-09-23)
+
+
+### Bug Fixes
+
+* incorrect env vars for upload widget ([c531b5a](https://github.com/colbyfayock/astro-cloudinary/commit/c531b5aebf11a196dec646d74bb4f821f8c1215a))
+
 ## [1.0.3](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.2...v1.0.3) (2024-09-20)
 
 
