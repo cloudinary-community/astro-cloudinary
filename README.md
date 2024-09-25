@@ -69,7 +69,9 @@ pnpm install
 
 #### Configuration
 
-To work on the project, you need to have an active Cloudinary account. With the account, configure a `.env` file inside of `docs` with:
+To work on the project, you need to have an active Cloudinary account.
+
+With the account, configure a `.env` file inside of `docs` with:
 
 ```
 PUBLIC_CLOUDINARY_CLOUD_NAME="<Your Cloudinary Cloud Name>"
@@ -79,26 +81,22 @@ CLOUDINARY_API_SECRET="<Your Cloudinary API Secret>"
 PUBLIC_ASSETS_DIRECTORY="assets"
 ```
 
-> Note: The Cloudinary account can be free, but some features may not work beyond free tier like Background Removal
+> Note: The Cloudinary account can be free, but some features may not work beyond free tier like Background Removal without enabling the add-on
 
 The Cloud Name is required for all usage, where the API Key and Secret currently is only used for Upload Widget usage. The Upload Preset is additionally used for the Upload Widgets.
 
 #### Uploading Example Images
 
-In order to run the Docs project, you need to have the images referenced available inside of your Cloudinary account.
+In order to run the Docs project, you need to have the images and videos referenced available inside of your Cloudinary account.
 
-To do this, navigate to the `scripts` directory and first create a new `.env` file with:
+Most of the images and videos used in the project take advantage of the sample assets included in every Cloudinary account, so some may work out-of-the-box, but not all.
+
+To upload the remaining assets, navigate to the `scripts` directory and first create a new `.env` file with:
 
 ```
 CLOUDINARY_CLOUD_NAME="<Your Cloudinary Cloud Name>"
 CLOUDINARY_API_KEY="<Your API Key>"
 CLOUDINARY_API_SECRET="<Your API Secret>"
-```
-
-Then run the upload script with:
-
-```
-pnpm upload
 ```
 
 By default, the images and videos inside of `scripts/assets.json` will be uploaded to the "assets" directory inside of your Cloudinary account. To change the location, add the `CLOUDINARY_ASSETS_DIRECTORY` environment variable with your preferred directory:
@@ -107,15 +105,59 @@ By default, the images and videos inside of `scripts/assets.json` will be upload
 CLOUDINARY_ASSETS_DIRECTORY="<Your Directory>"
 ```
 
+> Note: You will then need to update the `/docs/.env` file to reference the same directory.
+
+To run the script, install the dependencies:
+
+```
+pnpm install
+```
+
+Then run the upload script with:
+
+```
+pnpm upload
+```
+
+#### Uploading Example Collections
+
+Collections are groups of images that are showcased using the cldAssetsLoader helper.
+
+The directories that make up the sample images include too many images to reasonably
+ask a contributor to upload.
+
+We have a few options then.
+
+1. Skip uploading the collections
+
+If you're not working on cldAssetsLoader, or you can test using the single example
+that utilizes the samples directory, you may not need to worry about this.
+
+2. Change the collections location
+
+You could update these directories in the `docs/src/content/config.ts` file to directories that
+already exist in your account, such as other sample directories.
+
+3. Upload Manually
+
+If you want to have assets available to test this out, you can create the following directories
+and include some assets inside.
+
+- collection
+- ecommerce/fashion
+- ecommerce/sneakers
+
+A good way to handle this is to download some images from Unsplash or your favorite stock photo site.
+
 #### Running the Project
 
-Once installed and configured, open two terminal tabs, navigating one to `astro-cloudinary` and one to `docs`, running the following command in each:
+Once installed and configured, from the root of your project run:
 
 ```
 pnpm dev
 ```
 
-The project will now be available at <https://localhost:3000> or the configured local port.
+The project will now be available at <https://localhost:4321> or the configured local port.
 
 
 ## Contributors

@@ -2,7 +2,7 @@
   "name": "scripts",
   "version": "0.0.1",
   "scripts": {
-    "upload": "node upload-sample-images.js"
+    "upload": "node upload-assets.js"
   },
   "dependencies": {
   },
