@@ -85,7 +85,7 @@ import Button from '../../components/Button.astro';
         }}
         overlays={[
           {
-            url: 'https://res.cloudinary.com/astro-cloudinary/image/upload/v1723217009/assets/pill-bad-red_ceyitm.png',
+            publicId: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/pill-bad-red_ceyitm`,
             width: 400,
             position: {
               gravity: 'south_east',
@@ -107,7 +107,7 @@ import Button from '../../components/Button.astro';
             }
           },
           {
-            url: 'https://res.cloudinary.com/astro-cloudinary/image/upload/v1723217010/assets/pill-good-green_aaoi4h.png',
+            publicId: `${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/pill-good-green_aaoi4h`,
             width: 400,
             position: {
               gravity: 'south_east',
@@ -172,8 +172,7 @@ import Button from '../../components/Button.astro';
         class="rounded-lg border border-zinc-200 mb-6"
         width="800"
         height="600"
-        src="https://res.cloudinary.com/astro-cloudinary/image/upload/v1723220669/assets/astro-cloudinary-upload-widget_ngil8j.png"
-        deliverType="fetch"
+        src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-upload-widget_ngil8j`}
         sizes="50w"
         alt=""
       />
@@ -185,8 +184,7 @@ import Button from '../../components/Button.astro';
         class="rounded-lg border border-zinc-200 mb-6"
         width="800"
         height="600"
-        src="https://res.cloudinary.com/astro-cloudinary/image/upload/v1723220705/assets/astro-cloudinary-social-cards_ntewed.png"
-        deliverType="fetch"
+        src={`${import.meta.env.PUBLIC_ASSETS_DIRECTORY}/astro-cloudinary-social-cards_ntewed`}
         sizes="50w"
         alt=""
       />
