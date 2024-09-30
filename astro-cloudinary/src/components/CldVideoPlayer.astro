@@ -5,7 +5,7 @@ import { getVideoPlayerOptions, type ConfigOptions } from '@cloudinary-util/url-
 import { getCloudinaryConfig } from '../lib/cloudinary';
 import type { CloudinaryVideoPlayerOptions, CloudinaryVideoPlayerOptionsLogo } from '@cloudinary-util/types';
 
-const PLAYER_VERSION = '2.0.5';
+const PLAYER_VERSION = '2.1.0';
 
 export interface CldVideoPlayerProps extends Omit<CloudinaryVideoPlayerOptions, "autoplayMode" | "cloud_name" | "controlBar" | "height" |  "logoImageUrl" | "logoOnclickUrl" | "posterOptions" | "publicId" | "secure" | "showLogo" | "width"> {
   class?: string;
@@ -71,16 +71,17 @@ if ( className ) {
   />
 </div>
 
-<script is:inline src={`https://unpkg.com/cloudinary-video-player@${PLAYER_VERSION}/dist/cld-video-player.min.js`}></script>
-
 <script>
   import type { CloudinaryVideoPlayer } from '@cloudinary-util/types';
-  
+  import { loadScript } from '../lib/util.js';
+
   interface Cloudinary {
     videoPlayer: (video: HTMLVideoElement, options: {}) => CloudinaryVideoPlayer;
   }
 
-  window.addEventListener('load', () => {
+  window.addEventListener('load', async () => {
+    await loadScript('https://unpkg.com/cloudinary-video-player@2.1.0/dist/cld-video-player.min.js');
+
     if ( 'cloudinary' in window ) {
       const cloudinary = window.cloudinary as Cloudinary;
       const videos = document.querySelectorAll('.astro-cloudinary-cldvideoplayer') as NodeListOf<HTMLVideoElement>;
@@ -93,7 +94,7 @@ if ( className ) {
       }
 
       videos.forEach(video => {
-        const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);        
+        const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);
         const player = cloudinary.videoPlayer(video, playerOptions);
 
         if ( !player ) return;
