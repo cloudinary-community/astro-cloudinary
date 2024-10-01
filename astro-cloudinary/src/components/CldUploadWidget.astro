@@ -44,93 +44,116 @@ if ( typeof className === 'string' ) {
   <slot />
 </span>
 
-<script is:inline src="https://upload-widget.cloudinary.com/global/all.js" />
-
 <script>
 import type { CloudinaryCreateUploadWidget, CloudinaryUploadWidget } from '@cloudinary-util/types';
 import { generateSignatureCallback, generateUploadWidgetResultCallback } from "@cloudinary-util/url-loader";
-import { triggerOnIdle } from '../lib/util';
+import { triggerOnIdle, loadScript } from '../lib/util';
 
 interface Cloudinary {
   createUploadWidget: CloudinaryCreateUploadWidget;
 }
 
-window.addEventListener('load', () => {
-  if ( 'cloudinary' in window ) {
-    const cloudinary = window.cloudinary as Cloudinary;
-    const widgets = document.querySelectorAll('.astro-cloudinary-clduploadwidget') as NodeListOf<HTMLSpanElement>;
+window.addEventListener('load', async () => {
+  const widgets = document.querySelectorAll('.astro-cloudinary-clduploadwidget') as NodeListOf<HTMLSpanElement>;
 
-    widgets.forEach(widget => {
-      let widgetInstance: CloudinaryUploadWidget;
+  if ( widgets.length === 0 ) return;
 
-      // Primary user interaction point for the upload widget, create
-      // an instance if it doesnt already exist (someone triggering before idle)
-      // then attempt to open the upload widget
+  // Verify that the script already hasn't been loaded before trying to load it again
 
-      widget.querySelector('button')?.addEventListener('click', (e) => {
-        if (!widgetInstance) {
-          widgetInstance = createWidget();
-        }
-        widgetInstance.open();
-      });
+  if ( !('cloudinary' in window) || typeof (window.cloudinary as Cloudinary).createUploadWidget !== 'function' ) {
+    await loadScript('https://upload-widget.cloudinary.com/global/all.js');
+  }
 
-      // Parse the upload options from the DOM and configure the
-      // remaining options that couldn't be serialized
+  if ( !('cloudinary' in window) ) {
+    if ( import.meta.env.MODE === 'development' ) {
+      throw new Error('Unable to find cloudinary when loading the CldUploadWidget.')
+    }
+    // Silently exit if it can' tbe found, we don't want to break people's page in production just
+    // because the UW wouldn't load
+    return;
+  }
 
-      const uploadOptions = widget.dataset.clduploadwidgetuploadOptions && JSON.parse(widget.dataset.clduploadwidgetuploadOptions);
-      const signatureEndpoint = widget.dataset.clduploadwidgetuploadSignatureendpoint;
+  const cloudinary = window.cloudinary as Cloudinary;
 
-      const uploadSignature = signatureEndpoint && generateSignatureCallback({
-        signatureEndpoint: String(signatureEndpoint),
-        fetch
-      });
+  widgets.forEach(widget => {
+    let widgetInstance: CloudinaryUploadWidget;
 
-      const resultsCallback = generateUploadWidgetResultCallback({
-        onError: (uploadError) => {
-          const customEvent = new CustomEvent(`clduploadwidget:error`, {
-            detail: {
-              event: 'error',
-              error: uploadError,
-              UploadWidget: widget,
-            },
-          });
+    // Primary user interaction point for the upload widget, create
+    // an instance if it doesnt already exist (someone triggering before idle)
+    // then attempt to open the upload widget
 
-          widget?.dispatchEvent(customEvent);
-        },
-        onResult: (uploadResult) => {
-          if ( typeof uploadResult?.event !== 'string' ) return;
+    const widgetButton = widget.querySelector('button');
 
-          const customEvent = new CustomEvent(`clduploadwidget:${uploadResult?.event}`, {
-            detail: {
-              event: uploadResult.event,
-              info: uploadResult.info,
-              UploadWidget: widgetInstance,
-            },
-          });
+    if ( !widgetButton ) {
+      if ( import.meta.env.MODE === 'development' ) {
+        throw new Error('Unable to find button element in CldUploadWidget. Please nest a button inside. (Ex: <CldUploadWidget><button /></CldUploadWidget>)')
+      }
+      return;
+    }
 
-          widget?.dispatchEvent(customEvent);
-        },
-      });
+    widgetButton.addEventListener('click', (e) => {
+      if (!widgetInstance) {
+        widgetInstance = createWidget();
+      }
+      widgetInstance.open();
+    });
 
-      // To help improve performance, attempt to create a new widget instance
-      // ONLY when the page is deemed idle. This helps offload the JS and
-      // additional file downloads for initialization until after the page
-      // settles while attempting to perform those functions before
-      // user interaction
+    // Parse the upload options from the DOM and configure the
+    // remaining options that couldn't be serialized
 
-      triggerOnIdle(() => {
-        if ( !widgetInstance ) {
-          widgetInstance = createWidget();
-        }
-      });
+    const uploadOptions = widget.dataset.clduploadwidgetuploadOptions && JSON.parse(widget.dataset.clduploadwidgetuploadOptions);
+    const signatureEndpoint = widget.dataset.clduploadwidgetuploadSignatureendpoint;
 
-      function createWidget() {
-        return cloudinary.createUploadWidget({
-          ...uploadOptions,
-          uploadSignature
-        }, resultsCallback);
+    const uploadSignature = signatureEndpoint && generateSignatureCallback({
+      signatureEndpoint: String(signatureEndpoint),
+      fetch
+    });
+
+    const resultsCallback = generateUploadWidgetResultCallback({
+      onError: (uploadError) => {
+        const customEvent = new CustomEvent(`clduploadwidget:error`, {
+          detail: {
+            event: 'error',
+            error: uploadError,
+            UploadWidget: widget,
+          },
+        });
+
+        widget?.dispatchEvent(customEvent);
+      },
+      onResult: (uploadResult) => {
+        if ( typeof uploadResult?.event !== 'string' ) return;
+
+        const customEvent = new CustomEvent(`clduploadwidget:${uploadResult?.event}`, {
+          detail: {
+            event: uploadResult.event,
+            info: uploadResult.info,
+            UploadWidget: widgetInstance,
+          },
+        });
+
+        widget?.dispatchEvent(customEvent);
+      },
+    });
+
+    // To help improve performance, attempt to create a new widget instance
+    // ONLY when the page is deemed idle. This helps offload the JS and
+    // additional file downloads for initialization until after the page
+    // settles while attempting to perform those functions before
+    // user interaction
+
+    triggerOnIdle(() => {
+      if ( !widgetInstance ) {
+        widgetInstance = createWidget();
       }
     });
-  }
+
+    function createWidget() {
+      return cloudinary.createUploadWidget({
+        ...uploadOptions,
+        uploadSignature
+      }, resultsCallback);
+    }
+  });
 })
 </script>

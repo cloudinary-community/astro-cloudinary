@@ -72,82 +72,100 @@ if ( className ) {
 </div>
 
 <script>
-  import type { CloudinaryVideoPlayer } from '@cloudinary-util/types';
-  import { loadScript } from '../lib/util.js';
+import type { CloudinaryVideoPlayer } from '@cloudinary-util/types';
+import { loadScript } from '../lib/util';
 
-  interface Cloudinary {
-    videoPlayer: (video: HTMLVideoElement, options: {}) => CloudinaryVideoPlayer;
+interface Cloudinary {
+  videoPlayer: (video: HTMLVideoElement, options: {}) => CloudinaryVideoPlayer;
+}
+
+window.addEventListener('load', async () => {
+  const videos = document.querySelectorAll('.astro-cloudinary-cldvideoplayer') as NodeListOf<HTMLVideoElement>;
+
+  if ( videos.length === 0 ) return;
+
+  // Verify that the script already hasn't been loaded before trying to load it again
+
+  if ( !('cloudinary' in window) || typeof (window.cloudinary as Cloudinary).videoPlayer !== 'function' ) {
+    await loadScript('https://unpkg.com/cloudinary-video-player@2.1.0/dist/cld-video-player.min.js');
   }
 
-  window.addEventListener('load', async () => {
-    await loadScript('https://unpkg.com/cloudinary-video-player@2.1.0/dist/cld-video-player.min.js');
-
-    if ( 'cloudinary' in window ) {
-      const cloudinary = window.cloudinary as Cloudinary;
-      const videos = document.querySelectorAll('.astro-cloudinary-cldvideoplayer') as NodeListOf<HTMLVideoElement>;
-
-      if ( import.meta.env.MODE === 'development' ) {
-        const playerIds = Array.from(videos).map(video => video.dataset.cldvideoplayerId);
-        if ( new Set(playerIds).size !== playerIds.length ) {
-          console.warn('[CldVideoPlayer] Multiple instances of the same video detected on the page which may cause unexpected results. Try adding a unique id to each player.');
-        }
-      }
-
-      videos.forEach(video => {
-        const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);
-        const player = cloudinary.videoPlayer(video, playerOptions);
-
-        if ( !player ) return;
-
-        // Loop through all avialable player events and create custom event callbacks
-
-        const events = [
-          'loadstart',
-          'suspend',
-          'abort',
-          'error',
-          'emptied',
-          'stalled',
-          'loadedmetadata',
-          'loadeddata',
-          'canplay',
-          'canplaythrough',
-          'playing',
-          'waiting',
-          'seeking',
-          'seeked',
-          'ended',
-          'durationchange',
-          'timeupdate',
-          'progress',
-          'play',
-          'pause',
-          'ratechange',
-          'volumechange',
-          'fullscreenchange',
-          'posterchange',
-          'mute',
-          'unmute',
-          'percentsplayed',
-          'timeplayed',
-          'seek',
-          'sourcechanged',
-          'qualitychanged',
-        ];
-
-        events.forEach(event => {
-          player.on(event, (e: { Player: CloudinaryVideoPlayer; type: string; }) => {
-            const customEvent = new CustomEvent(`cldvideoplayer:${event}`, {
-              detail: {
-                Player: e.Player,
-                type: e.type,
-                Video: video
-              },
-            });
-            video.closest(`#${video.dataset.cldvideoplayerId}`)?.dispatchEvent(customEvent);
-          });
-        });
-      })
+  if ( !('cloudinary' in window) ) {
+    if ( import.meta.env.MODE === 'development' ) {
+      throw new Error('Unable to find cloudinary when loading the CldVideoPlayer.')
     }
-  });
+    // Silently exit if it can' tbe found, we don't want to break people's page in production just
+    // because the player wouldn't load
+    return;
+  }
+
+  const cloudinary = window.cloudinary as Cloudinary;
+
+  // Check to see if there are any duplicate player IDs
+  // This should be rare but if there are duplicates it can create conflicts
+  // in how the player loads with the given settings
+
+  if ( import.meta.env.MODE === 'development' ) {
+    const playerIds = Array.from(videos).map(video => video.dataset.cldvideoplayerId);
+    if ( new Set(playerIds).size !== playerIds.length ) {
+      console.warn('[CldVideoPlayer] Multiple instances of the same video detected on the page which may cause unexpected results. Try adding a unique id to each player.');
+    }
+  }
+
+  videos.forEach(video => {
+    const playerOptions = video.dataset.cldvideoplayerOptions && JSON.parse(video.dataset.cldvideoplayerOptions);
+    const player = cloudinary.videoPlayer(video, playerOptions);
+
+    if ( !player ) return;
+
+    // Loop through all avialable player events and create custom event callbacks
+
+    const events = [
+      'loadstart',
+      'suspend',
+      'abort',
+      'error',
+      'emptied',
+      'stalled',
+      'loadedmetadata',
+      'loadeddata',
+      'canplay',
+      'canplaythrough',
+      'playing',
+      'waiting',
+      'seeking',
+      'seeked',
+      'ended',
+      'durationchange',
+      'timeupdate',
+      'progress',
+      'play',
+      'pause',
+      'ratechange',
+      'volumechange',
+      'fullscreenchange',
+      'posterchange',
+      'mute',
+      'unmute',
+      'percentsplayed',
+      'timeplayed',
+      'seek',
+      'sourcechanged',
+      'qualitychanged',
+    ];
+
+    events.forEach(event => {
+      player.on(event, (e: { Player: CloudinaryVideoPlayer; type: string; }) => {
+        const customEvent = new CustomEvent(`cldvideoplayer:${event}`, {
+          detail: {
+            Player: e.Player,
+            type: e.type,
+            Video: video
+          },
+        });
+        video.closest(`#${video.dataset.cldvideoplayerId}`)?.dispatchEvent(customEvent);
+      });
+    });
+  })
+});
 </script>
