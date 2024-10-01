@@ -4,6 +4,8 @@ import { getVideoPlayerOptions, type ConfigOptions } from '@cloudinary-util/url-
 
 import { getCloudinaryConfig } from '../lib/cloudinary';
 import type { CloudinaryVideoPlayerOptions, CloudinaryVideoPlayerOptionsLogo } from '@cloudinary-util/types';
+import type { GetCldImageUrlOptions } from "../helpers/getCldImageUrl";
+import type { GetCldVideoUrlOptions } from "../helpers/getCldVideoUrl";
 
 const PLAYER_VERSION = '2.0.5';
 
@@ -14,7 +16,7 @@ export interface CldVideoPlayerProps extends Omit<CloudinaryVideoPlayerOptions, 
   height: CloudinaryVideoPlayerOptions["height"];
   id?: string;
   logo?: boolean | CldVideoPlayerPropsLogo;
-  poster?: string; // | GetCldImageUrlOptions | GetCldVideoUrlOptions;
+  poster?: string | GetCldImageUrlOptions | GetCldVideoUrlOptions;
   src: string;
   quality?: string | number;
   // Redefine to make it required
