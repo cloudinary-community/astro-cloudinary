@@ -1,0 +1,157 @@
+---
+title: Generating Social Media Cards
+description: Boosting social engagement with custom Social Media Cards in Astro.
+head:
+  - tag: title
+    content: Social Media Cards - Astro Cloudinary
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+
+You can use Astro Cloudinary to easily generate dynamic social media cards
+for your Astro app.
+
+## Example
+
+<HeaderImage>
+  <CldImage
+    src="cld-sample-2"
+    width={1200}
+    height={630}
+    crop={{
+      width: 1200,
+      height: 630,
+      type: 'fill',
+      gravity: 'center',
+      source: true
+    }}
+    colorize="100,co_white"
+    overlays={[
+      {
+        publicId: 'cld-sample-2',
+        position: {
+          gravity: 'north_east',
+        },
+        effects: [
+          {
+            crop: 'fill',
+            gravity: 'auto',
+            width: '0.33',
+            height: '1.0'
+          }
+        ],
+        flags: ['relative']
+      },
+      {
+        width: 625,
+        crop: 'fit',
+        text: {
+          color: 'black',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 80,
+          fontWeight: 'bold',
+          text: 'Astro Cloudinary'
+        },
+        position: {
+          x: 125,
+          y: -50,
+          gravity: 'west',
+        },
+      },
+      {
+        width: 625,
+        crop: 'fit',
+        text: {
+          color: 'black',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 37,
+          text: 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!'
+        },
+        position: {
+          x: 125,
+          y: 50,
+          gravity: 'west',
+        },
+      },
+    ]}
+    alt="Astro Cloudinary with picture of a mountain"
+  />
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="getCldOgImageUrl">
+    Update the Cloudinary public ID, headline, body, and alt with your own values and add
+    the following code when defining metadata for a page.
+
+    <CodeBlock className="mt-6">
+```jsx copy showLineNumbers
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+
+const publicId = 'cld-sample-2';
+const headline = 'Astro Cloudinary';
+const body = 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!';
+
+const url = getCldOgImageUrl({
+  src: publicId,
+  effects: [{ colorize: '100,co_white' }],
+  overlays: [
+    {
+      publicId,
+      position: {
+        gravity: 'north_east',
+      },
+      effects: [
+        {
+          crop: 'fill',
+          gravity: 'auto',
+          width: '0.33',
+          height: '1.0'
+        }
+      ],
+      flags: ['relative']
+    },
+    {
+      width: 625,
+      crop: 'fit',
+      text: {
+        color: 'black',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 80,
+        fontWeight: 'bold',
+        text: headline
+      },
+      position: {
+        x: 125,
+        y: -50,
+        gravity: 'west',
+      },
+    },
+    {
+      width: 625,
+      crop: 'fit',
+      text: {
+        color: 'black',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 37,
+        text: body
+      },
+      position: {
+        x: 125,
+        y: 50,
+        gravity: 'west',
+      },
+    },
+  ]
+}),
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Learn More
+* [Social Media Card Templates](/templates/social-media-cards)
+* [getCldOgImageUrl Configuration](/getcldogimageurl/configuration)
