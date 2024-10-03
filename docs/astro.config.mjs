@@ -166,12 +166,32 @@ export default defineConfig({
           label: 'Guides',
           items: [
             {
-              label: 'Responsive Sizing',
-              slug: 'guides/responsive-sizing'
+              label: 'Image Optimization',
+              slug: 'guides/image-optimization'
+            },
+            {
+              label: 'Image Overlays',
+              slug: 'guides/image-overlays'
+            },
+            {
+              label: 'Responsive Images',
+              slug: 'guides/responsive-images'
+            },
+            {
+              label: 'Responsive Images',
+              slug: 'guides/responsive-images'
             },
             {
               label: 'Social Media Card',
               slug: 'guides/social-media-card'
+            },
+            {
+              label: 'Text Overlays',
+              slug: 'guides/text-overlays'
+            },
+            {
+              label: 'Uploading Images & Videos',
+              slug: 'guides/uploading-images-and-videos'
             },
           ]
         },
@@ -196,6 +216,10 @@ export default defineConfig({
     }),
     icon()
   ],
+
+  redirects: {
+    '/guides/responsive-sizing': '/guides/responsive-images'
+  },
 
   adapter: vercel({
     webAnalytics: {
