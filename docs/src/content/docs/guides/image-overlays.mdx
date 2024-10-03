@@ -1,11 +1,109 @@
 ---
 title: Image Overlays
-description: Image Overlays
+description: Placing images on top of images in Astro with Cloudinary.
 head:
   - tag: title
     content: Image Overlays - Astro Cloudinary
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 import { CldImage } from '../../../../../astro-cloudinary';
 
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
+
+With the CldImage component, you can easily place an image onto an existing
+image with overlays.
+
+## Example
+
+<HeaderImage>
+  <CldImage
+    src="samples/people/kitchen-bar"
+    width="960"
+    height="600"
+    crop="fill"
+    overlays={[{
+      publicId: "samples/food/fish-vegetables",
+      position: {
+        x: 50,
+        y: 50,
+        gravity: 'north_east',
+      },
+      effects: [{
+        crop: 'fill',
+        width: 350,
+        height: 350,
+        gravity: 'auto',
+        border: '5px_solid_yellow'
+      }]
+    }]}
+    alt="Chef in a kitchen with image overlay"
+    sizes="50vw"
+  />
+</HeaderImage>
+
+<Tabs items={['CldImage', 'getCldImageUrl']}>
+  <TabItem className="nx-pt-0" label="CldImage">
+    <CodeBlock>
+```jsx
+import { CldImage } from 'astro-cloudinary';
+
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  overlays={[{
+    publicId: "<Public ID>",
+    position: {
+      x: 50,
+      y: 50,
+      gravity: 'north_east',
+    },
+    effects: [{
+      crop: 'fill',
+      width: 350,
+      height: 350,
+      gravity: 'auto',
+      border: '5px_solid_yellow'
+    }]
+  }]}
+  alt=""
+  sizes="100vw"
+/>
+```
+    </CodeBlock>
+  </TabItem>
+  <TabItem className="nx-pt-0" label="getCldImageUrl">
+    <CodeBlock>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+getCldImageUrl({
+  width: 1335,
+  height: 891,
+  src: '<Public ID>',
+  overlays: [{
+    publicId: '<Public ID>',
+    position: {
+      x: 50,
+      y: 50,
+      gravity: 'north_east',
+    },
+    effects: [{
+      crop: 'fill',
+      width: 350,
+      height: 350,
+      gravity: 'auto',
+      border: '5px_solid_yellow'
+    }]
+  }]
+})
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Learn More
+* [CldImage](/cldimage/basic-usage)
+* [getCldImageUrl](/getcldimageurl/basic-usage)

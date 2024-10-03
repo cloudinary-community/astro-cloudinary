@@ -1,11 +1,159 @@
 ---
 title: Text Overlays
-description: Text Overlays
+description: Adding text to images in Astro with Cloudinary.
 head:
   - tag: title
     content: Text Overlays - Astro Cloudinary
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 import { CldImage } from '../../../../../astro-cloudinary';
 
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
+
+You can easily add text on top of your image with text-based overlays using
+the CldImage component.
+
+## Example
+
+<HeaderImage>
+  <CldImage
+    width="1335"
+    height="891"
+    src="cld-sample-5"
+    sizes="100vw"
+    overlays={[
+      {
+        position: {
+          x: 150,
+          y: 125,
+          angle: -20,
+          gravity: 'south_east',
+        },
+        text: {
+          color: 'magenta',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 150,
+          fontWeight: 'black',
+          text: 'WITH STYLE'
+        }
+      },
+      {
+        position: {
+          x: 140,
+          y: 140,
+          angle: -20,
+          gravity: 'south_east',
+        },
+        text: {
+          color: 'white',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 150,
+          fontWeight: 'black',
+          text: 'WITH STYLE'
+        }
+      },
+    ]}
+    alt="Sneakers with text With Style"
+  />
+</HeaderImage>
+
+<Tabs items={['CldImage', 'getCldImageUrl']}>
+  <TabItem className="nx-pt-0" label="CldImage">
+    <CodeBlock>
+```jsx
+import { CldImage } from 'astro-cloudinary';
+
+<CldImage
+  width="1335"
+  height="891"
+  src="images/sneakers"
+  sizes="100vw"
+  overlays={[
+    {
+      position: {
+        x: 150,
+        y: 125,
+        angle: -20,
+        gravity: 'south_east',
+      },
+      text: {
+        color: 'magenta',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 150,
+        fontWeight: 'black',
+        text: 'WITH STYLE'
+      }
+    },
+    {
+      position: {
+        x: 140,
+        y: 140,
+        angle: -20,
+        gravity: 'south_east',
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 150,
+        fontWeight: 'black',
+        text: 'WITH STYLE'
+      }
+    },
+  ]}
+  alt="Sneakers with text With Style"
+/>
+```
+    </CodeBlock>
+  </TabItem>
+  <TabItem className="nx-pt-0" label="getCldImageUrl">
+    <CodeBlock>
+```jsx
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+getCldImageUrl({
+  width: 1335,
+  height: 891,
+  src: 'images/sneakers',
+  overlays: [
+    {
+      position: {
+        x: 150,
+        y: 125,
+        angle: -20,
+        gravity: 'south_east',
+      },
+      text: {
+        color: 'magenta',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 150,
+        fontWeight: 'black',
+        text: 'WITH STYLE'
+      }
+    },
+    {
+      position: {
+        x: 140,
+        y: 140,
+        angle: -20,
+        gravity: 'south_east',
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 150,
+        fontWeight: 'black',
+        text: 'WITH STYLE'
+      }
+    },
+  ]
+})
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Learn More
+* [CldImage](/cldimage/basic-usage)
+* [getCldImageUrl](/getcldimageurl/basic-usage)
