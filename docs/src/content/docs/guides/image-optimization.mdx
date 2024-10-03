@@ -1,11 +1,71 @@
 ---
-title: Image Optimization
-description: Image Optimization
+title: Optimizing Images in Astro
+description: Boost performance by optimizing images in Astro with Cloudinary.
 head:
   - tag: title
     content: Image Optimization - Astro Cloudinary
 ---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 import { CldImage } from '../../../../../astro-cloudinary';
 
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
+
+Optimization plays a critical role in making your website load as fast as possible.
+
+With the CldImage component, your images will be automatically optimized with automatic
+compression and by delivering the most efficient format based on your browser or device
+(WebP, AVIF, etc).
+
+:::tip
+You can further optimize delivery with [responsive sizing](/guides/responsive-images) by using the `sizes` prop.
+:::
+
+## Example
+
+<HeaderImage>
+  <CldImage
+    width="960"
+    height="600"
+    src="samples/balloons"
+    sizes="100vw"
+    alt="Turtle"
+  />
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="CldImage">
+    <CodeBlock>
+```jsx copy
+import { CldImage } from 'astro-cloudinary';
+
+<CldImage
+  width="960"
+  height="600"
+  src="<Your Public ID>"
+  sizes="100vw"
+  alt="<Description>"
+/>
+```
+    </CodeBlock>
+  </TabItem>
+  <TabItem label="getCldImageUrl">
+    <CodeBlock>
+```jsx copy
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+getCldImageUrl({
+  width: 960,
+  height: 600,
+  src: '<Your Public ID>'
+});
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Learn More
+* [Responsive Images](/guides/responsive-images)
+* [CldImage](/cldimage/basic-usage)
+* [getCldImageUrl](/getcldimageurl/basic-usage)
