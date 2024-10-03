@@ -12,14 +12,29 @@ import { CldImage } from '../../../../../astro-cloudinary';
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
 
+Social Media Cards are critical for boosting engagement when sharing links
+on social media websites like Twiter/X, LinkedIn, and Facebook.
+
+They work by utilizing the the Open Graph standard with HTML meta tags
+like `og:image` to define the image you would like to show as a preview
+when your link is shared.
+
 You can use Astro Cloudinary to easily generate dynamic social media cards
-for your Astro app.
+for your Astro app using the [getCldOgImageUrl](/getcldogimageurl/basic-usage) helper.
 
 ## Example
 
+Using getCldOgImageUrl, you can first generate the URL of the image you want to
+create. This can be as simple as a reference to an image in your Cloudinary account
+or can be a dynamically generated image with text overlays, image overlays, or any
+effect supported by the Trasnformation API.
+
+For instance, if you have a blog, you may one unique Social Cards for each page,
+where you can apply a text overlay based on that blog's title.
+
 <HeaderImage>
   <CldImage
-    src="cld-sample-2"
+    src="samples/balloons"
     width={1200}
     height={630}
     crop={{
@@ -29,124 +44,182 @@ for your Astro app.
       gravity: 'center',
       source: true
     }}
-    colorize="100,co_white"
-    overlays={[
+    effects={[
       {
-        publicId: 'cld-sample-2',
-        position: {
-          gravity: 'north_east',
-        },
-        effects: [
-          {
-            crop: 'fill',
-            gravity: 'auto',
-            width: '0.33',
-            height: '1.0'
-          }
-        ],
-        flags: ['relative']
+        background: 'rgb:010A44'
       },
       {
-        width: 625,
+        color: 'rgb:2A005F',
+        colorize: '100'
+      },
+      {
+        gradientFade: 'symmetric'
+      }
+    ]}
+    overlays={[
+      {
+        publicId: 'samples/balloons',
+        width: 1200,
+        height: 630,
+        crop: 'fill',
+        effects: [
+          { opacity: 20 }
+        ]
+      },
+      {
+        width: 1000,
         crop: 'fit',
         text: {
-          color: 'black',
-          fontFamily: 'Source Sans Pro',
-          fontSize: 80,
+          color: 'white',
+          fontFamily: 'Merriweather',
+          fontSize: 58,
+          fontWeight: 'bold',
+          lineSpacing: 10,
+          lineSpacing: 10,
+          text: 'High-Performance Image & Video Delivery at Scale in Astro'
+        },
+        position: {
+          x: 100,
+          y: 100,
+          gravity: 'north_west'
+        },
+      },
+      {
+        publicId: 'samples/balloons',
+        width: 1000,
+        height: 2,
+        effects: [{
+          colorize: '100,co_white',
+          opacity: 70
+        }],
+        position: {
+          x: 100,
+          y: 175,
+          gravity: 'south_west'
+        },
+      },
+      {
+        width: 60,
+        crop: 'fit',
+        publicId: 'samples/logo',
+        position: {
+          x: 100,
+          y: 102,
+          gravity: 'south_west'
+        },
+      },
+      {
+        text: {
+          color: 'white',
+          fontFamily: 'Lato',
+          fontSize: 37,
           fontWeight: 'bold',
           text: 'Astro Cloudinary'
         },
         position: {
-          x: 125,
-          y: -50,
-          gravity: 'west',
-        },
-      },
-      {
-        width: 625,
-        crop: 'fit',
-        text: {
-          color: 'black',
-          fontFamily: 'Source Sans Pro',
-          fontSize: 37,
-          text: 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!'
-        },
-        position: {
-          x: 125,
-          y: 50,
-          gravity: 'west',
+          x: 180,
+          y: 100,
+          gravity: 'south_west'
         },
       },
     ]}
-    alt="Astro Cloudinary with picture of a mountain"
+    alt="Astro Cloudinary High-Performance Image & Video Delivery at Scale in Astro over picture of a mountain"
   />
 </HeaderImage>
 
 <Tabs>
   <TabItem label="getCldOgImageUrl">
-    Update the Cloudinary public ID, headline, body, and alt with your own values and add
-    the following code when defining metadata for a page.
-
     <CodeBlock className="mt-6">
 ```jsx copy showLineNumbers
 import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
 
-const publicId = 'cld-sample-2';
-const headline = 'Astro Cloudinary';
-const body = 'Get the power of Cloudinary in a Astro project with Astro Cloudinary!';
+const publicId = 'samples/balloons';
+const headline = 'High-Performance Image & Video Delivery at Scale in Astro';
+const tagline = 'Astro Cloudinary';
+const logoPublicId = 'samples/logo';
 
 const url = getCldOgImageUrl({
   src: publicId,
-  effects: [{ colorize: '100,co_white' }],
+  effects: [
+    {
+      background: 'rgb:010A44'
+    },
+    {
+      color: 'rgb:2A005F',
+      colorize: '100'
+    },
+    {
+      gradientFade: 'symmetric'
+    }
+  ],
   overlays: [
     {
       publicId,
-      position: {
-        gravity: 'north_east',
-      },
+      width: 1200,
+      height: 630,
+      crop: 'fill',
       effects: [
-        {
-          crop: 'fill',
-          gravity: 'auto',
-          width: '0.33',
-          height: '1.0'
-        }
-      ],
-      flags: ['relative']
+        { opacity: 20 }
+      ]
     },
     {
-      width: 625,
+      width: 1000,
       crop: 'fit',
       text: {
-        color: 'black',
-        fontFamily: 'Source Sans Pro',
-        fontSize: 80,
+        color: 'white',
+        fontFamily: 'Merriweather',
+        fontSize: 58,
         fontWeight: 'bold',
+        lineSpacing: 10,
+        lineSpacing: 10,
         text: headline
       },
       position: {
-        x: 125,
-        y: -50,
-        gravity: 'west',
+        x: 100,
+        y: 100,
+        gravity: 'north_west'
       },
     },
     {
-      width: 625,
+      publicId,
+      width: 1000,
+      height: 2,
+      effects: [{
+        colorize: '100,co_white',
+        opacity: 70
+      }],
+      position: {
+        x: 100,
+        y: 175,
+        gravity: 'south_west'
+      },
+    },
+    {
+      width: 60,
       crop: 'fit',
+      publicId: logoPublicId,
+      position: {
+        x: 100,
+        y: 102,
+        gravity: 'south_west'
+      },
+    },
+    {
       text: {
-        color: 'black',
-        fontFamily: 'Source Sans Pro',
+        color: 'white',
+        fontFamily: 'Lato',
         fontSize: 37,
-        text: body
+        fontWeight: 'bold',
+        text: tagline
       },
       position: {
-        x: 125,
-        y: 50,
-        gravity: 'west',
+        x: 180,
+        y: 100,
+        gravity: 'south_west'
       },
     },
   ]
-}),
+})
 ```
     </CodeBlock>
   </TabItem>

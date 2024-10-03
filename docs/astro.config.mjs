@@ -168,7 +168,11 @@ export default defineConfig({
             {
               label: 'Responsive Sizing',
               slug: 'guides/responsive-sizing'
-            }
+            },
+            {
+              label: 'Social Media Card',
+              slug: 'guides/social-media-card'
+            },
           ]
         },
         {
