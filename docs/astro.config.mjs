@@ -178,10 +178,6 @@ export default defineConfig({
               slug: 'guides/responsive-images'
             },
             {
-              label: 'Responsive Images',
-              slug: 'guides/responsive-images'
-            },
-            {
               label: 'Social Media Card',
               slug: 'guides/social-media-card'
             },
