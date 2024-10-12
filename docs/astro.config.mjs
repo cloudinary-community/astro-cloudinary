@@ -189,6 +189,10 @@ export default defineConfig({
               label: 'Uploading Images & Videos',
               slug: 'guides/uploading-images-and-videos'
             },
+            {
+              label: 'Delivering Remote Images',
+              slug: 'guides/delivering-remote-images'
+            },
           ]
         },
         {
