@@ -39,8 +39,8 @@ importers:
         specifier: ^1.20.0
         version: 1.20.0
       '@unpic/astro':
-        specifier: ^0.0.46
-        version: 0.0.46(astro@4.15.6(@types/node@20.11.5)(rollup@4.21.1)(sass@1.71.1)(typescript@5.6.2))
+        specifier: ^0.0.47
+        version: 0.0.47(astro@4.15.6(@types/node@20.11.5)(rollup@4.21.1)(sass@1.71.1)(typescript@5.6.2))
       '@unpic/core':
         specifier: ^0.0.49
         version: 0.0.49
@@ -1263,10 +1263,10 @@ packages:
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
 
-  '@unpic/astro@0.0.46':
-    resolution: {integrity: sha512-NVMwxA9hA6jC9rUrgUb49szB+3OHjuZHm0D8jUYzcDp8NJ3gdBKf5ujcs/ok6ReTmdkAGIy8WHnwN5ASd8QvsQ==}
+  '@unpic/astro@0.0.47':
+    resolution: {integrity: sha512-V35x+L8hzJ0w+VnoaCNjXOMYbm5B+WTKa3RQxYUw2/hJZ4Jo4a1uqYbiORJO77eGSaJGQBOGB9RT0BWMOmEz9Q==}
     peerDependencies:
-      astro: ^2.0.0 || ^3.0.0 || ^4.0.0
+      astro: ^2.0.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
 
   '@unpic/core@0.0.49':
     resolution: {integrity: sha512-tAqeJRMPF2TrZbSQe74OZ9O5DzKDDUoFwFbZUpjvLcgwGQ/8aleDCb2Iy3bHFJfzzYZ9iHN0hN1VpTlAGQd+ZA==}
@@ -4110,9 +4110,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  ufo@1.4.0:
-    resolution: {integrity: sha512-Hhy+BhRBleFjpJ2vchUNN40qgkh0366FWJGqVLYBHev0vpHTrXSA0ryT+74UiW6KWsldNurQMKGqCm1M2zBciQ==}
-
   ufo@1.5.4:
     resolution: {integrity: sha512-UsUk3byDzKd04EyoZ7U4DOlxQaD14JUKQl6/P7wiX4FNvUfm3XL246n9W5AmqwW5RSFJ27NAuM0iLscAOYUiGQ==}
 
@@ -5709,7 +5706,7 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@unpic/astro@0.0.46(astro@4.15.6(@types/node@20.11.5)(rollup@4.21.1)(sass@1.71.1)(typescript@5.6.2))':
+  '@unpic/astro@0.0.47(astro@4.15.6(@types/node@20.11.5)(rollup@4.21.1)(sass@1.71.1)(typescript@5.6.2))':
     dependencies:
       '@unpic/core': 0.0.49
       '@unpic/pixels': 1.2.2
@@ -8099,7 +8096,7 @@ snapshots:
     dependencies:
       destr: 2.0.3
       node-fetch-native: 1.6.4
-      ufo: 1.4.0
+      ufo: 1.5.4
 
   once@1.4.0:
     dependencies:
@@ -9114,8 +9111,6 @@ snapshots:
   typescript@5.5.4: {}
 
   typescript@5.6.2: {}
-
-  ufo@1.4.0: {}
 
   ufo@1.5.4: {}
 
