@@ -1,0 +1,230 @@
+---
+title: Generating Social Media Cards
+description: Boosting social engagement with custom Social Media Cards in Astro.
+head:
+  - tag: title
+    content: Social Media Cards - Astro Cloudinary
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+
+Social Media Cards are critical for boosting engagement when sharing links
+on social media websites like Twiter/X, LinkedIn, and Facebook.
+
+They work by utilizing the the Open Graph standard with HTML meta tags
+like `og:image` to define the image you would like to show as a preview
+when your link is shared.
+
+You can use Astro Cloudinary to easily generate dynamic social media cards
+for your Astro app using the [getCldOgImageUrl](/getcldogimageurl/basic-usage) helper.
+
+## Example
+
+Using getCldOgImageUrl, you can first generate the URL of the image you want to
+create. This can be as simple as a reference to an image in your Cloudinary account
+or can be a dynamically generated image with text overlays, image overlays, or any
+effect supported by the Trasnformation API.
+
+For instance, if you have a blog, you may one unique Social Cards for each page,
+where you can apply a text overlay based on that blog's title.
+
+<HeaderImage>
+  <CldImage
+    src="samples/balloons"
+    width={1200}
+    height={630}
+    crop={{
+      width: 1200,
+      height: 630,
+      type: 'fill',
+      gravity: 'center',
+      source: true
+    }}
+    effects={[
+      {
+        background: 'rgb:010A44'
+      },
+      {
+        color: 'rgb:2A005F',
+        colorize: '100'
+      },
+      {
+        gradientFade: 'symmetric'
+      }
+    ]}
+    overlays={[
+      {
+        publicId: 'samples/balloons',
+        width: 1200,
+        height: 630,
+        crop: 'fill',
+        effects: [
+          { opacity: 20 }
+        ]
+      },
+      {
+        width: 1000,
+        crop: 'fit',
+        text: {
+          color: 'white',
+          fontFamily: 'Merriweather',
+          fontSize: 58,
+          fontWeight: 'bold',
+          lineSpacing: 10,
+          lineSpacing: 10,
+          text: 'High-Performance Image & Video Delivery at Scale in Astro'
+        },
+        position: {
+          x: 100,
+          y: 100,
+          gravity: 'north_west'
+        },
+      },
+      {
+        publicId: 'samples/balloons',
+        width: 1000,
+        height: 2,
+        effects: [{
+          colorize: '100,co_white',
+          opacity: 70
+        }],
+        position: {
+          x: 100,
+          y: 175,
+          gravity: 'south_west'
+        },
+      },
+      {
+        width: 60,
+        crop: 'fit',
+        publicId: 'samples/logo',
+        position: {
+          x: 100,
+          y: 102,
+          gravity: 'south_west'
+        },
+      },
+      {
+        text: {
+          color: 'white',
+          fontFamily: 'Lato',
+          fontSize: 37,
+          fontWeight: 'bold',
+          text: 'Astro Cloudinary'
+        },
+        position: {
+          x: 180,
+          y: 100,
+          gravity: 'south_west'
+        },
+      },
+    ]}
+    alt="Astro Cloudinary High-Performance Image & Video Delivery at Scale in Astro over picture of a mountain"
+  />
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="getCldOgImageUrl">
+    <CodeBlock className="mt-6">
+```jsx copy showLineNumbers
+import { getCldOgImageUrl } from 'astro-cloudinary/helpers';
+
+const publicId = 'samples/balloons';
+const headline = 'High-Performance Image & Video Delivery at Scale in Astro';
+const tagline = 'Astro Cloudinary';
+const logoPublicId = 'samples/logo';
+
+const url = getCldOgImageUrl({
+  src: publicId,
+  effects: [
+    {
+      background: 'rgb:010A44'
+    },
+    {
+      color: 'rgb:2A005F',
+      colorize: '100'
+    },
+    {
+      gradientFade: 'symmetric'
+    }
+  ],
+  overlays: [
+    {
+      publicId,
+      width: 1200,
+      height: 630,
+      crop: 'fill',
+      effects: [
+        { opacity: 20 }
+      ]
+    },
+    {
+      width: 1000,
+      crop: 'fit',
+      text: {
+        color: 'white',
+        fontFamily: 'Merriweather',
+        fontSize: 58,
+        fontWeight: 'bold',
+        lineSpacing: 10,
+        lineSpacing: 10,
+        text: headline
+      },
+      position: {
+        x: 100,
+        y: 100,
+        gravity: 'north_west'
+      },
+    },
+    {
+      publicId,
+      width: 1000,
+      height: 2,
+      effects: [{
+        colorize: '100,co_white',
+        opacity: 70
+      }],
+      position: {
+        x: 100,
+        y: 175,
+        gravity: 'south_west'
+      },
+    },
+    {
+      width: 60,
+      crop: 'fit',
+      publicId: logoPublicId,
+      position: {
+        x: 100,
+        y: 102,
+        gravity: 'south_west'
+      },
+    },
+    {
+      text: {
+        color: 'white',
+        fontFamily: 'Lato',
+        fontSize: 37,
+        fontWeight: 'bold',
+        text: tagline
+      },
+      position: {
+        x: 180,
+        y: 100,
+        gravity: 'south_west'
+      },
+    },
+  ]
+})
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Learn More
+* [Social Media Card Templates](/templates/social-media-cards)
+* [getCldOgImageUrl Configuration](/getcldogimageurl/configuration)

@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.7...v1.1.0) (2024-10-01)
+
+
+### Features
+
+* Fixes JS Render Blocking ([#34](https://github.com/colbyfayock/astro-cloudinary/issues/34)) ([eb3a8ff](https://github.com/colbyfayock/astro-cloudinary/commit/eb3a8ff6529a0e17d4138c2a7fc3ae9c249bc1d7))
+
 ## [1.0.7](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.6...v1.0.7) (2024-10-01)
 
 
