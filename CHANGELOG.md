@@ -1,3 +1,17 @@
+## [1.1.2](https://github.com/colbyfayock/astro-cloudinary/compare/v1.1.1...v1.1.2) (2024-10-14)
+
+
+### Bug Fixes
+
+* bumping unpic ([#47](https://github.com/colbyfayock/astro-cloudinary/issues/47)) ([69bc7e1](https://github.com/colbyfayock/astro-cloudinary/commit/69bc7e184fe0cd0235fa326d6a1ba80df985f571))
+
+## [1.1.1](https://github.com/colbyfayock/astro-cloudinary/compare/v1.1.0...v1.1.1) (2024-10-14)
+
+
+### Bug Fixes
+
+* bump @cloudinary-util/url-loader from 5.10.2 to 5.10.5 ([#43](https://github.com/colbyfayock/astro-cloudinary/issues/43)) ([81956d9](https://github.com/colbyfayock/astro-cloudinary/commit/81956d95c879ecbc75e4f36d520c2a9afd96391f))
+
 # [1.1.0](https://github.com/colbyfayock/astro-cloudinary/compare/v1.0.7...v1.1.0) (2024-10-01)
 
 
