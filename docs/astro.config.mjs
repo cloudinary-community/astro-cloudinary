@@ -166,6 +166,10 @@ export default defineConfig({
           label: 'Guides',
           items: [
             {
+              label: 'Delivering Remote Images',
+              slug: 'guides/delivering-remote-images'
+            },
+            {
               label: 'Image Optimization',
               slug: 'guides/image-optimization'
             },
@@ -188,10 +192,6 @@ export default defineConfig({
             {
               label: 'Uploading Images & Videos',
               slug: 'guides/uploading-images-and-videos'
-            },
-            {
-              label: 'Delivering Remote Images',
-              slug: 'guides/delivering-remote-images'
             },
           ]
         },

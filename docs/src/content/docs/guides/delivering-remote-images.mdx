@@ -17,16 +17,29 @@ Astro Cloudinary provides two powerful methods for fetching, optimizing, and del
 
 ## Method 1: Using the Fetch API
 
-The Fetch API allows you to deliver remote images on-the-fly through Cloudinary, applying transformations as needed. This method is ideal for dynamically accessing and transforming images from external sources without storing them in your Cloudinary account.
+The Fetch API allows you to deliver remote images on-the-fly through Cloudinary, applying transformations as needed. This method is ideal for dynamically accessing and transforming images from external sources.
 
 ### Basic Usage
 
 To fetch a remote image, you need to include the full URL of the image in the `src` prop and set `deliveryType="fetch"`.
 
+<HeaderImage>
+<CldImage
+src="https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F4%2F47%2FPNG_transparency_demonstration_1.png"
+width="960"
+height="600"
+crop="fill"
+deliveryType="fetch"
+alt="Remote image with Cloudinary logo overlay"
+sizes="50vw"
+/>
+</HeaderImage>
+
 <Tabs>
   <TabItem label="CldImage">
     <CodeBlock>
 ```jsx copy
+
 import { CldImage } from 'astro-cloudinary';
 
 <CldImage
@@ -122,7 +135,7 @@ When you set `deliveryType="fetch"` and provide a full URL as the `src` prop, As
 2. Apply any specified transformations
 3. Deliver the optimized image
 
-This process happens on-the-fly, allowing you to apply Cloudinary's transformations and optimizations to any image on the web without storing it in your account.
+This process happens on-the-fly, allowing you to apply Cloudinary's transformations and optimizations to any image on the web.
 
 ### Security Considerations
 
@@ -239,7 +252,7 @@ const imageUrl = getCldImageUrl({
 ## Choosing Between Fetch API and Auto Upload Mapping
 
 - Use **Fetch API** when:
-  - You need to dynamically access and transform images without storing them.
+  - You need to dynamically access and transform images.
   - You want to optimize third-party images that you don't own or control.
   - You need to apply transformations to images on-the-fly without permanent storage.
 
