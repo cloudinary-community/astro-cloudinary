@@ -25,13 +25,11 @@ To fetch a remote image, you need to include the full URL of the image in the `s
 
 <HeaderImage>
 <CldImage
-src="https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F4%2F47%2FPNG_transparency_demonstration_1.png"
-width="960"
-height="600"
-crop="fill"
-deliveryType="fetch"
-alt="Remote image with Cloudinary logo overlay"
-sizes="50vw"
+  width="960"
+  height="600"
+  src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg"
+  deliveryType="fetch"
+  alt="A remote image"
 />
 </HeaderImage>
 
@@ -45,9 +43,8 @@ import { CldImage } from 'astro-cloudinary';
 <CldImage
   width="960"
   height="600"
-  src="https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png"
+  src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg"
   deliveryType="fetch"
-  sizes="100vw"
   alt="A remote image"
 />
 ```
@@ -61,7 +58,7 @@ import { getCldImageUrl } from 'astro-cloudinary/helpers';
 const imageUrl = getCldImageUrl({
   width: 960,
   height: 600,
-  src: 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png',
+  src: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg',
   deliveryType: 'fetch'
 });
 ```
@@ -72,12 +69,27 @@ const imageUrl = getCldImageUrl({
 This will result in a URL similar to:
 
 ```
-https://res.cloudinary.com/demo/image/fetch/https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png
+https://res.cloudinary.com/demo/image/fetch/h_600,w_960/https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg
 ```
 
 ### Advanced Usage with Transformations
 
 You can apply Cloudinary transformations to fetched images just like you would with uploaded images. This allows you to resize, crop, apply effects, and more to remote images on-the-fly.
+
+<HeaderImage>
+<CldImage
+  width="300"
+  height="300"
+  src="https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png"
+  deliveryType="fetch"
+  crop="fill"
+  gravity="face"
+  radius="max"
+  quality="auto"
+  fetchFormat="auto"
+  alt="A transformed remote image"
+/>
+</HeaderImage>
 
 <Tabs>
   <TabItem label="CldImage">
@@ -88,11 +100,11 @@ import { CldImage } from 'astro-cloudinary';
 <CldImage
   width="300"
   height="300"
-  src="https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png"
+  src="https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png"
   deliveryType="fetch"
-  crop="thumb"
-  gravity="auto"
-  effect="sepia"
+  crop="fill"
+  gravity="face"
+  radius="max"
   quality="auto"
   fetchFormat="auto"
   alt="A transformed remote image"
@@ -106,13 +118,13 @@ import { CldImage } from 'astro-cloudinary';
 import { getCldImageUrl } from 'astro-cloudinary/helpers';
 
 const imageUrl = getCldImageUrl({
-  width: 300,
-  height: 300,
-  src: 'https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png',
+  width: 960,
+  height: 600,
+  src: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg',
   deliveryType: 'fetch',
-  crop: 'thumb',
-  gravity: 'auto',
-  effect: 'sepia',
+  crop: 'fill',
+  gravity: 'face',
+  radius: 'max',
   quality: 'auto',
   fetchFormat: 'auto'
 });
@@ -124,7 +136,7 @@ const imageUrl = getCldImageUrl({
 This will result in a URL similar to:
 
 ```
-https://res.cloudinary.com/demo/image/fetch/c_thumb,e_sepia,f_auto,g_auto,h_300,q_auto,w_300/https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png
+https://res.cloudinary.com/demo/image/fetch/c_fill,g_face,h_300,w_300/r_max/f_auto/https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png
 ```
 
 ### How It Works
