@@ -33,8 +33,8 @@ importers:
         specifier: 5.10.5
         version: 5.10.5
       '@cloudinary-util/util':
-        specifier: ^3.3.2
-        version: 3.3.2
+        specifier: ^4.0.0
+        version: 4.0.0
       '@cloudinary/url-gen':
         specifier: ^1.20.0
         version: 1.20.0
@@ -316,6 +316,9 @@ packages:
 
   '@cloudinary-util/util@3.3.2':
     resolution: {integrity: sha512-Cc0iFxzfl7fcOXuznpeZFGYC885Of/vDgccRDnhTe/8Rf8YKv2PjLtezyo0VgmdA/CpeZy29NCXAsf6liokbwg==}
+
+  '@cloudinary-util/util@4.0.0':
+    resolution: {integrity: sha512-S4xcou/3A7l5o+bcKlw2VHBNgwups7/0lbVDT/cO5YmtrcEYXgj6LGmwnjvpTm/x571VPVN8x5jWdT3rLZiKJQ==}
 
   '@cloudinary/transformation-builder-sdk@1.14.1':
     resolution: {integrity: sha512-z49To4r3byg7zHsOGKsw/nHef5B9W3wSBdDsGoY7JOj75kbvmSlP4MCkS0JU3Bv57EvYYw5ymalPz+bvRXmPlA==}
@@ -4835,6 +4838,8 @@ snapshots:
       zod: 3.23.8
 
   '@cloudinary-util/util@3.3.2': {}
+
+  '@cloudinary-util/util@4.0.0': {}
 
   '@cloudinary/transformation-builder-sdk@1.14.1':
     dependencies:
