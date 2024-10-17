@@ -1,0 +1,284 @@
+---
+title: Delivering Remote Images
+description: Fetching and optimizing remote images with Astro Cloudinary
+head:
+  - tag: title
+    content: Delivering Remote Images - Astro Cloudinary
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+
+
+Astro Cloudinary provides two powerful methods for fetching, optimizing, and delivering remote images through Cloudinary's transformation pipeline: the Fetch API and Auto Upload Mapping. These features are particularly useful when you want to fetch and optimize external images without explicitly storing them in your Cloudinary account.
+
+## Method 1: Using the Fetch API
+
+The Fetch API allows you to deliver remote images on-the-fly through Cloudinary, applying transformations as needed. This method is ideal for dynamically accessing and transforming images from external sources.
+
+### Basic Usage
+
+To fetch a remote image, you need to include the full URL of the image in the `src` prop and set `deliveryType="fetch"`.
+
+<HeaderImage>
+<CldImage
+  width="960"
+  height="600"
+  src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg"
+  deliveryType="fetch"
+  alt="A remote image"
+/>
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="CldImage">
+    <CodeBlock>
+```jsx copy
+
+import { CldImage } from 'astro-cloudinary';
+
+<CldImage
+  width="960"
+  height="600"
+  src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg"
+  deliveryType="fetch"
+  alt="A remote image"
+/>
+```
+    </CodeBlock>
+  </TabItem>
+  <TabItem label="getCldImageUrl">
+    <CodeBlock>
+```jsx copy
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+const imageUrl = getCldImageUrl({
+  width: 960,
+  height: 600,
+  src: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg',
+  deliveryType: 'fetch'
+});
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+This will result in a URL similar to:
+
+```
+https://res.cloudinary.com/demo/image/fetch/h_600,w_960/https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg
+```
+
+### Advanced Usage with Transformations
+
+You can apply Cloudinary transformations to fetched images just like you would with uploaded images. This allows you to resize, crop, apply effects, and more to remote images on-the-fly.
+
+<HeaderImage>
+<CldImage
+  width="300"
+  height="300"
+  src="https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png"
+  deliveryType="fetch"
+  crop="fill"
+  gravity="face"
+  radius="max"
+  quality="auto"
+  fetchFormat="auto"
+  alt="A transformed remote image"
+/>
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="CldImage">
+    <CodeBlock>
+```jsx copy
+import { CldImage } from 'astro-cloudinary';
+
+<CldImage
+  width="300"
+  height="300"
+  src="https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png"
+  deliveryType="fetch"
+  crop="fill"
+  gravity="face"
+  radius="max"
+  quality="auto"
+  fetchFormat="auto"
+  alt="A transformed remote image"
+/>
+```
+    </CodeBlock>
+  </TabItem>
+  <TabItem label="getCldImageUrl">
+    <CodeBlock>
+```jsx copy
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+const imageUrl = getCldImageUrl({
+  width: 960,
+  height: 600,
+  src: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg',
+  deliveryType: 'fetch',
+  crop: 'fill',
+  gravity: 'face',
+  radius: 'max',
+  quality: 'auto',
+  fetchFormat: 'auto'
+});
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+This will result in a URL similar to:
+
+```
+https://res.cloudinary.com/demo/image/fetch/c_fill,g_face,h_300,w_300/r_max/f_auto/https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png
+```
+
+### How It Works
+
+When you set `deliveryType="fetch"` and provide a full URL as the `src` prop, Astro Cloudinary constructs a special URL that tells Cloudinary to:
+
+1. Fetch the image from the specified URL
+2. Apply any specified transformations
+3. Deliver the optimized image
+
+This process happens on-the-fly, allowing you to apply Cloudinary's transformations and optimizations to any image on the web.
+
+### Security Considerations
+
+To prevent abuse and ensure secure usage of the Fetch API:
+
+1. Configure your Cloudinary account to only fetch images from trusted domains:
+   - Log in to your Cloudinary Console
+   - Navigate to Settings > Security
+   - In the "Allowed fetch domains" section, add the domains you want to allow
+   - Save your changes
+
+2. Use signed URLs for added security:
+   - Enable signed URLs in your Cloudinary account settings
+   - Generate signed URLs using Cloudinary's SDKs or API
+
+3. Be cautious when fetching images from user-provided URLs to prevent potential security risks
+
+### Best Practices for Fetch API
+
+1. **Use `f_auto` and `q_auto`**: Add `fetchFormat="auto"` and `quality="auto"` to your image requests for optimal format and quality.
+
+2. **Cache-Control**: Cloudinary sets a Cache-Control header of 1 year by default for fetched images. Adjust this using the `cacheControl` option if needed.
+
+3. **Error Handling**: Cloudinary returns a placeholder image if the remote image can't be fetched. Customize this behavior using the `defaultImage` option.
+
+4. **URL Encoding**: Ensure that special characters in remote URLs are properly encoded to avoid issues.
+
+5. **Responsive Images**: Use the `sizes` prop along with `width` and `height` to create responsive images that adapt to different screen sizes.
+
+By leveraging the Fetch API, you can easily optimize and transform remote images without the need to upload them to your Cloudinary account, providing flexibility and efficiency in your image delivery workflow.
+
+## Method 2: Auto Upload Mapping
+
+Auto Upload Mapping allows you to automatically upload remote images to your Cloudinary account when they're first accessed, making them available for future use with all of Cloudinary's features. This method is particularly useful when you have a large number of images hosted on another server that you want to gradually migrate to Cloudinary.
+
+### How It Works
+
+When you access an image using the configured folder, Cloudinary will:
+
+1. Check if the image exists in your account
+2. If not, it will fetch the image from the mapped URL
+3. Upload the image to your Cloudinary account
+4. Apply any specified transformations
+5. Deliver the optimized image
+
+This process happens only on the first request. Subsequent requests will use the uploaded image directly from your Cloudinary account, providing faster delivery and full access to Cloudinary's transformation capabilities.
+
+### Configuration
+
+To set up Auto Upload Mapping:
+
+1. Log in to your Cloudinary Console
+2. Navigate to Settings > Upload
+3. Find the "Auto upload mapping" section
+4. Click "Add mapping"
+5. Set up your folder and URL prefix:
+   - Folder: e.g., "remote_images" (this will be the folder in your Cloudinary account)
+   - URL prefix: The base URL of your remote images (e.g., "https://example.com/images/")
+6. Click "Save"
+
+Here's a video tutorial demonstrating the process:
+
+<iframe width="300" height="550" src="https://www.youtube.com/embed/LJhsn5A0PFE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Usage
+
+Once configured, you can use the images as if they were already in your Cloudinary account:
+
+<Tabs>
+  <TabItem label="CldImage">
+    <CodeBlock>
+```jsx copy
+import { CldImage } from 'astro-cloudinary';
+
+<CldImage
+  width="960"
+  height="600"
+  src="remote_images/sample.jpg"
+  sizes="100vw"
+  alt="An auto-uploaded image"
+/>
+```
+    </CodeBlock>
+  </TabItem>
+  <TabItem label="getCldImageUrl">
+    <CodeBlock>
+```jsx copy
+import { getCldImageUrl } from 'astro-cloudinary/helpers';
+
+const imageUrl = getCldImageUrl({
+  width: 960,
+  height: 600,
+  src: 'remote_images/sample.jpg'
+});
+```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+### Benefits of Auto Upload Mapping
+
+1. **Gradual Migration**: Easily move your images to Cloudinary without the need for a bulk upload.
+2. **Automatic Optimization**: Images are automatically optimized when they're first accessed.
+3. **Seamless Integration**: Use your existing URL structure while leveraging Cloudinary's features.
+4. **On-Demand Processing**: Images are only uploaded when they're actually needed, saving storage space.
+
+### Best Practices for Auto Upload Mapping
+
+1. **Folder Structure**: Choose a logical folder structure that mirrors your existing setup for easy management.
+2. **Backup**: Ensure you maintain a backup of your original images, even though Cloudinary will store a copy.
+3. **Monitoring**: Keep an eye on your Cloudinary usage to manage costs as images are automatically uploaded.
+4. **Security**: Only map trusted sources to prevent unauthorized uploads to your account.
+
+## Choosing Between Fetch API and Auto Upload Mapping
+
+- Use **Fetch API** when:
+  - You need to dynamically access and transform images.
+  - You want to optimize third-party images that you don't own or control.
+  - You need to apply transformations to images on-the-fly without permanent storage.
+
+- Use **Auto Upload Mapping** when:
+  - You want to gradually migrate a large number of images to Cloudinary.
+  - You need to maintain your existing URL structure while using Cloudinary.
+  - You want to automatically optimize and store remote images in your Cloudinary account.
+
+Both methods offer powerful ways to work with remote images, allowing you to leverage Cloudinary's extensive transformation and optimization capabilities.
+
+## Learn More
+* [Cloudinary Fetch API Documentation](https://cloudinary.com/documentation/fetch_remote_images)
+* [Cloudinary Auto Upload Mapping Documentation](https://cloudinary.com/documentation/upload_images#auto_upload_remote_files)
+* [Lazy Migration with Auto Upload](https://cloudinary.com/documentation/migration#lazy_migration_with_auto_upload)
+* [CldImage Component](/cldimage/basic-usage)
+* [getCldImageUrl Helper](/getcldimageurl/basic-usage)
+* [Video Tutorial on Auto Upload Mapping](https://www.youtube.com/watch?v=LJhsn5A0PFE)
