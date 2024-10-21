@@ -23,18 +23,17 @@ The `CldUploadWidget` component is a wrapper around Cloudinary's Upload Widget, 
 
 Here's a simple example of how to use the `CldUploadWidget`:
 
-<CodeBlock>
+<CodeBlock alwaysExpanded>
 ```astro copy
-
 import { CldUploadWidget } from 'astro-cloudinary';
 
-<CldUploadWidget uploadPreset="your_upload_preset">
-  <Button>Upload to Cloudinary</Button>
+<CldUploadWidget uploadPreset="<Your Upload Preset>">
+  <button>Upload to Cloudinary</button>
 </CldUploadWidget>
 ```
 </CodeBlock>
 
-Replace "your_upload_preset" with your actual Cloudinary upload preset.
+Replace `<Your Upload Preset>` with your actual Cloudinary upload preset.
 
 ### Live Example
 Here's a live example of the CldUploadWidget in action:
@@ -52,14 +51,13 @@ For enhanced security, you can use signed uploads. This requires setting up a se
 
 <CodeBlock>
 ```astro copy
-
 import { CldUploadWidget } from 'astro-cloudinary';
 
 <CldUploadWidget
-  uploadPreset="your_upload_preset"
+  uploadPreset="<Your Upload Preset>"
   signatureEndpoint="/api/sign-cloudinary-params"
 >
-  <Button>Secure Upload</Button>
+  <button>Secure Upload</button>
 </CldUploadWidget>
 ```
 </CodeBlock>
@@ -70,19 +68,20 @@ You'll need to create an API route to handle the signature. Here's an example of
 ```typescript copy
 import type { APIRoute } from "astro";
 import { v2 as cloudinary } from "cloudinary";
+
 export const post: APIRoute = async ({ request }) => {
-const body = await request.json();
-const { paramsToSign } = body;
-const signature = cloudinary.utils.api_sign_request(
-paramsToSign,
-process.env.CLOUDINARY_API_SECRET
-);
-return new Response(JSON.stringify({ signature }), {
-status: 200,
-headers: {
-"Content-Type": "application/json",
-},
-});
+  const body = await request.json();
+  const { paramsToSign } = body;
+  const signature = cloudinary.utils.api_sign_request(
+    paramsToSign,
+    process.env.CLOUDINARY_API_SECRET
+  );
+  return new Response(JSON.stringify({ signature }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 ```
 </CodeBlock>
