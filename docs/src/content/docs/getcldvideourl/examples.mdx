@@ -5,11 +5,219 @@ head:
   - tag: title
     content: getCldVideoUrl Examples - Astro Cloudinary
 ---
-import { CldImage } from '../../../../../astro-cloudinary';
-import { getCldImageUrl } from '../../../../../astro-cloudinary/helpers';
+import { getCldVideoUrl, getCldImageUrl } from "../../../../../astro-cloudinary/helpers";
 
-import CodeBlock from '../../../components/CodeBlock.astro';
-import HeaderImage from '../../../components/HeaderImage.astro';
-import ExamplesCldOgImage from '../../../components/ExamplesCldOgImage.astro';
+import CodeBlock from "../../../components/CodeBlock.astro";
+import ImageGrid from "../../../components/ImageGrid.astro";
+import HeaderImage from "../../../components/HeaderImage.astro";
 
-Coming soon...
+## Basic Usage
+
+Standard Cloudinary Video Player with playback.
+
+<ImageGrid columns={1}>
+  <video
+    src={getCldVideoUrl({
+      src: "samples/elephants",
+      width: "1920",
+      height: "1080"
+    })}
+    width="1920"
+    height="1080"
+    controls
+    muted
+  />
+</ImageGrid>
+
+
+<CodeBlock>
+```jsx
+---
+import { getCldVideoUrl } from 'astro-cloudinary/helpers';
+---
+const url = getCldVideoUrl({
+  src: "<PublicID>"
+})
+```
+</CodeBlock>
+
+## Transformations
+
+Cloudinary provides the following transformations along with the getCldVideoUrl function.
+
+### Cropping & Resizing
+
+Crop and resize the video to fit the container.
+
+<ImageGrid columns={1}>
+    <video
+      src={getCldVideoUrl({
+        src: "samples/sea-turtle",
+        width: 500,
+        height: 500,
+        crop: 'fill',
+        gravity: 'auto'
+      })}
+      height= "500"
+      width= "500"
+      controls
+      muted
+    />
+</ImageGrid>
+
+<CodeBlock>
+```jsx
+---
+import { getCldVideoUrl } from 'astro-cloudinary';
+---
+const url = getCldVideoUrl({
+  src: "<PublicID>",
+  width: 500,
+  height: 500,
+  crop: 'fill',
+  gravity: 'auto'
+})
+```
+</CodeBlock>
+
+### Text Overlays
+
+Place text over the video (Ex: subtitles).
+
+<ImageGrid columns={1}>
+  <video
+    src={getCldVideoUrl({
+      src: "samples/elephants",
+      overlays: [
+        {
+          position: {
+            x: 150,
+            y: 125,
+            angle: -20,
+            gravity: 'south_east',
+          },
+          text: {
+            color: 'magenta',
+            fontFamily: 'Source Sans Pro',
+            fontSize: 150,
+            fontWeight: 'black',
+            text: 'WITH STYLE'
+          }
+        },
+        {
+          position: {
+            x: 140,
+            y: 140,
+            angle: -20,
+            gravity: 'south_east',
+          },
+          text: {
+            color: 'white',
+            fontFamily: 'Source Sans Pro',
+            fontSize: 150,
+            fontWeight: 'black',
+            text: 'WITH STYLE'
+          }
+        },
+      ]
+    })}
+    width="1920"
+    height="1080"
+    controls
+    muted
+  />
+</ImageGrid>
+
+<CodeBlock>
+```jsx
+---
+import { getCldVideoUrl } from 'astro-cloudinary';
+---
+const url = getCldVideoUrl({
+  src: "<PublicID>",
+  overlays: [
+    {
+      position: {
+        x: 150,
+        y: 125,
+        angle: -20,
+        gravity: 'south_east',
+      },
+      text: {
+        color: 'magenta',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 150,
+        fontWeight: 'black',
+        text: 'WITH STYLE'
+      }
+    },
+    {
+      position: {
+        x: 140,
+        y: 140,
+        angle: -20,
+        gravity: 'south_east',
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 150,
+        fontWeight: 'black',
+        text: 'WITH STYLE'
+      }
+    },
+  ]
+})
+```
+</CodeBlock>
+
+### Image Overlays
+
+Place an image over the video (Ex: watermarks).
+
+<ImageGrid columns={1}>
+  <video
+    src={getCldVideoUrl({
+      src: "samples/elephants",
+      overlays: [
+        {
+          position: {
+            x: 40,
+            y: 40,
+            gravity: 'north_east',
+          },
+          publicId: "samples/cloudinary-icon",
+          width: 150,
+          height: 150
+        }
+      ]
+    })}
+    width="1920"
+    height="1080"
+    controls
+    muted
+  />
+</ImageGrid>
+
+<CodeBlock>
+```jsx
+---
+import { getCldVideoUrl } from 'astro-cloudinary';
+---
+const url = getCldVideoUrl({
+  src: "<PublicVideoID>",
+  overlays: [
+    {
+      position: {
+        x: 40,
+        y: 40,
+        gravity: 'north_east',
+      },
+      publicId: "<PublicPhotoID>",
+      width: 150,
+      height: 150
+    }
+  ]
+})
+```
+</CodeBlock>
