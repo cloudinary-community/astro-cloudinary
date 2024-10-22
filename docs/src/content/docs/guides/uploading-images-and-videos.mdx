@@ -1,11 +1,112 @@
 ---
 title: Uploading Images & Videos
-description: Uploading Images & Videos
+description: Learn how to upload images and videos in Astro with Cloudinary
 head:
   - tag: title
     content: Uploading Images & Videos - Astro Cloudinary
 ---
-import { CldImage } from '../../../../../astro-cloudinary';
+import { CldUploadWidget } from '../../../../../astro-cloudinary';
 
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
+import Button from '../../../components/Button.astro';
+import DemoUploadWidgetSigned from '../../../components/DemoUploadWidgetSigned.astro';
+
+
+Astro Cloudinary provides a seamless way to integrate Cloudinary's powerful upload capabilities into your Astro project. This guide will show you how to use the `CldUploadWidget` component to add upload functionality to your application.
+
+## CldUploadWidget Component
+
+The `CldUploadWidget` component is a wrapper around Cloudinary's Upload Widget, specifically optimized for Astro projects. It allows you to easily add upload functionality with minimal configuration.
+
+### Basic Usage
+
+Here's a simple example of how to use the `CldUploadWidget`:
+
+<CodeBlock alwaysExpanded>
+```astro copy
+import { CldUploadWidget } from 'astro-cloudinary';
+
+<CldUploadWidget uploadPreset="<Your Upload Preset>">
+  <button>Upload to Cloudinary</button>
+</CldUploadWidget>
+```
+</CodeBlock>
+
+Replace `<Your Upload Preset>` with your actual Cloudinary upload preset.
+
+### Live Example
+Here's a live example of the CldUploadWidget in action:
+
+<DemoUploadWidgetSigned uploadPreset="astro-cloudinary-signed" signatureEndpoint="/api/sign-cloudinary-params">
+  <Button class="cursor-pointer">Upload to Cloudinary</Button>
+</DemoUploadWidgetSigned>
+
+:::note
+All files uploaded in this demo will be deleted.
+:::
+
+### Signed Uploads
+For enhanced security, you can use signed uploads. This requires setting up a server-side endpoint to sign the upload parameters.
+
+<CodeBlock>
+```astro copy
+import { CldUploadWidget } from 'astro-cloudinary';
+
+<CldUploadWidget
+  uploadPreset="<Your Upload Preset>"
+  signatureEndpoint="/api/sign-cloudinary-params"
+>
+  <button>Secure Upload</button>
+</CldUploadWidget>
+```
+</CodeBlock>
+
+You'll need to create an API route to handle the signature. Here's an example of how your API route might look:
+
+<CodeBlock>
+```typescript copy
+import type { APIRoute } from "astro";
+import { v2 as cloudinary } from "cloudinary";
+
+export const post: APIRoute = async ({ request }) => {
+  const body = await request.json();
+  const { paramsToSign } = body;
+  const signature = cloudinary.utils.api_sign_request(
+    paramsToSign,
+    process.env.CLOUDINARY_API_SECRET
+  );
+  return new Response(JSON.stringify({ signature }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+```
+</CodeBlock>
+
+## Configuration Options
+
+The `CldUploadWidget` component accepts several props for customization:
+
+- `uploadPreset`: (Required) Your Cloudinary upload preset
+- `signatureEndpoint`: (Optional) Endpoint for signed uploads
+- `onUpload`: Callback function triggered after a successful upload
+- `onError`: Callback function triggered if an error occurs during upload
+
+For a full list of options, refer to the [CldUploadWidget Configuration](/clduploadwidget/configuration) page.
+
+## Best Practices and Tips
+
+1. Always use upload presets to control what can be uploaded to your Cloudinary account.
+2. Implement signed uploads for enhanced security, especially in production environments.
+3. Use the `onUpload` callback to handle successful uploads, such as displaying the uploaded image or updating your application state.
+4. Customize the upload widget to match your application's design using CSS.
+5. Consider implementing upload restrictions (file types, sizes) using Cloudinary's upload presets.
+
+## Learn More
+* [CldUploadWidget Basic Usage](/clduploadwidget/basic-usage)
+* [CldUploadWidget Configuration](/clduploadwidget/configuration)
+* [Cloudinary Upload Widget Documentation](https://cloudinary.com/documentation/upload_widget)
+* [Cloudinary Upload API Documentation](https://cloudinary.com/documentation/image_upload_api_reference)
