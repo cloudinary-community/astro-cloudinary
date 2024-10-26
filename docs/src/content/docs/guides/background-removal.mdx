@@ -1,0 +1,127 @@
+---
+title: Background Removal in Astro
+description: Removing a Background from an Image - Astro Cloudinary
+head:
+  - tag: title
+    content: Background Removal - Astro Cloudinary
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { CldImage } from '../../../../../astro-cloudinary';
+import { getCldImageUrl } from '../../../../../astro-cloudinary/helpers';
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+
+Astro Cloudinary supports background removal and modification.
+
+The CldImage component removes backgrounds from images using the `removeBackground` prop.
+
+::tip
+  Removing backgrounds requires enabling the [Cloudinary AI Background Removal Add-On](https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon) which includes a free tier for getting started.
+::tip
+
+## Examples
+
+### Background Removal
+
+<HeaderImage layout="grid">
+  <CldImage
+    src={getCldImageUrl({
+      src: 'samples/animals/three-dogs',
+    })}
+    width="960"
+    height="600"
+    alt=""
+    sizes="50vw"
+  />
+  <CldImage
+    src={getCldImageUrl({
+      src: 'samples/animals/three-dogs',
+      removeBackground: true
+    })}
+    width="960"
+    height="600"
+    preserveTransformations
+    alt=""
+    sizes="50vw"
+  />
+</HeaderImage>
+
+<Tabs>
+  <TabItem label="CldImage">
+    <CodeBlock>
+        ```jsx copy
+        import { CldImage } from 'astro-cloudinary';
+    
+        <CldImage
+          width="960"
+          height="600"
+          src="<Your Public ID>"
+          sizes="100vw"
+          removeBackground
+          alt=""
+        />
+        ```
+    </CodeBlock>
+  </TabItem>
+  <TabItem label="getCldImageUrl">
+    <CodeBlock>
+      ```jsx copy
+      import { getCldImageUrl } from 'astro-cloudinary';
+  
+      getCldImageUrl({
+        src: '<Your Public ID>',
+        removeBackground: true
+      })
+      ```
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+### Color Change
+
+Use `background` to specify a background color. You can also use `underlay: "<Your Public ID>"` to specify an image to use as a background.
+
+::tip
+  You must use `removeBackground` before to remove the initial background. Also check out [Generative AI Background Replace](#generative-replace-background) to replace the background with an AI prompt-based image!
+::tip
+
+<HeaderImage layout="grid">
+  <CldImage
+    src={getCldImageUrl({
+      src: 'samples/animals/three-dogs'
+    })}
+    width="960"
+    height="600"
+    alt=""
+    sizes="50vw"
+  />
+  <CldImage
+    src={getCldImageUrl({
+      src: 'samples/animals/three-dogs',
+      removeBackground: true,
+      background: 'blueviolet'
+    })}
+    width="960"
+    height="600"
+    preserveTransformations
+    alt=""
+    sizes="50vw"
+  />
+</HeaderImage>
+
+<CodeBlock>
+  ```jsx copy
+  import { getCldImageUrl } from 'astro-cloudinary';
+
+  getCldImageUrl({
+    src: "<Your Public ID>",
+    removeBackground: true,
+    background: "blueviolet"
+  });
+  ```
+</CodeBlock>
+
+## Learn More
+* [CldImage](/cldimage/basic-usage)
+* [getCldImageUrl](/getcldimageurl/basic-usage)
