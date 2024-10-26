@@ -1,6 +1,6 @@
 ---
 title: Background Removal in Astro
-description: Removing a Background from an Image - Astro Cloudinary
+description: Remove a Background from an Image - Astro Cloudinary
 head:
   - tag: title
     content: Background Removal - Astro Cloudinary
@@ -16,9 +16,9 @@ Astro Cloudinary supports background removal and modification.
 
 The CldImage component removes backgrounds from images using the `removeBackground` prop.
 
-::tip
-  Removing backgrounds requires enabling the [Cloudinary AI Background Removal Add-On](https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon) which includes a free tier for getting started.
-::tip
+:::tip
+  Removing backgrounds requires enabling the [Cloudinary AI Background Removal Add-On](https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon), which includes a free tier for getting started.
+:::tip
 
 ## Examples
 
@@ -82,9 +82,9 @@ The CldImage component removes backgrounds from images using the `removeBackgrou
 
 Use `background` to specify a background color. You can also use `underlay: "<Your Public ID>"` to specify an image to use as a background.
 
-::tip
-  You must use `removeBackground` before to remove the initial background. Also check out [Generative AI Background Replace](#generative-replace-background) to replace the background with an AI prompt-based image!
-::tip
+:::tip
+  Check out [Generative AI Background Replace](#generative-replace-background) to replace the background with an AI prompt-based image!
+:::tip
 
 <HeaderImage layout="grid">
   <CldImage
@@ -109,6 +109,10 @@ Use `background` to specify a background color. You can also use `underlay: "<Yo
     sizes="50vw"
   />
 </HeaderImage>
+
+:::note
+  You must use `removeBackground` before `background` or `underlay` to remove the initial background. 
+:::
 
 <CodeBlock>
   ```jsx copy
