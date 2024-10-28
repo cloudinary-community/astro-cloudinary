@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@cloudinary-util/types": "1.5.7",
-    "@cloudinary-util/url-loader": "5.10.5",
+    "@cloudinary-util/url-loader": "5.10.6",
     "@cloudinary-util/util": "^3.3.2",
     "@cloudinary/url-gen": "^1.20.0",
     "@unpic/astro": "^0.0.47",
