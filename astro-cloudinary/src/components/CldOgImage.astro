@@ -4,9 +4,9 @@ import { getCldOgImageUrl } from "../helpers/getCldOgImageUrl";
 import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from "../constants/sizes";
 
 export type CldOgImageProps = CldImageProps & {
+	twitterTitle: string;
 	excludeTags?: Array<string>;
 	keys?: object;
-	twitterTitle?: string;
 };
 
 interface Props extends CldOgImageProps {}
@@ -18,6 +18,11 @@ const {
 	alt,
 	...props
 }: Props = Astro.props;
+
+// check if the twitter title exists
+if (!twitterTitle) {
+	throw new Error("twitterTitle is required for the CldOgImage component");
+}
 
 // We need to separately handle the width and the height to allow our user to pass in
 // a custom value, but also we need to know this at the component level so that we can
