@@ -45,6 +45,19 @@ export default defineConfig({
               ]
             },
             {
+              label: 'CldOgImage',
+              items: [
+                {
+                  label: 'Basic Usage',
+                  slug: 'cldogimage/basic-usage'
+                },
+                {
+                  label: 'Configuration',
+                  slug: 'cldogimage/configuration'
+                }
+              ]
+            },
+            {
               label: 'CldUploadWidget',
               items: [
                 {
