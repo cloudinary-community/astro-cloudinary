@@ -2,7 +2,7 @@
 import { type HTMLAttributes } from 'astro/types';
 import { type UnpicImageProps } from '@unpic/core';
 import { Image } from '@unpic/astro';
-import { transformationPlugins, type ConfigOptions, type ImageOptions } from '@cloudinary-util/url-loader';
+import { cloudinaryPluginKeys, type ConfigOptions, type ImageOptions } from '@cloudinary-util/url-loader';
 
 import { generateImageLoader } from '../lib/loader';
 
@@ -27,26 +27,13 @@ const CLOUDINARY_PROPS = [
   'format',
   'quality',
   'strictTransformations',
+  ...cloudinaryPluginKeys
 
   // Excluded props that are managed by the component
   // 'height',
   // 'src',
   // 'width'
 ];
-
-// Collect all of the valid CldImage props that should only
-// be applied to the URL construction and not applied to
-// the underlaying Image component
-
-transformationPlugins.forEach(({ props }: { props: Record<string, unknown> }) => {
-  Object.keys(props).forEach(prop => {
-    // If the prop already exists, flag it as a duplicate
-    if ( CLOUDINARY_PROPS.includes(prop) ) {
-      throw new Error(`Option ${prop} already exists!`);
-    }
-    CLOUDINARY_PROPS.push(prop);
-  });
-});
 
 // Collect all of the props that are intended to be passed
 // into the URL construction
@@ -100,7 +87,7 @@ if (className) {
   imageClassName = `${imageClassName} ${className}`;
 }
 ---
-<Image class={imageClassName} {...imageProps} />
+<Image class={imageClassName} {...imageProps} data-cldimage-src={props.src} />
 
 <script>
   import { pollForProcessingImage } from '@cloudinary-util/util';
@@ -122,7 +109,13 @@ if (className) {
 
     image?.dispatchEvent(customEvent);
 
-    if ( await pollForProcessingImage({ src: image.src }) ) {
+    const result = await pollForProcessingImage({ src: image.src })
+
+    if ( typeof result.error === 'string' && process.env.NODE_ENV === 'development' ) {
+      console.error(`[CldImage] Failed to load image ${image.dataset.cldimageSrc}: ${result.error}`)
+    }
+
+    if ( result.success ) {
       const key = `${Date.now()}${Math.random()}`;
       if ( image.src.includes('?') ) {
         image.src = `${image.src}?key=${key}`;
