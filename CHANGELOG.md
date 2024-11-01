@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/colbyfayock/astro-cloudinary/compare/v1.1.2...v1.2.0) (2024-11-01)
+
+
+### Features
+
+* Add CldOgImage component ([#60](https://github.com/colbyfayock/astro-cloudinary/issues/60)) ([7255ac2](https://github.com/colbyfayock/astro-cloudinary/commit/7255ac2a6d0e03f00c942f8b44f38972ac19c6af))
+
 ## [1.1.2](https://github.com/colbyfayock/astro-cloudinary/compare/v1.1.1...v1.1.2) (2024-10-14)
 
 
