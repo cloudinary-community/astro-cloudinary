@@ -5,19 +5,11 @@ import { OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT } from "../constants/sizes";
 
 export type CldOgImageProps = CldImageProps & {
 	twitterTitle: string;
-	excludeTags?: Array<string>;
-	keys?: object;
 };
 
 interface Props extends CldOgImageProps {}
 
-const {
-	excludeTags = [],
-	twitterTitle,
-	keys = {},
-	alt,
-	...props
-}: Props = Astro.props;
+const { twitterTitle, alt, ...props }: Props = Astro.props;
 
 // check if the twitter title exists
 if (!twitterTitle) {
