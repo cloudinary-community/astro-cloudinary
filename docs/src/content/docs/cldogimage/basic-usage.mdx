@@ -1,0 +1,166 @@
+---
+title: Getting Started with CldOgImage
+description: Auto generate OG images and the relevant tags in Astro with the CldOgImage component.
+ogImageTitle: CldOgImage
+head:
+  - tag: title
+    content: CldOgImage - Astro Cloudinary
+---
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+import DemoImageEvents from '../../../components/DemoImageEvents.astro';
+
+The CldOgImage component provides an easy way to deliver images from Cloudinary in an Astro app.
+
+With it comes access to more advanced features like dynamic cropping, background removal, overlays, and other Cloudinary transformations.
+
+As CldImage is a wrapper around the Unpic Image component, you also gain access to built-in Image component features that will work out-of-the-box like [Responsive Sizing](/guides/responsive-images).
+
+## Basic Usage
+
+The basic required props include `twitterTitle`, `src`, and `alt`:
+
+<HeaderImage>
+   <CldImage
+    src="cld-sample-4"
+    width="1870"
+    height="1250"
+    alt="A variety of colorful and appetizing breakfast dishes, including waffles, oatmeal, and fresh fruits, are arranged on a white surface, accompanied by various condiments and utensils."
+    sizes="100vw"
+  />
+</HeaderImage>
+
+> CldOgImage does not render an `<img>` tag, meaning it can't be visually embedded on a page. The following examples make use of the `<CldImage>` tag to showcase what's possible.
+
+<CodeBlock alwaysExpanded>
+```jsx
+---
+import { CldOgImage } from 'astro-cloudinary';
+---
+<CldOgImage
+  src="<Public ID>"
+  twitterTitle="<Title>"
+  alt="<Description>"
+/>
+```
+</CodeBlock>
+
+The resulting HTML will be applied to the Head of the document including all applicable [open graph tags](https://ogp.me/):
+
+```html copy
+<meta property="og:image" content="https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_1200,h_627,g_center/c_limit,w_1200/f_jpg/q_auto/v1/images/galaxy" />
+<meta property="og:image:secure_url" content="https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_1200,h_627,g_center/c_limit,w_1200/f_jpg/q_auto/v1/images/galaxy" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="twitter:title" content=" " />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://res.cloudinary.com/colbycloud-next-cloudinary/image/upload/c_fill,w_1200,h_627,g_center/c_limit,w_1200/f_webp/q_auto/v1/images/galaxy" />
+```
+
+The `src` property takes in a Cloudinary Public ID which includes the folder path along with the ID of the image itself.
+The `twitterTitle` should represent the title of the page and the `alt` value should be a text-based description
+of the image.
+
+## Additional Features
+
+You can further take advantage of Cloudinary features like replacing backgrounds with generative AI and text overlays by adding additional props:
+
+<HeaderImage>
+  <CldImage
+    src="cld-sample-5"
+    width="1870"
+    height="1250"
+    alt="A variety of colorful and appetizing breakfast dishes, including waffles, oatmeal, and fresh fruits, are arranged on a white surface, accompanied by various condiments and utensils."
+    sizes="100vw"
+    crop={{
+      type: 'fill',
+      source: true
+    }}
+    replaceBackground="cartoon outer space"
+    overlays={[
+      {
+        position: {
+          y: 40,
+          x: -10,
+          gravity: 'south',
+        },
+        text: {
+          color: 'magenta',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+      {
+        position: {
+          y: 50,
+          gravity: 'south',
+        },
+        text: {
+          color: 'white',
+          fontFamily: 'Source Sans Pro',
+          fontSize: 160,
+          fontWeight: 'black',
+          text: 'OUT OF THIS WORLD'
+        }
+      },
+    ]}
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldOgImage } from 'astro-cloudinary';
+---
+<CldOgImage
+  src="<Public ID>"
+  twitterTitle="<Title>"
+  alt="<Description>"
+  crop={{
+    type: 'fill',
+    source: true
+  }}
+  replaceBackground="cartoon outer space"
+  overlays={[
+    {
+      position: {
+        y: 40,
+        x: -10,
+        gravity: 'south',
+      },
+      text: {
+        color: 'magenta',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 160,
+        fontWeight: 'black',
+        text: 'OUT OF THIS WORLD'
+      }
+    },
+    {
+      position: {
+        y: 50,
+        gravity: 'south',
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Source Sans Pro',
+        fontSize: 160,
+        fontWeight: 'black',
+        text: 'OUT OF THIS WORLD'
+      }
+    },
+  ]}
+/>
+```
+</CodeBlock>
+
+[Check out more examples](/cldimage/examples) of what you can do with transformations in the CldImage docs because the CldOgImage supports all the params that the CldImage component does!
+
+## Learn More about CldOgImage with the CldImage docs
+* [Configuration](/cldimage/configuration)
+* [Examples](/cldimage/examples)
+\

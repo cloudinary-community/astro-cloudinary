@@ -157,7 +157,7 @@ Once installed and configured, from the root of your project run:
 pnpm dev
 ```
 
-The project will now be available at <https://localhost:4321> or the configured local port.
+The project will now be available at <http://localhost:4321> or the configured local port.
 
 
 ## Contributors

@@ -4,6 +4,11 @@ export {
 } from './CldImage.astro';
 
 export {
+  default as CldOgImage,
+  type CldOgImageProps
+} from './CldOgImage.astro';
+
+export {
   default as CldVideoPlayer,
   type CldVideoPlayerProps,
   type CldVideoPlayerPropsLogo
