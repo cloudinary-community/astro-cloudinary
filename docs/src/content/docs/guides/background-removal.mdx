@@ -18,7 +18,7 @@ The CldImage component removes backgrounds from images using the `removeBackgrou
 
 :::tip
   Removing backgrounds requires enabling the [Cloudinary AI Background Removal Add-On](https://cloudinary.com/documentation/cloudinary_ai_background_removal_addon), which includes a free tier for getting started.
-:::tip
+:::
 
 ## Examples
 
@@ -84,7 +84,7 @@ Use `background` to specify a background color. You can also use `underlay: "<Yo
 
 :::tip
   Check out [Generative AI Background Replace](#generative-replace-background) to replace the background with an AI prompt-based image!
-:::tip
+:::
 
 <HeaderImage layout="grid">
   <CldImage
@@ -110,11 +110,7 @@ Use `background` to specify a background color. You can also use `underlay: "<Yo
   />
 </HeaderImage>
 
-:::note
-  You must use `removeBackground` before `background` or `underlay` to remove the initial background. 
-:::
-
-<CodeBlock>
+<CodeBlock alwaysExpanded>
   ```jsx copy
   import { getCldImageUrl } from 'astro-cloudinary';
 
