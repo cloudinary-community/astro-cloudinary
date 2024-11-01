@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/colbyfayock/astro-cloudinary/compare/v1.2.0...v1.3.0) (2024-11-01)
+
+
+### Features
+
+* upgrading util to migrated definitions ([#63](https://github.com/colbyfayock/astro-cloudinary/issues/63)) ([e961137](https://github.com/colbyfayock/astro-cloudinary/commit/e96113775912cc562b1a622e32909a1ae49df148))
+
 # [1.2.0](https://github.com/colbyfayock/astro-cloudinary/compare/v1.1.2...v1.2.0) (2024-11-01)
 
 
