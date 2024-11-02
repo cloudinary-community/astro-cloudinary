@@ -193,6 +193,10 @@ export default defineConfig({
               label: 'Uploading Images & Videos',
               slug: 'guides/uploading-images-and-videos'
             },
+            {
+              label: 'Remove a Background from an Image',
+              slug: 'guides/background-removal'
+            },
           ]
         },
         {
