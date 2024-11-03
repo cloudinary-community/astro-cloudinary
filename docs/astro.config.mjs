@@ -166,6 +166,10 @@ export default defineConfig({
           label: 'Guides',
           items: [
             {
+              label: 'Background Removal',
+              slug: 'guides/background-removal'
+            },
+            {
               label: 'Delivering Remote Images',
               slug: 'guides/delivering-remote-images'
             },
@@ -192,10 +196,6 @@ export default defineConfig({
             {
               label: 'Uploading Images & Videos',
               slug: 'guides/uploading-images-and-videos'
-            },
-            {
-              label: 'Remove a Background from an Image',
-              slug: 'guides/background-removal'
             },
           ]
         },
