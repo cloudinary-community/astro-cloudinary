@@ -176,6 +176,9 @@ The project will now be available at <http://localhost:4321> or the configured l
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/RaghavMangla"><img src="https://avatars.githubusercontent.com/u/97332401?v=4?s=100" width="100px;" alt="Raghav Mangla"/><br /><sub><b>Raghav Mangla</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=RaghavMangla" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://dunkirk.sh"><img src="https://avatars.githubusercontent.com/u/92754843?v=4?s=100" width="100px;" alt="Kieran Klukas"/><br /><sub><b>Kieran Klukas</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=kcoderhtml" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/smv1256"><img src="https://avatars.githubusercontent.com/u/117322465?v=4?s=100" width="100px;" alt="S. M. V."/><br /><sub><b>S. M. V.</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=smv1256" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
 </table>
 
