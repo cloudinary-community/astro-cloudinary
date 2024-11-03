@@ -179,6 +179,10 @@ export default defineConfig({
           label: 'Guides',
           items: [
             {
+              label: 'Background Removal',
+              slug: 'guides/background-removal'
+            },
+            {
               label: 'Delivering Remote Images',
               slug: 'guides/delivering-remote-images'
             },
