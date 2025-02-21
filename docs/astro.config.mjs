@@ -7,11 +7,7 @@ import icon from "astro-icon";
 import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
-  output: 'hybrid',
-
-  experimental: {
-    contentLayer: true,
-  },
+  output: 'static',
 
   integrations: [
     starlight({
