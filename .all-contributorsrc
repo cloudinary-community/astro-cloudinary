@@ -85,6 +85,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "ooloth",
+      "name": "Michael Uloth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/625364?v=4",
+      "profile": "https://michaeluloth.com",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
