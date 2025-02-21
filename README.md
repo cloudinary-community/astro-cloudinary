@@ -178,6 +178,7 @@ The project will now be available at <http://localhost:4321> or the configured l
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/smv1256"><img src="https://avatars.githubusercontent.com/u/117322465?v=4?s=100" width="100px;" alt="S. M. V."/><br /><sub><b>S. M. V.</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=smv1256" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://michaeluloth.com"><img src="https://avatars.githubusercontent.com/u/625364?v=4?s=100" width="100px;" alt="Michael Uloth"/><br /><sub><b>Michael Uloth</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=ooloth" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
