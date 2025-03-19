@@ -3,7 +3,7 @@ import type { Props } from '@astrojs/starlight/props'
 import Default from '@astrojs/starlight/components/Head.astro'
 import { CldOgImage } from '../../../astro-cloudinary';
 
-const { slug, entry } = Astro.props;
+const { slug, entry } = Astro.locals.starlightRoute;
 const { title, ogImageTitle } = entry.data;
 ---
 <Default {...Astro.props}><slot /></Default>
