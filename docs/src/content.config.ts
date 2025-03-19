@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { docsLoader } from "@astrojs/starlight/loaders";
 import { docsSchema } from '@astrojs/starlight/schema';
 
-import { cldAssetsLoader } from '../../../astro-cloudinary/loaders';
+import { cldAssetsLoader } from '../../astro-cloudinary/loaders';
 
 export const collections = {
 	assetsSamplesBasic: defineCollection({
@@ -33,6 +34,7 @@ export const collections = {
 		})
 	}),
 	docs: defineCollection({
+    loader: docsLoader(),
     schema: docsSchema({
       extend: z.object({
         ogImageTitle: z.string().optional(),
