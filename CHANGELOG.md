@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/cloudinary-community/astro-cloudinary/compare/v1.3.1...v1.3.2) (2025-03-21)
+
+
+### Bug Fixes
+
+* bump Astro and Starlight in docs ([6451290](https://github.com/cloudinary-community/astro-cloudinary/commit/645129077877e175ff2dd90a8fc9d571ea0253d6))
+
 ## [1.3.1](https://github.com/colbyfayock/astro-cloudinary/compare/v1.3.0...v1.3.1) (2025-03-19)
 
 
