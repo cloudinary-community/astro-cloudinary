@@ -361,7 +361,7 @@ packages:
     os: [linux]
 
   '@esbuild/linux-loong64@0.25.1':
-    resolution: {integrity: sha512-nGfornQj4dzcq5Vp835oM/o21UMlXzn79KobKlcs3Wz9smwiifknLy4xDCLUU0BWp7b/houtdrgUz7nOGnfIYg==}
+    resolution: {integrity: sha512-nGfornQj4dzcq5Vp835oM/o21UMlXzn79KobKlcs3Wz9smwiifknLy4xDCLUU0BWp7b/houtdrgUz7nOGnfIYg==}=
     engines: {node: '>=18'}
     cpu: [loong64]
     os: [linux]
@@ -780,7 +780,6 @@ packages:
     resolution: {integrity: sha512-1ZPyEDWF8phd4FQtTzMh8FQwqzvIjLsl6/84gzUxnMNFBtExBtpL51H67mV9xipuxl1AEAerRBgBwFNpkw8+Lg==}
     cpu: [loong64]
     os: [linux]
-
   '@rollup/rollup-linux-powerpc64le-gnu@4.36.0':
     resolution: {integrity: sha512-VMPMEIUpPFKpPI9GZMhJrtu8rxnp6mJR3ZzQPykq4xc2GmdHj3Q4cA+7avMyegXy4n1v+Qynr9fR88BmyO74tg==}
     cpu: [ppc64]
@@ -814,6 +813,11 @@ packages:
   '@rollup/rollup-win32-ia32-msvc@4.36.0':
     resolution: {integrity: sha512-t+RY0JuRamIocMuQcfwYSOkmdX9dtkr1PbhKW42AMvaDQa+jOdpUYysroTF/nuPpAaQMWp7ye+ndlmmthieJrQ==}
     cpu: [ia32]
+    os: [win32]
+
+  '@rollup/rollup-win32-x64-msvc@4.36.0':
+    resolution: {integrity: sha512-aRXd7tRZkWLqGbChgcMMDEHjOKudo1kChb1Jt1IfR8cY/KIpgNviLeJy5FUb9IpSuQj8dU2fAYNMPW/hLKOSTw==}
+    cpu: [x64]
     os: [win32]
 
   '@rollup/rollup-win32-x64-msvc@4.36.0':
@@ -1559,6 +1563,15 @@ packages:
       supports-color:
         optional: true
 
+  debug@4.4.0:
+    resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   decode-named-character-reference@1.0.2:
     resolution: {integrity: sha512-O8x12RzrUF8xyVcY0KJowWsmaJxQbmy0/EtnNtHRpsOcT7dFk5W598coHqBVpmWo1oQQfsCqfCmkZN5DJrZVdg==}
 
@@ -1700,6 +1713,11 @@ packages:
 
   esast-util-from-js@2.0.1:
     resolution: {integrity: sha512-8Ja+rNJ0Lt56Pcf3TAmpBZjmx8ZcK5Ts4cAzIOjsjevg9oSXJnl6SUQ2EevU8tv3h6ZLWmoKL5H4fgWvdvfETw==}
+
+  esbuild@0.25.1:
+    resolution: {integrity: sha512-BGO5LtrGC7vxnqucAe/rmvKdJllfGaYWdyABvyMoXQlfYMb2bbRuReWR5tEGE//4LcNJj9XrkovTqNYRFZHAMQ==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   esbuild@0.25.1:
     resolution: {integrity: sha512-BGO5LtrGC7vxnqucAe/rmvKdJllfGaYWdyABvyMoXQlfYMb2bbRuReWR5tEGE//4LcNJj9XrkovTqNYRFZHAMQ==}
@@ -3432,6 +3450,11 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
+  rollup@4.36.0:
+    resolution: {integrity: sha512-zwATAXNQxUcd40zgtQG0ZafcRK4g004WtEl7kbuhTWPvf07PsfohXl39jVUvPF7jvNAIkKPQ2XrsDlWuxBd++Q==}
+    engines: {node: '>=18.0.0', npm: '>=8.0.0'}
+    hasBin: true
+
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
 
@@ -3709,6 +3732,13 @@ packages:
 
   through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
+
+  tinyexec@0.3.2:
+    resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
+
+  tinyglobby@0.2.12:
+    resolution: {integrity: sha512-qkf4trmKSIiMTs/E63cxH+ojC2unam7rJ0WrauAzpT3ECNTxGRMlaXxVbfxMUC/w0LaYk6jQ4y/nGR9uBO3tww==}
+    engines: {node: '>=12.0.0'}
 
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
@@ -5051,6 +5081,9 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.36.0':
     optional: true
 
+  '@rollup/rollup-win32-x64-msvc@4.36.0':
+    optional: true
+
   '@semantic-release/changelog@6.0.3(semantic-release@23.0.0(typescript@5.5.4))':
     dependencies:
       '@semantic-release/error': 3.0.0
@@ -5955,6 +5988,10 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
+  debug@4.4.0:
+    dependencies:
+      ms: 2.1.3
+
   decode-named-character-reference@1.0.2:
     dependencies:
       character-entities: 2.0.2
@@ -6092,6 +6129,34 @@ snapshots:
       acorn: 8.14.1
       esast-util-from-estree: 2.0.0
       vfile-message: 4.0.2
+
+  esbuild@0.25.1:
+    optionalDependencies:
+      '@esbuild/aix-ppc64': 0.25.1
+      '@esbuild/android-arm': 0.25.1
+      '@esbuild/android-arm64': 0.25.1
+      '@esbuild/android-x64': 0.25.1
+      '@esbuild/darwin-arm64': 0.25.1
+      '@esbuild/darwin-x64': 0.25.1
+      '@esbuild/freebsd-arm64': 0.25.1
+      '@esbuild/freebsd-x64': 0.25.1
+      '@esbuild/linux-arm': 0.25.1
+      '@esbuild/linux-arm64': 0.25.1
+      '@esbuild/linux-ia32': 0.25.1
+      '@esbuild/linux-loong64': 0.25.1
+      '@esbuild/linux-mips64el': 0.25.1
+      '@esbuild/linux-ppc64': 0.25.1
+      '@esbuild/linux-riscv64': 0.25.1
+      '@esbuild/linux-s390x': 0.25.1
+      '@esbuild/linux-x64': 0.25.1
+      '@esbuild/netbsd-arm64': 0.25.1
+      '@esbuild/netbsd-x64': 0.25.1
+      '@esbuild/openbsd-arm64': 0.25.1
+      '@esbuild/openbsd-x64': 0.25.1
+      '@esbuild/sunos-x64': 0.25.1
+      '@esbuild/win32-arm64': 0.25.1
+      '@esbuild/win32-ia32': 0.25.1
+      '@esbuild/win32-x64': 0.25.1
 
   esbuild@0.25.1:
     optionalDependencies:
@@ -8180,6 +8245,31 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.36.0
       fsevents: 2.3.3
 
+  rollup@4.36.0:
+    dependencies:
+      '@types/estree': 1.0.6
+    optionalDependencies:
+      '@rollup/rollup-android-arm-eabi': 4.36.0
+      '@rollup/rollup-android-arm64': 4.36.0
+      '@rollup/rollup-darwin-arm64': 4.36.0
+      '@rollup/rollup-darwin-x64': 4.36.0
+      '@rollup/rollup-freebsd-arm64': 4.36.0
+      '@rollup/rollup-freebsd-x64': 4.36.0
+      '@rollup/rollup-linux-arm-gnueabihf': 4.36.0
+      '@rollup/rollup-linux-arm-musleabihf': 4.36.0
+      '@rollup/rollup-linux-arm64-gnu': 4.36.0
+      '@rollup/rollup-linux-arm64-musl': 4.36.0
+      '@rollup/rollup-linux-loongarch64-gnu': 4.36.0
+      '@rollup/rollup-linux-powerpc64le-gnu': 4.36.0
+      '@rollup/rollup-linux-riscv64-gnu': 4.36.0
+      '@rollup/rollup-linux-s390x-gnu': 4.36.0
+      '@rollup/rollup-linux-x64-gnu': 4.36.0
+      '@rollup/rollup-linux-x64-musl': 4.36.0
+      '@rollup/rollup-win32-arm64-msvc': 4.36.0
+      '@rollup/rollup-win32-ia32-msvc': 4.36.0
+      '@rollup/rollup-win32-x64-msvc': 4.36.0
+      fsevents: 2.3.3
+
   run-parallel@1.2.0:
     dependencies:
       queue-microtask: 1.2.3
@@ -8546,6 +8636,13 @@ snapshots:
       xtend: 4.0.2
 
   through@2.3.8: {}
+
+  tinyexec@0.3.2: {}
+
+  tinyglobby@0.2.12:
+    dependencies:
+      fdir: 6.4.3(picomatch@4.0.2)
+      picomatch: 4.0.2
 
   tinyexec@0.3.2: {}
 
