@@ -1,6 +1,6 @@
 {
   "name": "astro-cloudinary",
-  "repository": "git@github.com:colbyfayock/astro-cloudinary.git",
+  "repository": "git@github.com:cloudinary-community/astro-cloudinary.git",
   "author": "Colby Fayock <hello@colbyfayock.com>",
   "license": "MIT",
   "private": true,

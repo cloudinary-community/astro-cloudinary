@@ -49,7 +49,9 @@ import { CldImage } from 'astro-cloudinary';
 ## ❤️ Community & Support
 
 * [GitHub: Create an Issue](https://github.com/cloudinary-community/astro-cloudinary/issues)
-* [Twitter: @colbyfayock](https://twitter.com/colbyfayock)
+* [Bluesky: @ericportis.com](https://bsky.app/profile/ericportis.com)
+* [Mastodon: @eeeps@front-end.social](https://front-end.social/@eeeps)
+* [X: @etportis](https://x.com/etportis)
 
 ## 🛠 Contributing
 
