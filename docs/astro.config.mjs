@@ -12,7 +12,7 @@ export default defineConfig({
     starlight({
       title: 'Astro Cloudinary',
       social: {
-        github: 'https://github.com/colbyfayock/astro-cloudinary'
+        github: 'https://github.com/cloudinary-community/astro-cloudinary'
       },
       sidebar: [
         {
