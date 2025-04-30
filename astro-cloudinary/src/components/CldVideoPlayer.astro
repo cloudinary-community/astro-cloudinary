@@ -81,7 +81,7 @@ interface Cloudinary {
   videoPlayer: (video: HTMLVideoElement, options: {}) => CloudinaryVideoPlayer;
 }
 
-window.addEventListener('load', async () => {
+window.addEventListener('astro:page-load', async () => {
   const videos = document.querySelectorAll('.astro-cloudinary-cldvideoplayer') as NodeListOf<HTMLVideoElement>;
 
   if ( videos.length === 0 ) return;
