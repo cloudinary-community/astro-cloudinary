@@ -4,6 +4,13 @@
   "author": "Colby Fayock <hello@colbyfayock.com>",
   "license": "MIT",
   "private": true,
+  "keywords": [
+		"astro-component",
+    "media",
+		"image",
+		"images",
+		"video"
+	],
   "scripts": {
     "release": "semantic-release",
     "dev": "pnpm -r dev"
