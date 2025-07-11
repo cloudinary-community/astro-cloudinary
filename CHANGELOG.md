@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/cloudinary-community/astro-cloudinary/compare/v1.3.3...v1.3.4) (2025-07-11)
+
+
+### Bug Fixes
+
+* Bump docs' astro version, too! ([f21ccb4](https://github.com/cloudinary-community/astro-cloudinary/commit/f21ccb491491ee93fcfb95e907dc3c1d7e86d7a6))
+
 ## [1.3.3](https://github.com/cloudinary-community/astro-cloudinary/compare/v1.3.2...v1.3.3) (2025-07-11)
 
 
