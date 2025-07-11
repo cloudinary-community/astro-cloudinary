@@ -1,3 +1,11 @@
+## [1.3.3](https://github.com/cloudinary-community/astro-cloudinary/compare/v1.3.2...v1.3.3) (2025-07-11)
+
+
+### Bug Fixes
+
+* bump Astro in docs ([57754e5](https://github.com/cloudinary-community/astro-cloudinary/commit/57754e5f280df835ddfb371525f35f9b17913300))
+* rebuild lockfile ([21973f9](https://github.com/cloudinary-community/astro-cloudinary/commit/21973f9ba26a5b65d5fbc1ce5e5b5014f041e8d7))
+
 ## [1.3.2](https://github.com/cloudinary-community/astro-cloudinary/compare/v1.3.1...v1.3.2) (2025-03-21)
 
 
