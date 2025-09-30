@@ -21,6 +21,7 @@
     "cloudinary": "^2.5.0",
     "clsx": "^2.1.1",
     "sharp": "^0.33.5",
+    "starlight-llms-txt": "^0.6.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.2"
