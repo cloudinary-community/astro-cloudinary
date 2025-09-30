@@ -5,3 +5,4 @@ astro-cloudinary/dist
 .idea
 tsconfig.tsbuildinfo
 .vercel
+.DS_Store
