@@ -65,7 +65,30 @@ getCldImageUrl({
   </TabItem>
 </Tabs>
 
+## Prioritizing Critical Images
+
+For images that are critical to page load (like hero images), you can improve performance by using `fetchpriority="high"` and `loading="eager"` to prioritize their loading and improve Largest Contentful Paint (LCP).
+
+<CodeBlock>
+```jsx
+<CldImage
+  src="<Your Public ID>"
+  width="1920"
+  height="1080"
+  alt="<Description>"
+  sizes="100vw"
+  fetchpriority="high"
+  loading="eager"
+/>
+```
+</CodeBlock>
+
+:::note
+Learn more about when and how to prioritize images in the [Image Performance & LCP guide](/guides/image-performance-lcp).
+:::
+
 ## Learn More
+* [Image Performance & LCP](/guides/image-performance-lcp)
 * [Responsive Images](/guides/responsive-images)
 * [CldImage](/cldimage/basic-usage)
 * [getCldImageUrl](/getcldimageurl/basic-usage)
