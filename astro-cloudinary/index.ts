@@ -1,4 +1,5 @@
 export * from './src/components/index.js';
+export * from './src/types/events.js';
 // export * from './helpers.js';
 
 // export { default as CldOgImage } from './components/CldOgImage';
