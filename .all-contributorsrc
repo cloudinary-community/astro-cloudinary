@@ -112,6 +112,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "lemeurherve",
+      "name": "Hervé Le Meur",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91831478?v=4",
+      "profile": "https://github.com/lemeurherve",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
