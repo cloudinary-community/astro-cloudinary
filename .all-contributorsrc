@@ -14,6 +14,16 @@
   "commitType": "docs",
   "contributors": [
     {
+      "login": "colbyfayock",
+      "name": "Colby Fayock",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1045274?v=4",
+      "profile": "https://colbyfayock.com/newsletter",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
       "login": "Andarist",
       "name": "Mateusz Burzyński",
       "avatar_url": "https://avatars.githubusercontent.com/u/9800850?v=4",
