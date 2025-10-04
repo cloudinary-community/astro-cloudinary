@@ -88,12 +88,14 @@ import { CldUploadWidget } from 'astro-cloudinary';
 />
 
 <script>
+import type { CldUploadWidgetEventDetail } from 'astro-cloudinary';
+
 const widget = document.querySelector('#upload-events');
 
 if ( widget ) {
-  widget.addEventListener('clduploadwidget:success', ((e: CustomEvent<{ detail: object }>) => {
+  widget.addEventListener('clduploadwidget:success', (e: CustomEvent<CldUploadWidgetEventDetail>) => {
     console.log('clduploadwidget:success', e.detail);
-  }) as EventListener);
+  });
 }
 </script>
 ```

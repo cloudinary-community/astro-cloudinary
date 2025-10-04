@@ -263,12 +263,14 @@ import { CldImage } from 'astro-cloudinary';
 />
 
 <script>
+import type { CldImageErrorEventDetail } from 'astro-cloudinary';
+
 const image = document.querySelector(`#image-events`);
 
 if ( image ) {
-  image.addEventListener('cldimage:error', ((e: CustomEvent<{ detail: {} }>) => {
+  image.addEventListener('cldimage:error', (e: CustomEvent<CldImageErrorEventDetail>) => {
     console.log('cldimage:error', e.detail)
-  }) as EventListener);
+  });
 };
 </script>
 ```
