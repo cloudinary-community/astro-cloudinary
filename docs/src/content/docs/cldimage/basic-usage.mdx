@@ -53,6 +53,10 @@ of the image.
 
 The `sizes` prop is optional, but recommended for [Responsive Sizing](/guides/responsive-images).
 
+:::tip
+For images critical to page load like hero images or other above-the-fold content, consider adding `fetchpriority="high"` and `loading="eager"` to improve your [Largest Contentful Paint (LCP)](/guides/image-performance-lcp). Learn more about [Image Performance & LCP](/guides/image-performance-lcp).
+:::
+
 ## Transformations
 
 You can further take advantage of Cloudinary features like replacing backgrounds with generative AI and text overlays by adding additional props:
