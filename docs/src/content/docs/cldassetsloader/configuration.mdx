@@ -95,6 +95,13 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
       more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
     },
     {
+      option: 'recursive',
+      type: 'boolean',
+      default: 'false',
+      example: () => (<code>true</code>),
+      more: () => (<span className="whitespace-nowrap">Include subfolders</span>)
+    },
+    {
       option: 'tags',
       type: 'boolean',
       default: 'true',
@@ -202,6 +209,23 @@ moderation: true
 </CodeBlock>
 
 [Learn more about Moderation on Upload](https://cloudinary.com/documentation/upload_parameters#moderation) in the Cloudinary docs.
+
+#### `recursive`
+
+Whether to include assets from subfolders when querying a folder. When set to `true`, the loader will search through all subfolders of the specified folder.
+
+**Examples**
+
+<CodeBlock alwaysExpanded>
+```jsx
+// Include assets from subfolders
+recursive: true
+```
+</CodeBlock>
+
+**Note:** Recursive folder queries work differently depending on your Cloudinary folder mode:
+- **Dynamic folders**: Discovers and queries each subfolder individually
+- **Fixed folders**: Uses prefix matching which naturally includes subfolders
 
 #### `resourceType`
 
