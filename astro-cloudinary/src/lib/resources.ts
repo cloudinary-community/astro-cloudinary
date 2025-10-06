@@ -94,7 +94,7 @@ export interface ListResourcesOptions {
   folderMode?: string;
   limit?: number;
   nextCursor?: string;
-  resourceType: Omit<CloudinaryResourceResourceType, "auto">;
+  resourceType: CloudinaryResourceResourceType | Array<CloudinaryResourceResourceType>;
   recursive?: boolean;
 
   // Additional data
@@ -110,6 +110,28 @@ export interface ListResourcesResponse {
 }
 
 export async function listResources(options: ListResourcesOptions): Promise<ListResourcesResponse> {
+  // Handle multiple resource types by making separate requests
+  if (Array.isArray(options.resourceType)) {
+    const allResources: CloudinaryResource[] = [];
+    let lastCursor: string | undefined = options.nextCursor;
+    
+    for (const resourceType of options.resourceType) {
+      const typeOptions = { ...options, resourceType, nextCursor: lastCursor };
+      const response = await listResourcesSingle(typeOptions);
+      allResources.push(...response.resources);
+      lastCursor = response.next_cursor;
+    }
+    
+    return {
+      resources: allResources,
+      next_cursor: lastCursor || ''
+    };
+  }
+  
+  return listResourcesSingle({ ...options, resourceType: options.resourceType as CloudinaryResourceResourceType });
+}
+
+export async function listResourcesSingle(options: ListResourcesOptions & { resourceType: CloudinaryResourceResourceType }): Promise<ListResourcesResponse> {
   const params = new URLSearchParams();
 
   if ( options.nextCursor ) {

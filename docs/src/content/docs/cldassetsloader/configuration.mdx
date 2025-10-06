@@ -89,8 +89,8 @@ cldAssetLoader provides a wide range of options to customize your Collectoin que
     },
     {
       option: 'resourceType',
-      type: 'string',
-      example: () => (<code>45</code>),
+      type: 'string | Array<string>',
+      example: () => (<code>'video' | ['image', 'video']</code>),
       default: 'image',
       more: () => (<a className="whitespace-nowrap" href="https://cloudinary.com/documentation/transformation_reference#a_angle">More Info</a>)
     },
@@ -229,13 +229,17 @@ recursive: true
 
 #### `resourceType`
 
-The type of the assets you want to query.
+The type of the assets you want to query. Can be a single type or an array of types to query multiple asset types at once.
 
 **Examples**
 
 <CodeBlock alwaysExpanded>
 ```jsx
+// Single resource type
 resourceType: 'video'
+
+// Multiple resource types
+resourceType: ['image', 'video']
 ```
 </CodeBlock>
 

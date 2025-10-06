@@ -1,6 +1,6 @@
 import { AstroError } from "astro/errors";
 import type { Loader } from "astro/loaders";
-import type { CloudinaryResource } from '@cloudinary-util/types'
+import type { CloudinaryResource, CloudinaryResourceResourceType } from '@cloudinary-util/types'
 
 import { cloudinaryResourceSchema } from '../types/resources';
 import { getEnvironmentConfig, listResources, type ListResourcesOptions, type ListResourcesResponse } from '../lib/resources';
@@ -18,7 +18,7 @@ export interface CloudinaryAssetsLoaderOptions {
   fields?: ListResourcesOptions["fields"];
   folder?: ListResourcesOptions["folder"];
   limit?: ListResourcesOptions["limit"];
-  resourceType?: ListResourcesOptions["resourceType"];
+  resourceType?: CloudinaryResourceResourceType | Array<CloudinaryResourceResourceType>;
   recursive?: boolean;
 
   // Resource data options: These are used to include
@@ -44,6 +44,11 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
       logger.info(`Loading Cloudinary Assets from ${folderMode} folder mode`);
       if (options?.folder) {
         logger.info(`Folder: ${options.folder}${options?.recursive ? ' (recursive)' : ''}`);
+      }
+      if (Array.isArray(options?.resourceType)) {
+        logger.info(`Resource types: ${options.resourceType.join(', ')}`);
+      } else if (options?.resourceType) {
+        logger.info(`Resource type: ${options.resourceType}`);
       }
 
       // 10 is the Cloudinary default max_results
