@@ -108,6 +108,127 @@ not only deliver, but easily edit and build new images on the fly.
 
 ## Advanced
 
+### Recursive Folder Queries
+
+Query assets from a folder and all its subfolders:
+
+<strong class="block mb-2">Defining the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
+
+  export const collections = {
+    galleryImages: defineCollection({
+      loader: cldAssetsLoader({
+        folder: 'MainFolder/FolderContainingSubfolders',
+        recursive: true,
+        limit: 100
+      })
+    }),
+  }
+  ```
+</CodeBlock>
+
+<strong class="block mb-2">Accessing the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  ---
+  import { getCollection } from 'astro:content';
+  import { CldImage } from 'astro-cloudinary';
+  const galleryImages = await getCollection('galleryImages');
+  ---
+  {galleryImages.map(asset => {
+    return (
+      <CldImage
+        src={asset.data.public_id}
+        width={asset.data.width}
+        height={asset.data.height}
+        alt=""
+      />
+    )
+  })}
+  ```
+</CodeBlock>
+
+### Multiple Resource Types
+
+Query multiple asset types (images and videos) in a single collection:
+
+<strong class="block mb-2">Defining the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
+
+  export const collections = {
+    assets: defineCollection({
+      loader: cldAssetsLoader({
+        folder: 'collection',
+        resourceType: ['image', 'video'],
+        limit: 50
+      })
+    }),
+  }
+  ```
+</CodeBlock>
+
+<strong class="block mb-2">Accessing the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  ---
+  import { getCollection } from 'astro:content';
+  import { CldImage, CldVideoPlayer } from 'astro-cloudinary';
+  const assets = await getCollection('assets');
+  ---
+  {assets.map(asset => {
+    if (asset.data.resource_type === 'video') {
+      return (
+        <CldVideoPlayer
+          src={asset.data.public_id}
+          width={asset.data.width}
+          height={asset.data.height}
+        />
+      )
+    } else {
+      return (
+        <CldImage
+          src={asset.data.public_id}
+          width={asset.data.width}
+          height={asset.data.height}
+          alt=""
+        />
+      )
+    }
+  })}
+  ```
+</CodeBlock>
+
+### Combined: Recursive + Multiple Types
+
+Query all images and videos from a folder tree:
+
+<strong class="block mb-2">Defining the Collection</strong>
+
+<CodeBlock>
+  ```jsx
+  import { cldAssetsLoader } from 'astro-cloudinary/loaders';
+
+  export const collections = {
+    mediaLibrary: defineCollection({
+      loader: cldAssetsLoader({
+        folder: 'media',
+        resourceType: ['image', 'video'],
+        recursive: true,
+        limit: 200
+      })
+    }),
+  }
+  ```
+</CodeBlock>
+
 ### Tags, Context, & Metadata 
 
 <HeaderImage layout="full">
