@@ -1,0 +1,239 @@
+---
+title: Image Performance & LCP
+description: Best practices for optimizing Largest Contentful Paint with prioritized image loading in Astro.
+head:
+  - tag: title
+    content: Image Performance & LCP - Astro Cloudinary
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+import { CldImage } from '../../../../../astro-cloudinary';
+
+import CodeBlock from '../../../components/CodeBlock.astro';
+import HeaderImage from '../../../components/HeaderImage.astro';
+
+Largest Contentful Paint (LCP) is one of the Core Web Vitals that measures loading performance. It represents the time it takes for the largest content element visible in the viewport to become visible to the user.
+
+Since images are often the largest contentful element on a page, optimizing image loading is critical for achieving good LCP scores.
+
+## When to Prioritize Images
+
+You should prioritize images that are:
+
+- **Hero images**: Large, prominent images at the top of the page
+- **Above-the-fold content**: Any image visible without scrolling
+- **Critical to First Paint**: Images that are essential to the initial page render
+
+:::caution
+Only prioritize images that are truly critical. Over-using priority can actually hurt performance by delaying other important resources.
+:::
+
+## Using fetchpriority with CldImage
+
+The CldImage component supports all standard HTML image attributes, including `fetchpriority` and `loading`. For critical images, you can set these attributes to prioritize loading:
+
+<HeaderImage>
+  <CldImage
+    src="cld-sample-5"
+    width="1870"
+    height="1250"
+    alt="A variety of colorful and appetizing breakfast dishes"
+    sizes="100vw"
+    fetchpriority="high"
+    loading="eager"
+  />
+</HeaderImage>
+
+<CodeBlock>
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  alt="<Description>"
+  sizes="100vw"
+  fetchpriority="high"
+  loading="eager"
+/>
+```
+</CodeBlock>
+
+### Understanding the Attributes
+
+- **`fetchpriority="high"`**: Tells the browser to prioritize fetching this image over other resources
+- **`loading="eager"`**: Disables lazy loading, ensuring the image loads immediately
+
+:::note
+By default, CldImage uses `loading="lazy"` for automatic lazy loading. When you set `loading="eager"`, you're explicitly opting out of lazy loading for critical images.
+:::
+
+## When NOT to Prioritize Images
+
+Avoid using `fetchpriority="high"` for:
+
+- **Below-the-fold images**: Images not visible on initial page load
+- **Decorative images**: Non-critical visual elements
+- **Multiple images**: Prioritizing too many images defeats the purpose
+- **Images in carousels**: Unless the first image is above-the-fold
+
+<CodeBlock>
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<!-- ❌ Don't prioritize below-the-fold images -->
+<div style="margin-top: 2000px;">
+  <CldImage
+    src="<Public ID>"
+    width="<Width>"
+    height="<Height>"
+    alt="<Description>"
+    fetchpriority="high"
+  />
+</div>
+
+<!-- ✅ Let these lazy load instead -->
+<div style="margin-top: 2000px;">
+  <CldImage
+    src="<Public ID>"
+    width="<Width>"
+    height="<Height>"
+    alt="<Description>"
+    sizes="100vw"
+  />
+</div>
+```
+</CodeBlock>
+
+## Best Practices
+
+### 1. Prioritize Only One or Two Images
+
+Typically, only your hero image or the largest above-the-fold image should be prioritized.
+
+<CodeBlock>
+```jsx
+---
+import { CldImage } from 'astro-cloudinary';
+---
+<!-- Hero image - prioritized -->
+<header>
+  <CldImage
+    src="hero-image"
+    width="1920"
+    height="1080"
+    alt="Hero image"
+    sizes="100vw"
+    fetchpriority="high"
+    loading="eager"
+  />
+</header>
+
+<!-- Other images - lazy loaded -->
+<section>
+  <CldImage
+    src="content-image-1"
+    width="800"
+    height="600"
+    alt="Content image"
+    sizes="(max-width: 768px) 100vw, 50vw"
+  />
+</section>
+```
+</CodeBlock>
+
+### 2. Combine with Responsive Sizing
+
+Use the `sizes` prop along with priority to ensure the browser loads the appropriate image size:
+
+<CodeBlock>
+```jsx
+<CldImage
+  src="<Public ID>"
+  width="<Width>"
+  height="<Height>"
+  alt="<Description>"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+  fetchpriority="high"
+  loading="eager"
+/>
+```
+</CodeBlock>
+
+[Learn more about Responsive Images](/guides/responsive-images)
+
+### 3. Optimize Image Dimensions
+
+Ensure your width and height match the display size to avoid unnecessary data transfer:
+
+<CodeBlock>
+```jsx
+<!-- ❌ Bad: Image is much larger than needed -->
+<CldImage
+  src="<Public ID>"
+  width="4000"
+  height="3000"
+  alt="<Description>"
+  style="max-width: 800px;"
+  fetchpriority="high"
+/>
+
+<!-- ✅ Good: Image size matches display size -->
+<CldImage
+  src="<Public ID>"
+  width="1600"
+  height="1200"
+  alt="<Description>"
+  style="max-width: 800px;"
+  fetchpriority="high"
+  loading="eager"
+/>
+```
+</CodeBlock>
+
+## Measuring LCP
+
+To measure LCP and verify your optimizations are working, you can use the Web Vitals JavaScript API:
+
+<CodeBlock>
+```html
+<script>
+  // Measure LCP using the Web Performance API
+  const observer = new PerformanceObserver((list) => {
+    const entries = list.getEntries();
+    const lastEntry = entries[entries.length - 1];
+    
+    console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
+    console.log('LCP Element:', lastEntry.element);
+  });
+  
+  observer.observe({ type: 'largest-contentful-paint', buffered: true });
+</script>
+```
+</CodeBlock>
+
+You can also use browser DevTools:
+1. Open Chrome DevTools
+2. Go to the Performance tab
+3. Click the record button and reload the page
+4. Look for the LCP marker in the timeline
+
+:::tip
+Google's [PageSpeed Insights](https://pagespeed.web.dev/) and [Lighthouse](https://developers.google.com/web/tools/lighthouse) can also measure LCP and provide specific recommendations.
+:::
+
+## Additional Resources
+
+- [Largest Contentful Paint (LCP) - web.dev](https://web.dev/articles/lcp)
+- [Optimize LCP - web.dev](https://web.dev/articles/optimize-lcp)
+- [Measure LCP in JavaScript - web.dev](https://web.dev/articles/lcp#measure-lcp-in-javascript)
+- [Core Web Vitals - web.dev](https://web.dev/articles/vitals)
+
+## Learn More
+* [Image Optimization](/guides/image-optimization)
+* [Responsive Images](/guides/responsive-images)
+* [CldImage Configuration](/cldimage/configuration)
+
