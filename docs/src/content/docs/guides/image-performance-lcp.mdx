@@ -91,7 +91,7 @@ import { CldImage } from 'astro-cloudinary';
     width="<Width>"
     height="<Height>"
     alt="<Description>"
-    fetchpriority="high"  <!-- This hurts performance! -->
+    fetchpriority="high"
   />
 </div>
 
@@ -184,32 +184,12 @@ Ensure your width and height match the display size to avoid unnecessary data tr
 <!-- ✅ Good: Image size matches display size -->
 <CldImage
   src="<Public ID>"
-  width="1600"  <!-- 800px × 2 for retina displays -->
+  width="1600"
   height="1200"
   alt="<Description>"
   style="max-width: 800px;"
   fetchpriority="high"
   loading="eager"
-/>
-```
-</CodeBlock>
-
-### 4. Use Cloudinary Optimizations
-
-CldImage automatically applies `f_auto` and `q_auto` for optimal format and quality. Keep these optimizations enabled for prioritized images:
-
-<CodeBlock>
-```jsx
-<CldImage
-  src="<Public ID>"
-  width="<Width>"
-  height="<Height>"
-  alt="<Description>"
-  sizes="100vw"
-  fetchpriority="high"
-  loading="eager"
-  format="auto"  <!-- Automatically uses best format (WebP, AVIF, etc.) -->
-  quality="auto"  <!-- Automatically optimizes quality -->
 />
 ```
 </CodeBlock>
@@ -251,26 +231,6 @@ Google's [PageSpeed Insights](https://pagespeed.web.dev/) and [Lighthouse](https
 - [Optimize LCP - web.dev](https://web.dev/articles/optimize-lcp)
 - [Measure LCP in JavaScript - web.dev](https://web.dev/articles/lcp#measure-lcp-in-javascript)
 - [Core Web Vitals - web.dev](https://web.dev/articles/vitals)
-
-## Comparison with Next.js
-
-Next.js provides development warnings when images might impact LCP without the `priority` prop. While Astro Cloudinary doesn't have automatic warnings, you can follow these guidelines:
-
-**Next.js approach:**
-```jsx
-// Next.js automatically warns in dev mode
-<Image src="..." priority />
-```
-
-**Astro Cloudinary approach:**
-```jsx
-// Manually apply priority for critical images
-<CldImage src="..." fetchpriority="high" loading="eager" />
-```
-
-:::note
-In Astro, you need to proactively identify and prioritize critical images. Review your page layouts to determine which images are above-the-fold and visible during initial page load.
-:::
 
 ## Learn More
 * [Image Optimization](/guides/image-optimization)

@@ -21,10 +21,6 @@ Configuration for CldImage is the same as [getCldImageUrl](/getcldimageurl/confi
 
 The basic props required to use CldImage include:
 
-:::tip
-CldImage supports all standard HTML image attributes. For performance optimization, see [`fetchpriority`](#fetchpriority) and [`loading`](#loading) below.
-:::
-
 <Table
   columns={[
     {
@@ -2087,92 +2083,3 @@ quality={10}
 </CodeBlock>
 
 [Learn more about quality](https://cloudinary.com/documentation/transformation_reference#q_quality) on the Cloudinary docs.
-
-## Performance & Loading
-
-CldImage supports standard HTML image attributes for controlling loading behavior and prioritization.
-
-<Table
-  columns={[
-    {
-      id: 'prop',
-      title: 'Prop'
-    },
-    {
-      id: 'type',
-      title: 'Type'
-    },
-    {
-      id: 'default',
-      title: 'Default'
-    },
-    {
-      id: 'example',
-      title: 'Example'
-    },
-    {
-      id: 'more'
-    }
-  ]}
-  data={[
-    {
-      prop: 'fetchpriority',
-      type: 'string',
-      default: () => (<code>auto</code>),
-      example: () => (<code>high</code>),
-      more: () => (<a className="whitespace-nowrap" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority">More Info</a>)
-    },
-    {
-      prop: 'loading',
-      type: 'string',
-      default: () => (<code>lazy</code>),
-      example: () => (<code>eager</code>),
-      more: () => (<a className="whitespace-nowrap" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading">More Info</a>)
-    },
-  ]}
-/>
-
-#### `fetchpriority`
-
-Provides a hint to the browser about the relative priority of fetching the image.
-
-Use `fetchpriority="high"` for images that are critical to page load, such as hero images or other above-the-fold content that impacts [Largest Contentful Paint (LCP)](/guides/image-performance-lcp).
-
-**Examples**
-
-Prioritize a hero image:
-
-<CodeBlock alwaysExpanded>
-```jsx
-fetchpriority="high"
-```
-</CodeBlock>
-
-:::caution
-Only prioritize one or two critical images per page. Over-using `fetchpriority="high"` can hurt performance.
-:::
-
-[Learn more about fetchPriority](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/fetchPriority) on MDN.
-
-#### `loading`
-
-Controls when the browser should load the image.
-
-By default, CldImage uses `loading="lazy"` to defer loading of off-screen images. For critical images visible on initial page load, use `loading="eager"` in combination with `fetchpriority="high"`.
-
-**Examples**
-
-Disable lazy loading for a critical image:
-
-<CodeBlock alwaysExpanded>
-```jsx
-loading="eager"
-fetchpriority="high"
-```
-</CodeBlock>
-
-[Learn more about loading](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/loading) on MDN.
-
-:::tip
-Learn more about optimizing image performance in the [Image Performance & LCP guide](/guides/image-performance-lcp).
-:::
