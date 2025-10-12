@@ -69,7 +69,7 @@
       ]
     },
     {
-      "login": "kcoderhtml",
+      "login": "taciturnaxolotl",
       "name": "Kieran Klukas",
       "avatar_url": "https://avatars.githubusercontent.com/u/92754843?v=4",
       "profile": "http://dunkirk.sh",
@@ -100,6 +100,33 @@
       "name": "Justin Philpott",
       "avatar_url": "https://avatars.githubusercontent.com/u/8027086?v=4",
       "profile": "https://github.com/justinphilpott",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "vijay-x-Raj",
+      "name": "Vijay Raj",
+      "avatar_url": "https://avatars.githubusercontent.com/u/177956497?v=4",
+      "profile": "https://github.com/vijay-x-Raj",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "lemeurherve",
+      "name": "Hervé Le Meur",
+      "avatar_url": "https://avatars.githubusercontent.com/u/91831478?v=4",
+      "profile": "https://github.com/lemeurherve",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mohith2883",
+      "name": "mohith2883",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88938356?v=4",
+      "profile": "https://github.com/mohith2883",
       "contributions": [
         "doc"
       ]

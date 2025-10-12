@@ -6,7 +6,6 @@ head:
     content: Responsive Images - Astro Cloudinary
 ---
 import { CldImage } from '../../../../../astro-cloudinary';
-
 import CodeBlock from '../../../components/CodeBlock.astro';
 import HeaderImage from '../../../components/HeaderImage.astro';
 
@@ -47,7 +46,7 @@ application, such as:
           33vw"
     alt="<Description>"
   />
-  ```
+```
 </CodeBlock>
 
 This would give you roughly full width images on mobile, a 2-column layout on
@@ -58,9 +57,10 @@ tablets, and 3-column layout on desktop views.
 The difference with the CldImage component is that it utilizes Cloudinary tech
 in order to provide the responsive sizing.
 
+
 In the example above, the output would look like:
 
-```
+```html
 <img
   class="astro-cloudinary-cldimage"
   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -118,22 +118,22 @@ In an example such as:
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    src="Public ID>"
+    src="<Public ID>"
     width="<Width>"
     height="<Height>"
     crop="fill"
     sizes="100vw"
     alt="Description"
   />
-  ```
+```
 </CodeBlock>
 
 Each image will be cropped to a 1:1 ratio represented by the width and height provided.
 
-As the underlaying Unpic Image component generates an image for each responsive size,
+As the underlying Unpic Image component generates an image for each responsive size,
 Cloudinary will use those sizes when building the URL, for example:
 
-```
+```html
 <img
   alt="Turtle"
   loading="lazy"
@@ -183,7 +183,7 @@ than a 640x640 image.
   import { CldImage } from 'astro-cloudinary';
 
   <CldImage
-    src="Public ID>"
+    src="<Public ID>"
     width="<Width>"
     height="<Height>"
     crop="thumb"
@@ -195,7 +195,7 @@ than a 640x640 image.
 
 The resulting transformations may look like:
 
-```
+```text
 .../w_256,h_256,c_thumb/...
 .../w_384,h_384,c_thumb/...
 .../w_640,h_640,c_thumb/...
@@ -254,7 +254,7 @@ values by explicitly setting them.
 
 The resulting transformations may look like:
 
-```
+```text
 .../w_960,h_960,c_thumb/<Other Transformations>/w_256,h_256,c_limit/...
 .../w_960,h_960,c_thumb/<Other Transformations>/w_384,h_384,c_limit/...
 .../w_960,h_960,c_thumb/<Other Transformations>/w_640,h_640,c_limit/...

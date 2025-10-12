@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/cloudinary-community/astro-cloudinary/compare/v1.3.4...v1.3.5) (2025-10-02)
+
+
+### Bug Fixes
+
+* **docs:** enable HTML syntax highlighting in Responsive Images guide ([#119](https://github.com/cloudinary-community/astro-cloudinary/issues/119)) ([2f3138e](https://github.com/cloudinary-community/astro-cloudinary/commit/2f3138ed6cb5f60ed3947362cf31f15635d89ff5))
+
 ## [1.3.4](https://github.com/cloudinary-community/astro-cloudinary/compare/v1.3.3...v1.3.4) (2025-07-11)
 
 
