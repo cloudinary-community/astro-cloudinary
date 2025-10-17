@@ -163,20 +163,6 @@ To prevent abuse and ensure secure usage of the Fetch API:
 
 3. Be cautious when fetching images from user-provided URLs to prevent potential security risks
 
-### Best Practices for Fetch API
-
-1. **Use `f_auto` and `q_auto`**: Add `fetchFormat="auto"` and `quality="auto"` to your image requests for optimal format and quality.
-
-2. **Cache-Control**: Cloudinary sets a Cache-Control header of 1 year by default for fetched images. Adjust this using the `cacheControl` option if needed.
-
-3. **Error Handling**: Cloudinary returns a placeholder image if the remote image can't be fetched. Customize this behavior using the `defaultImage` option.
-
-4. **URL Encoding**: Ensure that special characters in remote URLs are properly encoded to avoid issues.
-
-5. **Responsive Images**: Use the `sizes` prop along with `width` and `height` to create responsive images that adapt to different screen sizes.
-
-By leveraging the Fetch API, you can easily optimize and transform remote images without the need to upload them to your Cloudinary account, providing flexibility and efficiency in your image delivery workflow.
-
 ## Method 2: Auto Upload Mapping
 
 Auto Upload Mapping allows you to automatically upload remote images to your Cloudinary account when they're first accessed, making them available for future use with all of Cloudinary's features. This method is particularly useful when you have a large number of images hosted on another server that you want to gradually migrate to Cloudinary.
