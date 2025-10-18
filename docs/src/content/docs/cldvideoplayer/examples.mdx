@@ -486,20 +486,22 @@ import { CldVideoPlayer } from 'astro-cloudinary';
 />
 
 <script>
+import type { CldVideoPlayerEventDetail } from 'astro-cloudinary';
+
 const videoPlayer = document.querySelector(`#video-player-events`);
 
 if ( videoPlayer ) {
-  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {
+  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', (e: CustomEvent<CldVideoPlayerEventDetail>) => {
     console.log('cldvideoplayer:loadedmetadata', e.detail)
-  }) as EventListener);
+  });
 
-  videoPlayer.addEventListener('cldvideoplayer:play', ((e: CustomEvent<{ detail: {} }>) => {
+  videoPlayer.addEventListener('cldvideoplayer:play', (e: CustomEvent<CldVideoPlayerEventDetail>) => {
     console.log('cldvideoplayer:play', e.detail)
-  }) as EventListener);
+  });
 
-  videoPlayer.addEventListener('cldvideoplayer:pause', ((e: CustomEvent<{ detail: {} }>) => {
+  videoPlayer.addEventListener('cldvideoplayer:pause', (e: CustomEvent<CldVideoPlayerEventDetail>) => {
     console.log('cldvideoplayer:pause', e.detail)
-  }) as EventListener);
+  });
 };
 </script>
 ```

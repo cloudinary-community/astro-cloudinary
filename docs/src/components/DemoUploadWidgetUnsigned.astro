@@ -23,6 +23,8 @@ const props: Props = Astro.props;
 </HeaderImage>
 
 <script>
+import type { CldUploadWidgetEventDetail } from '../../../astro-cloudinary';
+
 const demos = Array.from(document.querySelectorAll('.clduploadwidget-demo'));
 
 demos.forEach(demo => {
@@ -32,26 +34,24 @@ demos.forEach(demo => {
 
   if ( !widget ) return;
 
-  widget.addEventListener('clduploadwidget:success', ((e: CustomEvent<{ detail: { info: { secure_url: string } } }>) => {
+  widget.addEventListener('clduploadwidget:success', (e: CustomEvent<CldUploadWidgetEventDetail>) => {
     console.log('clduploadwidget:success', e.detail)
 
     if ( !uploadResult || !template ) return;
 
     const result = template.content.cloneNode(true) as HTMLTemplateElement;
-    // @ts-expect-error
     result.querySelector('img')?.setAttribute('src', e.detail.info.secure_url);
     uploadResult.innerHTML = '';
     uploadResult.appendChild(result);
     uploadResult.classList.remove('hidden');
 
     demo?.setAttribute('data-has-results', 'true');
-  }) as EventListener);
+  });
 
-  widget.addEventListener('clduploadwidget:queues-end', ((e: CustomEvent<{ detail: { UploadWidget: any } }>) => {
+  widget.addEventListener('clduploadwidget:queues-end', (e: CustomEvent<CldUploadWidgetEventDetail>) => {
     console.log('clduploadwidget:onqueuesend', e.detail)
-    // @ts-expect-error
     e.detail.UploadWidget?.close();
-  }) as EventListener);
+  });
 
 })
 </script>
