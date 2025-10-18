@@ -16,6 +16,52 @@ export async function cldRequest(path: string) {
 }
 
 /**
+ * getSubfolders
+ * @description Get all subfolders of a specified folder (for dynamic folder mode)
+ */
+
+export async function getSubfolders(folder: string): Promise<string[]> {
+  const params = new URLSearchParams();
+  params.append('max_results', '500'); // Get up to 500 subfolders
+  
+  const response = await cldRequest(`/folders/${encodeURIComponent(folder)}?${params}`);
+  
+  if (!response.ok) {
+    // If folder doesn't exist or no subfolders, return empty array
+    return [];
+  }
+  
+  const data = await response.json();
+  return data.folders?.map((f: any) => f.path) || [];
+}
+
+/**
+ * getAllSubfoldersRecursive
+ * @description Recursively get all subfolders of a folder
+ */
+
+export async function getAllSubfoldersRecursive(folder: string, maxDepth: number = 3): Promise<string[]> {
+  const allFolders: string[] = [folder];
+  const toProcess = [folder];
+  let depth = 0;
+  
+  while (toProcess.length > 0 && depth < maxDepth) {
+    const currentFolder = toProcess.shift()!;
+    const subfolders = await getSubfolders(currentFolder);
+    
+    for (const subfolder of subfolders) {
+      if (!allFolders.includes(subfolder)) {
+        allFolders.push(subfolder);
+        toProcess.push(subfolder);
+      }
+    }
+    depth++;
+  }
+  
+  return allFolders;
+}
+
+/**
  * getEnvironmentConfig
  * @description Get's a Cloudinary product environment's configuration
  */
@@ -48,7 +94,8 @@ export interface ListResourcesOptions {
   folderMode?: string;
   limit?: number;
   nextCursor?: string;
-  resourceType: Omit<CloudinaryResourceResourceType, "auto">;
+  resourceType: CloudinaryResourceResourceType | Array<CloudinaryResourceResourceType>;
+  recursive?: boolean;
 
   // Additional data
   context?: boolean;
@@ -63,6 +110,28 @@ export interface ListResourcesResponse {
 }
 
 export async function listResources(options: ListResourcesOptions): Promise<ListResourcesResponse> {
+  // Handle multiple resource types by making separate requests
+  if (Array.isArray(options.resourceType)) {
+    const allResources: CloudinaryResource[] = [];
+    let lastCursor: string | undefined = options.nextCursor;
+    
+    for (const resourceType of options.resourceType) {
+      const typeOptions = { ...options, resourceType, nextCursor: lastCursor };
+      const response = await listResourcesSingle(typeOptions);
+      allResources.push(...response.resources);
+      lastCursor = response.next_cursor;
+    }
+    
+    return {
+      resources: allResources,
+      next_cursor: lastCursor || ''
+    };
+  }
+  
+  return listResourcesSingle({ ...options, resourceType: options.resourceType as CloudinaryResourceResourceType });
+}
+
+export async function listResourcesSingle(options: ListResourcesOptions & { resourceType: CloudinaryResourceResourceType }): Promise<ListResourcesResponse> {
   const params = new URLSearchParams();
 
   if ( options.nextCursor ) {
@@ -96,15 +165,49 @@ export async function listResources(options: ListResourcesOptions): Promise<List
 
   if ( options.folder ) {
     if ( options.folderMode === 'dynamic' ) {
-
       params.append('asset_folder', options.folder);
+      
+      // Add recursive support for dynamic folders
+      if ( options.recursive ) {
+        // For dynamic folders, we need to make multiple requests for subfolders
+        const allResources: CloudinaryResource[] = [];
+        
+        try {
+          // Get all subfolders recursively
+          const allFolders = await getAllSubfoldersRecursive(options.folder);
+          
+          // Query each folder for assets
+          for (const folderPath of allFolders) {
+            const folderParams = new URLSearchParams(params);
+            folderParams.set('asset_folder', folderPath);
+            
+            const folderResponse = await cldRequest(`/resources/by_asset_folder?${folderParams}`);
+            if (folderResponse.ok) {
+              const folderData = await folderResponse.json();
+              allResources.push(...folderData.resources);
+            }
+          }
+          
+          return {
+            resources: allResources,
+            next_cursor: '' // Recursive queries don't support pagination
+          };
+        } catch (error) {
+          // Fall back to non-recursive if subfolder discovery fails
+          console.warn('Recursive folder query failed, falling back to single folder:', error);
+        }
+      }
 
       response = await cldRequest(`/resources/by_asset_folder?${params}`);
 
     } else if ( options.folderMode === 'fixed' ) {
-
+      // For fixed folder mode, recursive behavior is naturally supported via prefix
+      if ( options.recursive ) {
+        // In fixed mode, prefix naturally includes subfolders
+        // No additional parameters needed as prefix matching is inherently recursive
+      }
+      
       params.append('prefix', options.folder);
-
       response = await cldRequest(`/resources/${options.resourceType}?${params}`);
 
     } else {
