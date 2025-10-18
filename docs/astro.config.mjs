@@ -1,16 +1,18 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from "@astrojs/tailwind";
+import starlightLlmsTxt from "starlight-llms-txt";
 
 import icon from "astro-icon";
 
 import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
-
+  site: 'https://astro.cloudinary.dev',
   integrations: [
     starlight({
       title: 'Astro Cloudinary',
+      plugins: [ starlightLlmsTxt() ],
       social: {
         github: 'https://github.com/cloudinary-community/astro-cloudinary'
       },
