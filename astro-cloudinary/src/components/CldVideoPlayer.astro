@@ -81,7 +81,7 @@ interface Cloudinary {
   videoPlayer: (video: HTMLVideoElement, options: {}) => CloudinaryVideoPlayer;
 }
 
-window.addEventListener('load', async () => {
+async function initCldVideoPlayers() {
   const videos = document.querySelectorAll('.astro-cloudinary-cldvideoplayer') as NodeListOf<HTMLVideoElement>;
 
   if ( videos.length === 0 ) return;
@@ -120,8 +120,13 @@ window.addEventListener('load', async () => {
 
     if ( !player ) return;
 
-    // Loop through all avialable player events and create custom event callbacks
+    // Cleanup
+    document.addEventListener('astro:before-swap', async () => {
+      player.dispose();
+      player.videojs.cloudinary.dispose();
+    }, { once: true });
 
+    // Loop through all avialable player events and create custom event callbacks
     const events = [
       'loadstart',
       'suspend',
@@ -169,5 +174,39 @@ window.addEventListener('load', async () => {
       });
     });
   })
-});
+}
+
+function useState() {
+  let isInitialising = false;
+  let isInitialised = false;
+
+  return {
+    async initialise() {
+      if (!isInitialising && !isInitialised) {
+        isInitialising = true;
+        await initCldVideoPlayers()
+          .then(() => {
+            isInitialised = true;
+          })
+          .finally(() => {
+            isInitialising = false;
+          });
+      }
+    },
+
+    reset() {
+      isInitialising = false;
+      isInitialised = false;
+    },
+  };
+}
+
+const state = useState()
+
+window.addEventListener('load', state.initialise);
+
+// Lifecycle events, requires <ClientRouter />
+// https://docs.astro.build/en/guides/view-transitions/#lifecycle-events
+document.addEventListener('astro:after-swap', state.reset);
+document.addEventListener('astro:page-load', state.initialise);
 </script>
