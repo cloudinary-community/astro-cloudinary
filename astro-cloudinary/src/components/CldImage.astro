@@ -118,9 +118,9 @@ if (className) {
     if ( result.success ) {
       const key = `${Date.now()}${Math.random()}`;
       if ( image.src.includes('?') ) {
-        image.src = `${image.src}?key=${key}`;
-      } else {
         image.src = `${image.src}&key=${key}`;
+      } else {
+        image.src = `${image.src}?key=${key}`;
       }
     }
   }
