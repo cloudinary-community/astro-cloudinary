@@ -66,10 +66,10 @@ const imageUrl = getCldImageUrl({
   </TabItem>
 </Tabs>
 
-This will result in a URL similar to:
+This will generate URLs like:
 
 ```
-https://res.cloudinary.com/demo/image/fetch/h_600,w_960/https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg
+https://res.cloudinary.com/demo/image/fetch/c_limit,w_960/f_auto/q_auto/v1/https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну?_a=BBGJ1tUZ0
 ```
 
 ### Advanced Usage with Transformations
@@ -94,49 +94,47 @@ You can apply Cloudinary transformations to fetched images just like you would w
 <Tabs>
   <TabItem label="CldImage">
     <CodeBlock>
-```jsx copy
-import { CldImage } from 'astro-cloudinary';
-
-<CldImage
-  width="300"
-  height="300"
-  src="https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png"
-  deliveryType="fetch"
-  crop="fill"
-  gravity="face"
-  radius="max"
-  quality="auto"
-  fetchFormat="auto"
-  alt="A transformed remote image"
-/>
-```
+      ```jsx copy
+      import { CldImage } from 'astro-cloudinary';
+      
+      <CldImage
+        width="300"
+        height="300"
+        src="https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png"
+        deliveryType="fetch"
+        crop="fill"
+        gravity="face"
+        radius="max"
+        quality="auto"
+        fetchFormat="auto"
+        alt="A transformed remote image"
+      />
+      ```
     </CodeBlock>
   </TabItem>
   <TabItem label="getCldImageUrl">
     <CodeBlock>
-```jsx copy
-import { getCldImageUrl } from 'astro-cloudinary/helpers';
-
-const imageUrl = getCldImageUrl({
-  width: 960,
-  height: 600,
-  src: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/Песчаная_впадает_в_Стрельну.jpg',
-  deliveryType: 'fetch',
-  crop: 'fill',
-  gravity: 'face',
-  radius: 'max',
-  quality: 'auto',
-  fetchFormat: 'auto'
-});
-```
+      ```jsx copy
+      import { getCldImageUrl } from 'astro-cloudinary/helpers';
+      
+      const imageUrl = getCldImageUrl({
+        width: 300,
+        height: 300,
+        src: 'https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png',
+        deliveryType: 'fetch',
+        crop: 'fill',
+        gravity: 'face',
+        radius: 'max'
+      });
+      ```
     </CodeBlock>
   </TabItem>
 </Tabs>
 
-This will result in a URL similar to:
+This will generate URLs like:
 
 ```
-https://res.cloudinary.com/demo/image/fetch/c_fill,g_face,h_300,w_300/r_max/f_auto/https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png
+https://res.cloudinary.com/eric-cloudinary/image/fetch/r_max/c_fill,w_300,h_300,g_face/f_auto/q_auto/v1/https://upload.wikimedia.org/wikipedia/commons/1/13/Benedict_Cumberbatch_2011.png?_a=BBGJ1tUZ0
 ```
 
 ### How It Works
@@ -164,20 +162,6 @@ To prevent abuse and ensure secure usage of the Fetch API:
    - Generate signed URLs using Cloudinary's SDKs or API
 
 3. Be cautious when fetching images from user-provided URLs to prevent potential security risks
-
-### Best Practices for Fetch API
-
-1. **Use `f_auto` and `q_auto`**: Add `fetchFormat="auto"` and `quality="auto"` to your image requests for optimal format and quality.
-
-2. **Cache-Control**: Cloudinary sets a Cache-Control header of 1 year by default for fetched images. Adjust this using the `cacheControl` option if needed.
-
-3. **Error Handling**: Cloudinary returns a placeholder image if the remote image can't be fetched. Customize this behavior using the `defaultImage` option.
-
-4. **URL Encoding**: Ensure that special characters in remote URLs are properly encoded to avoid issues.
-
-5. **Responsive Images**: Use the `sizes` prop along with `width` and `height` to create responsive images that adapt to different screen sizes.
-
-By leveraging the Fetch API, you can easily optimize and transform remote images without the need to upload them to your Cloudinary account, providing flexibility and efficiency in your image delivery workflow.
 
 ## Method 2: Auto Upload Mapping
 

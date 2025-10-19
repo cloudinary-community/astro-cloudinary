@@ -205,6 +205,10 @@ export default defineConfig({
               label: 'Uploading Images & Videos',
               slug: 'guides/uploading-images-and-videos'
             },
+            {
+              label: 'Image Performance & LCP',
+              slug: 'guides/image-performance-lcp'
+            },
           ]
         },
         {
