@@ -38,6 +38,19 @@ const cloudinaryConfig = getCloudinaryConfig(config);
 const playerOptions = getVideoPlayerOptions(props, cloudinaryConfig);
 const { publicId } = playerOptions;
 
+if (playerOptions.transformation && Array.isArray(playerOptions.transformation)) {
+  const hasStreamingProfileAuto = playerOptions.transformation.some(
+    (transform: any) => transform.streaming_profile === 'auto'
+  );
+
+  if (hasStreamingProfileAuto) {
+    // Remove any quality parameter from transformations when streaming_profile is 'auto'
+    playerOptions.transformation = playerOptions.transformation.filter(
+      (transform: any) => !('quality' in transform)
+    );
+  }
+}
+
 if ( typeof publicId === 'undefined' ) {
   throw new Error('[CldVideoPlayer] Public ID or Cloudinary URL required - please specify a src prop.');
 }
