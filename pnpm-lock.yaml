@@ -30,8 +30,8 @@ importers:
         specifier: 1.6.0
         version: 1.6.0
       '@cloudinary-util/url-loader':
-        specifier: 6.0.0
-        version: 6.0.0
+        specifier: 6.2.0
+        version: 6.2.0
       '@cloudinary-util/util':
         specifier: ^4.2.0
         version: 4.2.0
@@ -251,8 +251,8 @@ packages:
   '@cloudinary-util/types@1.6.0':
     resolution: {integrity: sha512-YLpAkvrlQO9nmwA5poiOYYSXP0pMGIBX9IjHOqfU1kGf1ZBR5EwnHlY3b0er7H7uw/f+WlOlko5gE22JCma+TA==}
 
-  '@cloudinary-util/url-loader@6.0.0':
-    resolution: {integrity: sha512-nlwV6d8uvJPPt4IBPVkhs2YwuT4mXDheIY9Me04bz82u3W0gIhsxWPyr78kC52A2jxt5Lx6+cZi3Po/sy8ykUA==}
+  '@cloudinary-util/url-loader@6.2.0':
+    resolution: {integrity: sha512-dP1eEC/pBb6fwgX/YiuLlCewKCaZohwLqYYzg+vg/QFc9z+QTV2P3170kLEpbMrrF+sx3bgo+WCjRvjXh3Fxwg==}
 
   '@cloudinary-util/util@4.1.0':
     resolution: {integrity: sha512-01k2FWwxhVSauFGi3yJhz20WJ7M/l4ytJDHaBVDTIJlxQLNs36p24kynppgE44jn0dNa1DgYhCXB6BFmqUmfJA==}
@@ -262,6 +262,9 @@ packages:
 
   '@cloudinary/transformation-builder-sdk@1.14.1':
     resolution: {integrity: sha512-z49To4r3byg7zHsOGKsw/nHef5B9W3wSBdDsGoY7JOj75kbvmSlP4MCkS0JU3Bv57EvYYw5ymalPz+bvRXmPlA==}
+
+  '@cloudinary/transformation-builder-sdk@1.21.2':
+    resolution: {integrity: sha512-ehOgKUaP+Nvuf7B0TosmB8iilL0kdiVjzjl8tIK06cjvsNnwSJI3xP9nEJmKkvqNxwwFwvYXT+mxUTqnSv9JOA==}
 
   '@cloudinary/url-gen@1.15.0':
     resolution: {integrity: sha512-bjU67eZxLUgoRy/Plli4TQio7q6P31OYqnEgXxeN9TKXrzr6h0DeEdIUhKI9gy3HkEBWXWWJIPh7j7gkOJPnyA==}
@@ -4648,10 +4651,10 @@ snapshots:
 
   '@cloudinary-util/types@1.6.0': {}
 
-  '@cloudinary-util/url-loader@6.0.0':
+  '@cloudinary-util/url-loader@6.2.0':
     dependencies:
       '@cloudinary-util/types': 1.6.0
-      '@cloudinary-util/util': 4.1.0
+      '@cloudinary-util/util': 4.2.0
       '@cloudinary/url-gen': 1.15.0
 
   '@cloudinary-util/util@4.1.0': {}
@@ -4662,9 +4665,13 @@ snapshots:
     dependencies:
       '@cloudinary/url-gen': 1.20.0
 
+  '@cloudinary/transformation-builder-sdk@1.21.2':
+    dependencies:
+      '@cloudinary/url-gen': 1.20.0
+
   '@cloudinary/url-gen@1.15.0':
     dependencies:
-      '@cloudinary/transformation-builder-sdk': 1.14.1
+      '@cloudinary/transformation-builder-sdk': 1.21.2
 
   '@cloudinary/url-gen@1.20.0':
     dependencies:
