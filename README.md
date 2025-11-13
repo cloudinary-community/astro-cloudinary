@@ -187,6 +187,9 @@ The project will now be available at <http://localhost:4321> or the configured l
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mohith2883"><img src="https://avatars.githubusercontent.com/u/88938356?v=4?s=100" width="100px;" alt="mohith2883"/><br /><sub><b>mohith2883</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=mohith2883" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/sccalabr"><img src="https://avatars.githubusercontent.com/u/4111230?v=4?s=100" width="100px;" alt="sccalabr"/><br /><sub><b>sccalabr</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=sccalabr" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Juneezee"><img src="https://avatars.githubusercontent.com/u/20135478?v=4?s=100" width="100px;" alt="Eng Zer Jun"/><br /><sub><b>Eng Zer Jun</b></sub></a><br /><a href="https://github.com/cloudinary-community/astro-cloudinary/commits?author=Juneezee" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
