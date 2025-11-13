@@ -75,6 +75,7 @@ if ( className ) {
 
 <script>
 import type { CloudinaryVideoPlayer } from '@cloudinary-util/types';
+import type { CldVideoPlayerEventDetail } from '../types/events';
 import { loadScript } from '../lib/util';
 
 interface Cloudinary {
@@ -163,7 +164,7 @@ async function initCldVideoPlayers() {
 
     events.forEach(event => {
       player.on(event, (e: { Player: CloudinaryVideoPlayer; type: string; }) => {
-        const customEvent = new CustomEvent(`cldvideoplayer:${event}`, {
+        const customEvent = new CustomEvent<CldVideoPlayerEventDetail>(`cldvideoplayer:${event}`, {
           detail: {
             Player: e.Player,
             type: e.type,

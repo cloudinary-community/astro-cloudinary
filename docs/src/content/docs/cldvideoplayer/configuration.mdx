@@ -632,12 +632,14 @@ The events are triggered as global custom events which you can assign an event l
 <CldVideoPlayer {...props} id="video-player-events" />
 
 <script>
+import type { CldVideoPlayerEventDetail } from 'astro-cloudinary';
+
 const videoPlayer = document.querySelector(`#video-player-events`);
 
 if ( videoPlayer ) {
-  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', ((e: CustomEvent<{ detail: {} }>) => {
+  videoPlayer.addEventListener('cldvideoplayer:loadedmetadata', (e: CustomEvent<CldVideoPlayerEventDetail>) => {
     console.log('cldvideoplayer:loadedmetadata', e.detail)
-  }) as EventListener);
+  });
 }
 </script>
 ```

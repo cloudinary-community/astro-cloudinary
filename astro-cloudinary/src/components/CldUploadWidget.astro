@@ -46,6 +46,7 @@ if ( typeof className === 'string' ) {
 
 <script>
 import type { CloudinaryCreateUploadWidget, CloudinaryUploadWidget } from '@cloudinary-util/types';
+import type { CldUploadWidgetEventDetail, CldUploadWidgetErrorEventDetail } from '../types/events';
 import { generateSignatureCallback, generateUploadWidgetResultCallback } from "@cloudinary-util/url-loader";
 import { triggerOnIdle, loadScript } from '../lib/util';
 
@@ -120,7 +121,7 @@ async function initCldUploadWidgets() {
 
     const resultsCallback = generateUploadWidgetResultCallback({
       onError: (uploadError) => {
-        const customEvent = new CustomEvent(`clduploadwidget:error`, {
+        const customEvent = new CustomEvent<CldUploadWidgetErrorEventDetail>(`clduploadwidget:error`, {
           detail: {
             event: 'error',
             error: uploadError,
@@ -133,7 +134,7 @@ async function initCldUploadWidgets() {
       onResult: (uploadResult) => {
         if ( typeof uploadResult?.event !== 'string' ) return;
 
-        const customEvent = new CustomEvent(`clduploadwidget:${uploadResult?.event}`, {
+        const customEvent = new CustomEvent<CldUploadWidgetEventDetail>(`clduploadwidget:${uploadResult?.event}`, {
           detail: {
             event: uploadResult.event,
             info: uploadResult.info,

@@ -91,6 +91,7 @@ if (className) {
 
 <script>
   import { pollForProcessingImage } from '@cloudinary-util/util';
+  import type { CldImageErrorEventDetail } from '../types/events';
 
   document.addEventListener('error', onCldImageError, true);
     
@@ -100,10 +101,10 @@ if (className) {
     
     if ( !image || image.tagName !== 'IMG' ) return;
 
-    const customEvent = new CustomEvent('cldimage:error', {
+    const customEvent = new CustomEvent<CldImageErrorEventDetail>('cldimage:error', {
       detail: {
         Image: image,
-        type: 'error',
+        error: event,
       },
     });
 
