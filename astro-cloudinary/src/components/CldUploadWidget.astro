@@ -53,7 +53,7 @@ interface Cloudinary {
   createUploadWidget: CloudinaryCreateUploadWidget;
 }
 
-window.addEventListener('load', async () => {
+async function initCldUploadWidgets() {
   const widgets = document.querySelectorAll('.astro-cloudinary-clduploadwidget') as NodeListOf<HTMLSpanElement>;
 
   if ( widgets.length === 0 ) return;
@@ -76,7 +76,7 @@ window.addEventListener('load', async () => {
   const cloudinary = window.cloudinary as Cloudinary;
 
   widgets.forEach(widget => {
-    let widgetInstance: CloudinaryUploadWidget;
+    let widgetInstance: CloudinaryUploadWidget | undefined;
 
     // Primary user interaction point for the upload widget, create
     // an instance if it doesnt already exist (someone triggering before idle)
@@ -97,6 +97,15 @@ window.addEventListener('load', async () => {
       }
       widgetInstance.open();
     });
+
+    // Cleanup
+    document.addEventListener('astro:before-swap', async () => {
+      if (widgetInstance) {
+        widgetInstance.destroy().finally(() => {
+          widgetInstance = undefined;
+        });
+      }
+    }, { once: true });
 
     // Parse the upload options from the DOM and configure the
     // remaining options that couldn't be serialized
@@ -155,5 +164,39 @@ window.addEventListener('load', async () => {
       }, resultsCallback);
     }
   });
-})
+}
+
+function useState() {
+  let isInitialising = false;
+  let isInitialised = false;
+
+  return {
+    async initialise() {
+      if (!isInitialising && !isInitialised) {
+        isInitialising = true;
+        await initCldUploadWidgets()
+          .then(() => {
+            isInitialised = true;
+          })
+          .finally(() => {
+            isInitialising = false;
+          });
+      }
+    },
+
+    reset() {
+      isInitialising = false;
+      isInitialised = false;
+    },
+  };
+}
+
+const state = useState();
+
+window.addEventListener('load', state.initialise);
+
+// Lifecycle events, requires <ClientRouter />
+// https://docs.astro.build/en/guides/view-transitions/#lifecycle-events
+document.addEventListener('astro:after-swap', state.reset);
+document.addEventListener('astro:page-load', state.initialise);
 </script>
