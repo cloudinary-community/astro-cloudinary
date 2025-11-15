@@ -1,6 +1,6 @@
 import { AstroError } from "astro/errors";
 import type { Loader } from "astro/loaders";
-import type { CloudinaryResource } from '@cloudinary-util/types'
+import type { CloudinaryResource, CloudinaryResourceResourceType } from '@cloudinary-util/types'
 
 import { cloudinaryResourceSchema } from '../types/resources';
 import { getEnvironmentConfig, listResources, type ListResourcesOptions, type ListResourcesResponse } from '../lib/resources';
@@ -18,7 +18,8 @@ export interface CloudinaryAssetsLoaderOptions {
   fields?: ListResourcesOptions["fields"];
   folder?: ListResourcesOptions["folder"];
   limit?: ListResourcesOptions["limit"];
-  resourceType?: ListResourcesOptions["resourceType"];
+  resourceType?: CloudinaryResourceResourceType | Array<CloudinaryResourceResourceType>;
+  recursive?: boolean;
 
   // Resource data options: These are used to include
   // additional data that isn't added by default
@@ -40,7 +41,15 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
 
       const { settings: { folder_mode: folderMode } } = await getEnvironmentConfig();
 
-      logger.info(`Loading Cloudinary Assets`);
+      logger.info(`Loading Cloudinary Assets from ${folderMode} folder mode`);
+      if (options?.folder) {
+        logger.info(`Folder: ${options.folder}${options?.recursive ? ' (recursive)' : ''}`);
+      }
+      if (Array.isArray(options?.resourceType)) {
+        logger.info(`Resource types: ${options.resourceType.join(', ')}`);
+      } else if (options?.resourceType) {
+        logger.info(`Resource type: ${options.resourceType}`);
+      }
 
       // 10 is the Cloudinary default max_results
 
@@ -52,6 +61,7 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
         limit = CLOUDINARY_DEFAULT_LIMIT,
         metadata,
         moderation,
+        recursive = false,
         resourceType = 'image',
         tags,
       } = options || {};
@@ -68,6 +78,7 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
         limit,
         metadata,
         moderation,
+        recursive,
         resourceType,
         tags,
       }
@@ -86,7 +97,11 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
             throw new Error('Unkown error.');
           }
         } catch(error) {
-          logger.error(`${error}`);
+          logger.error(`Failed to load Cloudinary assets: ${error}`);
+          if (options?.folder) {
+            logger.error(`Check that folder '${options.folder}' exists and contains assets`);
+            logger.error(`Folder mode: ${folderMode}`);
+          }
           // @TODO Should we throw error for generic issues or bail and let the app continue?
           return;
         }
@@ -103,6 +118,17 @@ export function cldAssetsLoader(options?: CloudinaryAssetsLoaderOptions): Loader
 
         if (!nextCursor) {
           break;
+        }
+      }
+
+      logger.info(`Loaded ${resources.length} Cloudinary assets`);
+      if (resources.length === 0 && options?.folder) {
+        logger.warn(`No assets found in folder '${options.folder}'. This could mean:`);
+        logger.warn(`- The folder doesn't exist`);
+        logger.warn(`- The folder is empty`);
+        logger.warn(`- You don't have permission to access the folder`);
+        if (!options.recursive && folderMode === 'dynamic') {
+          logger.warn(`- Assets are in subfolders (try setting recursive: true)`);
         }
       }
 

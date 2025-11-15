@@ -13,7 +13,9 @@
 	],
   "scripts": {
     "release": "semantic-release",
-    "dev": "pnpm -r dev"
+    "dev": "pnpm -r dev",
+    "test": "pnpm -r test:run",
+    "test:watch": "pnpm -r test"
   },
   "devDependencies": {
     "@colbyfayock/semantic-release-pnpm": "^1.2.2",
