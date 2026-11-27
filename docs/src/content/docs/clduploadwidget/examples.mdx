@@ -28,7 +28,10 @@ All files uploaded to this demo will be deleted.
 ---
 import { CldUploadWidget } from 'astro-cloudinary';
 ---
-<CldUploadWidget signatureEndpoint="<API Endpoint (ex: /api/sign-cloudinary-params)>">
+<CldUploadWidget
+  signatureEndpoint="<API Endpoint (ex: /api/sign-cloudinary-params)>"
+  uploadPreset="<Your Signed Upload Preset>"
+>
   <button>Upload</button>
 </CldUploadWidget>
 ```

@@ -62,29 +62,9 @@ import { CldUploadWidget } from 'astro-cloudinary';
 ```
 </CodeBlock>
 
-You'll need to create an API route to handle the signature. Here's an example of how your API route might look:
+You'll need to create an API route to handle the signature. It should only sign the parameters your uploads need, not anything the browser sends.
 
-<CodeBlock>
-```typescript copy
-import type { APIRoute } from "astro";
-import { v2 as cloudinary } from "cloudinary";
-
-export const post: APIRoute = async ({ request }) => {
-  const body = await request.json();
-  const { paramsToSign } = body;
-  const signature = cloudinary.utils.api_sign_request(
-    paramsToSign,
-    process.env.CLOUDINARY_API_SECRET
-  );
-  return new Response(JSON.stringify({ signature }), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
-```
-</CodeBlock>
+[See how to create the API endpoint in Signing Uploads](/clduploadwidget/signed-uploads).
 
 ## Configuration Options
 
