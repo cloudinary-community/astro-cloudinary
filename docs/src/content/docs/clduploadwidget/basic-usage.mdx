@@ -86,39 +86,19 @@ All files uploaded to this demo will be deleted.
 ---
 import { CldUploadWidget } from 'astro-cloudinary';
 ---
-<CldUploadWidget signatureEndpoint="<API Endpoint (ex: /api/sign-cloudinary-params)>">
+<CldUploadWidget
+  signatureEndpoint="<API Endpoint (ex: /api/sign-cloudinary-params)>"
+  uploadPreset="<Your Signed Upload Preset>"
+>
   <button>Upload</button>
 </CldUploadWidget>
 ```
 </CodeBlock>
 
-Here's an example of how you could process the signature in an API endpoint that signs a request:
+The `signatureEndpoint` is a Node-based API route that signs the request. It should only sign the
+parameters your uploads need, not anything the browser sends.
 
-<CodeBlock>
-```js
-import type { APIRoute } from "astro";
-import { v2 as cloudinary } from "cloudinary";
-
-cloudinary.config({
-  cloud_name: import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME,
-  api_key: import.meta.env.PUBLIC_CLOUDINARY_API_KEY,
-  api_secret: import.meta.env.CLOUDINARY_API_SECRET,
-});
-
-export const prerender = false;
-
-export const POST: APIRoute = async ({ request }) => {
-  const body = await request.json();
-  const { paramsToSign } = body;
-  const signature = cloudinary.utils.api_sign_request(paramsToSign, import.meta.env.CLOUDINARY_API_SECRET);
-  return Response.json({ signature });
-}
-```
-</CodeBlock>
-
-To use the above, create a Node-based API route, add the snippet, and use that endpoint as the `signatureEndpoint` prop.
-
-[Learn more about signing uploads](/clduploadwidget/signed-uploads).
+[See how to create the API endpoint in Signing Uploads](/clduploadwidget/signed-uploads).
 
 Or see a full example of an API endpoint used with the Astro Cloudinary docs: https://github.com/cloudinary-community/astro-cloudinary/
 
